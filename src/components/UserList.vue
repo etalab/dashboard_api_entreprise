@@ -8,8 +8,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   name: 'user-list',
   data () {
@@ -23,7 +21,7 @@ export default {
   },
 
   created: function () {
-    axios.get(`${process.env.API_BASE_URL}/users`)
+    this.$http.get('/users')
       .then(response => {
         this.items = response.data
       })
