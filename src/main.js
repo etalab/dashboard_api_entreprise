@@ -11,6 +11,7 @@ import('../node_modules/vuetify/dist/vuetify.min.css')
 Vue.use(Vuetify)
 Vue.config.productionTip = false
 
+// $http is now available from anywhere in the app
 Vue.prototype.$http = axios
 
 /* eslint-disable no-new */
