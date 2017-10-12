@@ -18,16 +18,12 @@ export default {
         { text: 'E-mail', value: 'email', align: 'left' },
         { text: 'Token', value: 'token', align: 'left' }
       ],
-      items: [
-        { email: 'coucou@hello.yo', token: 'verytoken' },
-        { email: 'yo@coucou.fr', token: 'muchaccess' },
-        { email: 'coucou@sup.sup', token: 'dunnowattosay' }
-      ]
+      items: []
     }
   },
 
   created: function () {
-    axios.get(`http://watchdoge.entreprise.api.gouv.fr/api/admin/users`)
+    axios.get(`${process.env.API_BASE_URL}/users`)
       .then(response => {
         this.items = response.data
       })
