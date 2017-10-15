@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-data-table(:headers="headers" :items="items" class="elevation-1")
+  v-data-table(:headers="headers" :items="users" class="elevation-1")
     template(slot="items" scope="props")
       td {{ props.item.email }}
       td {{ props.item.token }}
@@ -14,14 +14,14 @@ export default {
         { text: 'E-mail', value: 'email', align: 'left' },
         { text: 'Token', value: 'token', align: 'left' }
       ],
-      items: []
+      users: []
     }
   },
 
   created: function () {
     this.$http.get('/users')
       .then(response => {
-        this.items = response.data
+        this.users = response.data
       })
   }
 }
