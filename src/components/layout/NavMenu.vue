@@ -16,6 +16,10 @@ export default {
         {
           label: 'Utilisateurs',
           routeName: 'users'
+        },
+        {
+          label: 'Roles',
+          routeName: 'roles'
         }
       ]
     }
