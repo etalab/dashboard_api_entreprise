@@ -1,9 +1,7 @@
-<template>
-  <v-navigation-drawer app>
-    <v-list>
-      <nav-menu-tile v-for="(tile, index) in tiles" :key="index" :label="tile.label" :route="tile.routeName"></nav-menu-tile>
-    </v-list>
-  </v-navigation-drawer>
+<template lang="pug">
+  v-navigation-drawer(app)
+    v-list
+      nav-menu-tile(v-for="(tile, index) in tiles" :key="index" :label="tile.label" :route="tile.routeName")
 </template>
 
 <script>

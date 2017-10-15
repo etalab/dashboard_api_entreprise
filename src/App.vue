@@ -1,18 +1,12 @@
-<template>
-  <div id="app">
-    <v-app>
-      <nav-menu></nav-menu>
-  	  <v-toolbar app></v-toolbar>
-      <main>
-        <v-content>
-          <v-container fluid>
-            <router-view></router-view>
-          </v-container>
-        </v-content>
-      </main>
-      <v-footer app></v-footer>
-    </v-app>
-  </div>
+<template lang="pug">
+  #app
+    v-app
+      nav-menu
+      v-toolbar(app)
+      main
+        v-content
+          v-container(fluid)
+            router-view
 </template>
 
 <script>

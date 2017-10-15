@@ -1,10 +1,8 @@
-<template>
-  <v-data-table :headers="headers" :items="items" class="elevation-1">
-    <template slot="items" scope="props">
-      <td>{{ props.item.email }}</td>
-      <td>{{ props.item.token }}</td>
-    </template>
-  </v-data-table>
+<template lang="pug">
+  v-data-table(:headers="headers" :items="items" class="elevation-1")
+    template(slot="items" scope="props")
+      td {{ props.item.email }}
+      td {{ props.item.token }}
 </template>
 
 <script>
