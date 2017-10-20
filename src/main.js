@@ -3,12 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import Vuetify from 'vuetify'
+import VeeValidate from 'vee-validate'
 import router from './router'
 import axios from './axios-common'
 
 import('../node_modules/vuetify/dist/vuetify.min.css')
 
 Vue.use(Vuetify)
+Vue.use(VeeValidate)
 Vue.config.productionTip = false
 
 // $http is now available from anywhere in the app

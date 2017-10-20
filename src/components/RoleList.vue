@@ -1,8 +1,13 @@
 <template lang="pug">
-  v-data-table(:headers="headers" :items="roles" class="elevation-1")
-    template(slot="items" scope="props")
-      td {{ props.item.name }}
-      td {{ props.item.code }}
+  div
+    h4 Liste des roles
+    div
+      v-btn(color="primary" @click="roleForm") Nouveau
+
+    v-data-table(:headers="headers" :items="roles" class="elevation-1")
+      template(slot="items" scope="props")
+        td {{ props.item.name }}
+        td {{ props.item.code }}
 </template>
 
 <script>
@@ -23,6 +28,12 @@ export default {
       .then(response => {
         this.roles = response.data
       })
+  },
+
+  methods: {
+    roleForm: function () {
+      this.$router.push({ name: 'roleNew' })
+    }
   }
 }
 </script>
