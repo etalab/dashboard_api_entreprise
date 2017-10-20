@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    h4 Liste des roles
+    h4 Liste des rôles
     div
       v-btn(color="primary" @click="roleForm") Nouveau
 
@@ -16,7 +16,7 @@ export default {
   data () {
     return {
       headers: [
-        { text: 'Label', value: 'name', align: 'left' },
+        { text: 'Nom', value: 'name', align: 'left' },
         { text: 'Code', value: 'code', align: 'left' }
       ],
       roles: []

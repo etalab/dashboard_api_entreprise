@@ -18,7 +18,7 @@ export default {
           routeName: 'users'
         },
         {
-          label: 'Roles',
+          label: 'Rôles',
           routeName: 'roles'
         }
       ]
