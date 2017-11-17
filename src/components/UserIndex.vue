@@ -1,8 +1,12 @@
 <template lang="pug">
-  v-data-table(:headers="headers" :items="users" class="elevation-1")
-    template(slot="items" scope="props")
-      td {{ props.item.email }}
-      td {{ props.item.token }}
+  div
+    h4 Liste des utilisateurs
+    v-btn(color="primary" @click="userForm") Nouveau
+
+    v-data-table(:headers="headers" :items="users" class="elevation-1")
+      template(slot="items" scope="props")
+        td {{ props.item.email }}
+        td {{ props.item.context }}
 </template>
 
 <script>
@@ -12,7 +16,7 @@ export default {
     return {
       headers: [
         { text: 'E-mail', value: 'email', align: 'left' },
-        { text: 'Token', value: 'token', align: 'left' }
+        { text: 'Contexte', value: 'context', align: 'left' }
       ],
       users: []
     }
@@ -23,6 +27,12 @@ export default {
       .then(response => {
         this.users = response.data
       })
+  },
+
+  methods: {
+    userForm: function () {
+      this.$router.push({ name: 'userNew' })
+    }
   }
 }
 </script>

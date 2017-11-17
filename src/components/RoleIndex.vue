@@ -1,8 +1,7 @@
 <template lang="pug">
   div
     h4 Liste des rôles
-    div
-      v-btn(color="primary" @click="roleForm") Nouveau
+    v-btn(color="primary" @click="roleForm") Nouveau
 
     v-data-table(:headers="headers" :items="roles" class="elevation-1")
       template(slot="items" scope="props")
