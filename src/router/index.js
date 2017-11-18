@@ -5,6 +5,7 @@ import UserIndex from '@/components/UserIndex'
 import RoleIndex from '@/components/RoleIndex'
 import RoleNew from '@/components/RoleNew'
 import UserNew from '@/components/UserNew'
+import UserShow from '@/components/UserShow'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/users/new',
       name: 'userNew',
       component: UserNew
+    },
+    {
+      path: '/users/:id',
+      name: 'userShow',
+      component: UserShow
     }
   ]
 })
