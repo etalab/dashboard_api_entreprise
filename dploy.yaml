@@ -1,0 +1,13 @@
+sandbox:
+  scheme: sftp
+  host: watchdoge.entreprise.api.gouv.fr
+  port: 22
+  user: deploy
+  privateKey: ~/.ssh/id_rsa
+  check: true
+  branch: develop
+  include:
+    "dist/**/*": "./"
+  path:
+    local: dist/
+    remote: /var/www/admin_board_sandbox
