@@ -28,9 +28,14 @@ div
   h4 Tokens de l'utilisateur
   ul
     li(v-for="(token, index) in user.tokens" key="index") {{ token }}
+
+  token-new(@tokenCreated="onTokenCreation")
+
 </template>
 
 <script>
+import TokenNew from '@/components/TokenNew'
+
 export default {
   name: 'user-show',
   data () {
@@ -45,6 +50,16 @@ export default {
       .then(response => {
         this.user = response.data
       })
+  },
+
+  methods: {
+    onTokenCreation: function (newToken) {
+      this.user.tokens.push(newToken)
+    }
+  },
+
+  components: {
+    'token-new': TokenNew
   }
 }
 </script>
