@@ -3,38 +3,41 @@ div
   h4 Profil utilisateur
   v-card
     v-card-text
-      v-container(fluid)
+      h6.caption.grey--text.mb-0 Adresse e-mail
+      div.headline {{ user.email }}
 
-        v-layout(row)
-          v-flex(xs3)
-            v-subheader Adresse e-mail
-          v-flex(xs9)
-            v-text-field(
-              name="input-email"
-              :value="user.email"
-              single-line
-              disabled)
+      h6.caption.grey--text.mb-0.mt-3 Contexte
+      div.headline {{ user.context }}
 
-        v-layout(row)
-          v-flex(xs3)
-            v-subheader Contexte
-          v-flex(xs9)
-            v-text-field(
-              name="input-context"
-              :value="user.context"
-              single-line
-              disabled)
+  v-flex.mt-4
+    h4 Tokens de l'utilisateur
+      token-new(@tokenCreated="onTokenCreation")
 
-  h4 Tokens de l'utilisateur
-  ul
-    li(v-for="(token, index) in user.tokens" key="index") {{ token }}
+    v-card
+      v-list(two-line)
+        template(v-for="(token, index) in user.tokens")
+          v-list-tile(:key="index")
+            v-list-tile-content
+              v-list-tile-title {{ token }}
+              v-list-tile-sub-title date
+            v-list-tile-action
+              v-icon delete
+          v-divider(v-if="index + 1 < user.tokens.length")
 
-  token-new(@tokenCreated="onTokenCreation")
+  v-flex.mt-4
+    h4 Contacts
+      v-btn(dark fab color="pink" small class="ml-3")
+        v-icon add
 
+  v-container(grid-list-md)
+    v-layout(row wrap)
+      v-flex(xs4 v-for="(contact, index) in user.contacts" :key="index")
+        contact-tile(:contact="contact")
 </template>
 
 <script>
 import TokenNew from '@/components/TokenNew'
+import ContactTile from '@/components/ContactTile'
 
 export default {
   name: 'user-show',
@@ -59,7 +62,8 @@ export default {
   },
 
   components: {
-    'token-new': TokenNew
+    'token-new': TokenNew,
+    'contact-tile': ContactTile
   }
 }
 </script>

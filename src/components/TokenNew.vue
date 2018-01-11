@@ -1,17 +1,17 @@
 <template lang="pug">
-v-layout(row justify-center)
-  v-dialog(v-model="dialog" persistent max-width="500px")
-    v-btn(color="primary" dark slot="activator") Créer un nouveau token
-    v-card
-      v-card-title
-        span.headline Roles d'accès
-      v-card-text
-        v-checkbox(v-for="(role, index) in roles" :key="index"
-          :label="role.name" v-model="token_payload" :value="role.code")
-      v-card-actions
-        v-spacer
-        v-btn(color="blue darken-1" flat @click="reset") Annuler
-        v-btn(color="blue darken-1" flat @click="submit") Créer
+v-dialog(v-model="dialog" persistent max-width="500px")
+  v-btn(fab small color="pink" dark slot="activator")
+    v-icon add
+  v-card
+    v-card-title
+      span.headline Roles d'accès
+    v-card-text
+      v-checkbox(v-for="(role, index) in roles" :key="index"
+        :label="role.name" v-model="token_payload" :value="role.code")
+    v-card-actions
+      v-spacer
+      v-btn(color="blue darken-1" flat @click="reset") Annuler
+      v-btn(color="blue darken-1" flat @click="submit") Créer
 </template>
 
 <script>
