@@ -1,8 +1,13 @@
 <template lang="pug">
   v-navigation-drawer(app)
+    v-toolbar
+      v-list
+        v-list-tile
+          v-list-tile-title.title Administration API Entreprise
+
     v-layout(column justify-space-between fill-height)
       v-list
-        nav-menu-tile(v-for="(tile, index) in tiles" :key="index" :label="tile.label" :route="tile.routeName")
+        nav-menu-tile(v-for="(tile, index) in tiles" :key="index" :label="tile.label" :route="tile.routeName" :icon="tile.icon")
 
       v-list
         v-list-tile
@@ -24,11 +29,13 @@ export default {
       tiles: [
         {
           label: 'Utilisateurs',
-          routeName: 'users'
+          routeName: 'users',
+          icon: 'supervisor_account'
         },
         {
           label: 'Rôles',
-          routeName: 'roles'
+          routeName: 'roles',
+          icon: 'enhanced_encryption'
         }
       ]
     }
