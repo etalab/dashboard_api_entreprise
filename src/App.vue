@@ -11,14 +11,29 @@
 
 <script>
 import NavMenu from '@/components/layout/NavMenu'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'app',
 
   // redirect to '/' (login page) when user not logged in
   updated () {
-    if (!localStorage.token && this.$route.path !== '/') {
-      this.$router.push('/?redirect=' + this.$route.path)
+    this.checkLoggedIn()
+  },
+
+  created () {
+    this.checkLoggedIn()
+  },
+
+  computed: {
+    ...mapGetters(['currentUser'])
+  },
+
+  methods: {
+    checkLoggedIn () {
+      if (!this.currentUser && this.$route.path !== '/') {
+        this.$router.push('/?redirect=' + this.$route.path)
+      }
     }
   },
 

@@ -31,6 +31,8 @@ div
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'login',
   data () {
@@ -48,6 +50,10 @@ export default {
 
   updated () {
     this.checkLoggedIn()
+  },
+
+  computed: {
+    ...mapGetters(['currentUser'])
   },
 
   methods: {
@@ -68,22 +74,24 @@ export default {
 
     successLogin: function (response) {
       if (!response.data.access_token) {
-        this.failLogin(response)
+        this.failLogin()
         return
       }
 
       localStorage.token = response.data.access_token
       this.loginError = false
+      this.$store.dispatch('login')
       this.$router.replace(this.$route.query.redirect || { name: 'users' })
     },
 
     failLogin () {
       this.loginError = true
+      this.$store.dispatch('logout')
       delete localStorage.token
     },
 
     checkLoggedIn () {
-      if (localStorage.token) {
+      if (this.currentUser) {
         this.$router.replace(this.$route.query.redirect || { name: 'users' })
       }
     }

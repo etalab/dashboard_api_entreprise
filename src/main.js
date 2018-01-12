@@ -6,6 +6,7 @@ import Vuetify from 'vuetify'
 import VeeValidate from 'vee-validate'
 import router from './router'
 import axios from './axios-common'
+import store from './store'
 
 import('../node_modules/vuetify/dist/vuetify.min.css')
 
@@ -20,6 +21,7 @@ Vue.prototype.$http = axios
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })
