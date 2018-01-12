@@ -6,6 +6,7 @@ import RoleNew from '@/components/RoleNew'
 import UserNew from '@/components/UserNew'
 import UserShow from '@/components/UserShow'
 import Login from '@/components/Login'
+import Logout from '@/components/Logout'
 
 Vue.use(Router)
 
@@ -15,6 +16,11 @@ export default new Router({
       path: '/',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      component: Logout
     },
     {
       path: '/users',

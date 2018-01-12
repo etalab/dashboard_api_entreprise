@@ -1,7 +1,16 @@
 <template lang="pug">
   v-navigation-drawer(app)
-    v-list
-      nav-menu-tile(v-for="(tile, index) in tiles" :key="index" :label="tile.label" :route="tile.routeName")
+    v-layout(column justify-space-between fill-height)
+      v-list
+        nav-menu-tile(v-for="(tile, index) in tiles" :key="index" :label="tile.label" :route="tile.routeName")
+
+      v-list
+        v-list-tile
+          v-list-tile-content
+            v-list-tile-title Administrateur
+          v-list-tile-action
+            v-btn(icon @click="logout")
+              v-icon exit_to_app
 </template>
 
 <script>
@@ -22,6 +31,12 @@ export default {
           routeName: 'roles'
         }
       ]
+    }
+  },
+
+  methods: {
+    logout () {
+      this.$router.push({ name: 'logout' })
     }
   },
 
