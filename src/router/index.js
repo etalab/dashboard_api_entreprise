@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import AdminPanel from '@/components/layout/AdminPanel'
 import UserIndex from '@/components/UserIndex'
 import RoleIndex from '@/components/RoleIndex'
 import RoleNew from '@/components/RoleNew'
@@ -13,7 +14,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/login',
       name: 'login',
       component: Login
     },
@@ -23,29 +24,35 @@ export default new Router({
       component: Logout
     },
     {
-      path: '/users',
-      name: 'users',
-      component: UserIndex
-    },
-    {
-      path: '/roles',
-      name: 'roles',
-      component: RoleIndex
-    },
-    {
-      path: '/roles/new',
-      name: 'roleNew',
-      component: RoleNew
-    },
-    {
-      path: '/users/new',
-      name: 'userNew',
-      component: UserNew
-    },
-    {
-      path: '/users/:id',
-      name: 'userShow',
-      component: UserShow
+      path: '/',
+      component: AdminPanel,
+      children: [
+        {
+          path: 'users',
+          name: 'users',
+          component: UserIndex
+        },
+        {
+          path: 'roles',
+          name: 'roles',
+          component: RoleIndex
+        },
+        {
+          path: 'roles/new',
+          name: 'roleNew',
+          component: RoleNew
+        },
+        {
+          path: 'users/new',
+          name: 'userNew',
+          component: UserNew
+        },
+        {
+          path: 'users/:id',
+          name: 'userShow',
+          component: UserShow
+        }
+      ]
     }
   ]
 })

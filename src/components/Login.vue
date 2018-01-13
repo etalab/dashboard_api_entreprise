@@ -1,33 +1,39 @@
 <template lang="pug">
 div
-  h4 Administration API Entreprise
+  v-app
+    v-container(fill-height)
+      v-layout(row wrap align-center)
+        v-flex(sm6 offset-sm3)
+          v-card
+            v-card-text
+              h3 Login
 
-  v-alert(
-    color="error"
-    icon="warning"
-    dismissible
-    v-model="loginError"
-    ) Login failed!
+              v-alert(
+                color="error"
+                icon="warning"
+                dismissible
+                v-model="loginError"
+                ) Login failed!
 
-  form
-    v-text-field(
-      label="E-mail"
-      v-model="email"
-      :error-messages="errors.collect('email')"
-      v-validate="'required|email'"
-      data-vv-name="email"
-      required)
+              form
+                v-text-field(
+                  label="E-mail"
+                  v-model="email"
+                  :error-messages="errors.collect('email')"
+                  v-validate="'required|email'"
+                  data-vv-name="email"
+                  required)
 
-    v-text-field(
-      label="Mot de passe"
-      v-model="password"
-      :error-messages="errors.collect('password')"
-      v-validate="'required'"
-      data-vv-name="password"
-      type="password"
-      required)
+                v-text-field(
+                  label="Mot de passe"
+                  v-model="password"
+                  :error-messages="errors.collect('password')"
+                  v-validate="'required'"
+                  data-vv-name="password"
+                  type="password"
+                  required)
 
-    v-btn(@click="login") Connexion
+                v-btn(@click="login") Connexion
 </template>
 
 <script>
