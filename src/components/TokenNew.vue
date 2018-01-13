@@ -1,6 +1,6 @@
 <template lang="pug">
 v-dialog(v-model="dialog" persistent max-width="500px")
-  v-btn(fab small color="pink" dark slot="activator")
+  v-btn(fab small color="primary" dark slot="activator")
     v-icon add
   v-card
     v-card-title

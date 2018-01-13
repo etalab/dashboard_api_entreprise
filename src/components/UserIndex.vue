@@ -1,7 +1,16 @@
 <template lang="pug">
   div
+    v-btn(
+      class="mb-5 mr-2"
+      color="primary"
+      absolute
+      dark
+      fab
+      bottom
+      right
+      @click="userForm")
+      v-icon add
     h4 Liste des utilisateurs
-    v-btn(color="primary" @click="userForm") Nouveau
 
     v-data-table(:headers="headers" :items="users" class="elevation-1")
       template(slot="items" scope="props")

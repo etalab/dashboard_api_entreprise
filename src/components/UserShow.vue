@@ -26,7 +26,7 @@ div
 
   v-flex.mt-4
     h4 Contacts
-      v-btn(dark fab color="pink" small class="ml-3")
+      v-btn(dark fab color="primary" small class="ml-3")
         v-icon add
 
   v-container(grid-list-md)
