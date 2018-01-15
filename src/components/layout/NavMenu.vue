@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-navigation-drawer(app)
+  v-navigation-drawer(app v-model="drawer")
     v-toolbar
       v-list
         v-list-tile
@@ -40,6 +40,8 @@ export default {
       ]
     }
   },
+
+  props: ['drawer'],
 
   methods: {
     logout () {

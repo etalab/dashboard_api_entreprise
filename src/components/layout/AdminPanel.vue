@@ -1,11 +1,14 @@
 <template lang="pug">
   v-app
-    nav-menu
-    v-toolbar(app)
-    main
-      v-content
-        v-container(fluid)
-          router-view
+    nav-menu(:drawer="drawer")
+
+    v-toolbar(app fixed)
+      v-toolbar-side-icon(@click.stop="drawer = !drawer")
+      v-toolbar-title {{ currentTitle }}
+
+    v-content
+      v-container(fluid)
+        router-view
 </template>
 
 <script>
@@ -14,6 +17,12 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'app',
+
+  data () {
+    return {
+      drawer: true
+    }
+  },
 
   // redirect to '/' (login page) when user not logged in
   updated () {
@@ -25,7 +34,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['currentUser'])
+    ...mapGetters(['currentUser', 'currentTitle'])
   },
 
   methods: {

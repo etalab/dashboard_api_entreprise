@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  div.mt-4
     v-btn(
       class="mb-5 mr-2"
       color="primary"
@@ -10,7 +10,6 @@
       right
       @click="roleForm")
       v-icon add
-    h4 Liste des rôles
 
     v-data-table(:headers="headers" :items="roles" class="elevation-1")
       template(slot="items" scope="props")
@@ -23,6 +22,7 @@ export default {
   name: 'role-list',
   data () {
     return {
+      title: 'Rôles',
       headers: [
         { text: 'Nom', value: 'name', align: 'left' },
         { text: 'Code', value: 'code', align: 'left' }
@@ -32,6 +32,8 @@ export default {
   },
 
   created: function () {
+    this.$store.dispatch('setPageTitle', this.title)
+
     this.$http.get('/roles')
       .then(response => {
         this.roles = response.data

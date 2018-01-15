@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  div.mt-4
     v-btn(
       class="mb-5 mr-2"
       color="primary"
@@ -10,7 +10,6 @@
       right
       @click="userForm")
       v-icon add
-    h4 Liste des utilisateurs
 
     v-data-table(:headers="headers" :items="users" class="elevation-1")
       template(slot="items" scope="props")
@@ -24,6 +23,7 @@ export default {
   name: 'user-list',
   data () {
     return {
+      title: 'Utilisateurs',
       headers: [
         { text: 'E-mail', value: 'email', align: 'left' },
         { text: 'Contexte', value: 'context', align: 'left' }
@@ -33,6 +33,8 @@ export default {
   },
 
   created: function () {
+    this.$store.dispatch('setPageTitle', this.title)
+
     this.$http.get('/users')
       .then(response => {
         this.users = response.data
