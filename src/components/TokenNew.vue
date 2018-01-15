@@ -25,6 +25,8 @@ export default {
     }
   },
 
+  props: ['userId'],
+
   // load roles the first time the form is open
   watch: {
     dialog: function (val) {
@@ -39,8 +41,7 @@ export default {
 
   methods: {
     submit: function () {
-      let userId = this.$route.params.id
-      this.$http.post(`/users/${userId}/tokens`, {
+      this.$http.post(`/users/${this.userId}/tokens`, {
         token_payload: this.token_payload
       })
         .then(response => {

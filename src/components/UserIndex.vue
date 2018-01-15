@@ -14,7 +14,7 @@
     v-data-table(:headers="headers" :items="users" class="elevation-1")
       template(slot="items" scope="props")
         td
-          router-link(:to="{ name: 'userShow', params: { id: props.item.id }}") {{ props.item.email }}
+          router-link(:to="{ name: 'userShow', params: { userId: props.item.id }}") {{ props.item.email }}
         td {{ props.item.context }}
 </template>
 

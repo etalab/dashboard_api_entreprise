@@ -11,7 +11,7 @@ div
 
   v-flex.mt-4
     h4 Tokens de l'utilisateur
-      token-new(@tokenCreated="onTokenCreation")
+      token-new(@tokenCreated="onTokenCreation" :userId="userId")
 
     v-card
       v-list(two-line)
@@ -46,10 +46,10 @@ export default {
       user: {}
     }
   },
+  props: ['userId'],
 
   created: function () {
-    let userId = this.$route.params.id
-    this.$http.get(`/users/${userId}`)
+    this.$http.get(`/users/${this.userId}`)
       .then(response => {
         this.user = response.data
       })

@@ -48,8 +48,9 @@ export default new Router({
           component: UserNew
         },
         {
-          path: 'users/:id',
+          path: 'users/:userId',
           name: 'userShow',
+          props: true,
           component: UserShow
         }
       ]
