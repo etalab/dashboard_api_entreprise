@@ -12,6 +12,8 @@ import Logout from '@/components/Logout'
 Vue.use(Router)
 
 export default new Router({
+  // TODO configure nginx to handle history mode: matching url fallback
+  // mode: 'history',
   routes: [
     {
       path: '/login',
