@@ -36,8 +36,8 @@ div
 </template>
 
 <script>
-import TokenNew from '@/components/TokenNew'
-import ContactTile from '@/components/ContactTile'
+import TokenNew from '@/components/admin/TokenNew'
+import ContactTile from '@/components/admin/ContactTile'
 
 export default {
   name: 'user-show',

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import NavMenu from '@/components/layout/NavMenu'
+import NavMenu from '@/components/admin/layout/NavMenu'
 import { mapGetters } from 'vuex'
 
 export default {

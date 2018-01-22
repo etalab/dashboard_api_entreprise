@@ -1,15 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import AdminPanel from '@/components/layout/AdminPanel'
-import UserIndex from '@/components/UserIndex'
-import RoleIndex from '@/components/RoleIndex'
-import RoleNew from '@/components/RoleNew'
-import UserNew from '@/components/UserNew'
-import UserShow from '@/components/UserShow'
-import Login from '@/components/Login'
+import AdminPanel from '@/components/admin/layout/AdminPanel'
+import UserIndex from '@/components/admin/UserIndex'
+import RoleIndex from '@/components/admin/RoleIndex'
+import RoleNew from '@/components/admin/RoleNew'
+import UserNew from '@/components/admin/UserNew'
+import UserShow from '@/components/admin/UserShow'
+import Login from '@/components/admin/Login'
+import Logout from '@/components/admin/Logout'
+
 import UserLogin from '@/components/espace_perso/UserLogin'
 import UserDashboard from '@/components/espace_perso/UserDashboard'
-import Logout from '@/components/Logout'
 
 Vue.use(Router)
 

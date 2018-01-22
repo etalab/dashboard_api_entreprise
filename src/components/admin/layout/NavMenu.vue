@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import NavMenuTile from '@/components/layout/NavMenuTile'
+import NavMenuTile from '@/components/admin/layout/NavMenuTile'
 
 export default {
   name: 'nav-menu',
