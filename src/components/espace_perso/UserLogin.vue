@@ -1,13 +1,13 @@
 <template lang="pug">
   .login
-    navbar
+    nav-bar
     .container
       .form__container
         form.panel
           h1 Bienvenue sur votre espace client
 
           .form__group
-            label Identifiant
+            label Adresse e-mail
             input
 
           .form__group
@@ -18,19 +18,19 @@
 
           button.button S'identifier
 
-          .signup.text-center Pas de compte ? 
-            a Contactez-nous 
+          .signup.text-center Pas de compte ?
+            a Contactez-nous
             pour en créer un.
 
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
+import Navbar from '@/components/layout/Navbar'
 
 export default {
   name: 'user-login',
   components: {
-    'Navbar': Navbar
+    'nav-bar': Navbar
   }
 }
 </script>
