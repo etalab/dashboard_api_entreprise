@@ -9,6 +9,7 @@ import UserShow from '@/components/admin/UserShow'
 import Login from '@/components/admin/Login'
 import Logout from '@/components/admin/Logout'
 
+import UserConfirm from '@/components/espace_perso/UserConfirm'
 import UserLogin from '@/components/espace_perso/UserLogin'
 import UserDashboard from '@/components/espace_perso/UserDashboard'
 
@@ -18,6 +19,11 @@ export default new Router({
   // TODO configure nginx to handle history mode: matching url fallback
   // mode: 'history',
   routes: [
+    {
+      path: '/account/confirm',
+      name: 'user-confirm',
+      component: UserConfirm
+    },
     {
       path: '/account/login',
       name: 'user-login',
