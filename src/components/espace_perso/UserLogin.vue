@@ -8,19 +8,20 @@
 
           .form__group
             label Adresse e-mail
-            input
+            input(type="email" v-model="email")
 
           .form__group
             label Mot de passe
-            input
+            input(type="password" v-model="password")
             small
               a Mot de passe oublié ?
 
-          button.button S'identifier
+          button.button(@click="submitLogin") S'identifier
 
           .signup.text-center Pas de compte ?
-            a Contactez-nous
-            pour en créer un.
+            div
+              a Contactez-nous &nbsp
+              span pour en créer un.
 
 </template>
 
@@ -29,6 +30,57 @@ import Navbar from '@/components/layout/Navbar'
 
 export default {
   name: 'user-login',
+
+  data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+
+  // redirect to /account/ when user already logged in
+  created () {
+    this.checkLoggedIn()
+  },
+
+  updated () {
+    this.checkLoggedIn()
+  },
+
+  methods: {
+    submitLogin () {
+      this.$http.post('/users/login', {
+        username: this.email,
+        password: this.password,
+        grant_type: 'password'
+      })
+        .then(response => this.successLogin(response.data))
+        .catch(response => this.failLogin())
+    },
+
+    successLogin (responseData) {
+      if (!responseData.access_token) {
+        this.failLogin()
+        return
+      }
+
+      this.loginError = false
+      this.$store.dispatch('login', { jwt_token: responseData.access_token })
+      this.$router.replace(this.$route.query.redirect || { name: 'user-dashboard' })
+    },
+
+    failLogin () {
+      this.loginError = true
+      this.$store.dispatch('logout')
+    },
+
+    checkLoggedIn () {
+      if (this.currentUser) {
+        this.$router.replace(this.$route.query.redirect || { name: 'user-dashboard' })
+      }
+    }
+  },
+
   components: {
     'nav-bar': Navbar
   }

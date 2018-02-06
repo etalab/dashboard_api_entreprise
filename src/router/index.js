@@ -9,6 +9,7 @@ import UserShow from '@/components/admin/UserShow'
 import Login from '@/components/admin/Login'
 import Logout from '@/components/admin/Logout'
 
+import UserApp from '@/components/layout/UserApp'
 import UserConfirm from '@/components/espace_perso/UserConfirm'
 import UserLogin from '@/components/espace_perso/UserLogin'
 import UserDashboard from '@/components/espace_perso/UserDashboard'
@@ -30,9 +31,15 @@ export default new Router({
       component: UserLogin
     },
     {
-      path: '/account/dashboard',
-      name: 'user-dashboard',
-      component: UserDashboard
+      path: '/account',
+      component: UserApp,
+      children: [
+        {
+          path: '/',
+          name: 'user-dashboard',
+          component: UserDashboard
+        }
+      ]
     },
     {
       path: '/login',

@@ -72,28 +72,26 @@ export default {
               password: this.password,
               grant_type: 'password'
             })
-              .then(response => this.successLogin(response))
+              .then(response => this.successLogin(response.data))
               .catch(() => this.failLogin())
           }
         })
     },
 
-    successLogin: function (response) {
-      if (!response.data.access_token) {
+    successLogin: function (responseData) {
+      if (!responseData.access_token) {
         this.failLogin()
         return
       }
 
-      localStorage.token = response.data.access_token
       this.loginError = false
-      this.$store.dispatch('login')
+      this.$store.dispatch('login', { jwt_token: responseData.access_token })
       this.$router.replace(this.$route.query.redirect || { name: 'users' })
     },
 
     failLogin () {
       this.loginError = true
       this.$store.dispatch('logout')
-      delete localStorage.token
     },
 
     checkLoggedIn () {

@@ -21,10 +21,12 @@ const mutations = {
 }
 
 const actions = {
-  login ({ commit }) {
+  login ({ commit }, params) {
+    localStorage.token = params.jwt_token
     commit(MutationTypes.LOGIN)
   },
   logout ({ commit }) {
+    delete localStorage.token
     commit(MutationTypes.LOGOUT)
   }
 }
