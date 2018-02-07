@@ -17,6 +17,12 @@ export default {
     this.checkLoggedIn()
   },
 
+  mounted () {
+    this.checkLoggedIn()
+
+    this.$store.dispatch('fetch_user')
+  },
+
   computed: {
     ...mapGetters(['currentUser', 'currentTitle'])
   },
