@@ -49,7 +49,7 @@ export default {
     }
   },
 
-  // redirect to '/users' when already logged in
+  // redirect to '/users' when admin already logged in
   created () {
     this.checkLoggedIn()
   },
@@ -59,7 +59,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['currentUser'])
+    ...mapGetters(['currentAdmin'])
   },
 
   methods: {
@@ -95,7 +95,7 @@ export default {
     },
 
     checkLoggedIn () {
-      if (this.currentUser) {
+      if (this.currentAdmin) {
         this.$router.replace(this.$route.query.redirect || { name: 'users' })
       }
     }

@@ -10,7 +10,13 @@ export default class User {
     }
   }
 
-  constructor ({ uid }) {
+  // The JWT payload is passed as argument to the User's constructor
+  constructor ({ uid, admin = null }) {
     this.id = uid
+    this.admin = admin
+  }
+
+  isAdmin () {
+    return this.admin === true
   }
 }

@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Navbar from '@/components/layout/Navbar'
 
 export default {
@@ -45,6 +46,10 @@ export default {
 
   updated () {
     this.checkLoggedIn()
+  },
+
+  computed: {
+    ...mapGetters(['currentUser'])
   },
 
   methods: {

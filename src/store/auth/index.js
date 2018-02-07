@@ -8,6 +8,12 @@ const state = {
 const getters = {
   currentUser (state) {
     return state.user
+  },
+
+  currentAdmin (state, getters) {
+    let user = getters.currentUser
+    if (user && user.isAdmin()) return user
+    else return null
   }
 }
 

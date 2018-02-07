@@ -24,7 +24,7 @@ export default {
     }
   },
 
-  // redirect to '/' (login page) when user not logged in
+  // redirect to '/' (login page) when admin not logged in
   updated () {
     this.checkLoggedIn()
   },
@@ -34,12 +34,12 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['currentUser', 'currentTitle'])
+    ...mapGetters(['currentAdmin', 'currentTitle'])
   },
 
   methods: {
     checkLoggedIn () {
-      if (!this.currentUser && this.$route.path !== '/login') {
+      if (!this.currentAdmin && this.$route.path !== '/login') {
         this.$router.push('/login?redirect=' + this.$route.path)
       }
     }
