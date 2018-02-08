@@ -22,9 +22,8 @@ div
     v-text-field(
       label="Code"
       v-model="role.code"
-      :counter="4"
       :error-messages="errors.collect('code')"
-      v-validate="'required|max:4'"
+      v-validate="'required'"
       data-vv-name="code"
       required)
 
