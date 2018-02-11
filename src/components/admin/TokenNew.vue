@@ -7,7 +7,7 @@ v-dialog(v-model="dialog" persistent max-width="500px")
       span.headline Roles d'accès
     v-card-text
       v-checkbox(v-for="(role, index) in roles" :key="index"
-        :label="role.name" v-model="token_payload" :value="role.code")
+        :label="role.name" v-model="checked_roles" :value="role.code")
     v-card-actions
       v-spacer
       v-btn(color="blue darken-1" flat @click="reset") Annuler
@@ -20,7 +20,7 @@ export default {
   data () {
     return {
       dialog: false,
-      token_payload: [],
+      checked_roles: [],
       roles: null
     }
   },
@@ -42,7 +42,7 @@ export default {
   methods: {
     submit: function () {
       this.$http.post(`/users/${this.userId}/tokens`, {
-        token_payload: this.token_payload
+        roles: this.checked_roles
       })
         .then(response => {
           this.$emit('tokenCreated', response.data.new_token)
@@ -54,7 +54,7 @@ export default {
     },
 
     reset: function () {
-      this.token_payload = []
+      this.checked_roles = []
       this.dialog = false
     }
   }
