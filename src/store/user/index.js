@@ -1,5 +1,6 @@
 import * as MutationTypes from '@/store/mutation-types'
 import axios from '@/axios-common'
+import JwtDecode from 'jwt-decode'
 
 const state = {
   user: {}
@@ -33,6 +34,16 @@ const mutations = {
     axios.get(`/users/${uid}`)
       .then(response => {
         state.user = response.data
+
+        // Extract the token payload data
+        state.user.tokens = state.user.tokens.map(jwt => {
+          let jwtPayload = JwtDecode(jwt)
+          let result = {}
+
+          result.value = jwt
+          result.access_roles = jwtPayload.roles
+          return result
+        })
       })
       .catch(response => {
         // TODO error handling
