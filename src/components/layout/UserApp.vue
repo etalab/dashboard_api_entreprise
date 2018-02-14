@@ -19,8 +19,6 @@ export default {
 
   mounted () {
     this.checkLoggedIn()
-
-    this.$store.dispatch('fetch_user')
   },
 
   computed: {

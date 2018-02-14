@@ -6,7 +6,7 @@
       <ul class="token__list">
         <li class="panel" v-for="(token, index) in userTokens" :key="index">
           <div class="panel__header">
-            <h3 class="token__name">Token {{ index }}</h3>
+            <h3 class="token__name">Token {{ index + 1}}</h3>
             <small class="panel__header-extra">Créé le 3 janvier 2018</small>
             <a href="#" class="button-stats">Voir les statistiques →</a>
           </div>
@@ -40,6 +40,10 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'user-dashboard',
+
+  created () {
+    this.$store.dispatch('fetch_user')
+  },
 
   computed: {
     ...mapGetters([
