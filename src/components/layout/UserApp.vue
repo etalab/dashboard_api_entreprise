@@ -27,10 +27,23 @@ export default {
 
   methods: {
     checkLoggedIn () {
-      if (!this.currentUser && this.$route.path !== '/account/login') {
+      if (!this.currentUser && this.restrictedAccess()) {
         this.$router.push('/account/login?redirect=' + this.$route.path)
       }
+    },
+
+    // TODO make it a helper to share the logic with admin
+    restrictedAccess () {
+      const allowedUserRoutes = [
+        '/account/login',
+        '/account/confirm'
+      ]
+
+      return allowedUserRoutes.every(route => {
+        return this.$route.path !== route
+      })
     }
+
   }
 }
 </script>
