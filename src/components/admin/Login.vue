@@ -85,8 +85,8 @@ export default {
       }
 
       this.loginError = false
-      this.$store.dispatch('login', { jwt_token: responseData.access_token })
-      this.$router.replace(this.$route.query.redirect || { name: 'users' })
+      return this.$store.dispatch('login', { jwt_token: responseData.access_token })
+        .then(() => { this.$router.replace(this.$route.query.redirect || { name: 'users' }) })
     },
 
     failLogin () {
