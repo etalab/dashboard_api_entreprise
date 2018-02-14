@@ -21,16 +21,6 @@ export default new Router({
   // mode: 'history',
   routes: [
     {
-      path: '/account/confirm',
-      name: 'user-confirm',
-      component: UserConfirm
-    },
-    {
-      path: '/account/login',
-      name: 'user-login',
-      component: UserLogin
-    },
-    {
       path: '/account',
       component: UserApp,
       children: [
@@ -38,23 +28,33 @@ export default new Router({
           path: '/',
           name: 'user-dashboard',
           component: UserDashboard
+        },
+        {
+          path: 'confirm',
+          name: 'user-confirm',
+          component: UserConfirm
+        },
+        {
+          path: 'login',
+          name: 'user-login',
+          component: UserLogin
         }
       ]
     },
     {
-      path: '/login',
+      path: '/admin/login',
       name: 'login',
       component: Login
     },
     {
-      path: '/logout',
+      path: '/admin/logout',
       name: 'logout',
       component: Logout
     },
     {
-      path: '/',
-      redirect: '/users',
+      path: '/admin',
       component: AdminPanel,
+      redirect: '/admin/users',
       children: [
         {
           path: 'users',

@@ -38,9 +38,10 @@ export default {
   },
 
   methods: {
+    // TODO use named routes for routing logic
     checkLoggedIn () {
-      if (!this.currentAdmin && this.$route.path !== '/login') {
-        this.$router.push('/login?redirect=' + this.$route.path)
+      if (!this.currentAdmin && this.$route.path !== '/admin/login') {
+        this.$router.push('/admin/login?redirect=' + this.$route.path)
       }
     }
   },
