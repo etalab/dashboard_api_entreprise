@@ -6,6 +6,11 @@
         form.panel
           h1 Activer votre compte utilisateur
 
+          div(class="notification error" v-if="fieldErrors") {{ validationErrors }}
+            button(class="close" aria-label="Fermer" @click="clearFieldErrors")
+              svg(class="icon icon-cross")
+                use(xlink:href="#icon-cross")
+
           p Afin de valider votre inscription, merci de renseigner votre mot de passe. Celui-ci vous sera demandé pour accéder à votre espace client.
 
           .form__group
@@ -29,7 +34,9 @@ export default {
   data () {
     return {
       password: '',
-      password_confirmation: ''
+      password_confirmation: '',
+      fieldErrors: false,
+      validationErrors: []
     }
   },
 
@@ -42,8 +49,15 @@ export default {
         confirmation_token: this.$route.query.confirmation_token
       })
         // TODO remove alerts
-        .then(response => alert('log the user and redirect to the dashboard'))
-        .catch(response => alert('Une erreur est survenue !'))
+        .then(response => alert('login the user and redirect to the dashboard'))
+        .catch(error => {
+          this.validationErrors = error.response.data.errors
+          this.fieldErrors = true
+        })
+    },
+
+    clearFieldErrors () {
+      this.fieldErrors = false
     }
   },
 
