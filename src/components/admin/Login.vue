@@ -83,10 +83,13 @@ export default {
         this.failLogin()
         return
       }
-
       this.loginError = false
-      return this.$store.dispatch('login', { jwt_token: responseData.access_token })
-        .then(() => { this.$router.replace(this.$route.query.redirect || { name: 'users' }) })
+
+      this.$store.dispatch('login', { jwt_token: responseData.access_token })
+        .then(() => {
+          this.$http.defaults.headers['Authorization'] = 'Bearer ' + localStorage.token
+          this.$router.replace(this.$route.query.redirect || { name: 'users' })
+        })
     },
 
     failLogin () {

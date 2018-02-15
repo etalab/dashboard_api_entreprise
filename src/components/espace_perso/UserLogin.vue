@@ -68,10 +68,15 @@ export default {
         this.failLogin()
         return
       }
-
       this.loginError = false
+
       this.$store.dispatch('login', { jwt_token: responseData.access_token })
-      this.$router.replace(this.$route.query.redirect || { name: 'user-dashboard' })
+        .then(() => {
+          // Update default axios header
+          // TODO Move global axios instance into the store
+          this.$http.defaults.headers['Authorization'] = 'Bearer ' + localStorage.token
+          this.$router.replace(this.$route.query.redirect || { name: 'user-dashboard' })
+        })
     },
 
     failLogin () {
