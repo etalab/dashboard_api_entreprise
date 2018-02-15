@@ -48,8 +48,13 @@ export default {
         password_confirmation: this.password_confirmation,
         confirmation_token: this.$route.query.confirmation_token
       })
-        // TODO remove alerts
-        .then(response => alert('login the user and redirect to the dashboard'))
+        .then(response => {
+          this.$store.dispatch('login', { jwt_token: response.data.access_token })
+            .then(() => {
+              this.$http.defaults.headers['Authorization'] = 'Bearer ' + localStorage.token
+              this.$router.replace({ name: 'user-dashboard' })
+            })
+        })
         .catch(error => {
           this.validationErrors = error.response.data.errors
           this.fieldErrors = true
