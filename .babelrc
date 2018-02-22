@@ -11,8 +11,9 @@
   "plugins": ["transform-runtime"],
   "env": {
     "test": {
-      "presets": ["env", "stage-2"],
-      "plugins": ["istanbul"]
+      "presets": [
+        ["env", { "targets": { "node": "current" }}]
+      ]
     }
   }
 }
