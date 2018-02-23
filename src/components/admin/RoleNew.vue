@@ -53,16 +53,17 @@ export default {
             return
           }
 
-          // POST request to create role
-          this.$http.post('/roles', {
+          const params = {
             name: this.role.name,
             code: this.role.code
-          })
-            .then(response => {
+          }
+          // POST request to create role
+          this.$store.dispatch('role/create', params)
+            .then(() => {
               this.$router.push({ name: 'roles' })
             })
-            .catch(e => {
-              this.alertMessage = e.response.data.errors
+            .catch(error => {
+              this.alertMessage = error
               this.validationFailure = true
             })
         })

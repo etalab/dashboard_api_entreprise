@@ -11,13 +11,16 @@
       @click="roleForm")
       v-icon add
 
-    v-data-table(:headers="headers" :items="roles" class="elevation-1")
+    v-data-table(:headers="headers" :items="index" class="elevation-1")
       template(slot="items" scope="props")
         td {{ props.item.name }}
         td {{ props.item.code }}
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('role')
+
 export default {
   name: 'role-list',
   data () {
@@ -26,18 +29,17 @@ export default {
       headers: [
         { text: 'Nom', value: 'name', align: 'left' },
         { text: 'Code', value: 'code', align: 'left' }
-      ],
-      roles: []
+      ]
     }
   },
 
   created: function () {
     this.$store.dispatch('setPageTitle', this.title)
+    this.$store.dispatch('role/index')
+  },
 
-    this.$http.get('/roles')
-      .then(response => {
-        this.roles = response.data
-      })
+  computed: {
+    ...mapGetters(['index'])
   },
 
   methods: {
