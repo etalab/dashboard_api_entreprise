@@ -15,14 +15,14 @@ div
 
     v-card
       v-list(two-line)
-        template(v-for="(token, index) in user.tokens")
+        template(v-for="(token, index) in tokens")
           v-list-tile(:key="index")
             v-list-tile-content
               v-list-tile-title {{ token }}
               v-list-tile-sub-title date
             v-list-tile-action
               v-icon delete
-          v-divider(v-if="index + 1 < user.tokens.length")
+          v-divider(v-if="index + 1 < tokens.length")
 
   v-flex.mt-4
     h4 Contacts
@@ -31,28 +31,29 @@ div
 
   v-container(grid-list-md)
     v-layout(row wrap)
-      v-flex(xs4 v-for="(contact, index) in user.contacts" :key="index")
+      v-flex(xs4 v-for="(contact, index) in contacts" :key="index")
         contact-tile(:contact="contact")
 </template>
 
 <script>
 import TokenNew from '@/components/admin/TokenNew'
 import ContactTile from '@/components/admin/ContactTile'
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('user')
 
 export default {
   name: 'user-show',
   data () {
-    return {
-      user: {}
-    }
+    return {}
   },
   props: ['userId'],
 
   created: function () {
-    this.$http.get(`/users/${this.userId}`)
-      .then(response => {
-        this.user = response.data
-      })
+    this.$store.dispatch('user/get', { userId: this.userId })
+  },
+
+  computed: {
+    ...mapGetters(['user', 'contacts', 'tokens'])
   },
 
   methods: {

@@ -4,7 +4,7 @@
     <div class="container">
       <h1>Jetons d'accès aux APIs</h1>
       <ul class="token__list">
-        <li class="panel" v-for="(token, index) in userTokens" :key="index">
+        <li class="panel" v-for="(token, index) in tokens" :key="index">
           <div class="panel__header">
             <h3 class="token__name">Token {{ index + 1}}</h3>
             <small class="panel__header-extra">Créé le 3 janvier 2018</small>
@@ -13,7 +13,7 @@
           <div class="form__group token__rights">
             <label class="token__rights-label">Accès</label>
             <ul class="token__rights-list tag-list">
-              <li class="tag" v-for="(role, index) in token.access_roles" :key="index"><a>{{ role }}</a></li>
+              <li class="tag" v-for="(role, index) in token.payload.roles" :key="index">{{ role }}</li>
             </ul>
           </div>
           <div class="form__group token__string">
@@ -36,22 +36,21 @@
 
 <script>
 import Navbar from '@/components/layout/Navbar'
-import { mapGetters } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('user')
 
 export default {
   name: 'user-dashboard',
 
   created () {
-    this.$store.dispatch('fetch_user')
+    this.$store.dispatch('user/get')
   },
 
   computed: {
     ...mapGetters([
-      'userId',
-      'userEmail',
-      'userContext',
-      'userContacts',
-      'userTokens'
+      'user',
+      'contacts',
+      'tokens'
     ])
   },
 
