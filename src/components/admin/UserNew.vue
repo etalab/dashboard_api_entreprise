@@ -11,7 +11,7 @@ div
 
   form
     v-text-field(
-      v-model="user.email"
+      v-model="userEmail"
       label= "Email"
       :error-messages="errors.collect('email')"
       v-validate="'required|email'"
@@ -19,7 +19,7 @@ div
       required)
 
     v-text-field(
-      v-model="user.context"
+      v-model="userContext"
       label= "Contexte"
       data-vv-name="context")
 
@@ -28,28 +28,28 @@ div
     div
       h6 Contact administratif
       v-text-field(
-        v-model="admin_contact.email"
+        v-model="adminContactEmail"
         label= "Email"
         :error-messages="errors.collect('admin_email')"
         v-validate="'email'"
         data-vv-name="admin_email")
 
       v-text-field(
-        v-model="admin_contact.phone_number"
+        v-model="adminContactPhone"
         label= "Téléphone"
         data-vv-name="admin_email")
 
     div
       h6 Contact technique
       v-text-field(
-        v-model="tech_contact.email"
+        v-model="techContactEmail"
         label= "Email"
         :error-messages="errors.collect('tech_email')"
         v-validate="'email'"
         data-vv-name="tech_email")
 
       v-text-field(
-        v-model="tech_contact.phone_number"
+        v-model="techContactPhone"
         label= "Téléphone"
         data-vv-name="tech_email")
 
@@ -57,15 +57,53 @@ div
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState } = createNamespacedHelpers('user/create')
+
 export default {
   name: 'user-new',
   data () {
     return {
-      user: {},
-      admin_contact: {},
-      tech_contact: {},
       validationErrorMsg: '',
       validationFailure: false
+    }
+  },
+
+  computed: {
+    ...mapState({
+      userForm: state => state.user_form
+    }),
+
+    // TODO refactor this following https://ypereirareis.github.io/blog/2017/04/25/vuejs-two-way-data-binding-state-management-vuex-strict-mode/
+    // ... or this https://github.com/maoberlehner/vuex-map-fields
+    userEmail: {
+      get () { return this.userForm.email },
+      set (value) { this.$store.commit('user/create/updateField', { field: 'email', val: value }) }
+    },
+
+    userContext: {
+      get () { return this.userForm.context },
+      set (value) { this.$store.commit('user/create/updateField', { field: 'context', val: value }) }
+    },
+
+    adminContactEmail: {
+      get () { return this.userForm.adminContactEmail },
+      set (value) { this.$store.commit('user/create/updateField', { field: 'adminContactEmail', val: value }) }
+    },
+
+    adminContactPhone: {
+      get () { return this.userForm.adminContactPhone },
+      set (value) { this.$store.commit('user/create/updateField', { field: 'adminContactPhone', val: value }) }
+    },
+
+    techContactEmail: {
+      get () { return this.userForm.techContactEmail },
+      set (value) { this.$store.commit('user/create/updateField', { field: 'techContactEmail', val: value }) }
+    },
+
+    techContactPhone: {
+      get () { return this.userForm.techContactPhone },
+      set (value) { this.$store.commit('user/create/updateField', { field: 'techContactPhone', val: value }) }
     }
   },
 
@@ -79,40 +117,14 @@ export default {
             return
           }
 
-          this.$http.post('/users', this.set_user_payload())
-            .then(response => {
-              this.$router.push({ name: 'users' })
-            })
+          // TODO handle routing and error with vuex
+          this.$store.dispatch('user/create/submit')
+            .then(data => this.$router.push({ name: 'users' }))
             .catch(e => {
               this.validationErrorMsg = e.response.data.errors
               this.validationFailure = true
             })
         })
-    },
-
-    set_user_payload: function () {
-      let contacts = []
-      if (this.admin_contact['email'] || this.admin_contact['phone_number']) {
-        contacts.push({
-          email: this.admin_contact.email,
-          phone_number: this.admin_contact.phone_number,
-          contact_type: 'admin'
-        })
-      }
-      if (this.tech_contact['email'] || this.tech_contact['phone_number']) {
-        contacts.push({
-          email: this.tech_contact.email,
-          phone_number: this.tech_contact.phone_number,
-          contact_type: 'tech'
-        })
-      }
-
-      let payload = {
-        email: this.user.email,
-        context: this.user.context
-      }
-      if (contacts.length > 0) { payload.contacts = contacts }
-      return payload
     }
   }
 }

@@ -10,6 +10,7 @@ import layoutContent from './layout_content'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  strict: process.env.NODE_ENV !== 'production',
   modules: {
     auth,
     layoutContent,

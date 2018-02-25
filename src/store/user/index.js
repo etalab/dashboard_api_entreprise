@@ -1,4 +1,5 @@
 import JwtDecode from 'jwt-decode'
+import userCreate from './create'
 
 const state = {
   user: {
@@ -69,5 +70,8 @@ export default {
   state,
   mutations,
   getters,
-  actions
+  actions,
+  modules: {
+    create: userCreate
+  }
 }
