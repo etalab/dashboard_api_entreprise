@@ -67,34 +67,20 @@ export default {
       this.$validator.validateAll()
         .then(result => {
           if (result) {
-            this.$http.post('/users/login', {
+            const loginParams = {
               username: this.email,
               password: this.password,
               grant_type: 'password'
-            })
-              .then(response => this.successLogin(response.data))
-              .catch(() => this.failLogin())
+            }
+            this.$store.dispatch('login', loginParams)
+              .then(() => {
+                this.$router.push(this.$route.query.redirect || { name: 'users' })
+              })
+              .catch(() => {
+                this.loginError = true
+              })
           }
         })
-    },
-
-    successLogin: function (responseData) {
-      if (!responseData.access_token) {
-        this.failLogin()
-        return
-      }
-      this.loginError = false
-
-      this.$store.dispatch('login', { jwt_token: responseData.access_token })
-        .then(() => {
-          this.$http.defaults.headers['Authorization'] = 'Bearer ' + localStorage.token
-          this.$router.replace(this.$route.query.redirect || { name: 'users' })
-        })
-    },
-
-    failLogin () {
-      this.loginError = true
-      this.$store.dispatch('logout')
     },
 
     checkLoggedIn () {

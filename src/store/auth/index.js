@@ -1,7 +1,7 @@
 import User from '@/models/User'
-import * as MutationTypes from '@/store/mutation-types'
 
 const state = {
+  // TODO remove user model
   user: User.from(localStorage.token)
 }
 
@@ -18,25 +18,34 @@ const getters = {
 }
 
 const mutations = {
-  [MutationTypes.LOGIN] (state) {
+  setAuthenticatedUser (state) {
     state.user = User.from(localStorage.token)
   },
-  [MutationTypes.LOGOUT] (state) {
+
+  clearUser (state) {
     state.user = null
   }
 }
 
 const actions = {
-  login ({ commit }, params) {
-    return new Promise((resolve, reject) => {
-      localStorage.token = params.jwt_token
-      commit(MutationTypes.LOGIN)
-      resolve()
-    })
+  login ({ dispatch, commit }, params) {
+    return dispatch('api/post', { url: '/users/login', params: params }, { root: true })
+      .then(data => {
+        const sessionJWT = data.access_token
+        if (!sessionJWT) dispatch('logout')
+        else dispatch('loginSuccess', sessionJWT)
+      })
   },
+
   logout ({ commit }) {
     delete localStorage.token
-    commit(MutationTypes.LOGOUT)
+    commit('clearUser')
+  },
+
+  loginSuccess ({ dispatch, commit, rootGetters }, jwt) {
+    localStorage.token = jwt
+    commit('setAuthenticatedUser')
+    return dispatch('api/updateAuthorizationBearer', { root: true })
   }
 }
 

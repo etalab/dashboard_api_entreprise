@@ -15,6 +15,10 @@ const actions = {
         .then(response => resolve(response.data))
         .catch(error => reject(error.response.data.errors))
     })
+  },
+
+  updateAuthorizationBearer (ctx) {
+    axios.defaults.headers['Authorization'] = 'Bearer ' + localStorage.token
   }
 }
 
