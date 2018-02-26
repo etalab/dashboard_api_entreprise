@@ -19,7 +19,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('userIndex')
 
 export default {
   name: 'user-list',
@@ -36,7 +37,7 @@ export default {
 
   created: function () {
     this.$store.dispatch('setPageTitle', this.title)
-    this.$store.dispatch('fetch_user_index')
+    this.$store.dispatch('userIndex/index')
   },
 
   computed: {

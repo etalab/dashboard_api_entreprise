@@ -1,6 +1,3 @@
-import * as MutationTypes from '@/store/mutation-types'
-import axios from '@/axios-common'
-
 const state = {
   user_index: []
 }
@@ -12,21 +9,20 @@ const getters = {
 }
 
 const mutations = {
-  [MutationTypes.FETCH_USER_INDEX] (state) {
-    axios.get('/users')
-      .then(response => {
-        state.user_index = response.data
-      })
+  fill (state, users) {
+    state.user_index = users
   }
 }
 
 const actions = {
-  fetch_user_index ({ commit }) {
-    commit(MutationTypes.FETCH_USER_INDEX)
+  index ({ commit, dispatch }) {
+    dispatch('api/get', { url: '/users' }, { root: true })
+      .then(data => commit('fill', data))
   }
 }
 
 export default {
+  namespaced: true,
   state,
   mutations,
   getters,
