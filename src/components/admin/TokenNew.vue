@@ -25,9 +25,8 @@ export default {
     }
   },
 
-  props: ['userId'],
-
   // load roles the first time the form is open
+  // TODO get roles from vuex
   watch: {
     dialog: function (val) {
       if (this.roles === null && val) {
@@ -41,13 +40,8 @@ export default {
 
   methods: {
     submit: function () {
-      this.$http.post(`/users/${this.userId}/tokens`, {
-        roles: this.checked_roles
-      })
-        .then(response => {
-          this.$emit('tokenCreated', response.data.new_token)
-          this.reset()
-        })
+      this.$store.dispatch('user/createToken', { roles: this.checked_roles })
+        .then(() => this.reset())
         .catch(e => {
           // TODO something went wrong
         })

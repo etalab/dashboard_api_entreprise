@@ -11,7 +11,7 @@ div
 
   v-flex.mt-4
     h4 Tokens de l'utilisateur
-      token-new(@tokenCreated="onTokenCreation" :userId="userId")
+      token-new
 
     v-card
       v-list(two-line)
@@ -54,12 +54,6 @@ export default {
 
   computed: {
     ...mapGetters(['user', 'contacts', 'tokens'])
-  },
-
-  methods: {
-    onTokenCreation: function (newToken) {
-      this.user.tokens.push(newToken)
-    }
   },
 
   components: {

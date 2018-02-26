@@ -43,6 +43,10 @@ const mutations = {
     })
 
     state.user.tokens = decodedTokens
+  },
+
+  addToken (state, token) {
+    state.user.tokens.push(token)
   }
 }
 
@@ -62,6 +66,13 @@ const actions = {
 
     commit('setContacts', data.contacts)
     commit('setTokens', data.tokens)
+  },
+
+  createToken ({ dispatch, commit, getters }, payload) {
+    const userId = getters.user.id
+    const url = `/users/${userId}/jwt_api_entreprise`
+    dispatch('api/post', { url: url, params: payload }, { root: true })
+      .then(data => commit('addToken', data.new_token))
   }
 }
 
