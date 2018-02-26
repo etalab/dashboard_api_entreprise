@@ -54,34 +54,18 @@ export default {
 
   methods: {
     submitLogin () {
-      this.$http.post('/users/login', {
+      const loginParams = {
         username: this.email,
         password: this.password,
         grant_type: 'password'
-      })
-        .then(response => this.successLogin(response.data))
-        .catch(response => this.failLogin())
-    },
-
-    successLogin (responseData) {
-      if (!responseData.access_token) {
-        this.failLogin()
-        return
       }
-      this.loginError = false
-
-      this.$store.dispatch('login', { jwt_token: responseData.access_token })
+      this.$store.dispatch('login', loginParams)
         .then(() => {
-          // Update default axios header
-          // TODO Move global axios instance into the store
-          this.$http.defaults.headers['Authorization'] = 'Bearer ' + localStorage.token
-          this.$router.replace(this.$route.query.redirect || { name: 'user-dashboard' })
+          this.$router.push(this.$route.query.redirect || { name: 'user-dashboard' })
         })
-    },
-
-    failLogin () {
-      this.loginError = true
-      this.$store.dispatch('logout')
+        .catch(() => {
+          this.loginError = true
+        })
     },
 
     checkLoggedIn () {
