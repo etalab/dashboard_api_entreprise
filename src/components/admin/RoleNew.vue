@@ -1,33 +1,32 @@
 <template lang="pug">
-div
-  h4 Ajout d'un nouveau rôle
-  //- Closing the alert will set v-model to false
-  v-alert(
-    color="error"
-    icon="warning"
-    dismissible
-    v-model="validationFailure"
-    ) {{ alertMessage }}
-
+.main-pane
   form
-    v-text-field(
-      label="Nom"
+    h2 Ajout d'un nouveau rôle
+    //- Closing the alert will set v-model to false
+    v-alert(
+      color="error"
+      icon="warning"
+      dismissible
+      v-model="validationFailure"
+      ) {{ alertMessage }}
+
+    .form__group
+      label Nom
+      input(
       v-model="role.name"
       :counter="50"
       :error-messages="errors.collect('name')"
       v-validate="'required|max:50'"
-      data-vv-name="name"
-      required)
+      data-vv-name="name")
 
-    v-text-field(
-      label="Code"
-      v-model="role.code"
+    .form__group
+      label Code
+      input(v-model="role.code"
       :error-messages="errors.collect('code')"
       v-validate="'required'"
-      data-vv-name="code"
-      required)
+      data-vv-name="code")
 
-    v-btn(
+    button.button(
       @click="submit"
      ) Créer
 </template>

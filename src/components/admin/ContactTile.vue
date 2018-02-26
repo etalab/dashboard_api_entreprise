@@ -1,17 +1,17 @@
 <template lang="pug">
-  v-card
-    v-card-title(primary-title class="headline pb-0") {{ contactLabel }}
-    v-card-text
-      div
-        v-icon.mr-2 email
-        span {{ contact.email }}
+  .panel
+    h4 {{ contactLabel }}
+    div
+      v-icon.mr-2 email
+      span {{ contact.email }}
 
-      div
-        v-icon.mr-2 phone
-        span {{ contact.phone_number }}
-    v-card-actions
-      v-btn(flat color="primary") Editer
-      v-btn(flat color="error") Supprimer
+    div
+      v-icon.mr-2 phone
+      span {{ contact.phone_number }}
+    
+    .action-buttons
+      button.button.small Editer
+      button.button.small.warning Supprimer
 </template>
 
 <script>
@@ -33,3 +33,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  h4 {
+    margin-top: 0;
+  }
+</style>

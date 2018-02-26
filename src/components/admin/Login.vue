@@ -1,46 +1,40 @@
 <template lang="pug">
-div
-  v-app
-    v-container(fill-height)
-      v-layout(row wrap align-center)
-        v-flex(sm6 offset-sm3)
-          v-card
-            v-card-text
-              h3 Login
+  .login
+    .container
+      .form__container
+        form.panel
+          h1 Veuillez vous authentifier
 
-              v-alert(
-                color="error"
-                icon="warning"
-                dismissible
-                v-model="loginError"
-                ) Login failed!
+          v-alert(
+            color="error"
+            icon="warning"
+            dismissible
+            v-model="loginError"
+            ) Login failed!
 
-              form
-                v-text-field(
-                  label="E-mail"
-                  v-model="email"
-                  :error-messages="errors.collect('email')"
-                  v-validate="'required|email'"
-                  data-vv-name="email"
-                  required)
+          .form__group
+            label Adresse e-mail
+            input(type="email" v-model="email")
 
-                v-text-field(
-                  label="Mot de passe"
-                  v-model="password"
-                  :error-messages="errors.collect('password')"
-                  v-validate="'required'"
-                  data-vv-name="password"
-                  type="password"
-                  required)
+          .form__group
+            label Mot de passe
+            input(type="password" v-model="password")
+            small
+              a Mot de passe oublié ?
 
-                v-btn(@click="login") Connexion
+          button.button(@click="login") S'identifier
+
+          .signup.text-center Pas de compte ?
+            div
+              a Contactez-nous &nbsp
+              span pour en créer un.
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'login',
+  name: 'user-login',
   data () {
     return {
       email: '',
@@ -91,3 +85,21 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .login {
+    height: calc(100% - 73px);
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  button.button {
+    margin-top: 2em;
+    display: block;
+  }
+
+  .signup {
+    margin-top: 2em;
+  }
+</style>

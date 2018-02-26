@@ -1,59 +1,60 @@
 <template lang="pug">
-div
-  h4 Création d'un nouvel utilisateur
-
-  v-alert(
-    color="error"
-    icon="warning"
-    dismissible
-    v-model="validationFailure"
-    ) {{ validationErrorMsg }}
-
+.main-pane
   form
-    v-text-field(
-      v-model="userEmail"
-      label= "Email"
+    h2 Création d'un nouvel utilisateur
+
+    v-alert(
+      color="error"
+      icon="warning"
+      dismissible
+      v-model="validationFailure"
+      ) {{ validationErrorMsg }}
+
+    .form__group
+      label Email
+      input(v-model="userEmail"
       :error-messages="errors.collect('email')"
       v-validate="'required|email'"
-      data-vv-name="email"
-      required)
+      data-vv-name="email")
 
-    v-text-field(
-      v-model="userContext"
+    .form__group
       label= "Contexte"
+      input(v-model="userContext"
       data-vv-name="context")
 
-    br
-
-    div
-      h6 Contact administratif
-      v-text-field(
+    .contact__group
+      h3 Contact administratif
+      .form__group
+        label Email
+        input(
         v-model="adminContactEmail"
-        label= "Email"
         :error-messages="errors.collect('admin_email')"
         v-validate="'email'"
         data-vv-name="admin_email")
 
-      v-text-field(
+      .form__group
+        label Téléphone
+        input(
         v-model="adminContactPhone"
-        label= "Téléphone"
-        data-vv-name="admin_email")
+        data-vv-name="admin_phone")
 
-    div
-      h6 Contact technique
-      v-text-field(
+    .contact__group
+      h3 Contact technique
+      .form__group
+        label Email
+        input(
         v-model="techContactEmail"
-        label= "Email"
         :error-messages="errors.collect('tech_email')"
         v-validate="'email'"
         data-vv-name="tech_email")
 
-      v-text-field(
+      .form__group
+        label Téléphone
+        input(
         v-model="techContactPhone"
-        label= "Téléphone"
-        data-vv-name="tech_email")
+        data-vv-name="tech_phone")
 
-    v-btn(@click="submit") Créer
+    button.button(@click="submit") Créer
 </template>
 
 <script>
@@ -130,3 +131,8 @@ export default {
 }
 </script>
 
+<style lang="scss" scoped>
+  .contact__group {
+    margin: 3em 0;
+  }
+</style>

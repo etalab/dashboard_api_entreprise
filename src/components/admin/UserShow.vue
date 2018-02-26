@@ -1,38 +1,33 @@
 <template lang="pug">
-div
-  h4 Profil utilisateur
-  v-card
-    v-card-text
-      h6.caption.grey--text.mb-0 Adresse e-mail
-      div.headline {{ user.email }}
+.main-pane
+  .profile__group
+    h2 Profil utilisateur
 
-      h6.caption.grey--text.mb-0.mt-3 Contexte
+    .form__group
+      label Adresse e-mail
+      div.headline {{ user.email }}
+    .form__group
+      label Contexte
       div.headline {{ user.context }}
 
-  v-flex.mt-4
-    h4 Tokens de l'utilisateur
-      token-new
+  .profile__group
+    h2 Tokens de l'utilisateur
 
-    v-card
-      v-list(two-line)
-        template(v-for="(token, index) in tokens")
-          v-list-tile(:key="index")
-            v-list-tile-content
-              v-list-tile-title {{ token }}
-              v-list-tile-sub-title date
-            v-list-tile-action
-              v-icon delete
-          v-divider(v-if="index + 1 < tokens.length")
+    table
+      tr(v-for="(token, index) in tokens")
+        td {{token}}
+          label date
+        td
+          v-icon delete
+    token-new
 
-  v-flex.mt-4
-    h4 Contacts
-      v-btn(dark fab color="primary" small class="ml-3")
-        v-icon add
+  .profile__group
+    h2 Contacts
 
-  v-container(grid-list-md)
-    v-layout(row wrap)
-      v-flex(xs4 v-for="(contact, index) in contacts" :key="index")
-        contact-tile(:contact="contact")
+    .contact__container
+      contact-tile(v-for="(contact, index) in contacts" :key="index" :contact="contact")
+
+    button.button Ajouter un contact
 </template>
 
 <script>
@@ -62,3 +57,39 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .main-pane {
+    height: auto;
+  }
+
+  .profile__group {
+    margin-bottom: 4em;
+  }
+
+  label {
+    color: $color-dark-grey;
+  }
+
+  .contact__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  table {
+    margin-bottom: 2em;
+  }
+
+  .panel {
+    width: 40%;
+  }
+
+  .panel:first-child {
+    margin-right: 2em;
+  }
+
+  .button {
+    margin-top: 2em;
+  }
+</style>

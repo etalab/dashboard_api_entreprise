@@ -1,21 +1,17 @@
 <template lang="pug">
-  div.mt-4
-    v-btn(
-      class="mb-5 mr-2"
-      color="primary"
-      absolute
-      dark
-      fab
-      bottom
-      right
-      @click="userForm")
-      v-icon add
+  .main-pane
+    button.button(@click="userForm") Ajouter un utilisateur
 
-    v-data-table(:headers="headers" :items="userList" class="elevation-1")
-      template(slot="items" scope="props")
-        td
-          router-link(:to="{ name: 'userShow', params: { userId: props.item.id }}") {{ props.item.email }}
-        td {{ props.item.context }}
+    table
+      thead
+        tr
+          th.text-left(v-for="header in headers") {{header.text}}
+      tbody
+        tr(v-for="user in userList")
+          td
+            router-link(:to="{ name: 'userShow', params: { userId: user.id }}") {{ user.email }}
+          td {{ user.context }}
+
 </template>
 
 <script>

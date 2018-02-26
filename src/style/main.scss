@@ -5,3 +5,52 @@ body, html {
 #app {
   height: 100%;
 }
+
+.main-pane {
+  min-height: calc(100% - 73px);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2em;
+  box-sizing: border-box;
+  box-shadow: 0 1px 4px $color-lighter-grey;
+}
+
+th, td {
+  border: 1px solid $color-lighter-grey;
+  padding: 1em;
+  word-break: break-all;
+}
+
+a.button.small,
+button.button.small {
+  font-size: 0.75em;
+}
+
+a.button.warning,
+button.button.warning {
+  background-color: $color-red;
+  border-bottom: 2px solid darken($color-red, 0.8);
+}
+
+a.button.warning:hover,
+button.button.warning:hover {
+  background: darken($color-red, 0.8);
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin-top: 1em;
+}
+
+.action-buttons button.button {
+  margin: 0;
+}
+
+.action-buttons button.button:first-child {
+  margin-right: 1em;
+}

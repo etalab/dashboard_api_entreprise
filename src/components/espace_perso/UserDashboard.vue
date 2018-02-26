@@ -1,6 +1,5 @@
 <template>
   <div class="dashboard">
-    <navbar></navbar>
     <div class="container">
       <h1>Jetons d'accès aux APIs</h1>
       <ul class="token__list">
@@ -35,7 +34,6 @@
 </template>
 
 <script>
-import Navbar from '@/components/layout/Navbar'
 import { createNamespacedHelpers } from 'vuex'
 const { mapGetters } = createNamespacedHelpers('user')
 
@@ -52,10 +50,6 @@ export default {
       'contacts',
       'tokens'
     ])
-  },
-
-  components: {
-    'Navbar': Navbar
   }
 }
 </script>

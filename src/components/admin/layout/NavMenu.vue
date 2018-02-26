@@ -1,26 +1,12 @@
 <template lang="pug">
-  v-navigation-drawer(app v-model="drawer")
-    v-toolbar
-      v-list
-        v-list-tile
-          v-list-tile-title.title Administration API Entreprise
+  .side-pane
+    ul.side-pane__menu
+      li(v-for="(tile, index) in tiles" :key="index"  :route="tile.routeName" :icon="tile.icon")
+        a.side-pane__link(@click="routeTo(tile.routeName)") {{tile.label}}
 
-    v-layout(column justify-space-between fill-height)
-      v-list
-        nav-menu-tile(v-for="(tile, index) in tiles" :key="index" :label="tile.label" :route="tile.routeName" :icon="tile.icon")
-
-      v-list
-        v-list-tile
-          v-list-tile-content
-            v-list-tile-title Administrateur
-          v-list-tile-action
-            v-btn(icon @click="logout")
-              v-icon exit_to_app
 </template>
 
 <script>
-import NavMenuTile from '@/components/admin/layout/NavMenuTile'
-
 export default {
   name: 'nav-menu',
 
@@ -40,17 +26,10 @@ export default {
       ]
     }
   },
-
-  props: ['drawer'],
-
   methods: {
-    logout () {
-      this.$router.push({ name: 'logout' })
+    routeTo: function (routeName) {
+      this.$router.push({ name: routeName })
     }
-  },
-
-  components: {
-    'nav-menu-tile': NavMenuTile
   }
 }
 </script>

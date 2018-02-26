@@ -1,14 +1,8 @@
 <template lang="pug">
-  v-app
-    nav-menu(:drawer="drawer")
+  .documentation
+    nav-menu
 
-    v-toolbar(app fixed)
-      v-toolbar-side-icon(@click.stop="drawer = !drawer")
-      v-toolbar-title {{ currentTitle }}
-
-    v-content
-      v-container(fluid)
-        router-view
+    router-view
 </template>
 
 <script>
@@ -51,3 +45,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .documentation {
+    height: auto;
+    min-height: calc(100% - 73px);
+  }
+</style>

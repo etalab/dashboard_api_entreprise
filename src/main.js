@@ -8,7 +8,7 @@ import router from './router'
 import axios from './axios-common'
 import store from './store'
 
-import('../node_modules/vuetify/dist/vuetify.min.css')
+// import('../node_modules/vuetify/dist/vuetify.min.css')
 
 require('@/style/app.scss')
 

@@ -1,10 +1,16 @@
 <template lang="pug">
   .login
-    nav-bar
     .container
       .form__container
         form.panel
-          h1 Bienvenue sur votre espace client
+          h1 Veuillez vous authentifier
+
+          v-alert(
+            color="error"
+            icon="warning"
+            dismissible
+            v-model="loginError"
+            ) Login failed!
 
           .form__group
             label Adresse e-mail
@@ -16,26 +22,24 @@
             small
               a Mot de passe oublié ?
 
-          button.button(@click="submitLogin") S'identifier
+          button.button(@click="login") S'identifier
 
           .signup.text-center Pas de compte ?
             div
               a Contactez-nous &nbsp
               span pour en créer un.
-
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import Navbar from '@/components/layout/Navbar'
 
 export default {
   name: 'user-login',
-
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      loginError: false
     }
   },
 
@@ -53,7 +57,7 @@ export default {
   },
 
   methods: {
-    submitLogin () {
+    login () {
       const loginParams = {
         username: this.email,
         password: this.password,
@@ -73,17 +77,13 @@ export default {
         this.$router.replace(this.$route.query.redirect || { name: 'user-dashboard' })
       }
     }
-  },
-
-  components: {
-    'nav-bar': Navbar
   }
 }
 </script>
 
 <style lang="scss" scoped>
   .login {
-    height: 100%;
+    height: calc(100% - 73px);
     display: flex;
     align-items: center;
     position: relative;

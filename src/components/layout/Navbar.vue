@@ -4,6 +4,9 @@
       a.nav__link(@click="clearHomepage")
         img.nav__logo(src="../../assets/images/logo_site.svg" alt="entreprise.api.gouv.fr")
 
+      a.logout(icon @click="logout")
+        v-icon exit_to_app
+
 </template>
 
 <script>
@@ -12,18 +15,20 @@ export default {
   methods: {
     clearHomepage () {
       // TODO
+    },
+    logout () {
+      this.$router.push({ name: 'logout' })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.nav {
-  position: fixed;
-  top: 0;
-}
-
 a {
   box-sizing: initial;
+}
+
+.logout {
+  margin-right: 1em;
 }
 </style>

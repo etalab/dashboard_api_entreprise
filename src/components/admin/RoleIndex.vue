@@ -1,20 +1,15 @@
 <template lang="pug">
-  div.mt-4
-    v-btn(
-      class="mb-5 mr-2"
-      color="primary"
-      absolute
-      dark
-      fab
-      bottom
-      right
-      @click="roleForm")
-      v-icon add
+  .main-pane
+    button.button(@click="roleForm") Ajouter un rôle
 
-    v-data-table(:headers="headers" :items="index" class="elevation-1")
-      template(slot="items" scope="props")
-        td {{ props.item.name }}
-        td {{ props.item.code }}
+    table
+      thead
+        tr
+          th.text-left(v-for="header in headers") {{ header.text }}
+      tbody
+        tr(v-for="role in index")
+          td {{ role.name }}
+          td {{ role.code }}
 </template>
 
 <script>
