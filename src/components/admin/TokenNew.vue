@@ -4,10 +4,10 @@
   .dialog-backdrop(v-if="dialog")
     .dialog.panel
       h4 Rôles d’accès
-      div(v-for="(role, index) in roles") 
-        input(type="checkbox" :id="index" v-model="checked_roles" :value="role.code")
+      div(v-for="role in index")
+        input(type="checkbox" :id="role.id" v-model="checked_roles" :value="role.code")
         label.label-inline(:for="index") {{role.name}}
-        
+
       .action-buttons
         button.button.small(@click="submit") Créer
         button.button.small.warning(@click="reset") Annuler
@@ -16,27 +16,24 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('role')
+
 export default {
   name: 'token-new',
   data () {
     return {
       dialog: false,
-      checked_roles: [],
-      roles: null
+      checked_roles: []
     }
   },
 
-  // load roles the first time the form is open
-  // TODO get roles from vuex
-  watch: {
-    dialog: function (val) {
-      if (this.roles === null && val) {
-        this.$http.get('/roles')
-          .then(response => {
-            this.roles = response.data
-          })
-      }
-    }
+  created () {
+    this.$store.dispatch('role/index')
+  },
+
+  computed: {
+    ...mapGetters(['index'])
   },
 
   methods: {
