@@ -2,17 +2,13 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import Vuetify from 'vuetify'
 import VeeValidate from 'vee-validate'
 import router from './router'
 import axios from './axios-common'
 import store from './store'
 
-// import('../node_modules/vuetify/dist/vuetify.min.css')
-
 require('@/style/app.scss')
 
-Vue.use(Vuetify)
 Vue.use(VeeValidate)
 Vue.config.productionTip = false
 
