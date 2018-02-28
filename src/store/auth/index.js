@@ -29,7 +29,7 @@ const mutations = {
 
 const actions = {
   login ({ dispatch, commit }, params) {
-    return dispatch('api/post', { url: '/users/login', params: params }, { root: true })
+    return dispatch('api/admin/post', { url: '/users/login', params: params }, { root: true })
       .then(data => {
         const sessionJWT = data.access_token
         if (!sessionJWT) dispatch('logout')
@@ -45,7 +45,7 @@ const actions = {
   loginSuccess ({ dispatch, commit, rootGetters }, jwt) {
     localStorage.token = jwt
     commit('setAuthenticatedUser')
-    return dispatch('api/updateAuthorizationBearer', { root: true })
+    return dispatch('api/admin/updateAuthorizationBearer', { root: true })
   }
 }
 

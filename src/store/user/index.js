@@ -53,7 +53,7 @@ const mutations = {
 const actions = {
   get ({ dispatch, commit, rootGetters }, { userId } = {}) {
     const uid = userId || rootGetters.currentUser.id
-    dispatch('api/get', { url: `/users/${uid}` }, { root: true })
+    dispatch('api/admin/get', { url: `/users/${uid}` }, { root: true })
       .then(data => dispatch('fillUserData', data))
   },
 
@@ -71,7 +71,7 @@ const actions = {
   createToken ({ dispatch, commit, getters }, payload) {
     const userId = getters.user.id
     const url = `/users/${userId}/jwt_api_entreprise`
-    dispatch('api/post', { url: url, params: payload }, { root: true })
+    dispatch('api/admin/post', { url: url, params: payload }, { root: true })
       .then(data => commit('addToken', data.new_token))
   }
 }

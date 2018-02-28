@@ -59,7 +59,7 @@ const mutations = {
 const actions = {
   submit ({ dispatch, getters }) {
     const payload = getters.generatePayload
-    return dispatch('api/post', { url: '/users', params: payload }, { root: true })
+    return dispatch('api/admin/post', { url: '/users', params: payload }, { root: true })
   }
 }
 

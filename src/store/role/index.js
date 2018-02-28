@@ -20,12 +20,12 @@ const mutations = {
 
 const actions = {
   index ({ commit, dispatch }) {
-    dispatch('api/get', { url: '/roles' }, { root: true })
+    dispatch('api/admin/get', { url: '/roles' }, { root: true })
       .then(data => commit('fill', { roles: data }))
   },
 
   create ({ dispatch }, params) {
-    return dispatch('api/post', { url: '/roles', params }, { root: true })
+    return dispatch('api/admin/post', { url: '/roles', params }, { root: true })
   }
 }
 
