@@ -1,9 +1,20 @@
-import axios from '@/axios-common'
+import axios from 'axios'
+
+const API_URL = `${process.env.API_BASE_URL}${process.env.API_URL_PREFIX}`
+
+const http = axios.create({
+  baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + localStorage.getItem('token')
+  },
+  timeout: 30000
+})
 
 const actions = {
   get (ctx, { url, params = {} }) {
     return new Promise((resolve, reject) => {
-      axios.get(url, { params })
+      http.get(url, { params })
         .then(response => resolve(response.data))
         .catch(error => reject(error.response.data.errors))
     })
@@ -11,14 +22,14 @@ const actions = {
 
   post (ctx, { url, params = {} }) {
     return new Promise((resolve, reject) => {
-      axios.post(url, params)
+      http.post(url, params)
         .then(response => resolve(response.data))
         .catch(error => reject(error.response.data.errors))
     })
   },
 
   updateAuthorizationBearer (ctx) {
-    axios.defaults.headers['Authorization'] = 'Bearer ' + localStorage.token
+    http.defaults.headers['Authorization'] = 'Bearer ' + localStorage.token
   }
 }
 
