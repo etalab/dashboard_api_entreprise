@@ -7,7 +7,6 @@ import RoleNew from '@/components/admin/RoleNew'
 import UserNew from '@/components/admin/UserNew'
 import UserShow from '@/components/admin/UserShow'
 import Login from '@/components/admin/Login'
-import Logout from '@/components/admin/Logout'
 
 import UserApp from '@/components/layout/UserApp'
 import UserConfirm from '@/components/espace_perso/UserConfirm'
@@ -45,11 +44,6 @@ export default new Router({
       path: '/admin/login',
       name: 'login',
       component: Login
-    },
-    {
-      path: '/admin/logout',
-      name: 'logout',
-      component: Logout
     },
     {
       path: '/admin',
