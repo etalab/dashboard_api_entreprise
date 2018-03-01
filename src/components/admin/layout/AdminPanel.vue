@@ -7,7 +7,8 @@
 
 <script>
 import NavMenu from '@/components/admin/layout/NavMenu'
-import { mapGetters } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('auth')
 
 export default {
   name: 'app',
@@ -28,7 +29,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['currentAdmin', 'currentTitle'])
+    ...mapGetters(['currentAdmin'])
   },
 
   methods: {

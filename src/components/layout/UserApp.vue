@@ -3,7 +3,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('auth')
 
 export default {
   name: 'user-app',
@@ -22,7 +23,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['currentUser', 'currentTitle'])
+    ...mapGetters(['currentUser'])
   },
 
   methods: {

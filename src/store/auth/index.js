@@ -30,11 +30,7 @@ const mutations = {
 const actions = {
   login ({ dispatch, commit }, params) {
     return dispatch('api/admin/post', { url: '/users/login', params: params }, { root: true })
-      .then(data => {
-        const sessionJWT = data.access_token
-        if (!sessionJWT) dispatch('logout')
-        else dispatch('loginSuccess', sessionJWT)
-      })
+      .then(data => dispatch('processLogin', data))
   },
 
   logout ({ commit }) {
@@ -42,14 +38,26 @@ const actions = {
     commit('clearUser')
   },
 
-  loginSuccess ({ dispatch, commit, rootGetters }, jwt) {
+  loginSuccess ({ dispatch, commit }, jwt) {
     localStorage.token = jwt
     commit('setAuthenticatedUser')
-    return dispatch('api/admin/updateAuthorizationBearer', { root: true })
+    return dispatch('api/admin/updateAuthorizationBearer', null, { root: true })
+  },
+
+  processLogin ({ dispatch }, response) {
+    const sessionJWT = response.access_token
+    if (!sessionJWT) dispatch('logout')
+    else dispatch('loginSuccess', sessionJWT)
+  },
+
+  confirm ({ dispatch }, params) {
+    return dispatch('api/admin/post', { url: '/users/confirm', params: params }, { root: true })
+      .then(data => dispatch('processLogin', data))
   }
 }
 
 export default {
+  namespaced: true,
   state,
   mutations,
   getters,

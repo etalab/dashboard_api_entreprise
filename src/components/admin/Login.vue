@@ -31,7 +31,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('auth')
 
 export default {
   name: 'user-login',
@@ -66,7 +67,7 @@ export default {
               password: this.password,
               grant_type: 'password'
             }
-            this.$store.dispatch('login', loginParams)
+            this.$store.dispatch('auth/login', loginParams)
               .then(() => {
                 this.$router.push(this.$route.query.redirect || { name: 'users' })
               })

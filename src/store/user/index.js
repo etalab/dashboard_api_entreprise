@@ -52,7 +52,7 @@ const mutations = {
 
 const actions = {
   get ({ dispatch, commit, rootGetters }, { userId } = {}) {
-    const uid = userId || rootGetters.currentUser.id
+    const uid = userId || rootGetters['auth/currentUser'].id
     dispatch('api/admin/get', { url: `/users/${uid}` }, { root: true })
       .then(data => dispatch('fillUserData', data))
   },

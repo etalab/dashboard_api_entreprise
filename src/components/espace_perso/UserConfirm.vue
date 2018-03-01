@@ -27,6 +27,8 @@
 
 <script>
 import Navbar from '@/components/layout/Navbar'
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('auth')
 
 export default {
   name: 'user-confirm',
@@ -40,22 +42,25 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters(['currentUser'])
+  },
+
   methods: {
     // TODO set validation for password
     submit () {
-      this.$http.post('/users/confirm', {
+      const payload = {
         password: this.password,
         password_confirmation: this.password_confirmation,
         confirmation_token: this.$route.query.confirmation_token
-      })
-        .then(response => {
-          this.$store.dispatch('login', { jwt_token: response.data.access_token })
-            .then(() => {
-              this.$http.defaults.headers['Authorization'] = 'Bearer ' + localStorage.token
-              this.$router.replace({ name: 'user-dashboard' })
-            })
+      }
+      this.$store.dispatch('auth/confirm', payload)
+        .then(data => {
+          console.log('confirmed')
+          this.$router.push({ name: 'user-dashboard' })
         })
         .catch(error => {
+          console.log('error', error)
           this.validationErrors = error.response.data.errors
           this.fieldErrors = true
         })
