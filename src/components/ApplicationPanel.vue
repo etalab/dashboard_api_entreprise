@@ -3,7 +3,7 @@
     navigation-header
 
     .documentation
-      navigation-menu(v-if="currentUser.isAdmin()")
+      navigation-menu(v-if="showNavigationMenu")
       router-view
 </template>
 
@@ -11,8 +11,7 @@
 import NavigationMenu from '@/components/ui/NavigationMenu'
 import NavigationHeader from '@/components/ui/NavigationHeader'
 
-import { createNamespacedHelpers } from 'vuex'
-const { mapGetters } = createNamespacedHelpers('auth')
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'application-panel',
@@ -20,7 +19,6 @@ export default {
   // redirect to '/login' when no user is logged in
   updated () {
     this.checkLoggedIn()
-    this.loadApp()
   },
 
   created () {
@@ -29,13 +27,17 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['currentUser'])
+    ...mapGetters({
+      unknownUser: 'auth/unknownUser',
+      isAdmin: 'auth/isAdmin',
+      showNavigationMenu: 'ui/showNavigationMenu'
+    })
   },
 
   methods: {
     checkLoggedIn () {
       // TODO name route + build query redirect param
-      if (!this.currentUser && this.restrictedAccess()) {
+      if (this.unknownUser && this.restrictedAccess()) {
         this.$router.push('/login?redirect=' + this.$route.path)
       }
     },
@@ -52,7 +54,7 @@ export default {
     },
 
     loadApp () {
-      if (this.currentUser.isAdmin()) this.$router.push({ name: 'users' })
+      if (this.isAdmin) this.$router.push({ name: 'users' })
       else this.$router.push({ name: 'client-view' })
     }
   },

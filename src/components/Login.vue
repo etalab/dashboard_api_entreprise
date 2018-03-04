@@ -48,7 +48,7 @@ export default {
     }
   },
 
-  // redirect to /login when user already logged in
+  // redirect to /admin when user already logged in
   created () {
     this.checkLoggedIn()
   },
@@ -58,7 +58,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['currentUser'])
+    ...mapGetters(['unknownUser'])
   },
 
   methods: {
@@ -78,8 +78,8 @@ export default {
     },
 
     checkLoggedIn () {
-      if (this.currentUser) {
-        this.$router.replace(this.$route.query.redirect || { name: 'user-dashboard' })
+      if (!this.unknownUser) {
+        this.$router.replace(this.$route.query.redirect || { name: 'application-panel' })
       }
     }
   },

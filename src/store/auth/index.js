@@ -6,14 +6,17 @@ const state = {
 }
 
 const getters = {
+  unknownUser (state, getters) {
+    return (getters.currentUser === null)
+  },
+
   currentUser (state) {
     return state.user
   },
 
-  currentAdmin (state, getters) {
-    let user = getters.currentUser
-    if (user && user.isAdmin()) return user
-    else return null
+  isAdmin (state, getters) {
+    const user = getters.currentUser
+    return (user && user.isAdmin())
   }
 }
 
@@ -42,6 +45,7 @@ const actions = {
     localStorage.token = jwt
     commit('setAuthenticatedUser')
     return dispatch('api/admin/updateAuthorizationBearer', null, { root: true })
+      .then(() => dispatch('ui/loadUI', null, { root: true }))
   },
 
   processLogin ({ dispatch }, response) {

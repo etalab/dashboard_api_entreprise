@@ -6,6 +6,7 @@ import role from './role'
 import userIndex from './user_index'
 import api from './api'
 import layoutContent from './layout_content'
+import ui from './ui'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
   modules: {
     auth,
     layoutContent,
+    ui,
     role,
     user,
     userIndex,

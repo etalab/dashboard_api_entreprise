@@ -20,7 +20,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/admin/'
+      redirect: '/admin'
     },
     {
       path: '/confirm',
@@ -76,6 +76,7 @@ export default new Router({
         {
           path: 'users/:userId',
           name: 'userShow',
+          props: true,
           component: UserShow
         }
       ]
