@@ -12,14 +12,9 @@
 
   .profile__group
     h2 Tokens de l'utilisateur
+    jwt-api-entreprise-index(:jwtList="tokens")
 
-    table
-      tr(v-for="(token, index) in tokens")
-        td {{token}}
-          label date
-        td
-          v-icon delete
-    token-new
+    jwt-api-entreprise-new
 
   .profile__group
     h2 Contacts
@@ -31,8 +26,9 @@
 </template>
 
 <script>
-import TokenNew from '@/components/admin/TokenNew'
-import ContactTile from '@/components/admin/ContactTile'
+import JWTAPIEntrepriseNew from '@/components/resource/jwt_api_entreprise/New'
+import JWTAPIEntrepriseIndex from '@/components/resource/jwt_api_entreprise/Index'
+import ContactTile from '@/components/resource/contact/Show'
 import { createNamespacedHelpers } from 'vuex'
 const { mapGetters } = createNamespacedHelpers('user')
 
@@ -52,7 +48,8 @@ export default {
   },
 
   components: {
-    'token-new': TokenNew,
+    'jwt-api-entreprise-new': JWTAPIEntrepriseNew,
+    'jwt-api-entreprise-index': JWTAPIEntrepriseIndex,
     'contact-tile': ContactTile
   }
 }

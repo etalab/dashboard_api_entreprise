@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import IconDefinition from '@/components/layout/IconDefinition'
+import IconDefinition from '@/components/ui/IconDefinition'
 
 export default {
   name: 'app',

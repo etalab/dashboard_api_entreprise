@@ -17,7 +17,7 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapGetters } = createNamespacedHelpers('role')
 
 export default {
-  name: 'role-list',
+  name: 'role-index',
   data () {
     return {
       title: 'Rôles',
@@ -29,7 +29,6 @@ export default {
   },
 
   created: function () {
-    this.$store.dispatch('setPageTitle', this.title)
     this.$store.dispatch('role/index')
   },
 

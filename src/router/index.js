@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import UserIndex from '@/components/admin/UserIndex'
-import RoleIndex from '@/components/admin/RoleIndex'
-import RoleNew from '@/components/admin/RoleNew'
-import UserNew from '@/components/admin/UserNew'
-import UserShow from '@/components/admin/UserShow'
+import UserIndex from '@/components/resource/user/Index'
+import UserNew from '@/components/resource/user/New'
+import UserShow from '@/components/resource/user/Show'
+import RoleIndex from '@/components/resource/role/Index'
+import RoleNew from '@/components/resource/role/New'
 
 import Login from '@/components/Login'
+import AccountConfirmation from '@/components/AccountConfirmation'
 import ApplicationPanel from '@/components/ApplicationPanel'
-import UserConfirm from '@/components/espace_perso/UserConfirm'
 
 import store from '@/store'
 
@@ -24,8 +24,8 @@ export default new Router({
     },
     {
       path: '/confirm',
-      name: 'user-confirm',
-      component: UserConfirm
+      name: 'account-confirmation',
+      component: AccountConfirmation
     },
     {
       path: '/login',

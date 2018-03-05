@@ -19,7 +19,7 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapGetters } = createNamespacedHelpers('userIndex')
 
 export default {
-  name: 'user-list',
+  name: 'user-index',
 
   data () {
     return {
@@ -32,7 +32,6 @@ export default {
   },
 
   created: function () {
-    this.$store.dispatch('setPageTitle', this.title)
     this.$store.dispatch('userIndex/index')
   },
 

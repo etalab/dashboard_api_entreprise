@@ -20,7 +20,7 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapGetters } = createNamespacedHelpers('role')
 
 export default {
-  name: 'token-new',
+  name: 'jwt-api-entreprise-new',
   data () {
     return {
       dialog: false,
