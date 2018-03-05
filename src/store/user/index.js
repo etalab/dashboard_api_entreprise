@@ -23,6 +23,15 @@ const getters = {
   }
 }
 
+const formatJwt = (jwt) => {
+  const payload = JwtDecode(jwt)
+
+  return {
+    value: jwt,
+    payload
+  }
+}
+
 const mutations = {
   setUserDetails (state, details) {
     state.user.details = details
@@ -33,20 +42,13 @@ const mutations = {
   },
 
   setTokens (state, tokens) {
-    const decodedTokens = tokens.map(jwt => {
-      const payload = JwtDecode(jwt)
-
-      return {
-        value: jwt,
-        payload
-      }
-    })
+    const decodedTokens = tokens.map(e => formatJwt(e))
 
     state.user.tokens = decodedTokens
   },
 
   addToken (state, token) {
-    state.user.tokens.push(token)
+    state.user.tokens.push(formatJwt(token))
   }
 }
 
