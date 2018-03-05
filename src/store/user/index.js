@@ -1,5 +1,6 @@
 import JwtDecode from 'jwt-decode'
 import userCreate from './create'
+import userIndex from './index/index.js'
 
 const state = {
   user: {
@@ -85,6 +86,7 @@ export default {
   getters,
   actions,
   modules: {
-    create: userCreate
+    create: userCreate,
+    index: userIndex
   }
 }

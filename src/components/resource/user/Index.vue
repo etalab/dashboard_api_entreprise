@@ -16,7 +16,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapGetters } = createNamespacedHelpers('userIndex')
+const { mapGetters } = createNamespacedHelpers('user/index')
 
 export default {
   name: 'user-index',
@@ -32,7 +32,7 @@ export default {
   },
 
   created: function () {
-    this.$store.dispatch('userIndex/index')
+    this.$store.dispatch('user/index/index')
   },
 
   computed: {
