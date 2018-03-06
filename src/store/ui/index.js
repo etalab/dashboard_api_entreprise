@@ -26,7 +26,7 @@ const mutations = {
 }
 
 const actions = {
-  loadUI ({ rootGetters, commit }) {
+  load ({ rootGetters, commit }) {
     if (rootGetters['auth/isAdmin']) commit('setAdminConfig')
     else commit('setClientConfig')
   }

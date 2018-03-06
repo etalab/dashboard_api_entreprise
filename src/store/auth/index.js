@@ -45,7 +45,6 @@ const actions = {
     localStorage.token = jwt
     commit('setAuthenticatedUser')
     return dispatch('api/admin/updateAuthorizationBearer', null, { root: true })
-      .then(() => dispatch('ui/loadUI', null, { root: true }))
   },
 
   processLogin ({ dispatch }, response) {
