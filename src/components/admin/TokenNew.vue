@@ -12,7 +12,6 @@
         button.button.small(@click="submit") Créer
         button.button.small.warning(@click="reset") Annuler
 
-
 </template>
 
 <script>
