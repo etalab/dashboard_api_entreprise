@@ -14,7 +14,7 @@ import store from '@/store'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   // TODO configure nginx to handle history mode: matching url fallback
   // mode: 'history',
   routes: [
@@ -37,7 +37,7 @@ export default new Router({
       name: 'logout',
       beforeEnter: (to, from, next) => {
         store.dispatch('auth/logout')
-        next({ name: 'login' })
+          .then(() => next({ name: 'login' }))
       }
     },
     {
@@ -56,30 +56,82 @@ export default new Router({
         {
           path: 'users',
           name: 'users',
+          meta: { requiresAdmin: true },
           component: UserIndex
         },
         {
           path: 'roles',
           name: 'roles',
+          meta: { requiresAdmin: true },
           component: RoleIndex
         },
         {
           path: 'roles/new',
           name: 'roleNew',
+          meta: { requiresAdmin: true },
           component: RoleNew
         },
         {
           path: 'users/new',
           name: 'userNew',
+          meta: { requiresAdmin: true },
           component: UserNew
         },
         {
           path: 'users/:userId',
           name: 'userShow',
           props: true,
+          meta: { requiresAdmin: true },
           component: UserShow
         }
       ]
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  /* eslint-disable */
+
+  // the targeted route requires administrator access
+  if (to.matched.some(route => route.meta.requiresAdmin))
+  {
+    if (store.getters['auth/isAdmin']) next() // proceed navigation
+    else next({ name: 'application-panel' }) // redirect to main route
+  }
+
+  // the required route is a child of application root
+  else if (to.matched.some(route => (route.name === 'application-panel')))
+  {
+    // redirect unauthenticated user to the login page
+    if (store.getters['auth/unknownUser']) next({ name: 'login' })
+
+    // this allow the ApplicationPanel component, the root component for
+    // the application, to behave like as a proxy : it knows the different
+    // home routes for a client and an administrator user and it redirects
+    // accordindly. The block is executed when the interface's actions
+    // redirect to /admin (named 'application-panel')
+    // It also automatically redirects a client trying to navigate to
+    // /admin/users for instance
+    else if (to.name === 'application-panel')
+    {
+      // redirect administrator or client to their default home
+      const defaultRoute = (store.getters['auth/isAdmin']) ? 'users' : 'client-view'
+      next({ name: defaultRoute })
+    }
+
+    else
+    {
+      next()
+    }
+  }
+
+  // default behaviour
+  else
+  {
+    next()
+  }
+
+  /* eslint-enable */
+})
+
+export default router
