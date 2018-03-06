@@ -14,6 +14,9 @@ import UserConfirm from '@/components/espace_perso/UserConfirm'
 import UserLogin from '@/components/espace_perso/UserLogin'
 import UserDashboard from '@/components/espace_perso/UserDashboard'
 
+import Dashboard from '@/components/dashboard/Dashboard'
+import RealTime from '@/components/dashboard/RealTime'
+
 Vue.use(Router)
 
 export default new Router({
@@ -81,6 +84,18 @@ export default new Router({
           name: 'userShow',
           props: true,
           component: UserShow
+        }
+      ]
+    },
+    {
+      path: '/dashboard',
+      component: Dashboard,
+      redirect: '/dashboard/real_time',
+      children: [
+        {
+          path: 'real_time',
+          name: 'real_time',
+          component: RealTime
         }
       ]
     }
