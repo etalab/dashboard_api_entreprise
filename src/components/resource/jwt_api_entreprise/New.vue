@@ -3,6 +3,9 @@
   button.button(@click="showDialog") Ajouter un token
   .dialog-backdrop(v-if="dialog")
     .dialog.panel
+      h4 Agent utilisateur
+      input(type="text" v-model="subject")
+
       h4 Rôles d’accès
       div(v-for="role in index")
         input(type="checkbox" :id="role.id" v-model="checked_roles" :value="role.code")
@@ -24,6 +27,7 @@ export default {
   data () {
     return {
       dialog: false,
+      subject: '',
       checked_roles: []
     }
   },
@@ -38,7 +42,7 @@ export default {
 
   methods: {
     submit: function () {
-      this.$store.dispatch('user/createToken', { roles: this.checked_roles })
+      this.$store.dispatch('user/createToken', { roles: this.checked_roles, subject: this.subject })
         .then(() => this.reset())
         .catch(e => {
           // TODO something went wrong

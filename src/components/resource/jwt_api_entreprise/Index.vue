@@ -2,8 +2,8 @@
   <ul class="token__list">
     <li class="panel" v-for="(token, index) in jwtList" :key="index">
       <div class="panel__header">
-        <h3 class="token__name">Token {{ index + 1}}</h3>
-        <small class="panel__header-extra">Créé le 3 janvier 2018</small>
+        <h3 class="token__name">Agent utilisateur : {{ token.payload.sub }}</h3>
+        <small class="panel__header-extra">Délivré le {{ formatDate(token.payload.iat) }}</small>
         <a href="#" class="button-stats">Voir les statistiques →</a>
       </div>
       <div class="form__group token__rights">
@@ -32,7 +32,14 @@
 export default {
   name: 'jwt-api-entreprise-index',
 
-  props: ['jwtList']
+  props: ['jwtList'],
+
+  methods: {
+    formatDate (timestamp) {
+      const date = new Date(timestamp * 1000) // wtf JS ...
+      return date.toLocaleString('fr-FR')
+    }
+  }
 }
 </script>
 
