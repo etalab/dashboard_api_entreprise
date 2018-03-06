@@ -22,10 +22,6 @@ export default {
   },
 
   methods: {
-    clearHomepage () {
-      // TODO
-    },
-
     logout () {
       this.$router.push({ name: 'logout' })
     }

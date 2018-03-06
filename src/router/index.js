@@ -30,6 +30,10 @@ const router = new Router({
     {
       path: '/login',
       name: 'login',
+      beforeEnter: (to, from, next) => {
+        if (!store.getters['auth/unknownUser']) next({ name: 'application-panel' })
+        else next()
+      },
       component: Login
     },
     {

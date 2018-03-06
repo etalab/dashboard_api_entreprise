@@ -35,8 +35,6 @@
 
 <script>
 import NavigationHeader from '@/components/ui/NavigationHeader'
-import { createNamespacedHelpers } from 'vuex'
-const { mapGetters } = createNamespacedHelpers('auth')
 
 export default {
   name: 'login',
@@ -46,19 +44,6 @@ export default {
       password: '',
       loginError: false
     }
-  },
-
-  // redirect to /admin when user already logged in
-  created () {
-    this.checkLoggedIn()
-  },
-
-  updated () {
-    this.checkLoggedIn()
-  },
-
-  computed: {
-    ...mapGetters(['unknownUser'])
   },
 
   methods: {
@@ -75,12 +60,6 @@ export default {
         .catch(() => {
           this.loginError = true
         })
-    },
-
-    checkLoggedIn () {
-      if (!this.unknownUser) {
-        this.$router.replace(this.$route.query.redirect || { name: 'application-panel' })
-      }
     }
   },
 
