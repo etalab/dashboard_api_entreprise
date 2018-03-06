@@ -16,7 +16,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       http.get(url, { params })
         .then(response => resolve(response.data))
-        .catch(error => reject(error.response.data.errors))
+        .catch(error => ctx.dispatch('handleError', error))
     })
   },
 
@@ -24,12 +24,16 @@ const actions = {
     return new Promise((resolve, reject) => {
       http.post(url, params)
         .then(response => resolve(response.data))
-        .catch(error => reject(error.response.data.errors))
+        .catch(error => ctx.dispatch('handleError', error))
     })
   },
 
   updateAuthorizationBearer (ctx) {
     http.defaults.headers['Authorization'] = 'Bearer ' + localStorage.token
+  },
+
+  handleError ({ dispatch }, error) {
+    if (error.response.status === 401) dispatch('router/push', 'logout', { root: true })
   }
 }
 
