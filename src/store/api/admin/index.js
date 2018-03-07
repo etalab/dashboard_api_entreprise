@@ -33,7 +33,9 @@ const actions = {
   },
 
   handleError ({ dispatch }, error) {
-    if (error.response.status === 401) dispatch('router/push', 'logout', { root: true })
+    // TODO handle error message with vuex
+    if (!error.response) dispatch('router/push', 'logout', { root: true })
+    else if (error.response.status === 401) dispatch('router/push', 'logout', { root: true })
   }
 }
 
