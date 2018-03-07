@@ -64,51 +64,34 @@ export default {
   name: 'endpoints-view',
   data () {
     return {
-      isUP: false,
-      homepageStatus: 'DOWN',
-      endpoints: [],
       lastRefreshTime: ''
     }
   },
   computed: {
-    ...mapGetters(['realTime']),
+    ...mapGetters(['endpoints', 'homepageCode']),
     endpointsV1: function () {
       return this.endpoints.filter(function (e) { return e.api_version === 1 })
     },
     endpointsV2: function () {
       return this.endpoints.filter(function (e) { return e.api_version === 2 })
+    },
+    homepageStatus: function () {
+      console.log(this.homepageCode)
+      return this.homepageCode === 200 ? 'UP' : 'DOWN'
+    },
+    isUP: function () {
+      return this.homepageCode === 200
     }
   },
   methods: {
     loadData: function () {
       const vm = this
-      this.$store.dispatch('dashboard/realTime')
-        .then(response => { this.endpoints = response.data.results })
-        .catch(() => {
-          console.error('An error occured while retrieving the data')
-          // TODO catch error ?
-        })
-      // this.$http.get('/dashboard/current_status')
-      //   .then(response => {
-      //     vm.endpoints = response.data.results
-      //   }, error => {
-      //     console.trace(error.message)
-      //   })
-      //
-      // this.$http.get('/dashboard/homepage_status')
-      //   .then(response => {
-      //     if (response.data.results[0].code === 200) {
-      //       vm.isUP = true
-      //       vm.homepageStatus = 'UP'
-      //     } else {
-      //       vm.isUP = false
-      //       vm.homepageStatus = 'DOWN'
-      //     }
-      //   }, error => {
-      //     console.trace(error.message)
-      //   })
+      this.$store.dispatch('dashboard/endpoints')
+        .then(() => { vm.lastRefreshTime = moment().format('LTS') })
+        .catch(error => console.trace(error.message))
 
-      vm.lastRefreshTime = moment().format('LTS')
+      this.$store.dispatch('dashboard/homepageCode')
+        .catch(error => console.trace(error.messsage))
     }
   },
   mounted: function () {
