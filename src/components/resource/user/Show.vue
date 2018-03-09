@@ -5,32 +5,33 @@
 
     .form__group
       label Adresse e-mail
-      div.headline {{ user.email }}
+      div.headline {{ userDetails.email }}
     .form__group
       label Contexte
-      div.headline {{ user.context }}
+      div.headline {{ userDetails.context }}
 
   .profile__group
     h2 Tokens de l'utilisateur
-    jwt-api-entreprise-index(:jwtList="tokens")
+    jwt-api-entreprise-index(:jwtList="tokens" v-if="tokens.length > 0")
+    p(v-else) Aucun token attribué
 
-    jwt-api-entreprise-new
+    jwt-api-entreprise-new(v-if="isAdmin")
 
   .profile__group
     h2 Contacts
 
-    .contact__container
+    .contact__container(v-if="contacts.length > 0")
       contact-tile(v-for="(contact, index) in contacts" :key="index" :contact="contact")
+    p(v-else) Aucune coordonnée de contact
 
-    button.button Ajouter un contact
+    button.button(v-if="isAdmin") Ajouter un contact
 </template>
 
 <script>
 import JWTAPIEntrepriseNew from '@/components/resource/jwt_api_entreprise/New'
 import JWTAPIEntrepriseIndex from '@/components/resource/jwt_api_entreprise/Index'
 import ContactTile from '@/components/resource/contact/Show'
-import { createNamespacedHelpers } from 'vuex'
-const { mapGetters } = createNamespacedHelpers('user')
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'user-show',
@@ -44,7 +45,12 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['user', 'contacts', 'tokens'])
+    ...mapGetters({
+      userDetails: 'user/userDetails',
+      contacts: 'user/contacts',
+      tokens: 'user/tokens',
+      isAdmin: 'auth/isAdmin'
+    })
   },
 
   components: {

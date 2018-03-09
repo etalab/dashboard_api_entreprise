@@ -11,7 +11,7 @@ const state = {
 }
 
 const getters = {
-  user (state) {
+  userDetails (state) {
     return state.user.details
   },
 
@@ -72,7 +72,7 @@ const actions = {
   },
 
   createToken ({ dispatch, commit, getters }, payload) {
-    const userId = getters.user.id
+    const userId = getters.userDetails.id
     const url = `/users/${userId}/jwt_api_entreprise`
     dispatch('api/admin/post', { url: url, params: payload }, { root: true })
       .then(data => commit('addToken', data.new_token))
