@@ -1,5 +1,5 @@
-const state = {
-  user_form: {
+const initState = () => {
+  return {
     email: '',
     context: '',
     adminContactEmail: '',
@@ -7,6 +7,10 @@ const state = {
     techContactEmail: '',
     techContactPhone: ''
   }
+}
+
+const state = {
+  user_form: initState()
 }
 
 const getters = {
@@ -53,13 +57,18 @@ const getters = {
 const mutations = {
   updateField (state, { field, val }) {
     state.user_form[field] = val
+  },
+
+  clearForm (state) {
+    state.user_form = initState()
   }
 }
 
 const actions = {
-  submit ({ dispatch, getters }) {
+  submit ({ dispatch, getters, commit }) {
     const payload = getters.generatePayload
     return dispatch('api/admin/post', { url: '/users', params: payload }, { root: true })
+      .then(() => commit('clearForm'))
   }
 }
 
