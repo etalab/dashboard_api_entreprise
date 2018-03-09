@@ -23,7 +23,7 @@ const router = new Router({
       redirect: '/admin'
     },
     {
-      path: '/confirm',
+      path: '/account/confirm',
       name: 'account-confirmation',
       component: AccountConfirmation
     },
