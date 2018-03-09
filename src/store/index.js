@@ -5,7 +5,6 @@ import user from './user'
 import role from './role'
 import api from './api'
 import ui from './ui'
-import router from './router'
 
 Vue.use(Vuex)
 
@@ -14,7 +13,6 @@ export default new Vuex.Store({
   modules: {
     auth,
     ui,
-    router,
     role,
     user,
     api
