@@ -34,7 +34,7 @@ describe('actions', () => {
 
   it('fills endpoints history store', () => {
     return store.dispatch('endpointsHistory')
-      .then(() => expect(store.getters.endpointsHistory)
+      .then(() => expect(store.getters.providersHistory)
         .toEqual(dataHelper.loadMockedData('availability_history').results)
       )
   })

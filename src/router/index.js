@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 import AdminPanel from '@/components/admin/layout/AdminPanel'
 import UserIndex from '@/components/admin/UserIndex'
 import RoleIndex from '@/components/admin/RoleIndex'
@@ -16,6 +17,7 @@ import UserDashboard from '@/components/espace_perso/UserDashboard'
 
 import Dashboard from '@/components/dashboard/Dashboard'
 import RealTime from '@/components/dashboard/RealTime'
+import EndpointHistory from '@/components/dashboard/EndpointHistory'
 
 Vue.use(Router)
 
@@ -94,8 +96,11 @@ export default new Router({
       children: [
         {
           path: 'real_time',
-          name: 'real_time',
           component: RealTime
+        },
+        {
+          path: 'endpoints_history',
+          component: EndpointHistory
         }
       ]
     }

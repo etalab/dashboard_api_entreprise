@@ -13,13 +13,13 @@ const http = axios.create({
 const state = {
   endpoints: [],
   homepageCode: 500,
-  endpointsHistory: []
+  providersHistory: []
 }
 
 export const getters = {
   endpoints (state) { return state.endpoints },
   homepageCode (state) { return state.homepageCode },
-  endpointsHistory (state) { return state.endpointsHistory }
+  providersHistory (state) { return state.providersHistory }
 }
 
 export const mutations = {
@@ -29,8 +29,8 @@ export const mutations = {
   fillHomepageCode (state, { homepageCode }) {
     state.homepageCode = homepageCode
   },
-  fillEndpointsHistory (state, { endpointsHistory }) {
-    state.endpointsHistory = endpointsHistory
+  fillProvidersHistory (state, { providersHistory }) {
+    state.providersHistory = providersHistory
   }
 }
 
@@ -45,9 +45,9 @@ export const actions = {
       .then(response => commit('fillHomepageCode', {homepageCode: response.data.results[0].code}))
       .catch(error => console.log(error))
   },
-  endpointsHistory ({ commit }) {
+  providersHistory ({ commit }) {
     return http.get('/availability_history')
-      .then(response => commit('fillEndpointsHistory', { endpointsHistory: response.data.results }))
+      .then(response => commit('fillProvidersHistory', { providersHistory: response.data.results }))
       .catch(error => console.log(error))
   }
 }
