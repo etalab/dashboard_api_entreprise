@@ -68,8 +68,6 @@ export default {
 }
 </script>
 
-<!--<style src='@/assets/visavail/visavail.css'></style>-->
-
 <style>
   .perfect-sla {
     color: green;

@@ -18,6 +18,7 @@ import UserDashboard from '@/components/espace_perso/UserDashboard'
 import Dashboard from '@/components/dashboard/Dashboard'
 import RealTime from '@/components/dashboard/RealTime'
 import EndpointHistory from '@/components/dashboard/EndpointHistory'
+import Incidents from '@/components/dashboard/Incidents'
 
 Vue.use(Router)
 
@@ -101,6 +102,10 @@ export default new Router({
         {
           path: 'endpoints_history',
           component: EndpointHistory
+        },
+        {
+          path: 'incidents',
+          component: Incidents
         }
       ]
     }
