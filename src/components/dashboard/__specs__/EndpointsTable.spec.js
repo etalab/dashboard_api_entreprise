@@ -1,7 +1,6 @@
 /* global describe, expect, it, beforeEach, require */
 import { mount } from 'vue-test-utils'
 import EndpointsTable from '@/components/dashboard/EndpointsTable'
-const helper = require('./EndpointsHelper')
 
 describe('Dashboard/EndpointsTable', () => {
   let wrapper

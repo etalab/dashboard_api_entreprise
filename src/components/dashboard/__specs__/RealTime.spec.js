@@ -1,15 +1,40 @@
 /* global describe, expect, it, beforeEach, jest */
-import { shallow } from 'vue-test-utils'
+import Vuex from 'vuex'
+import { shallow, createLocalVue } from 'vue-test-utils'
+import dataHelper from '@/__specs__/dataHelper'
 import RealTime from '@/components/dashboard/RealTime'
 import RefreshButton from '@/components/dashboard/RefreshButton'
 import EndpointsTable from '@/components/dashboard/EndpointsTable'
-const helper = require('./EndpointsHelper')
+
+const localVue = createLocalVue()
+
+localVue.use(Vuex)
 
 describe('Dashboard/RealTime', () => {
-  let wrapper
+  let wrapper, store
 
   beforeEach(() => {
-    wrapper = shallow(RealTime)
+    const getters = {
+      homepageCode: () => 200,
+      endpoints: () => dataHelper.loadMockedData('current_status').results
+    }
+
+    const actions = {
+      homepageCode: jest.fn(),
+      endpoints: jest.fn()
+    }
+
+    const modules = {
+      dashboard: {
+        namespaced: true,
+        getters,
+        actions
+      }
+    }
+
+    store = new Vuex.Store({ modules })
+
+    wrapper = shallow(RealTime, { store, localVue })
   })
 
   it('refresh button clicked calls loadData when loadData is emitted', () => {
@@ -26,12 +51,12 @@ describe('Dashboard/RealTime', () => {
 
   it('gets endpoints from back office', () => {
     wrapper.vm.loadData()
-    expect(wrapper.vm.endpoints).toHaveLength(7)
+    expect(wrapper.vm.endpoints).toHaveLength(36)
   })
 
   it('has computed functions to filter endpoints', () => {
     wrapper.vm.loadData()
-    expect(wrapper.vm.endpointsV1).toHaveLength(4)
-    expect(wrapper.vm.endpointsV2).toHaveLength(3)
+    expect(wrapper.vm.endpointsV1).toHaveLength(14)
+    expect(wrapper.vm.endpointsV2).toHaveLength(22)
   })
 })

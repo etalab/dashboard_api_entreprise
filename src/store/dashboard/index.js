@@ -37,17 +37,17 @@ export const mutations = {
 export const actions = {
   endpoints ({ commit }) {
     return http.get('/current_status')
-      .then(response => commit('fillEndpoints', { endpoints: response.results }))
+      .then(response => commit('fillEndpoints', { endpoints: response.data.results }))
       .catch(error => console.log(error))
   },
   homepageCode ({ commit }) {
     return http.get('/homepage_status')
-      .then(response => commit('fillHomepageCode', { homepageCode: response.results[0].code }))
+      .then(response => commit('fillHomepageCode', {homepageCode: response.data.results[0].code}))
       .catch(error => console.log(error))
   },
   endpointsHistory ({ commit }) {
     return http.get('/availability_history')
-      .then(response => commit('fillEndpointsHistory', { endpointsHistory: response.results }))
+      .then(response => commit('fillEndpointsHistory', { endpointsHistory: response.data.results }))
       .catch(error => console.log(error))
   }
 }

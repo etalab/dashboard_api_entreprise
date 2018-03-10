@@ -3,12 +3,7 @@
     <refresh-button :lastRefreshTime="lastRefreshTime" @loadData="loadData"></refresh-button>
     <h2 class="ui header">
       <i class="dashboard icon"></i>
-      <div class="content">
-        Endpoints
-        <!-- <span data-tooltip="Infomartions basique qu'on peut mettre ici" data-position="top left"> -->
-        <!-- <i class="help circle outline icon"></i> -->
-        <!-- </span> -->
-      </div>
+      <div class="content">Endpoints</div>
     </h2>
     <p>Le service API Entreprise est: <span :class="[isUP ? 'up' : 'down']">{{ homepageStatus }}</span></p>
     <hr>
@@ -76,7 +71,6 @@ export default {
       return this.endpoints.filter(function (e) { return e.api_version === 2 })
     },
     homepageStatus: function () {
-      console.log(this.homepageCode)
       return this.homepageCode === 200 ? 'UP' : 'DOWN'
     },
     isUP: function () {

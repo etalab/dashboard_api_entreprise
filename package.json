@@ -94,7 +94,9 @@
   ],
   "jest": {
     "testRegex": "(/__specs__/.*|(\\.|/))(test|spec)\\.jsx?$",
-    "setupFiles": ["<rootDir>/src/__specs__/spec-env.js"],
+    "setupFiles": [
+      "<rootDir>/src/__specs__/spec-env.js"
+    ],
     "moduleNameMapper": {
       "^@/(.*)$": "<rootDir>/src/$1"
     },
