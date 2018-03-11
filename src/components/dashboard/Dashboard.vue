@@ -1,9 +1,16 @@
 <template lang="pug">
-  router-view
+  div
+    navigation-header
+    router-view
 </template>
 
 <script>
+import NavigationHeader from '@/components/ui/NavigationHeader'
+
 export default {
-  name: 'dashboard'
+  name: 'dashboard',
+  components: {
+    'navigation-header': NavigationHeader
+  }
 }
 </script>
