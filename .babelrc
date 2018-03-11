@@ -6,13 +6,16 @@
         "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
       }
     }],
+    "es2015",
     "stage-2"
   ],
   "plugins": ["transform-runtime"],
   "env": {
     "test": {
       "presets": [
-        ["env", { "targets": { "node": "current" }}]
+        ["env", { "targets": { "node": "current" }}],
+        "es2015",
+        "stage-2"
       ]
     }
   }

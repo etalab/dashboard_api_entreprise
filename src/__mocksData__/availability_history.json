@@ -1,0 +1,62 @@
+{
+  "results": [
+    {
+      "provider_name": "dgfip",
+      "endpoints_availability_history": [
+        {
+          "uname": "apie_2_liasses_fiscales_dgfip_declaration",
+          "name": "Liasses fiscales (déclaration)",
+          "provider": "dgfip",
+          "api_version": 2,
+          "timezone": "Europe/Paris",
+          "provider_name": null,
+          "sla": 0.0,
+          "availability_history": [
+            [
+              "2018-02-28 01:00:02",
+              500,
+              "2018-03-07 15:00:03"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "provider_name": "qualibat",
+      "endpoints_availability_history": [
+        {
+          "uname": "apie_1_certificats_qualibat",
+          "name": "Certificats Qualibat",
+          "provider": "qualibat",
+          "api_version": 1,
+          "timezone": "Europe/Paris",
+          "provider_name": null,
+          "sla": 100,
+          "availability_history": [
+            [
+              "2018-03-03 01:00:04",
+              200,
+              "2018-03-10 13:00:04"
+            ]
+          ]
+        },
+        {
+          "uname": "apie_2_certificats_qualibat",
+          "name": "Certificats Qualibat",
+          "provider": "qualibat",
+          "api_version": 2,
+          "timezone": "Europe/Paris",
+          "provider_name": null,
+          "sla": 100,
+          "availability_history": [
+            [
+              "2018-03-03 01:00:11",
+              200,
+              "2018-03-10 13:00:05"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

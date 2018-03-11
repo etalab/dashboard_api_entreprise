@@ -8,7 +8,7 @@
     div
       v-icon.mr-2 phone
       span {{ contact.phone_number }}
-    
+
     .action-buttons
       button.button.small Editer
       button.button.small.warning Supprimer
