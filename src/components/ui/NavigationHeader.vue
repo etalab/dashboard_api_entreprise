@@ -4,8 +4,20 @@
       a.nav__link(@click="clearHomepage")
         img.nav__logo(src="../../assets/images/logo_site.svg" alt="entreprise.api.gouv.fr")
 
-      a.logout(icon @click="logout" v-if="!unknownUser")
-        v-icon exit_to_app
+      ul.nav__links
+        li
+          router-link(:to="{ name: 'real_time' }") Temps réel
+        li
+          router-link(:to="{ name: 'endpoints_history' }") Historique
+        li
+          router-link(:to="{ name: 'incidents' }") Incidents
+        li
+          router-link(:to="{ name: 'client-view' }" v-if="!unknownUser") Espace Perso
+        li
+          a.logout(icon @click="logout" v-if="!unknownUser")
+            v-icon exit_to_app
+        li
+          router-link(:to="{ name: 'login' }" v-if="unknownUser") Login
 
 </template>
 

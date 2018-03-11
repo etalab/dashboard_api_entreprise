@@ -1,14 +1,17 @@
-<template>
-  <div class="ui raised segment">
-    <!--<span style="color:green;">UP</span>-->
-    <!--<span style="color:yellow;">UP (fallback)</span>-->
-    <!--<span style="color:orange;">INCOMPLETE</span>-->
-    <!--<span style="color:red;">DOWN</span>-->
-    <!--<span style="color:darkred;">DOWN (fallback)</span>-->
-    <!-- <h3>{{ provider_name.toUpperCase() }}</h3> -->
-    <!-- <p>Disponibilité sur 7 jours: <span :class="slaRatingClass">{{ meanSla }}%</span></p> -->
-    <p :id="provider_name"><!-- Visavail.js chart will be inserted here --></p>
-  </div>
+<template lang="pug">
+  div
+    .panel
+      <!--<span style="color:green;">UP</span>-->
+      <!--<span style="color:yellow;">UP (fallback)</span>-->
+      <!--<span style="color:orange;">INCOMPLETE</span>-->
+      <!--<span style="color:red;">DOWN</span>-->
+      <!--<span style="color:darkred;">DOWN (fallback)</span>-->
+       h3 {{ provider_name.toUpperCase() }}
+      <!-- <p>Disponibilité sur 7 jours: <span :class="slaRatingClass">{{ meanSla }}%</span></p> -->
+      p(:id="provider_name")
+        <!-- Visavail.js chart will be inserted here -->
+
+    br
 </template>
 
 <script>

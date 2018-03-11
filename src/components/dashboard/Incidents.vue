@@ -1,6 +1,6 @@
 <template lang="pug">
-  .main-pane
-    h1 Incidents survenus sur la plateforme API Entreprise
+  .container
+    h2 Incidents survenus sur la plateforme API Entreprise
 
     .panel
       .panel__header

@@ -7,6 +7,9 @@ import router from './router'
 import store from './store'
 
 require('@/style/app.scss')
+require('semantic-ui-menu/menu.min.css')
+require('semantic-ui-tab/tab.min.css')
+require('semantic-ui-tab/tab.min')
 
 Vue.use(VeeValidate)
 Vue.config.productionTip = false
