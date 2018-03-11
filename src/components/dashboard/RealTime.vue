@@ -1,49 +1,42 @@
-<template>
-  <div>
-    <refresh-button :lastRefreshTime="lastRefreshTime" @loadData="loadData"></refresh-button>
-    <h2 class="ui header">
-      <i class="dashboard icon"></i>
-      <div class="content">Endpoints</div>
-    </h2>
-    <p>Le service API Entreprise est: <span :class="[isUP ? 'up' : 'down']">{{ homepageStatus }}</span></p>
-    <hr>
-    <endpoints-table>
-      <p slot="info-v2">Les données proviennent de <a href="https://entreprise.api.gouv.fr">entreprise.api.gouv.fr</a></p>
-      <endpoint-row slot="v2"
+<template lang="pug">
+  .container
+    <!--refresh-button(:lastRefreshTime="lastRefreshTime" @loadData="loadData")-->
+    h2 Endpoints
+    p Le service API Entreprise est:
+      span(:class="[isUP ? 'up' : 'down']") {{ homepageStatus }}
+    hr
+    endpoints-table
+      p(slot="info-v2") Les données proviennent de
+        a(href="https://entreprise.api.gouv.fr")  entreprise.api.gouv.fr
+      endpoint-row(slot="v2"
                 v-for="endpoint in endpointsV2"
                 :key="endpoint.id"
                 :name="endpoint.name"
                 :sub_name="endpoint.sub_name"
                 :code="endpoint.code"
-                :timestamp="endpoint.timestamp">
-      </endpoint-row>
+                :timestamp="endpoint.timestamp")
 
-      <div slot="info-v1">
-        <p>Les données proviennent de <a href="https://apientreprise.fr">apientreprise.fr</a></p>
+      div(slot="info-v1")
+        p Les données proviennent de
+          a(href="https://apientreprise.fr")  apientreprise.fr
 
-        <div class="ui negative message">
-          <div class="header">
-            Attention la v1 est dépréciée
-          </div>
-          <p>
-            Coupure de la v1 au 31 mars 2018<br>
-            La v1 sera coupée dans<span id="v1-countdown" class="bold"></span>
-          </p>
-        </div>
-      </div>
-      <endpoint-row slot="v1"
+        .notification.error
+          h4.no_margin Attention la v1 est dépréciée
+
+          p.no_margin.
+            Coupure de la v1 au 31 mars 2018
+            <br>
+            La v1 sera coupée dans <span id="v1-countdown" class="bold"></span>
+
+      endpoint-row(slot="v1"
                 v-for="endpoint in endpointsV1"
                 :key="endpoint.id"
                 :name="endpoint.name"
                 :sub_name="endpoint.sub_name"
                 :code="endpoint.code"
-                :timestamp="endpoint.timestamp">
-      </endpoint-row>
+                :timestamp="endpoint.timestamp")
 
-    </endpoints-table>
-
-    <br>
-  </div>
+    br
 </template>
 
 <script>
@@ -53,6 +46,7 @@ import EndpointRow from '@/components/dashboard/EndpointRow'
 import EndpointsTable from '@/components/dashboard/EndpointsTable'
 import RefreshButton from '@/components/dashboard/RefreshButton'
 import { createNamespacedHelpers } from 'vuex'
+
 const { mapGetters } = createNamespacedHelpers('dashboard')
 
 export default {
@@ -95,11 +89,11 @@ export default {
 
     this.loadData()
 
-    // $('.menu .item').tab()
+    $('.menu .item').tab()
 
-    setInterval(function () {
-      this.loadData()
-    }.bind(this), 60000)
+    // setInterval(function () {
+    //   this.loadData()
+    // }.bind(this), 60000)
   },
   components: {
     'endpoint-row': EndpointRow,
@@ -110,6 +104,9 @@ export default {
 </script>
 
 <style>
+  .no_margin {
+    margin: 0;
+  }
   .up {
     color: green;
     font-weight: bold;

@@ -1,11 +1,9 @@
-<template>
-  <tr :class="statusClass">
-    <td>
-      <div class="ui ribbon label" :class="colorClass">{{ name }}</div>
-    </td>
-    <td>{{ status }}</td>
-    <td>{{ timestampMoment(timestamp) }}</td>
-  </tr>
+<template lang="pug">
+  tr(:class="statusClass")
+    td
+      .ui.ribbon.label {{ name }}
+    td {{ status }}
+    td {{ timestampMoment(timestamp) }}
 </template>
 
 <script>
@@ -18,7 +16,6 @@ export default {
   data () {
     return {
       status: '',
-      colorClass: '',
       statusClass: ''
     }
   },
@@ -26,18 +23,15 @@ export default {
     switch (this.code) {
       case 200:
         this.status = 'UP'
-        this.colorClass = 'green'
-        this.statusClass = 'positive'
+        this.statusClass = 'success'
         break
       case 206:
         this.status = 'INCOMPLETE'
-        this.colorClass = 'orange'
         this.statusClass = 'warning'
         break
       default:
         this.status = 'DOWN'
-        this.colorClass = 'red'
-        this.statusClass = 'negative'
+        this.statusClass = 'error'
         break
     }
   },
@@ -48,3 +42,25 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  tr {
+    outline-style: auto;
+    outline-color: $color-light-grey;
+  }
+  .success {
+    background-color: $color-light-green;
+    color: $color-green;
+    border-color: #color-green;
+  }
+  .error {
+    background-color: $color-light-red;
+    color: $color-red;
+    border-color: #color-red;
+  }
+  .warning {
+    background-color: $color-light-orange;
+    color: $color-orange;
+    border-color: #color-orange;
+  }
+</style>

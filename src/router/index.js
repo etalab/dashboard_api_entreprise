@@ -26,7 +26,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/admin'
+      redirect: '/dashboard/real_time'
     },
     {
       path: '/account/confirm',
@@ -103,14 +103,17 @@ const router = new Router({
       children: [
         {
           path: 'real_time',
+          name: 'real_time',
           component: RealTime
         },
         {
           path: 'endpoints_history',
+          name: 'endpoints_history',
           component: EndpointHistory
         },
         {
           path: 'incidents',
+          name: 'incidents',
           component: Incidents
         }
       ]

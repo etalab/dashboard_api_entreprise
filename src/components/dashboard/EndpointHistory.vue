@@ -1,27 +1,15 @@
-<template>
-  <div>
-    <refresh-button :lastRefreshTime="lastRefreshTime" @loadData="loadHistoricalData"></refresh-button>
-    <h2 class="ui header">
-      <i class="world icon"></i>
-      <div class="content">
-        Historique
-        <!-- <span data-tooltip="Infomartions basique qu'on peut mettre ici" data-position="top left"> -->
-        <!-- <i class="help circle outline icon"></i> -->
-        <!-- </span> -->
-      </div>
-    </h2>
+<template lang="pug">
+  .container
+    <!--refresh-button(:lastRefreshTime="lastRefreshTime" @loadData="loadHistoricalData")-->
+    h2 Historique
 
-    <hr>
-
-    <endpoint-history-element
+    endpoint-history-element(
       v-for="provider in providersHistory"
       :key="provider.id"
       :provider_name="provider.provider_name"
-      :endpoints_availability_history="provider.endpoints_availability_history">
-    </endpoint-history-element>
+      :endpoints_availability_history="provider.endpoints_availability_history")
 
-    <br>
-  </div>
+    br
 </template>
 
 <script>
@@ -52,9 +40,9 @@ export default {
   mounted: function () {
     this.loadHistoricalData()
 
-    setInterval(function () {
-      this.loadHistoricalData()
-    }.bind(this), 60000)
+    // setInterval(function () {
+    //   this.loadHistoricalData()
+    // }.bind(this), 60000)
   },
   components: {
     RefreshButton,
