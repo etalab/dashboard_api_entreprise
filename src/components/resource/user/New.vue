@@ -3,12 +3,7 @@
   form
     h2 Création d'un nouvel utilisateur
 
-    v-alert(
-      color="error"
-      icon="warning"
-      dismissible
-      v-model="validationFailure"
-      ) {{ validationErrorMsg }}
+    .notification.error(v-if="validationFailure") {{ validationErrorMsg }}
 
     .form__group
       label Email

@@ -8,12 +8,7 @@
           form.panel
             h1 Connectez vous !
 
-            v-alert(
-              color="error"
-              icon="warning"
-              dismissible
-              v-model="loginError"
-              ) Login failed!
+            .notification.error(v-if="loginError") L’authentification a échoué
 
             .form__group
               label Adresse e-mail

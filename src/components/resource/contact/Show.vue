@@ -1,12 +1,12 @@
 <template lang="pug">
   .panel
     h4 {{ contactLabel }}
-    div
-      v-icon.mr-2 email
+    .contact-item
+      .label Email
       span {{ contact.email }}
 
-    div
-      v-icon.mr-2 phone
+    .contact-item
+      .label Téléphone
       span {{ contact.phone_number }}
 
     .action-buttons
@@ -37,5 +37,13 @@ export default {
 <style lang="scss" scoped>
   h4 {
     margin-top: 0;
+  }
+
+  .contact-item {
+    margin-bottom: 1em;
+  }
+
+  .label {
+    color: $color-dark-grey;
   }
 </style>
