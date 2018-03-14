@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  .content
     navigation-header
 
     .login
