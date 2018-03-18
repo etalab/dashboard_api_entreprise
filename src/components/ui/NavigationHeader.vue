@@ -14,8 +14,7 @@
         li
           router-link(:to="{ name: 'client-view' }" v-if="!unknownUser") Espace Perso
         li
-          a.logout(icon @click="logout" v-if="!unknownUser")
-            v-icon exit_to_app
+          a.logout(icon @click="logout" v-if="!unknownUser") Déconnexion
         li
           router-link(:to="{ name: 'login' }" v-if="unknownUser") Login
 
