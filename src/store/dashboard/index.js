@@ -1,15 +1,3 @@
-import axios from 'axios'
-
-const API_URL = `${process.env.API_BASE_URL}${process.env.DASHBOARD_URL_PREFIX}`
-
-const http = axios.create({
-  baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  timeout: 30000
-})
-
 const state = {
   endpoints: [],
   homepageCode: 500,
@@ -35,19 +23,19 @@ export const mutations = {
 }
 
 export const actions = {
-  endpoints ({ commit }) {
-    return http.get('/current_status')
-      .then(response => commit('fillEndpoints', { endpoints: response.data.results }))
+  endpoints ({ dispatch, commit }) {
+    dispatch('api/watchdoge/get', { url: '/current_status' }, { root: true })
+      .then(data => commit('fillEndpoints', { endpoints: data.results }))
       .catch(error => console.log(error))
   },
-  homepageCode ({ commit }) {
-    return http.get('/homepage_status')
-      .then(response => commit('fillHomepageCode', {homepageCode: response.data.results[0].code}))
+  homepageCode ({ dispatch, commit }) {
+    dispatch('api/watchdoge/get', { url: '/homepage_status' }, { root: true })
+      .then(data => commit('fillHomepageCode', { homepageCode: data.results[0].code }))
       .catch(error => console.log(error))
   },
-  providersHistory ({ commit }) {
-    return http.get('/availability_history')
-      .then(response => commit('fillProvidersHistory', { providersHistory: response.data.results }))
+  providersHistory ({ dispatch, commit }) {
+    dispatch('api/watchdoge/get', { url: '/availability_history' }, { root: true })
+      .then(data => commit('fillProvidersHistory', { providersHistory: data.results }))
       .catch(error => console.log(error))
   }
 }
