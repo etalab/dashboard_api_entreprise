@@ -1,6 +1,7 @@
 <template lang="pug">
   .panel
-    h4 {{ contactLabel }}
+    .panel__header
+      h3 {{ contactLabel }}
     .contact-item
       .label Email
       span {{ contact.email }}
@@ -35,6 +36,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .panel {
+    flex: 1;
+  }
+
   h4 {
     margin-top: 0;
   }
