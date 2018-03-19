@@ -16,6 +16,8 @@ import RealTime from '@/components/dashboard/RealTime'
 import EndpointHistory from '@/components/dashboard/EndpointHistory'
 import Incidents from '@/components/dashboard/Incidents'
 
+import PageNotFound from '@/components/PageNotFound'
+
 import store from '@/store'
 
 Vue.use(Router)
@@ -117,6 +119,10 @@ const router = new Router({
           component: Incidents
         }
       ]
+    },
+    {
+      path: '*',
+      component: PageNotFound
     }
   ]
 })
