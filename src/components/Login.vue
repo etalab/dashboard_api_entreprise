@@ -1,7 +1,5 @@
 <template lang="pug">
   .content
-    navigation-header
-
     .login
       .container
         .form__container
@@ -29,8 +27,6 @@
 </template>
 
 <script>
-import NavigationHeader from '@/components/ui/NavigationHeader'
-
 export default {
   name: 'login',
   data () {
@@ -56,10 +52,6 @@ export default {
           this.loginError = true
         })
     }
-  },
-
-  components: {
-    'navigation-header': NavigationHeader
   }
 }
 </script>
