@@ -24,7 +24,7 @@ Vue.use(Router)
 
 const router = new Router({
   // TODO configure nginx to handle history mode: matching url fallback
-  // mode: 'history',
+  mode: 'history',
   routes: [
     {
       path: '/',
