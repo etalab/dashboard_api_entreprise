@@ -49,7 +49,7 @@
         v-model="techContactPhone"
         data-vv-name="tech_phone")
 
-    button.button(@click="submit") Créer
+    button.button(@click.prevent="submit") Créer
 </template>
 
 <script>

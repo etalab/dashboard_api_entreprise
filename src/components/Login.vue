@@ -20,7 +20,7 @@
               small
                 a Mot de passe oublié ?
 
-            button.button(@click="login") S'identifier
+            button.button(@click.prevent="login") S'identifier
 
             .signup.text-center Pas de compte ?
               div
@@ -50,7 +50,7 @@ export default {
       }
       this.$store.dispatch('auth/login', loginParams)
         .then(() => {
-          this.$router.push(this.$route.query.redirect || { name: 'application-panel' })
+          this.$router.push({ name: 'application-panel' })
         })
         .catch(() => {
           this.loginError = true

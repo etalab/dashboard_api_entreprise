@@ -22,7 +22,7 @@
               label Confirmation
               input(type="password" v-model="password_confirmation")
 
-            button.button(@click="submit") Finaliser l'inscription
+            button.button(@click.prevent="submit") Finaliser l'inscription
 
 </template>
 
@@ -51,7 +51,7 @@ export default {
       }
       this.$store.dispatch('auth/confirm', payload)
         .then(data => {
-          this.$router.push({ name: 'user-dashboard' })
+          this.$router.push({ name: 'application-panel' })
         })
         .catch(error => {
           this.validationErrors = error

@@ -26,7 +26,7 @@
 
     .buttons
       button.button.submit(
-        @click="submit"
+        @click.prevent="submit"
        ) Créer
 
       button.button.cancel(
