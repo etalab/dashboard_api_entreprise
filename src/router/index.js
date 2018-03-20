@@ -11,7 +11,6 @@ import Login from '@/components/Login'
 import AccountConfirmation from '@/components/AccountConfirmation'
 import ApplicationPanel from '@/components/ApplicationPanel'
 
-import Dashboard from '@/components/dashboard/Dashboard'
 import RealTime from '@/components/dashboard/RealTime'
 import EndpointHistory from '@/components/dashboard/EndpointHistory'
 import Incidents from '@/components/dashboard/Incidents'
@@ -28,7 +27,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/dashboard/real_time'
+      redirect: '/real_time'
     },
     {
       path: '/account/confirm',
@@ -98,27 +97,22 @@ const router = new Router({
         }
       ]
     },
+
+    // DASHBOARD routes
     {
-      path: '/dashboard',
-      component: Dashboard,
-      redirect: '/dashboard/real_time',
-      children: [
-        {
-          path: 'real_time',
-          name: 'real_time',
-          component: RealTime
-        },
-        {
-          path: 'endpoints_history',
-          name: 'endpoints_history',
-          component: EndpointHistory
-        },
-        {
-          path: 'incidents',
-          name: 'incidents',
-          component: Incidents
-        }
-      ]
+      path: '/real_time',
+      name: 'real_time',
+      component: RealTime
+    },
+    {
+      path: '/endpoints_history',
+      name: 'endpoints_history',
+      component: EndpointHistory
+    },
+    {
+      path: '/incidents',
+      name: 'incidents',
+      component: Incidents
     },
     {
       path: '*',
