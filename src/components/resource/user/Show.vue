@@ -3,12 +3,13 @@
   .profile__group
     h2 Profil utilisateur
 
-    .form__group
-      label Adresse e-mail
-      div.headline {{ userDetails.email }}
-    .form__group
-      label Contexte
-      div.headline {{ userDetails.context }}
+    .panel
+      .form__group
+        label Adresse e-mail
+        div.headline {{ userDetails.email }}
+      .form__group
+        label Contexte
+        div.headline {{ userDetails.context }}
 
   .profile__group
     h2 Tokens de l'utilisateur
@@ -84,15 +85,22 @@ export default {
     margin-bottom: 2em;
   }
 
-  .panel {
-    width: 40%;
-  }
-
   .panel:first-child {
     margin-right: 2em;
   }
 
   .button {
     margin-top: 2em;
+  }
+
+  @media (max-width: 949px) {
+    .contact__container {
+      flex-direction: column;
+    }
+
+    .panel:first-child {
+      margin-right: 0;
+      margin-bottom: 2em;
+    }
   }
 </style>
