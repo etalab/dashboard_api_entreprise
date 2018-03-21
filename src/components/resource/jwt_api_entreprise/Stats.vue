@@ -15,7 +15,23 @@ import StatsGauge from '@/components/resource/stats/Gauge'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'stats-show',
+  name: 'jwt-stats',
+
+  props: ['jwtId'],
+
+  created: function () {
+    this.$store.dispatch('stats/fetch', { jti: this.jwtId })
+  },
+
+  computed: {
+    ...mapGetters('stats', [
+      'lastTenMinutesCalls',
+      'lastThirtyHoursCalls',
+      'lastEightDaysCalls',
+      'lastCalls'
+    ])
+  },
+
   data () {
     return {
       // calls: 'lol'

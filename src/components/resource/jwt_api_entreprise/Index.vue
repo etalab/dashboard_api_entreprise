@@ -4,7 +4,7 @@
       <div class="panel__header">
         <h3 class="token__name">Agent utilisateur : {{ token.payload.sub }}</h3>
         <small class="panel__header-extra">Délivré le {{ formatDate(token.payload.iat) }}</small>
-        <a href="#" class="button-stats">Voir les statistiques →</a>
+        <router-link :to="{ name: 'jwt-stats', params: { jwtId: token.payload.jti } }" class="button-stats">Voir les statistiques →</router-link>
       </div>
       <div class="form__group token__rights">
         <label class="token__rights-label">Accès</label>

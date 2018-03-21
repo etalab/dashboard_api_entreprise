@@ -6,7 +6,7 @@ import UserNew from '@/components/resource/user/New'
 import UserShow from '@/components/resource/user/Show'
 import RoleIndex from '@/components/resource/role/Index'
 import RoleNew from '@/components/resource/role/New'
-import StatsShow from '@/components/resource/stats/Show'
+import JwtStats from '@/components/resource/jwt_api_entreprise/Stats'
 
 import Login from '@/components/Login'
 import AccountConfirmation from '@/components/AccountConfirmation'
@@ -66,6 +66,12 @@ const router = new Router({
           component: UserShow
         },
         {
+          path: '/me/stats/:jwtId',
+          name: 'jwt-stats',
+          props: true,
+          component: JwtStats
+        },
+        {
           path: 'users',
           name: 'users',
           meta: { requiresAdmin: true },
@@ -95,13 +101,6 @@ const router = new Router({
           props: true,
           meta: { requiresAdmin: true },
           component: UserShow
-        },
-        {
-          path: 'stats/:tokenId',
-          name: 'statShow',
-          props: true,
-          meta: { requresAdmin: true },
-          component: StatsShow
         }
       ]
     },
