@@ -24,17 +24,17 @@ export const mutations = {
 
 export const actions = {
   endpoints ({ dispatch, commit }) {
-    dispatch('api/watchdoge/get', { url: '/current_status' }, { root: true })
+    dispatch('api/watchdoge/get', { url: '/dashboard/current_status' }, { root: true })
       .then(data => commit('fillEndpoints', { endpoints: data.results }))
       .catch(error => console.log(error))
   },
   homepageCode ({ dispatch, commit }) {
-    dispatch('api/watchdoge/get', { url: '/homepage_status' }, { root: true })
+    dispatch('api/watchdoge/get', { url: '/dashboard/homepage_status' }, { root: true })
       .then(data => commit('fillHomepageCode', { homepageCode: data.results[0].code }))
       .catch(error => console.log(error))
   },
   providersHistory ({ dispatch, commit }) {
-    dispatch('api/watchdoge/get', { url: '/availability_history' }, { root: true })
+    dispatch('api/watchdoge/get', { url: '/dashboard/availability_history' }, { root: true })
       .then(data => commit('fillProvidersHistory', { providersHistory: data.results }))
       .catch(error => console.log(error))
   }
