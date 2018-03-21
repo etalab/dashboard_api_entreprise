@@ -6,6 +6,7 @@ import UserNew from '@/components/resource/user/New'
 import UserShow from '@/components/resource/user/Show'
 import RoleIndex from '@/components/resource/role/Index'
 import RoleNew from '@/components/resource/role/New'
+import StatsShow from '@/components/resource/stats/Show'
 
 import Login from '@/components/Login'
 import AccountConfirmation from '@/components/AccountConfirmation'
@@ -94,6 +95,13 @@ const router = new Router({
           props: true,
           meta: { requiresAdmin: true },
           component: UserShow
+        },
+        {
+          path: 'stats/:tokenId',
+          name: 'statShow',
+          props: true,
+          meta: { requresAdmin: true },
+          component: StatsShow
         }
       ]
     },

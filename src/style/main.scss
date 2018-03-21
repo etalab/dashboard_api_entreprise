@@ -12,11 +12,12 @@ body, html {
 }
 
 table {
+  background: $color-white;
   width: 100%;
   border-collapse: collapse;
   margin-top: 2em;
   box-sizing: border-box;
-  box-shadow: 0 1px 4px $color-lighter-grey;
+  box-shadow: 0 1px 4px $color-light-grey;
 }
 
 th, td {
@@ -54,4 +55,14 @@ button.button.warning:hover {
 
 .action-buttons button.button:first-child {
   margin-right: 1em;
+}
+
+.documentation {
+  .main-pane {
+    background: $color-lighter-grey;
+  }
+
+  .side-pane {
+    background: $color-white;
+  }
 }
