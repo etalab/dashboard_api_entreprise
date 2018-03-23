@@ -1,28 +1,24 @@
 <template lang="pug">
 .panel
-  .panel__header(v-if="data.title")
+  .panel__header
     .panel__header-content
-      h3 {{ data.title }}
-      ul(v-if="data.timeSpans")
-        li.stats__time-span(v-for="span in data.timeSpans" v-on:click="changeSpan(span.time)") {{ span.label }}
-  .gauge(:style="{ 'width': data.volume + '%'}")
+      h3 Quantité d'appels (limite à 2000/10mn)
+  .gauge(:style="{ 'width': quotaPercentage + '%'}")
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'statsGauge',
-  props: ['data'],
-  data () {
-    return {
-      gaugeWidth: {
-        width: this.data.volume
-      }
-    }
-  },
-  methods: {
-    changeSpan: function (time) {
-      console.log('pouet')
-      // load new results
+
+  computed: {
+    ...mapGetters('stats', [
+      'lastTenMinutesNumberCalls'
+    ]),
+
+    quotaPercentage () {
+      return (this.lastTenMinutesNumberCalls / 2000 * 100)
     }
   }
 }
