@@ -1,0 +1,43 @@
+.tabs-component-tabs {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.tabs-component-tab {
+  display: inline-block;
+  margin-left: .5em;
+
+  a {
+    border: 1px solid $color-light-grey;
+    background: $color-white;
+    border-radius: 3px 3px 0 0;
+    padding: 0.5em 1em;
+    display: inline-block;
+  }
+
+  &.is-active::after {
+    content: '';
+    border-bottom: 1px solid $color-white;
+    display: block;
+  }
+
+  &.is-active a {
+    border-bottom: 0;
+  }
+}
+
+.tabs-component-panels {
+  background: $color-white;
+  padding: 1em 2em;
+  box-shadow: 0 0 4px 0 $color-light-grey;
+  border-radius: 3px;
+
+  section {
+    padding-top: 0;
+  }
+
+  table {
+    box-shadow: none;
+  }
+}
