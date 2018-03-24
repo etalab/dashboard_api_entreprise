@@ -3,13 +3,16 @@
   button.button(@click="showDialog") Ajouter un token
   .dialog-backdrop(v-if="dialog")
     .dialog.panel
-      h4 Agent utilisateur
-      input(type="text" v-model="subject")
+      h2 Ajout d’un nouveau token
+      .form__group
+        label(for="agent-name") Agent utilisateur
+        input(type="text" v-model="subject" id="agent-name")
 
-      h4 Rôles d’accès
-      div(v-for="role in index")
-        input(type="checkbox" :id="role.id" v-model="checked_roles" :value="role.code")
-        label.label-inline(:for="index") {{role.name}}
+      .form__group
+        label Rôles d’accès
+        div(v-for="role in index")
+          input(type="checkbox" :id="role.code" v-model="checked_roles" :value="role.code")
+          label.label-inline(:for="role.code") {{role.name}}
 
       .action-buttons
         button.button.small(@click="submit") Créer
@@ -60,6 +63,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  label.label-inline {
+    color: $color-black;
+  }
+
   .dialog-backdrop {
     position: fixed;
     height: 100%;
@@ -77,7 +84,11 @@ export default {
     max-width: 32em;
   }
 
-  h4 {
+  h2 {
     margin-top: 0;
+  }
+
+  .action-buttons {
+    margin-top: 2em;
   }
 </style>

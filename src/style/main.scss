@@ -7,6 +7,10 @@ body, html {
   height: 100%;
 }
 
+.form__group {
+  margin-bottom: 0;
+}
+
 .main-pane {
   min-height: calc(100% - 73px);
 }

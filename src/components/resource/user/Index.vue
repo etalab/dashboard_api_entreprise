@@ -11,6 +11,7 @@
           td
             router-link(:to="{ name: 'userShow', params: { userId: user.id }}") {{ user.email }}
           td {{ user.context }}
+          td Oui
 
 </template>
 
@@ -26,7 +27,8 @@ export default {
       title: 'Utilisateurs',
       headers: [
         { text: 'E-mail', value: 'email', align: 'left' },
-        { text: 'Contexte', value: 'context', align: 'left' }
+        { text: 'Contexte', value: 'context', align: 'left' },
+        { text: 'Vérifié', value: 'verified', align: 'left' }
       ]
     }
   },
