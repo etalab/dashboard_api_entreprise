@@ -2,8 +2,7 @@
 
 ## Environnements de développement
 
-Le projet est développé dans un environnement Node.js version 8.6.0. Voir NVM
-comme gestionnaire de versions Node.
+Le projet est développé dans un environnement Node.js version 8.6.0. Voir NVM comme gestionnaire de versions Node.
 
 ## Build Setup
 
@@ -14,8 +13,13 @@ npm install
 # serve with hot reload at localhost:8080
 npm run dev
 
+# build for sandbox with minification
+npm run sandbox
+
 # build for production with minification
 npm run build
+# or
+npm run production
 
 # build for production and view the bundle analyzer report
 npm run build --report
@@ -31,5 +35,4 @@ globaly : `npm install dploy -g`.
 Explicit configuration can be found in the dploy.yaml file located into the
 project root folder.
 
-Use `dploy sandbox` or `dploy production` in order to deploy to the
-corresponding environment.
+Use `dploy sandbox` or `dploy production` in order to deploy to the corresponding environment.

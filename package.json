@@ -10,7 +10,9 @@
     "watch": "jest --no-cache --watch",
     "update-snapshots": "jest --updateSnapshot",
     "start": "npm run dev",
-    "build": "node build/build.js",
+    "sandbox": "node build/sandbox.js",
+    "production": "node build/production.js",
+    "build": "node build/production.js",
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
