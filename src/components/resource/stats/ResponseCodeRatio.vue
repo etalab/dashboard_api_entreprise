@@ -4,7 +4,7 @@
     .panel__header-content
       h3 {{ tableTitle }}
       ul(v-if="timeSpans")
-        li.stats__time-span(v-for="time in timeSpans" v-on:click="changeSpan(time.value)") {{ time.label }}
+        li.stats__time-span(v-for="time in timeSpans" v-on:click="changeSpan(time.value)" :class="{active:isSelected(time.value)}") {{ time.label }}
   table
     thead
       th(v-for="header in headers") {{ header }}
@@ -64,6 +64,9 @@ export default {
   methods: {
     changeSpan: function (time) {
       this.timeSpanDisplayed = time
+    },
+    isSelected: function (time) {
+      return this.timeSpanDisplayed === time
     }
   }
 }

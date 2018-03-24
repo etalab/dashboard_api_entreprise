@@ -21,6 +21,10 @@
     flex-direction: row;
     justify-content: space-between;
 
+    li.active {
+      font-weight: 700;
+    }
+
     li + li {
       margin-left: 1em;
     }
@@ -36,20 +40,15 @@
     }
   }
 
-  .last-errors li {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
   table {
     box-shadow: none;
+    border: 1px solid $color-light-grey;
   }
 
   th,
   td {
-    padding: 0;
     border: 0;
     text-align: left;
+    vertical-align: top;
   }
 }

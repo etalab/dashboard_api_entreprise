@@ -1,7 +1,7 @@
 <template lang="pug">
 .main-pane.stats
-  .back-button Retour au profil
-  h2 Token Name
+  a.back-button(@click="goToPreviousPage") ← Retour au profil
+  h2 {{jwtId}}
   stats-gauge
   endpoints-called(class="stats__call-count")
   response-code-ratio
@@ -40,6 +40,12 @@ export default {
     'last-calls': LastCalls,
     'response-code-ratio': ResponseCodeRatio,
     'statsGauge': StatsGauge
+  },
+
+  methods: {
+    goToPreviousPage: function () {
+      this.$router.go(-1)
+    }
   }
 }
 </script>

@@ -12,7 +12,7 @@
       tr(v-for="item in lastCalls")
         td {{ item.url }}
         td {{ item.params }}
-        td {{ item.code }}
+        td(class="return-code") {{ item.code }}
 </template>
 
 <script>
@@ -36,5 +36,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+  .return-code {
+    width: 90px;
+  }
 </style>
