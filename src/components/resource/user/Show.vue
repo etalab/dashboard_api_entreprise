@@ -89,10 +89,6 @@ export default {
     margin-right: 2em;
   }
 
-  .button {
-    margin-top: 2em;
-  }
-
   @media (max-width: 949px) {
     .contact__container {
       flex-direction: column;
