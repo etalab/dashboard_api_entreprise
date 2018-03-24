@@ -1,37 +1,41 @@
 <template lang="pug">
-  .panel
-    .ui.top.attached.tabular.menu
-      a.item.active(data-tab="v2") v2
-      a.item(data-tab="v1") v1
+  div
+    tabs
+      tab(name="v2")
+        slot(name="info-v2")
+        table
+          thead
+            tr
+              th Endpoint
+              th Status
+              th Dernier appel
 
-    .ui.bottom.attached.tab.segment.active(data-tab="v2")
-      slot(name="info-v2")
-      table.ui.celled.table
-        thead
-          tr
-            th Endpoint
-            th Status
-            th Dernier appel
+          tbody
+            slot(name="v2")
 
-        tbody
-        slot(name="v2")
+      tab(name="v1")
+        slot(name="info-v1")
+        table
+          thead
+            tr
+              th Endpoint
+              th Status
+              th Dernier appel
 
-    .ui.bottom.attached.tab.segment(data-tab="v1")
-      slot(name="info-v1")
-      table.ui.celled.table
-        thead
-          tr
-            th Endpoint
-            th Status
-            th Dernier appel
+          tbody
+            slot(name="v1")
 
-        tbody
-        slot(name="v1")
 </template>
 
 <script>
+import {Tabs, Tab} from 'vue-tabs-component'
+
 export default {
-  name: 'endpoints-table'
+  name: 'endpoints-table',
+  components: {
+    'tabs': Tabs,
+    'tab': Tab
+  }
 }
 </script>
 

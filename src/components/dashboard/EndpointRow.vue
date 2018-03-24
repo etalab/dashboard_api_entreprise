@@ -1,8 +1,7 @@
 <template lang="pug">
-  tr(:class="statusClass")
-    td
-      .ui.ribbon.label {{ name }}
-    td {{ status }}
+  tr
+    td {{ name }}
+    td(:class="statusClass") {{ status }}
     td {{ timestampMoment(timestamp) }}
 </template>
 
@@ -44,23 +43,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  tr {
-    outline-style: auto;
-    outline-color: $color-light-grey;
-  }
   .success {
-    background-color: $color-light-green;
     color: $color-green;
-    border-color: #color-green;
   }
   .error {
-    background-color: $color-light-red;
     color: $color-red;
-    border-color: #color-red;
   }
   .warning {
-    background-color: $color-light-orange;
     color: $color-orange;
-    border-color: #color-orange;
   }
 </style>

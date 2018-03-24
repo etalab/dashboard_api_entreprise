@@ -2,9 +2,9 @@
   .container
     <!--refresh-button(:lastRefreshTime="lastRefreshTime" @loadData="loadData")-->
     h2 Endpoints
-    p Le service API Entreprise est:
-      span(:class="[isUP ? 'up' : 'down']") {{ homepageStatus }}
-    hr
+    p Le service API Entreprise est :
+      span(:class="[isUP ? 'up' : 'down']")  {{ homepageStatus }}
+
     endpoints-table
       p(slot="info-v2") Les données proviennent de
         a(href="https://entreprise.api.gouv.fr")  entreprise.api.gouv.fr
@@ -23,10 +23,10 @@
         .notification.error
           h4.no_margin Attention la v1 est dépréciée
 
-          p.no_margin.
+          p.no_margin
             Coupure de la v1 au 31 mars 2018
             <br>
-            La v1 sera coupée dans <span id="v1-countdown" class="bold"></span>
+            La v1 sera coupée dans <strong id="v1-countdown"></strong>
 
       endpoint-row(slot="v1"
                 v-for="endpoint in endpointsV1"
