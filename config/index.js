@@ -6,8 +6,8 @@ const path = require('path')
 module.exports = {
   build: {
     env: require('./prod.env'),
-    index: path.resolve(__dirname, '../dist/index.html'),
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    index: path.resolve(__dirname, '../dist_production/index.html'),
+    assetsRoot: path.resolve(__dirname, '../dist_production'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     productionSourceMap: true,
@@ -23,6 +23,18 @@ module.exports = {
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report
   },
+  sandbox: {
+    env: require('./sandbox.env'),
+    index: path.resolve(__dirname, '../dist_sandbox/index.html'),
+    assetsRoot: path.resolve(__dirname, '../dist_sandbox'),
+    assetsSubDirectory: 'static',
+    assetsPublicPath: '/',
+    productionSourceMap: true,
+    productionGzip: false,
+    productionGzipExtensions: ['js', 'css'],
+    bundleAnalyzerReport: process.env.npm_config_report
+  },
+
   dev: {
     env: require('./dev.env'),
     port: process.env.PORT || 8080,
