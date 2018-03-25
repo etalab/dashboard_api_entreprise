@@ -9,7 +9,7 @@
     thead
       th(v-for="header in headers") {{ header }}
     tbody
-      tr(v-for="item in lastCalls")
+      tr(v-for="item in orderedLastCalls")
         td {{ item.url }}
         td {{ item.params }}
         td(class="return-code") {{ item.code }}
@@ -30,7 +30,7 @@ export default {
 
   computed: {
     ...mapGetters('stats', [
-      'lastCalls'
+      'orderedLastCalls'
     ])
   }
 }

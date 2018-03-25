@@ -1,6 +1,6 @@
 const state = {
   number_of_calls: {},
-  last_calls: {},
+  last_calls: [],
   http_ratios: {}
 }
 
@@ -32,6 +32,11 @@ const getters = {
 
   lastCalls (state) {
     return state.last_calls
+  },
+
+  orderedLastCalls (state, getters) {
+    let logs = [...state.last_calls]
+    return logs.sort((log1, log2) => new Date(log2.timestamp) - new Date(log1.timestamp))
   }
 }
 
