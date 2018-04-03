@@ -1,3 +1,5 @@
+import transform from 'lodash/transform'
+
 const state = {
   number_of_calls: {},
   last_calls: [],
@@ -15,7 +17,11 @@ const getters = {
   },
 
   responseCodeRatio (state) {
-    return state.http_ratios
+    // order ratios from HTTP codes ascending
+    let ratios = { ...state.http_ratios }
+    return transform(ratios, function (result, value, key) {
+      result[key] = value.sort((code1, code2) => parseInt(Object.keys(code1)[0]) - parseInt(Object.keys(code2)[0]))
+    }, {})
   },
 
   lastTenMinutesCalls (state) {
@@ -30,12 +36,9 @@ const getters = {
     return state.number_of_calls.last_8_days
   },
 
-  lastCalls (state) {
-    return state.last_calls
-  },
-
-  orderedLastCalls (state, getters) {
+  orderedLastCalls (state) {
     let logs = [...state.last_calls]
+    // order last calls logs from newer to older
     return logs.sort((log1, log2) => new Date(log2.timestamp) - new Date(log1.timestamp))
   }
 }
