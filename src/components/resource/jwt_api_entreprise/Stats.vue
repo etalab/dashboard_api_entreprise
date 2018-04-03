@@ -24,17 +24,6 @@ export default {
     this.$store.dispatch('stats/fetch', { jti: this.jwtId })
   },
 
-  computed: {
-    ...mapGetters('stats', [
-      'lastTenMinutesNumberCalls',
-      'endpointsCalled',
-      'lastTenMinutesCalls',
-      'lastThirtyHoursCalls',
-      'lastEightDaysCalls',
-      'lastCalls'
-    ])
-  },
-
   components: {
     'endpoints-called': EndpointsCalled,
     'last-calls': LastCalls,

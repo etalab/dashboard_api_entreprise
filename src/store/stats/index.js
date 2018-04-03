@@ -24,18 +24,6 @@ const getters = {
     }, {})
   },
 
-  lastTenMinutesCalls (state) {
-    return state.number_of_calls.last_10_minutes
-  },
-
-  lastThirtyHoursCalls (state) {
-    return state.number_of_calls.last_30_hours
-  },
-
-  lastEightDaysCalls (state) {
-    return state.number_of_calls.last_8_days
-  },
-
   orderedLastCalls (state) {
     let logs = [...state.last_calls]
     // order last calls logs from newer to older
