@@ -1,4 +1,5 @@
 import transform from 'lodash/transform'
+import cloneDeep from 'lodash/cloneDeep'
 
 const state = {
   number_of_calls: {},
@@ -13,12 +14,17 @@ const getters = {
   },
 
   endpointsCalled (state) {
-    return state.number_of_calls
+    // order the list by number of call descending
+    let nbCalls = cloneDeep(state.number_of_calls)
+    return transform(nbCalls, function (result, value, key) {
+      value.by_endpoint.sort((e1, e2) => e2.total - e1.total)
+      result[key] = value
+    }, {})
   },
 
   responseCodeRatio (state) {
     // order ratios from HTTP codes ascending
-    let ratios = { ...state.http_ratios }
+    let ratios = cloneDeep(state.http_ratios)
     return transform(ratios, function (result, value, key) {
       result[key] = value.sort((code1, code2) => parseInt(Object.keys(code1)[0]) - parseInt(Object.keys(code2)[0]))
     }, {})
