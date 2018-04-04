@@ -1,5 +1,5 @@
 <template lang="pug">
-.main-pane
+.main
   form
     h2 Ajout d'un nouveau rôle
 

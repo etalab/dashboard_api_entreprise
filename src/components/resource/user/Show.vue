@@ -1,8 +1,7 @@
 <template lang="pug">
-.main-pane
+.main
   .profile__group
     h2 Profil utilisateur
-
     .panel
       .form__group
         label Adresse e-mail

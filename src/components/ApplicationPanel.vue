@@ -1,6 +1,6 @@
 <template lang="pug">
   .content
-    .documentation
+    .dashboard
       navigation-menu(v-if="showNavigationMenu")
       router-view
 </template>

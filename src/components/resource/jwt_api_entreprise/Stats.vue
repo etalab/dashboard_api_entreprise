@@ -1,5 +1,5 @@
 <template lang="pug">
-.main-pane.stats
+.main.stats
   a.back-button(@click="goToPreviousPage") ← Retour au profil
   h2 {{jwtId}}
   stats-gauge

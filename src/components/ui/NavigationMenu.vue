@@ -1,8 +1,8 @@
 <template lang="pug">
-  .side-pane
-    ul.side-pane__menu
-      li(v-for="(tile, index) in tiles" :key="index"  :route="tile.routeName" :icon="tile.icon" :class="{active:isSelected(tile.routeName)}")
-        a.side-pane__link(@click="routeTo(tile.routeName)") {{ tile.label }}
+  .side-menu
+    ul
+      li(v-for="(tile, index) in tiles" :key="index"  :route="tile.routeName" :icon="tile.icon")
+        a.side-pane__link(@click="routeTo(tile.routeName)"  :class="{active:isSelected(tile.routeName)}") {{ tile.label }}
 
 </template>
 

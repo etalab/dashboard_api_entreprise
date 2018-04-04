@@ -1,17 +1,18 @@
 <template lang="pug">
-  .main-pane
+  .main
+    h2 Liste des utilisateurs
+    .panel
+      table
+        thead
+          tr
+            th.text-left(v-for="header in headers") {{header.text}}
+        tbody
+          tr(v-for="user in userList")
+            td
+              router-link(:to="{ name: 'userShow', params: { userId: user.id }}") {{ user.email }}
+            td {{ user.context }}
+            td Oui
     button.button(@click="userForm") Ajouter un utilisateur
-
-    table
-      thead
-        tr
-          th.text-left(v-for="header in headers") {{header.text}}
-      tbody
-        tr(v-for="user in userList")
-          td
-            router-link(:to="{ name: 'userShow', params: { userId: user.id }}") {{ user.email }}
-          td {{ user.context }}
-          td Oui
 
 </template>
 
@@ -48,3 +49,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  button {
+    margin-top: 1em;
+  }
+</style>
