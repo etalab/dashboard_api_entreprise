@@ -16,10 +16,6 @@ export default {
       selected: 'client-view',
       tiles: [
         {
-          label: 'Profil',
-          routeName: 'client-view'
-        },
-        {
           label: 'Utilisateurs',
           routeName: 'users'
         },

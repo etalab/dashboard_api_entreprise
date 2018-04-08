@@ -12,7 +12,8 @@
         li
           router-link(:to="{ name: 'incidents' }") Incidents
         li
-          router-link(:to="{ name: 'client-view' }" v-if="!unknownUser") Espace Perso
+          router-link(:to="{ name: 'application-panel' }" v-if="isAdmin") Espace d'administration
+          router-link(:to="{ name: 'application-panel' }" v-else-if="!unknownUser") Espace Perso
         li
           a.logout(icon @click="logout" v-if="!unknownUser") Déconnexion
         li
@@ -28,6 +29,7 @@ export default {
 
   computed: {
     ...mapGetters({
+      isAdmin: 'auth/isAdmin',
       unknownUser: 'auth/unknownUser'
     })
   },
