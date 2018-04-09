@@ -1,8 +1,7 @@
 <template lang="pug">
-.main-pane
+.main
   .profile__group
     h2 Profil utilisateur
-
     .panel
       .form__group
         label Adresse e-mail
@@ -10,6 +9,21 @@
       .form__group
         label Contexte
         div.headline {{ userDetails.context }}
+
+  .profile__group
+    h2 Droits de l'utilisateur
+    .panel
+      table
+        thead
+          th Endpoint
+          th Actif
+        tbody
+          tr(:class="{enabled:true}")
+            td Liasses fiscales
+            td Oui
+          tr(:class="{disabled:true}")
+            td Etablissements
+            td Non
 
   .profile__group
     h2 Tokens de l'utilisateur
@@ -21,8 +35,8 @@
   .profile__group
     h2 Contacts
 
-    .contact__container(v-if="contacts.length > 0")
-      contact-tile(v-for="(contact, index) in contacts" :key="index" :contact="contact")
+    .contact__container.row(v-if="contacts.length > 0")
+      contact-tile(class="contact" v-for="(contact, index) in contacts" :key="index" :contact="contact")
     p(v-else) Aucune coordonnée de contact
 
     button.button(v-if="isAdmin") Ajouter un contact
@@ -67,8 +81,12 @@ export default {
     height: auto;
   }
 
-  .profile__group {
-    margin-bottom: 4em;
+  .profile__group + .profile__group {
+    margin-top: 3em;
+  }
+
+  .profile__group > h2 {
+    margin-top: 0;
   }
 
   label {
@@ -79,24 +97,31 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 1em;
   }
 
   table {
     margin-bottom: 2em;
   }
 
-  .panel:first-child {
-    margin-right: 2em;
-  }
-
   @media (max-width: 949px) {
     .contact__container {
       flex-direction: column;
     }
+  }
 
-    .panel:first-child {
-      margin-right: 0;
-      margin-bottom: 2em;
-    }
+  .contact + .contact {
+    margin-left: 2em;
+    margin-top: 0;
+  }
+
+  .enabled :last-child{
+    color: $color-blue;
+    font-weight: 700;
+  }
+
+  tr.disabled {
+    color: $color-dark-grey;
+    background: $color-white;
   }
 </style>

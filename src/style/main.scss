@@ -30,6 +30,12 @@ th, td {
   word-break: break-all;
 }
 
+a.button,
+button.button {
+  font-weight: 400;
+  font-size: 1em;
+}
+
 a.button.small,
 button.button.small {
   font-size: 0.75em;
@@ -59,15 +65,4 @@ button.button.warning:hover {
 
 .action-buttons button.button:first-child {
   margin-right: 1em;
-}
-
-.documentation {
-  .main-pane {
-    background: $color-lighter-grey;
-  }
-
-  .side-pane {
-    background: $color-white;
-    flex: 0 0 20%;
-  }
 }
