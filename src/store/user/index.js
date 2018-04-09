@@ -1,11 +1,14 @@
 import JwtDecode from 'jwt-decode'
 import userCreate from './create'
 import userIndex from './index/index.js'
+import orderBy from 'lodash/orderBy'
+import cloneDeep from 'lodash/cloneDeep'
 
 const state = {
   user: {
     details: {},
     contacts: [],
+    allowed_roles: [],
     tokens: []
   }
 }
@@ -21,6 +24,16 @@ const getters = {
 
   tokens (state) {
     return state.user.tokens
+  },
+
+  allowedRoles (state, getters, rootState, rootGetters) {
+    const allRoles = cloneDeep(rootGetters['role/index'])
+    const taggedRoles = allRoles.map(role => {
+      role.allowed = (state.user.allowed_roles.includes(role.code))
+      return role
+    })
+
+    return orderBy(taggedRoles, ['allowed', 'name'], ['desc', 'asc'])
   }
 }
 
@@ -48,6 +61,10 @@ const mutations = {
     state.user.tokens = decodedTokens
   },
 
+  setAllowedRoles (state, roles) {
+    state.user.allowed_roles = roles
+  },
+
   addToken (state, token) {
     state.user.tokens.push(formatJwt(token))
   }
@@ -56,7 +73,8 @@ const mutations = {
 const actions = {
   get ({ dispatch, commit, rootGetters }, { userId } = {}) {
     const uid = userId || rootGetters['auth/currentUser'].id
-    dispatch('api/admin/get', { url: `/users/${uid}` }, { root: true })
+    dispatch('role/index', null, { root: true })
+      .then(() => dispatch('api/admin/get', { url: `/users/${uid}` }, { root: true }))
       .then(data => dispatch('fillUserData', data))
   },
 
@@ -69,6 +87,7 @@ const actions = {
 
     commit('setContacts', data.contacts)
     commit('setTokens', data.tokens)
+    commit('setAllowedRoles', data.allowed_roles)
   },
 
   createToken ({ dispatch, commit, getters }, payload) {

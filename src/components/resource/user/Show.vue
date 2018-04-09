@@ -18,12 +18,9 @@
           th Endpoint
           th Actif
         tbody
-          tr(:class="{enabled:true}")
-            td Liasses fiscales
-            td Oui
-          tr(:class="{disabled:true}")
-            td Etablissements
-            td Non
+          tr(v-for="(role, index) in allowedRoles" :key="index" :class="role.allowed ? 'enabled' : 'disabled'")
+            td {{ role.name }}
+            td {{ role.allowed ? 'Oui' : 'Non' }}
 
   .profile__group
     h2 Tokens de l'utilisateur
@@ -62,6 +59,7 @@ export default {
   computed: {
     ...mapGetters({
       userDetails: 'user/userDetails',
+      allowedRoles: 'user/allowedRoles',
       contacts: 'user/contacts',
       tokens: 'user/tokens',
       isAdmin: 'auth/isAdmin'
