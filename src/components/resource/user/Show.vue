@@ -29,7 +29,7 @@
     jwt-api-entreprise-index(:jwtList="tokens" v-if="tokens.length > 0")
     p(v-else) Aucun token attribué
 
-    jwt-api-entreprise-new(v-if="isAdmin")
+    jwt-api-entreprise-new(v-if="isAdmin || allowedToCreateToken")
 
   .profile__group
     h2 Contacts

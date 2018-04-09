@@ -10,7 +10,7 @@
 
       .form__group
         label Rôles d’accès
-        div(v-for="role in index")
+        div(v-for="role in allowedRoles")
           input(type="checkbox" :id="role.code" v-model="checked_roles" :value="role.code")
           label.label-inline(:for="role.code") {{role.name}}
 
@@ -21,8 +21,7 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-const { mapGetters } = createNamespacedHelpers('role')
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'jwt-api-entreprise-new',
@@ -35,7 +34,16 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['index'])
+    ...mapGetters({
+      allRoles: 'role/index',
+      userTaggedRoles: 'user/allowedRoles',
+      isAdmin: 'auth/isAdmin'
+    }),
+
+    allowedRoles () {
+      const userGivenRoles = this.userTaggedRoles.filter(role => role.allowed)
+      return this.isAdmin ? this.allRoles : userGivenRoles
+    }
   },
 
   methods: {
