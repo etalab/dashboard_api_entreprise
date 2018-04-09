@@ -34,6 +34,10 @@ const getters = {
     })
 
     return orderBy(taggedRoles, ['allowed', 'name'], ['desc', 'asc'])
+  },
+
+  allowedToCreateToken (state) {
+    return state.user.details.allow_token_creation
   }
 }
 
@@ -82,7 +86,8 @@ const actions = {
     commit('setUserDetails', {
       id: data.id,
       email: data.email,
-      context: data.context
+      context: data.context,
+      allow_token_creation: data.allow_token_creation
     })
 
     commit('setContacts', data.contacts)
@@ -101,6 +106,12 @@ const actions = {
 
     dispatch('api/admin/post', { url: url, params: payload }, { root: true })
       .then(data => commit('addToken', data.new_token))
+  },
+
+  addRoles ({ dispatch, getters }, roles) {
+    const userId = getters.userDetails.id
+    dispatch('api/admin/post', { url: `/users/${userId}/add_roles`, params: roles }, { root: true })
+      .then(data => dispatch('user/get', { userId }))
   }
 }
 

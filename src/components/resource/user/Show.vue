@@ -12,6 +12,7 @@
 
   .profile__group
     h2 Droits de l'utilisateur
+      span(v-if="userGrantedTokenCreation") (Cet utilisateur a les droits de création de token)
     .panel
       table
         thead
@@ -21,6 +22,7 @@
           tr(v-for="(role, index) in allowedRoles" :key="index" :class="role.allowed ? 'enabled' : 'disabled'")
             td {{ role.name }}
             td {{ role.allowed ? 'Oui' : 'Non' }}
+    user-add-roles-form(v-if="userGrantedTokenCreation")
 
   .profile__group
     h2 Tokens de l'utilisateur
@@ -41,6 +43,7 @@
 
 <script>
 import JWTAPIEntrepriseNew from '@/components/resource/jwt_api_entreprise/New'
+import UserAddRolesForm from '@/components/resource/user/AddRoles'
 import JWTAPIEntrepriseIndex from '@/components/resource/jwt_api_entreprise/Index'
 import ContactTile from '@/components/resource/contact/Show'
 import { mapGetters } from 'vuex'
@@ -60,15 +63,21 @@ export default {
     ...mapGetters({
       userDetails: 'user/userDetails',
       allowedRoles: 'user/allowedRoles',
+      allowedToCreateToken: 'user/allowedToCreateToken',
       contacts: 'user/contacts',
       tokens: 'user/tokens',
       isAdmin: 'auth/isAdmin'
-    })
+    }),
+
+    userGrantedTokenCreation () {
+      return (this.isAdmin && this.allowedToCreateToken)
+    }
   },
 
   components: {
     'jwt-api-entreprise-new': JWTAPIEntrepriseNew,
     'jwt-api-entreprise-index': JWTAPIEntrepriseIndex,
+    'user-add-roles-form': UserAddRolesForm,
     'contact-tile': ContactTile
   }
 }
