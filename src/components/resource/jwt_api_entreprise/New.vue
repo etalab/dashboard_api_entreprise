@@ -34,10 +34,6 @@ export default {
     }
   },
 
-  created () {
-    this.$store.dispatch('role/index')
-  },
-
   computed: {
     ...mapGetters(['index'])
   },

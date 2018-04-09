@@ -90,9 +90,15 @@ const actions = {
     commit('setAllowedRoles', data.allowed_roles)
   },
 
-  createToken ({ dispatch, commit, getters }, payload) {
+  createToken ({ dispatch, commit, getters, rootGetters }, payload) {
     const userId = getters.userDetails.id
-    const url = `/users/${userId}/jwt_api_entreprise`
+    let url = ''
+    if (rootGetters['auth/isAdmin']) {
+      url = `/users/${userId}/jwt_api_entreprise/admin_create`
+    } else {
+      url = `/users/${userId}/jwt_api_entreprise`
+    }
+
     dispatch('api/admin/post', { url: url, params: payload }, { root: true })
       .then(data => commit('addToken', data.new_token))
   }
