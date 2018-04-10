@@ -2,8 +2,7 @@
   .side-menu
     ul
       li(v-for="(tile, index) in tiles" :key="index"  :route="tile.routeName" :icon="tile.icon")
-        a.side-pane__link(@click="routeTo(tile.routeName)"  :class="{active:isSelected(tile.routeName)}") {{ tile.label }}
-
+        router-link(class="side-pane__link" :to="{name:tile.routeName}") {{ tile.label }}
 </template>
 
 <script>
@@ -37,3 +36,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .dashboard .side-menu a.router-link-active {
+    background: linear-gradient(90deg, $color-blue, $color-blue 5px, $color-lighter-grey 0, $color-lighter-grey);
+    color: $color-darker-grey;
+  }
+</style>
