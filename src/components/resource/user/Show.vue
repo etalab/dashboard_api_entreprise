@@ -1,51 +1,11 @@
 <template lang="pug">
 .main
-  .profile__group
-    h2 Profil utilisateur
-    .panel
-      .form__group
-        label Adresse e-mail
-        div.headline {{ userDetails.email }}
-      .form__group
-        label Contexte
-        div.headline {{ userDetails.context }}
-
-  .profile__group
-    h2 Droits de l'utilisateur
-      span(v-if="userGrantedTokenCreation") (Cet utilisateur a les droits de création de token)
-    .panel
-      table
-        thead
-          th Endpoint
-          th Actif
-        tbody
-          tr(v-for="(role, index) in allowedRoles" :key="index" :class="role.allowed ? 'enabled' : 'disabled'")
-            td {{ role.name }}
-            td {{ role.allowed ? 'Oui' : 'Non' }}
-    user-add-roles-form(v-if="userGrantedTokenCreation")
-
-  .profile__group
-    h2 Tokens de l'utilisateur
-    jwt-api-entreprise-index(:jwtList="tokens" v-if="tokens.length > 0")
-    p(v-else) Aucun token attribué
-
-    jwt-api-entreprise-new(v-if="isAdmin || allowedToCreateToken")
-
-  .profile__group
-    h2 Contacts
-
-    .contact__container.row(v-if="contacts.length > 0")
-      contact-tile(class="contact" v-for="(contact, index) in contacts" :key="index" :contact="contact")
-    p(v-else) Aucune coordonnée de contact
-
-    button.button(v-if="isAdmin") Ajouter un contact
+  user-tabs
+  router-view
 </template>
 
 <script>
-import JWTAPIEntrepriseNew from '@/components/resource/jwt_api_entreprise/New'
-import UserAddRolesForm from '@/components/resource/user/AddRoles'
-import JWTAPIEntrepriseIndex from '@/components/resource/jwt_api_entreprise/Index'
-import ContactTile from '@/components/resource/contact/Show'
+import UserTabs from '@/components/resource/user/Tabs'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -75,10 +35,7 @@ export default {
   },
 
   components: {
-    'jwt-api-entreprise-new': JWTAPIEntrepriseNew,
-    'jwt-api-entreprise-index': JWTAPIEntrepriseIndex,
-    'user-add-roles-form': UserAddRolesForm,
-    'contact-tile': ContactTile
+    'user-tabs': UserTabs
   }
 }
 </script>
@@ -117,11 +74,6 @@ export default {
     }
   }
 
-  .contact + .contact {
-    margin-left: 2em;
-    margin-top: 0;
-  }
-
   .enabled :last-child{
     color: $color-blue;
     font-weight: 700;
@@ -130,5 +82,32 @@ export default {
   tr.disabled {
     color: $color-dark-grey;
     background: $color-white;
+  }
+
+  .profile__tabs {
+    margin: 0;
+    margin-bottom: 3em;
+    padding: 0;
+  }
+
+  .profile__tabs li {
+    display: inline;
+  }
+
+  .profile__tabs li + li {
+    margin-left: 1em;
+  }
+
+  .profile__tabs a {
+    display: inline-block;
+    background: $color-white;
+    border-radius: 3px;
+    box-shadow: 0 0 4px $color-light-grey;
+    padding: .75em 1.5em;
+  }
+
+  .profile__tabs .router-link-active {
+    background: $color-blue;
+    color: $color-white;
   }
 </style>

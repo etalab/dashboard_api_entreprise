@@ -4,6 +4,10 @@ import Router from 'vue-router'
 import UserIndex from '@/components/resource/user/Index'
 import UserNew from '@/components/resource/user/New'
 import UserShow from '@/components/resource/user/Show'
+import UserProfile from '@/components/resource/user/UserProfile'
+import UserTokens from '@/components/resource/user/UserTokens'
+import UserContacts from '@/components/resource/user/UserContacts'
+
 import RoleIndex from '@/components/resource/role/Index'
 import RoleNew from '@/components/resource/role/New'
 import JwtStats from '@/components/resource/jwt_api_entreprise/Stats'
@@ -63,7 +67,24 @@ const router = new Router({
         {
           path: '/me',
           name: 'client-view',
-          component: UserShow
+          component: UserShow,
+          children: [
+            {
+              path: 'profile',
+              name: 'userProfileShow',
+              component: UserProfile
+            },
+            {
+              path: 'tokens',
+              name: 'userTokensShow',
+              component: UserTokens
+            },
+            {
+              path: 'contacts',
+              name: 'userContactsShow',
+              component: UserContacts
+            }
+          ]
         },
         {
           path: '/me/stats/:jwtId',
@@ -100,7 +121,24 @@ const router = new Router({
           name: 'userShow',
           props: true,
           meta: { requiresAdmin: true },
-          component: UserShow
+          component: UserShow,
+          children: [
+            {
+              path: 'profile',
+              name: 'userProfileShow',
+              component: UserProfile
+            },
+            {
+              path: 'tokens',
+              name: 'userTokensShow',
+              component: UserTokens
+            },
+            {
+              path: 'contacts',
+              name: 'userContactsShow',
+              component: UserContacts
+            }
+          ]
         }
       ]
     },
