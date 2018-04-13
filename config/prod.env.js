@@ -1,7 +1,8 @@
 'use strict'
 module.exports = {
   NODE_ENV: '"production"',
-  API_BASE_URL: '"https://dashboard.entreprise.api.gouv.fr"',
-  API_URL_PREFIX: '"/api/admin"',
-  DASHBOARD_URL_PREFIX: '"/api/watchdoge"'
+  ADMIN_API_BASE_URL: '"https://dashboard.entreprise.api.gouv.fr"',
+  WATCHDOGE_API_BASE_URL: '"https://dashboard.entreprise.api.gouv.fr"',
+  ADMIN_URL_PREFIX: '"/api/admin"',
+  WATCHDOGE_URL_PREFIX: '"/api/watchdoge"'
 }
