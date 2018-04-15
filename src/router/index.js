@@ -83,14 +83,14 @@ const router = new Router({
               path: 'contacts',
               name: 'client-contacts',
               component: UserContacts
+            },
+            {
+              path: 'stats/:jwtId',
+              name: 'client-jwt-stats',
+              props: true,
+              component: JwtStats
             }
           ]
-        },
-        {
-          path: '/me/stats/:jwtId',
-          name: 'jwt-stats',
-          props: true,
-          component: JwtStats
         },
         {
           path: 'users',
@@ -122,6 +122,7 @@ const router = new Router({
           props: true,
           meta: { requiresAdmin: true },
           component: UserShow,
+          // TODO remove this duplication with /me children routes
           children: [
             {
               path: 'profile',
@@ -137,6 +138,12 @@ const router = new Router({
               path: 'contacts',
               name: 'admin-user-contacts',
               component: UserContacts
+            },
+            {
+              path: 'stats/:jwtId',
+              name: 'admin-jwt-stats',
+              props: true,
+              component: JwtStats
             }
           ]
         }

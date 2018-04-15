@@ -1,6 +1,6 @@
 <template lang="pug">
 .main.stats
-  a.back-button(@click="goToPreviousPage") ← Retour au profil
+  a.back-button(@click="goToPreviousPage") ← Retour à la liste des tokens
   h2 {{jwtId}}
   stats-gauge
   endpoints-called(class="stats__call-count")

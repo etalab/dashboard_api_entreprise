@@ -4,7 +4,7 @@
       <div class="panel__header">
         <h3 class="token__name">Agent utilisateur : {{ token.payload.sub }}</h3>
         <small class="panel__header-extra">Délivré le {{ formatDate(token.payload.iat) }}</small>
-        <router-link :to="{ name: 'jwt-stats', params: { jwtId: token.payload.jti } }" class="button-stats">Voir les statistiques →</router-link>
+        <router-link :to="{ name: statsRoute, params: { jwtId: token.payload.jti } }" class="button-stats">Voir les statistiques →</router-link>
       </div>
       <div class="form__group token__rights">
         <label class="token__rights-label">Accès</label>
@@ -21,18 +21,27 @@
           </button>
         </div>
       </div>
-      <!--div class="form__group button-stats">
-        <a class="button" href="#">Statistiques</a>
-      </div-->
     </li>
   </ul>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'jwt-api-entreprise-index',
 
   props: ['jwtList'],
+
+  computed: {
+    ...mapGetters({
+      isAdmin: 'auth/isAdmin'
+    }),
+
+    statsRoute () {
+      return this.isAdmin ? 'admin-jwt-stats' : 'client-jwt-stats'
+    }
+  },
 
   methods: {
     formatDate (timestamp) {
