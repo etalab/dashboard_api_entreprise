@@ -11,7 +11,7 @@
             td
               router-link(:to="{ name: 'admin-user-profile', params: { userId: user.id }}") {{ user.email }}
             td {{ user.context }}
-            td Oui
+            td {{ user.confirmed ? 'Oui' : 'Non' }}
     button.button(@click="userForm") Ajouter un utilisateur
 
 </template>
@@ -29,7 +29,7 @@ export default {
       headers: [
         { text: 'E-mail', value: 'email', align: 'left' },
         { text: 'Contexte', value: 'context', align: 'left' },
-        { text: 'Vérifié', value: 'verified', align: 'left' }
+        { text: 'Confirmé', value: 'confirmed', align: 'left' }
       ]
     }
   },
