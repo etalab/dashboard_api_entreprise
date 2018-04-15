@@ -18,8 +18,12 @@ const getters = {
     return state.user.details
   },
 
-  contacts (state) {
-    return state.user.contacts
+  accountContacts (state) {
+    return state.user.contacts.filter(contact => ['tech', 'admin'].includes(contact.contact_type))
+  },
+
+  tokenContacts (state) {
+    return state.user.contacts.filter(contact => contact.contact_type === 'token')
   },
 
   tokens (state) {

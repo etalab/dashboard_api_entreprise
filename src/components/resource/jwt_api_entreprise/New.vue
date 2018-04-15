@@ -5,7 +5,7 @@
     .dialog.panel
       h2 Ajout d’un nouveau token
       .form__group
-        label(for="agent-name") Utilisateur final (ex: numéro SIRET)
+        label(for="agent-name") Organisme utilisateur final (ex: numéro SIRET)
         input(type="text" v-model="subject" id="agent-name")
 
       .form__group
@@ -13,6 +13,14 @@
         div(v-for="role in allowedRoles")
           input(type="checkbox" :id="role.code" v-model="checked_roles" :value="role.code")
           label.label-inline(:for="role.code") {{role.name}}
+
+      // Ask for end user contact information if non-admin
+      .form__group(v-if="!isAdmin")
+        label(for="agent-email") Adresse e-mail
+        input(type="email" v-model="contact_email" id="agent-email")
+
+        label(for="agent-phone") Téléphone
+        input(type="text" v-model="contact_phone" id="agent-phone")
 
       .action-buttons
         button.button.small(@click="submit") Créer
@@ -29,7 +37,9 @@ export default {
     return {
       dialog: false,
       subject: '',
-      checked_roles: []
+      checked_roles: [],
+      contact_email: null,
+      contact_phone: null
     }
   },
 
@@ -48,7 +58,16 @@ export default {
 
   methods: {
     submit: function () {
-      this.$store.dispatch('user/createToken', { roles: this.checked_roles, subject: this.subject })
+      let payload = {
+        roles: this.checked_roles,
+        subject: this.subject,
+        contact: {
+          email: this.contact_email
+        }
+      }
+      if (this.contact_phone) payload.contact.phone_number = this.contact_phone
+
+      this.$store.dispatch('user/createToken', payload)
         .then(() => this.reset())
         .catch(e => {
           // TODO something went wrong
@@ -58,6 +77,8 @@ export default {
     reset: function () {
       this.checked_roles = []
       this.dialog = false
+      this.subject = ''
+      this.contact_email = this.contact_phone = null
     },
     showDialog: function () {
       this.dialog = true

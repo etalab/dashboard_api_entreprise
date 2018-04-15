@@ -27,7 +27,6 @@ import store from '@/store'
 Vue.use(Router)
 
 const router = new Router({
-  // TODO configure nginx to handle history mode: matching url fallback
   mode: 'history',
   routes: [
     {
@@ -67,7 +66,7 @@ const router = new Router({
         {
           path: '/me',
           name: 'client-view',
-          redirect: '/me/profile',
+          redirect: { name: 'client-profile' },
           component: UserShow,
           children: [
             {
