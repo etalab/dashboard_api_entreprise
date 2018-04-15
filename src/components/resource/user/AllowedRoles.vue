@@ -1,25 +1,26 @@
 <template lang="pug">
-div
   .profile__group
-    h2 Profil utilisateur
+    h2 Droits de l'utilisateur
+      span(v-if="userGrantedTokenCreation") (Cet utilisateur a les droits de création de token)
     .panel
-      .form__group
-        label Adresse e-mail
-        div.headline {{ userDetails.email }}
-      .form__group
-        label Contexte
-        div.headline {{ userDetails.context }}
+      table
+        thead
+          th Endpoint
+          th Actif
+        tbody
+          tr(v-for="(role, index) in allowedRoles" :key="index" :class="role.allowed ? 'enabled' : 'disabled'")
+            td {{ role.name }}
+            td {{ role.allowed ? 'Oui' : 'Non' }}
 
-  user-allowed-roles
+    user-add-roles-form(v-if="userGrantedTokenCreation")
 </template>
 
 <script>
 import UserAddRolesForm from '@/components/resource/user/AddRoles'
-import UserAllowedRoles from '@/components/resource/user/AllowedRoles'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'user-profile',
+  name: 'user-allowed-roles',
 
   computed: {
     ...mapGetters({
@@ -35,8 +36,7 @@ export default {
   },
 
   components: {
-    'user-add-roles-form': UserAddRolesForm,
-    'user-allowed-roles': UserAllowedRoles
+    'user-add-roles-form': UserAddRolesForm
   }
 }
 </script>

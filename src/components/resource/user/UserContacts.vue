@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import UserTabs from '@/components/resource/user/Tabs'
 import ContactTile from '@/components/resource/contact/Show'
 import { mapGetters } from 'vuex'
 

@@ -67,21 +67,22 @@ const router = new Router({
         {
           path: '/me',
           name: 'client-view',
+          redirect: '/me/profile',
           component: UserShow,
           children: [
             {
               path: 'profile',
-              name: 'userProfileShow',
+              name: 'client-profile',
               component: UserProfile
             },
             {
               path: 'tokens',
-              name: 'userTokensShow',
+              name: 'client-tokens',
               component: UserTokens
             },
             {
               path: 'contacts',
-              name: 'userContactsShow',
+              name: 'client-contacts',
               component: UserContacts
             }
           ]
@@ -125,17 +126,17 @@ const router = new Router({
           children: [
             {
               path: 'profile',
-              name: 'userProfileShow',
+              name: 'admin-user-profile',
               component: UserProfile
             },
             {
               path: 'tokens',
-              name: 'userTokensShow',
+              name: 'admin-user-tokens',
               component: UserTokens
             },
             {
               path: 'contacts',
-              name: 'userContactsShow',
+              name: 'admin-user-contacts',
               component: UserContacts
             }
           ]
