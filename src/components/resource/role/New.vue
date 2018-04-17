@@ -4,7 +4,7 @@
     h2 Ajout d'un nouveau rôle
 
     .notification.error(v-if="validationFailure") {{ alertMessage }}
-      button(class="close" aria-label="Fermer" @click="clearRole")
+      button(class="close" aria-label="Fermer" @click.prevent="clearRole")
                 svg(class="icon icon-cross")
                   use(xlink:href="#icon-cross")
 
@@ -24,14 +24,14 @@
       v-validate="'required'"
       data-vv-name="code")
 
-    .buttons
+    .form__group
+      button.button.secondary(
+        @click.prevent="cancel"
+       ) Annuler
+
       button.button.submit(
         @click.prevent="submit"
        ) Créer
-
-      button.button.cancel(
-        @click="cancel"
-       ) Annuler
 </template>
 
 <script>
@@ -80,13 +80,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  .buttons {
-    margin-top: 2em;
-  }
-
-  .submit {
-    margin-right: 1em;
-  }
-</style>

@@ -1,6 +1,6 @@
 <template lang="pug">
 .dialog
-  button.button(@click="showDialog") Ajouter un droit
+  button.button.small.title-button(@click="showDialog") Ajouter un droit
   .dialog-backdrop(v-if="dialog")
     .dialog.panel
       h2 Donner des droits à l'utilisateur
@@ -73,7 +73,7 @@ export default {
   }
 
   .dialog {
-    max-width: 32em;
+    display: inline-block;
   }
 
   h2 {

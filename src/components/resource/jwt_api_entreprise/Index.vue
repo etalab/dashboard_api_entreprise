@@ -23,6 +23,7 @@ export default {
 <style lang="scss" scoped>
   .token__list {
     padding: 0;
+    margin: 0;
     list-style-type: none;
   }
 
