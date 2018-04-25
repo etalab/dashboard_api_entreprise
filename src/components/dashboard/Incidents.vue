@@ -4,10 +4,32 @@
 
     .panel
       .panel__header
+        h3 MSA
+        small.panel__header-extra vendredi 6 avril à aujourd'hui
+
+      p Le service de la MSA est injoinable.
+
+    br
+    .panel
+      .panel__header
         h3 Exercices
         small.panel__header-extra mardi 20 février à aujourd'hui
 
       p Environ 15% des appels renvoient un code 206 avec un body vide. Les services de la DGFiP sont en train d'investiguer sur les causes de ces réponses incomplètes.
+
+    br
+    .panel
+      .panel__header
+        h3 INSEE
+        small.panel__header-extra mardi 25 avril de 14h30 à 17h30
+
+      p Les services suivants de l'INSEE ont été indisponibles :
+
+      ul
+        li etablissements_legacy
+        li entreprises_legacy
+        li etablissements_precedesseur
+        li etablissements_successeur
 
     br
     .panel
