@@ -7,7 +7,21 @@ sandbox:
   check: true
   branch: develop
   include:
-    "dist/**/*": "./"
+    "dist_sandbox/**/*": "./"
   path:
-    local: dist/
+    local: dist_sandbox/
     remote: /var/www/admin_board_sandbox
+
+production:
+  scheme: sftp
+  host: watchdoge.entreprise.api.gouv.fr
+  port: 22
+  user: deploy
+  privateKey: ~/.ssh/id_rsa
+  check: true
+  branch: master
+  include:
+    "dist_production/**/*": "./"
+  path:
+    local: dist_production/
+    remote: /var/www/admin_board_production

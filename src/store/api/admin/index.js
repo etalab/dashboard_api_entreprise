@@ -1,7 +1,7 @@
 import axios from 'axios'
 import router from '@/router'
 
-const API_URL = `${process.env.API_BASE_URL}${process.env.API_URL_PREFIX}`
+const API_URL = `${process.env.ADMIN_API_BASE_URL}${process.env.ADMIN_URL_PREFIX}`
 
 const http = axios.create({
   baseURL: API_URL,

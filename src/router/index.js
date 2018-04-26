@@ -1,26 +1,37 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 import UserIndex from '@/components/resource/user/Index'
 import UserNew from '@/components/resource/user/New'
 import UserShow from '@/components/resource/user/Show'
+import UserProfile from '@/components/resource/user/UserProfile'
+import UserTokens from '@/components/resource/user/UserTokens'
+import UserContacts from '@/components/resource/user/UserContacts'
+
 import RoleIndex from '@/components/resource/role/Index'
 import RoleNew from '@/components/resource/role/New'
+import JwtStats from '@/components/resource/jwt_api_entreprise/Stats'
 
 import Login from '@/components/Login'
 import AccountConfirmation from '@/components/AccountConfirmation'
 import ApplicationPanel from '@/components/ApplicationPanel'
+
+import RealTime from '@/components/dashboard/RealTime'
+import EndpointHistory from '@/components/dashboard/EndpointHistory'
+import Incidents from '@/components/dashboard/Incidents'
+
+import PageNotFound from '@/components/PageNotFound'
 
 import store from '@/store'
 
 Vue.use(Router)
 
 const router = new Router({
-  // TODO configure nginx to handle history mode: matching url fallback
-  // mode: 'history',
+  mode: 'history',
   routes: [
     {
       path: '/',
-      redirect: '/admin'
+      redirect: '/real_time'
     },
     {
       path: '/account/confirm',
@@ -55,7 +66,31 @@ const router = new Router({
         {
           path: '/me',
           name: 'client-view',
-          component: UserShow
+          redirect: { name: 'client-profile' },
+          component: UserShow,
+          children: [
+            {
+              path: 'profile',
+              name: 'client-profile',
+              component: UserProfile
+            },
+            {
+              path: 'tokens',
+              name: 'client-tokens',
+              component: UserTokens
+            },
+            {
+              path: 'contacts',
+              name: 'client-contacts',
+              component: UserContacts
+            },
+            {
+              path: 'stats/:jwtId',
+              name: 'client-jwt-stats',
+              props: true,
+              component: JwtStats
+            }
+          ]
         },
         {
           path: 'users',
@@ -86,9 +121,54 @@ const router = new Router({
           name: 'userShow',
           props: true,
           meta: { requiresAdmin: true },
-          component: UserShow
+          component: UserShow,
+          // TODO remove this duplication with /me children routes
+          children: [
+            {
+              path: 'profile',
+              name: 'admin-user-profile',
+              component: UserProfile
+            },
+            {
+              path: 'tokens',
+              name: 'admin-user-tokens',
+              component: UserTokens
+            },
+            {
+              path: 'contacts',
+              name: 'admin-user-contacts',
+              component: UserContacts
+            },
+            {
+              path: 'stats/:jwtId',
+              name: 'admin-jwt-stats',
+              props: true,
+              component: JwtStats
+            }
+          ]
         }
       ]
+    },
+
+    // DASHBOARD routes
+    {
+      path: '/real_time',
+      name: 'real_time',
+      component: RealTime
+    },
+    {
+      path: '/endpoints_history',
+      name: 'endpoints_history',
+      component: EndpointHistory
+    },
+    {
+      path: '/incidents',
+      name: 'incidents',
+      component: Incidents
+    },
+    {
+      path: '*',
+      component: PageNotFound
     }
   ]
 })

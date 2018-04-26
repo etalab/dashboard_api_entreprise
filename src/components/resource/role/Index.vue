@@ -1,15 +1,16 @@
 <template lang="pug">
-  .main-pane
-    button.button(@click="roleForm") Ajouter un rôle
-
-    table
-      thead
-        tr
-          th.text-left(v-for="header in headers") {{ header.text }}
-      tbody
-        tr(v-for="role in index")
-          td {{ role.name }}
-          td {{ role.code }}
+  .main
+    h2 Rôles
+    .panel
+      table
+        thead
+          tr
+            th.text-left(v-for="header in headers") {{ header.text }}
+        tbody
+          tr(v-for="role in index")
+            td {{ role.name }}
+            td {{ role.code }}
+      button.button(@click="roleForm") Ajouter un rôle
 </template>
 
 <script>
@@ -43,3 +44,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  button {
+    margin-top: 1em;
+  }
+</style>

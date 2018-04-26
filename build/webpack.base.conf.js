@@ -3,6 +3,7 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const webpack = require('webpack')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -72,5 +73,18 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    //need to provide jQuery because of semantic-ui dependency
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    }),
+    new webpack.ProvidePlugin({
+      "d3": "d3",
+    }),
+    new webpack.ProvidePlugin({
+      "moment": "moment",
+    }),
+  ]
 }

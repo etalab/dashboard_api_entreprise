@@ -1,14 +1,15 @@
 <template lang="pug">
   .panel
-    h4 {{ contactLabel }}
-    div
-      v-icon.mr-2 email
+    .panel__header
+      h3 {{ contactLabel }}
+    .contact-item
+      .label Email
       span {{ contact.email }}
 
-    div
-      v-icon.mr-2 phone
+    .contact-item
+      .label Téléphone
       span {{ contact.phone_number }}
-    
+
     .action-buttons
       button.button.small Editer
       button.button.small.warning Supprimer
@@ -26,6 +27,8 @@ export default {
           return 'Contact administratif'
         case 'tech':
           return 'Contact technique'
+        case 'token':
+          return 'Contact ré-utilisateur'
         case 'other':
           return 'Autre contact'
       }
@@ -35,7 +38,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .panel {
+    flex: 1;
+  }
+
   h4 {
     margin-top: 0;
+  }
+
+  .contact-item {
+    margin-bottom: 1em;
+  }
+
+  .label {
+    color: $color-dark-grey;
   }
 </style>

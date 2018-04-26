@@ -1,19 +1,12 @@
 <template lang="pug">
-  div
-    navigation-header
-
+  .content
     .login
       .container
         .form__container
           form.panel
             h1 Connectez vous !
 
-            v-alert(
-              color="error"
-              icon="warning"
-              dismissible
-              v-model="loginError"
-              ) Login failed!
+            .notification.error(v-if="loginError") L’authentification a échoué
 
             .form__group
               label Adresse e-mail
@@ -25,7 +18,7 @@
               small
                 a Mot de passe oublié ?
 
-            button.button(@click="login") S'identifier
+            button.button(@click.prevent="login") S'identifier
 
             .signup.text-center Pas de compte ?
               div
@@ -34,8 +27,6 @@
 </template>
 
 <script>
-import NavigationHeader from '@/components/ui/NavigationHeader'
-
 export default {
   name: 'login',
   data () {
@@ -55,16 +46,12 @@ export default {
       }
       this.$store.dispatch('auth/login', loginParams)
         .then(() => {
-          this.$router.push(this.$route.query.redirect || { name: 'application-panel' })
+          this.$router.push({ name: 'application-panel' })
         })
         .catch(() => {
           this.loginError = true
         })
     }
-  },
-
-  components: {
-    'navigation-header': NavigationHeader
   }
 }
 </script>

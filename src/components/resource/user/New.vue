@@ -1,14 +1,9 @@
 <template lang="pug">
-.main-pane
+.main
   form
     h2 Création d'un nouvel utilisateur
 
-    v-alert(
-      color="error"
-      icon="warning"
-      dismissible
-      v-model="validationFailure"
-      ) {{ validationErrorMsg }}
+    .notification.error(v-if="validationFailure") {{ validationErrorMsg }}
 
     .form__group
       label Email
@@ -21,6 +16,10 @@
       label= "Contexte"
       input(v-model="userContext"
       data-vv-name="context")
+
+    .form__group
+      input(type="checkbox" id="token_grant" v-model="tokenGrant")
+      label.label-inline(for="token_grant") Déléguer la création de jetons
 
     .contact__group
       h3 Contact administratif
@@ -54,7 +53,7 @@
         v-model="techContactPhone"
         data-vv-name="tech_phone")
 
-    button.button(@click="submit") Créer
+    button.button(@click.prevent="submit") Créer
 </template>
 
 <script>
@@ -105,6 +104,11 @@ export default {
     techContactPhone: {
       get () { return this.userForm.techContactPhone },
       set (value) { this.$store.commit('user/create/updateField', { field: 'techContactPhone', val: value }) }
+    },
+
+    tokenGrant: {
+      get () { return this.userForm.allowTokenCreation },
+      set (value) { this.$store.commit('user/create/updateField', { field: 'allowTokenCreation', val: value }) }
     }
   },
 

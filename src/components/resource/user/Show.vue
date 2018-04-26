@@ -1,43 +1,23 @@
 <template lang="pug">
-.main-pane
-  .profile__group
-    h2 Profil utilisateur
+  .main
+    ul.profile__tabs
+      li
+        router-link(:to="{ name: routeTo('profile') }") Profil
+      li
+        router-link(:to="{ name: routeTo('tokens') }") Tokens
+      li
+        router-link(:to="{ name: routeTo('contacts') }") Contacts
 
-    .form__group
-      label Adresse e-mail
-      div.headline {{ userDetails.email }}
-    .form__group
-      label Contexte
-      div.headline {{ userDetails.context }}
-
-  .profile__group
-    h2 Tokens de l'utilisateur
-    jwt-api-entreprise-index(:jwtList="tokens" v-if="tokens.length > 0")
-    p(v-else) Aucun token attribué
-
-    jwt-api-entreprise-new(v-if="isAdmin")
-
-  .profile__group
-    h2 Contacts
-
-    .contact__container(v-if="contacts.length > 0")
-      contact-tile(v-for="(contact, index) in contacts" :key="index" :contact="contact")
-    p(v-else) Aucune coordonnée de contact
-
-    button.button(v-if="isAdmin") Ajouter un contact
+    // Tabs above are yield here as nested routes
+    router-view
 </template>
 
 <script>
-import JWTAPIEntrepriseNew from '@/components/resource/jwt_api_entreprise/New'
-import JWTAPIEntrepriseIndex from '@/components/resource/jwt_api_entreprise/Index'
-import ContactTile from '@/components/resource/contact/Show'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'user-show',
-  data () {
-    return {}
-  },
+  name: 'user-tabs',
+
   props: ['userId'],
 
   created: function () {
@@ -46,53 +26,55 @@ export default {
 
   computed: {
     ...mapGetters({
-      userDetails: 'user/userDetails',
-      contacts: 'user/contacts',
-      tokens: 'user/tokens',
       isAdmin: 'auth/isAdmin'
     })
   },
 
-  components: {
-    'jwt-api-entreprise-new': JWTAPIEntrepriseNew,
-    'jwt-api-entreprise-index': JWTAPIEntrepriseIndex,
-    'contact-tile': ContactTile
+  methods: {
+    routeTo (tabName) {
+      switch (tabName) {
+        case 'profile':
+          return this.isAdmin ? 'admin-user-profile' : 'client-profile'
+
+        case 'tokens':
+          return this.isAdmin ? 'admin-user-tokens' : 'client-tokens'
+
+        case 'contacts':
+          return this.isAdmin ? 'admin-user-contacts' : 'client-contacts'
+
+        default:
+          console.error('This route tab do not exists:', tabName)
+      }
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .main-pane {
-    height: auto;
+  .profile__tabs {
+    margin: 0;
+    margin-bottom: 3em;
+    padding: 0;
   }
 
-  .profile__group {
-    margin-bottom: 4em;
+  .profile__tabs li {
+    display: inline;
   }
 
-  label {
-    color: $color-dark-grey;
+  .profile__tabs li + li {
+    margin-left: 1em;
   }
 
-  .contact__container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  .profile__tabs a {
+    display: inline-block;
+    background: $color-white;
+    border-radius: 3px;
+    box-shadow: 0 0 4px $color-light-grey;
+    padding: .75em 1.5em;
   }
 
-  table {
-    margin-bottom: 2em;
-  }
-
-  .panel {
-    width: 40%;
-  }
-
-  .panel:first-child {
-    margin-right: 2em;
-  }
-
-  .button {
-    margin-top: 2em;
+  .profile__tabs .router-link-active {
+    background: $color-blue;
+    color: $color-white;
   }
 </style>

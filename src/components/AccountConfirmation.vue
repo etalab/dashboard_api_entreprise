@@ -1,34 +1,30 @@
 <template lang="pug">
-  div
-    navigation-header
-    .login
-      .container
-        .form__container
-          form.panel
-            h1 Activer votre compte utilisateur
+  .login
+    .container
+      .form__container
+        form.panel
+          h1 Activer votre compte utilisateur
 
-            div(class="notification error" v-if="fieldErrors") {{ validationErrors }}
-              button(class="close" aria-label="Fermer" @click="clearFieldErrors")
-                svg(class="icon icon-cross")
-                  use(xlink:href="#icon-cross")
+          div(class="notification error" v-if="fieldErrors") {{ validationErrors }}
+            button(class="close" aria-label="Fermer" @click="clearFieldErrors")
+              svg(class="icon icon-cross")
+                use(xlink:href="#icon-cross")
 
-            p Afin de valider votre inscription, merci de renseigner votre mot de passe. Celui-ci vous sera demandé pour accéder à votre espace client.
+          p Afin de valider votre inscription, merci de renseigner votre mot de passe. Celui-ci vous sera demandé pour accéder à votre espace client.
 
-            .form__group
-              label Mot de passe
-              input(type="password" v-model="password")
+          .form__group
+            label Mot de passe
+            input(type="password" v-model="password")
 
-            .form__group
-              label Confirmation
-              input(type="password" v-model="password_confirmation")
+          .form__group
+            label Confirmation
+            input(type="password" v-model="password_confirmation")
 
-            button.button(@click="submit") Finaliser l'inscription
+          button.button(@click.prevent="submit") Finaliser l'inscription
 
 </template>
 
 <script>
-import NavigationHeader from '@/components/ui/NavigationHeader'
-
 export default {
   name: 'account-confirmation',
 
@@ -51,7 +47,7 @@ export default {
       }
       this.$store.dispatch('auth/confirm', payload)
         .then(data => {
-          this.$router.push({ name: 'user-dashboard' })
+          this.$router.push({ name: 'application-panel' })
         })
         .catch(error => {
           this.validationErrors = error
@@ -62,10 +58,6 @@ export default {
     clearFieldErrors () {
       this.fieldErrors = false
     }
-  },
-
-  components: {
-    'navigation-header': NavigationHeader
   }
 }
 </script>

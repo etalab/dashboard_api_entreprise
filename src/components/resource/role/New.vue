@@ -1,14 +1,12 @@
 <template lang="pug">
-.main-pane
+.main
   form
     h2 Ajout d'un nouveau rôle
-    //- Closing the alert will set v-model to false
-    v-alert(
-      color="error"
-      icon="warning"
-      dismissible
-      v-model="validationFailure"
-      ) {{ alertMessage }}
+
+    .notification.error(v-if="validationFailure") {{ alertMessage }}
+      button(class="close" aria-label="Fermer" @click="clearRole")
+                svg(class="icon icon-cross")
+                  use(xlink:href="#icon-cross")
 
     .form__group
       label Nom
@@ -26,9 +24,14 @@
       v-validate="'required'"
       data-vv-name="code")
 
-    button.button(
-      @click="submit"
-     ) Créer
+    .buttons
+      button.button.submit(
+        @click.prevent="submit"
+       ) Créer
+
+      button.button.cancel(
+        @click="cancel"
+       ) Annuler
 </template>
 
 <script>
@@ -66,7 +69,24 @@ export default {
               this.validationFailure = true
             })
         })
+    },
+    clearRole () {
+      this.validationFailure = false
+      this.role = {}
+    },
+    cancel: function () {
+      this.$router.push({ name: 'roles' })
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .buttons {
+    margin-top: 2em;
+  }
+
+  .submit {
+    margin-right: 1em;
+  }
+</style>

@@ -4,8 +4,20 @@
       a.nav__link(@click="clearHomepage")
         img.nav__logo(src="../../assets/images/logo_site.svg" alt="entreprise.api.gouv.fr")
 
-      a.logout(icon @click="logout" v-if="!unknownUser")
-        v-icon exit_to_app
+      ul.nav__links
+        li
+          router-link(:to="{ name: 'real_time' }") Temps réel
+        li
+          router-link(:to="{ name: 'endpoints_history' }") Historique
+        li
+          router-link(:to="{ name: 'incidents' }") Incidents
+        li
+          router-link(:to="{ name: 'application-panel' }" v-if="isAdmin") Espace d'administration
+          router-link(:to="{ name: 'application-panel' }" v-else-if="!unknownUser") Espace Perso
+        li
+          a.logout(icon @click="logout" v-if="!unknownUser") Déconnexion
+        li
+          router-link(:to="{ name: 'login' }" v-if="unknownUser") Login
 
 </template>
 
@@ -17,6 +29,7 @@ export default {
 
   computed: {
     ...mapGetters({
+      isAdmin: 'auth/isAdmin',
       unknownUser: 'auth/unknownUser'
     })
   },

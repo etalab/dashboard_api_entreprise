@@ -1,6 +1,10 @@
+import 'es6-promise/auto'
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from './auth'
+import dashboard from './dashboard'
+import stats from './stats'
 import user from './user'
 import role from './role'
 import api from './api'
@@ -13,6 +17,8 @@ export default new Vuex.Store({
   modules: {
     auth,
     ui,
+    dashboard,
+    stats,
     role,
     user,
     api

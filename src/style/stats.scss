@@ -1,0 +1,54 @@
+.stats {
+  .panel + .panel {
+    margin-top: 2em;
+  }
+
+  .panel__header::after {
+    margin: 2em 0;
+  }
+
+  .panel__header h3 {
+    margin-bottom: 0;
+  }
+
+  .stats__time-span {
+    cursor: pointer;
+    color: $color-blue;
+  }
+
+  .panel__header-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    li.active {
+      font-weight: 700;
+    }
+
+    li + li {
+      margin-left: 1em;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: inline;
+    }
+  }
+
+  table {
+    box-shadow: none;
+    border: 1px solid $color-light-grey;
+  }
+
+  th,
+  td {
+    border: 0;
+    text-align: left;
+    vertical-align: top;
+  }
+}

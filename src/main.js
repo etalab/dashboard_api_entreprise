@@ -6,6 +6,7 @@ import VeeValidate from 'vee-validate'
 import router from './router'
 import store from './store'
 
+require('@/polyfill')
 require('@/style/app.scss')
 
 Vue.use(VeeValidate)

@@ -1,15 +1,12 @@
 <template lang="pug">
-  div
-    navigation-header
-
-    .documentation
+  .content
+    .dashboard
       navigation-menu(v-if="showNavigationMenu")
       router-view
 </template>
 
 <script>
 import NavigationMenu from '@/components/ui/NavigationMenu'
-import NavigationHeader from '@/components/ui/NavigationHeader'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -29,8 +26,7 @@ export default {
   },
 
   components: {
-    'navigation-menu': NavigationMenu,
-    'navigation-header': NavigationHeader
+    'navigation-menu': NavigationMenu
   }
 }
 </script>

@@ -1,16 +1,18 @@
 <template lang="pug">
-  .main-pane
+  .main
+    h2 Liste des utilisateurs
+    .panel
+      table
+        thead
+          tr
+            th.text-left(v-for="header in headers") {{header.text}}
+        tbody
+          tr(v-for="user in userList")
+            td
+              router-link(:to="{ name: 'admin-user-profile', params: { userId: user.id }}") {{ user.email }}
+            td {{ user.context }}
+            td {{ user.confirmed ? 'Oui' : 'Non' }}
     button.button(@click="userForm") Ajouter un utilisateur
-
-    table
-      thead
-        tr
-          th.text-left(v-for="header in headers") {{header.text}}
-      tbody
-        tr(v-for="user in userList")
-          td
-            router-link(:to="{ name: 'userShow', params: { userId: user.id }}") {{ user.email }}
-          td {{ user.context }}
 
 </template>
 
@@ -26,7 +28,8 @@ export default {
       title: 'Utilisateurs',
       headers: [
         { text: 'E-mail', value: 'email', align: 'left' },
-        { text: 'Contexte', value: 'context', align: 'left' }
+        { text: 'Contexte', value: 'context', align: 'left' },
+        { text: 'Confirmé', value: 'confirmed', align: 'left' }
       ]
     }
   },
@@ -46,3 +49,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  button {
+    margin-top: 1em;
+  }
+</style>
