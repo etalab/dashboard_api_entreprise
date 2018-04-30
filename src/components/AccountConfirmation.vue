@@ -6,7 +6,7 @@
           h1 Activer votre compte utilisateur
 
           div(class="notification error" v-if="fieldErrors") {{ validationErrors }}
-            button(class="close" aria-label="Fermer" @click="clearFieldErrors")
+            button(class="close" aria-label="Fermer" @click.prevent="clearFieldErrors")
               svg(class="icon icon-cross")
                 use(xlink:href="#icon-cross")
 
