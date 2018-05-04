@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import VeeValidate from 'vee-validate'
+import VueClipboard from 'vue-clipboard2'
 import router from './router'
 import store from './store'
 
@@ -10,6 +11,7 @@ require('@/polyfill')
 require('@/style/app.scss')
 
 Vue.use(VeeValidate)
+Vue.use(VueClipboard)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

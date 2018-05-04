@@ -16,7 +16,8 @@ const actions = {
     return new Promise((resolve, reject) => {
       http.get(url, { params })
         .then(response => resolve(response.data))
-        .catch(error => reject(handleError(error)))
+        // TODO Handle those errors (a current fail redirects to login page)
+        // .catch(error => reject(handleError(error)))
     })
   }
 }

@@ -27,7 +27,8 @@ const getters = {
   },
 
   tokens (state) {
-    return state.user.tokens
+    let tokens = cloneDeep(state.user.tokens)
+    return tokens.sort((token1, token2) => new Date(token2.payload.iat) - new Date(token1.payload.iat))
   },
 
   allowedRoles (state, getters, rootState, rootGetters) {
