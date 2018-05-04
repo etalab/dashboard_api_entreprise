@@ -20,6 +20,11 @@
             label Confirmation
             input(type="password" v-model="password_confirmation")
 
+          .form__group
+            input(type="checkbox" id="cgu_checkbox" v-model="cguChecked")
+            label.label-inline(for="cgu_checkbox") En confirmant votre compte utilisateur vous acceptez nos
+              a(href="/static/cgu.pdf") Conditions Générales d'Utilisation
+
           button.button(@click.prevent="submit") Finaliser l'inscription
 
 </template>
@@ -32,6 +37,7 @@ export default {
     return {
       password: '',
       password_confirmation: '',
+      cguChecked: false,
       fieldErrors: false,
       validationErrors: []
     }
@@ -43,6 +49,7 @@ export default {
       const payload = {
         password: this.password,
         password_confirmation: this.password_confirmation,
+        cgu_checked: this.cguChecked,
         confirmation_token: this.$route.query.confirmation_token
       }
       this.$store.dispatch('auth/confirm', payload)
