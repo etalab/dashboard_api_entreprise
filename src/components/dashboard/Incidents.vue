@@ -8,6 +8,7 @@
         small.panel__header-extra vendredi 6 avril à aujourd'hui
 
       p Le service de la MSA est injoinable.
+      p Aucune réponse à nos demandes d'informations sur la raison de cette indisponibilité ainsi que sur le délai de rétablissement ne nous a été fournie jusqu'ici.
 
     br
     .panel
