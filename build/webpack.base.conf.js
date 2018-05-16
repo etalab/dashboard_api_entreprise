@@ -75,11 +75,6 @@ module.exports = {
     ]
   },
   plugins: [
-    //need to provide jQuery because of semantic-ui dependency
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
-    }),
     new webpack.ProvidePlugin({
       "d3": "d3",
     }),

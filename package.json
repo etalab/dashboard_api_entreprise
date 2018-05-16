@@ -6,9 +6,6 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "test": "jest --no-cache",
-    "watch": "jest --no-cache --watch",
-    "update-snapshots": "jest --updateSnapshot",
     "start": "npm run dev",
     "sandbox": "node build/sandbox.js",
     "production": "node build/production.js",
@@ -20,14 +17,10 @@
     "chart.js": "^2.7.2",
     "d3": "3.5.17",
     "es6-promise": "^4.2.4",
-    "jquery": "^3.3.1",
-    "jquery-countdown": "^2.2.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.10",
     "moment": "^2.22.1",
     "pug": "^2.0.3",
-    "semantic-ui-menu": "^2.3.1",
-    "semantic-ui-tab": "^2.3.1",
     "vee-validate": "^2.0.8",
     "vue": "^2.5.16",
     "vue-chartjs": "^3.3.1",
@@ -40,7 +33,6 @@
     "autoprefixer": "^7.2.6",
     "babel-core": "^6.26.3",
     "babel-eslint": "^7.1.1",
-    "babel-jest": "^22.4.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-runtime": "^6.22.0",
     "babel-preset-env": "^1.6.1",
@@ -66,11 +58,8 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
     "friendly-errors-webpack-plugin": "^1.7.0",
-    "fs": "0.0.1-security",
     "html-webpack-plugin": "^2.30.1",
     "http-proxy-middleware": "^0.17.3",
-    "jest": "^22.4.3",
-    "jest-serializer-vue": "^0.3.0",
     "node-sass": "^4.9.0",
     "opn": "^5.3.0",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
@@ -82,12 +71,10 @@
     "semver": "^5.5.0",
     "shelljs": "^0.7.6",
     "url-loader": "^0.5.8",
-    "vue-jest": "^2.5.0",
     "vue-loader": "^13.7.1",
     "vue-server-renderer": "^2.5.16",
     "vue-style-loader": "^3.1.2",
     "vue-template-compiler": "^2.5.16",
-    "vue-test-utils": "^1.0.0-beta.11",
     "webpack": "^3.11.0",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-dev-middleware": "^1.12.2",
@@ -102,27 +89,5 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ],
-  "jest": {
-    "testRegex": "(/__specs__/.*|(\\.|/))(test|spec)\\.jsx?$",
-    "setupFiles": [
-      "<rootDir>/src/__specs__/spec-env.js"
-    ],
-    "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/src/$1"
-    },
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "vue"
-    ],
-    "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
-      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
-    },
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-serializer-vue"
-    ],
-    "collectCoverage": true
-  }
+  ]
 }
