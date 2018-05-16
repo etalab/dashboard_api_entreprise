@@ -4,6 +4,22 @@
 
     .panel
       .panel__header
+        h3 Service de stockage des PDF
+        small.panel__header-extra mardi 15 mai de 15h00 à 17h00
+
+      p Notre service de stockage de PDF était hors service pendant 2h. Les services suivants ont été impactés :
+
+      ul
+        li attestations_fiscales_dgfip
+        li attestations_cotisations_retraite_probtp
+        li certificats_cnetp
+        li documents_associations
+        li cartes_professionnelles_fntp
+        li attestations_sociales_acoss
+        li certificats_qualibat
+
+    .panel
+      .panel__header
         h3 MSA
         small.panel__header-extra vendredi 6 avril à aujourd'hui
 
