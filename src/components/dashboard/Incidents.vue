@@ -4,6 +4,22 @@
 
     .panel
       .panel__header
+        h3 INSEE, services indisponibles
+        small.panel__header-extra En cours depuis le 29 mai 2018 6h30
+
+      p Les services de l'INSEE étants indisponibles les endpoints suivant sont affectés :
+
+      ul
+        li etablissements_legacy
+        li entreprises_legacy
+        li etablissements_precedesseur
+        li etablissements_successeur
+
+      p Les endpoints etablissements et entreprises sont disponibles suite à la bascule sur le fallback INSEE.
+
+    br
+    .panel
+      .panel__header
         h3 Service de stockage des PDF
         small.panel__header-extra mardi 15 mai de 15h00 à 17h00
 
