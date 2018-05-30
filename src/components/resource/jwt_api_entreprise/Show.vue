@@ -3,7 +3,7 @@
   <div class="panel__header">
     <h3 class="token__name">Organisme utilisateur final : {{ jwt.payload.sub }}</h3>
     <small class="panel__header-extra">Délivré le {{ formatDate(jwt.payload.iat) }}</small>
-    <router-link :to="{ name: statsRoute, params: { jwtId: jwt.payload.jti } }" class="button-stats">Voir les statistiques →</router-link>
+    <router-link :to="{ name: statsRoute, params: { jwt: jwt } }" class="button-stats">Voir les statistiques →</router-link>
   </div>
   <div class="form__group token__rights">
     <label class="token__rights-label">Accès</label>

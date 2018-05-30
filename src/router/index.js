@@ -85,7 +85,7 @@ const router = new Router({
               component: UserContacts
             },
             {
-              path: 'stats/:jwtId',
+              path: 'stats/:jwt',
               name: 'client-jwt-stats',
               props: true,
               component: JwtStats
@@ -140,7 +140,7 @@ const router = new Router({
               component: UserContacts
             },
             {
-              path: 'stats/:jwtId',
+              path: 'stats/:jwt',
               name: 'admin-jwt-stats',
               props: true,
               component: JwtStats

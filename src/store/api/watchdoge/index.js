@@ -6,7 +6,8 @@ const API_URL = `${process.env.WATCHDOGE_API_BASE_URL}${process.env.WATCHDOGE_UR
 const http = axios.create({
   baseURL: API_URL,
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + localStorage.getItem('token')
   },
   timeout: 30000
 })
@@ -16,9 +17,12 @@ const actions = {
     return new Promise((resolve, reject) => {
       http.get(url, { params })
         .then(response => resolve(response.data))
-        // TODO Handle those errors (a current fail redirects to login page)
-        // .catch(error => reject(handleError(error)))
+        .catch(error => reject(handleError(error)))
     })
+  },
+
+  updateAuthorizationBearer (ctx) {
+    http.defaults.headers['Authorization'] = 'Bearer ' + localStorage.token
   }
 }
 

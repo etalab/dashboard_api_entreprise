@@ -44,7 +44,8 @@ const actions = {
   loginSuccess ({ dispatch, commit }, jwt) {
     localStorage.token = jwt
     commit('setAuthenticatedUser')
-    return dispatch('api/admin/updateAuthorizationBearer', null, { root: true })
+    dispatch('api/admin/updateAuthorizationBearer', null, { root: true })
+    return dispatch('api/watchdoge/updateAuthorizationBearer', null, { root: true })
   },
 
   processLogin ({ dispatch }, response) {
