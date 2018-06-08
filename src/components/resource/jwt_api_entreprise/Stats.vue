@@ -1,7 +1,7 @@
 <template lang="pug">
 .main.stats
   a.back-button(@click="goToPreviousPage") ← Retour à la liste des tokens
-  h2 {{jwt.payload.jti}}
+  h2 {{jwtId}}
   stats-gauge
   endpoints-called(class="stats__call-count")
   response-code-ratio
@@ -18,10 +18,10 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'jwt-stats',
 
-  props: ['jwt'],
+  props: ['jwtId'],
 
   created: function () {
-    this.$store.dispatch('stats/fetch', { jwt: this.jwt.value })
+    this.$store.dispatch('stats/fetch', { jti: this.jwtId })
   },
 
   components: {
