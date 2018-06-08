@@ -52,8 +52,8 @@ const mutations = {
 }
 
 const actions = {
-  fetch ({ dispatch, commit }, { jwt }) {
-    const statsUrl = `/stats/jwt_usage/${jwt}`
+  fetch ({ dispatch, commit }, { jti }) {
+    const statsUrl = `/stats/jwt_usage/${jti}`
     dispatch('api/watchdoge/get', { url: statsUrl }, { root: true })
       .then(data => {
         commit('setNumberCalls', data.number_of_calls)
