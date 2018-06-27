@@ -21,7 +21,6 @@ export default {
   name: 'role-index',
   data () {
     return {
-      title: 'Rôles',
       headers: [
         { text: 'Nom', value: 'name', align: 'left' },
         { text: 'Code', value: 'code', align: 'left' }
