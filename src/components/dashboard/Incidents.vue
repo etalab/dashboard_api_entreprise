@@ -5,6 +5,18 @@
     .panel
       .panel__header
         h3 INSEE, services indisponibles
+        small.panel__header-extra mercredi 27 juin de 8h00 à maintenant
+
+      p Certains services de l'INSEE sont indisponibles, les endpoints suivants sont affectés :
+
+      ul
+        li etablissements_legacy
+        li entreprises_legacy
+
+    .br
+    .panel
+      .panel__header
+        h3 INSEE, services indisponibles
         small.panel__header-extra mardi 29 mai 2018 de 6h30 à 19h00
 
       p Les services de l'INSEE étants indisponibles les endpoints suivant sont affectés :
