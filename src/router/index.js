@@ -18,7 +18,7 @@ import ApplicationPanel from '@/components/ApplicationPanel'
 
 import RealTime from '@/components/dashboard/RealTime'
 import EndpointHistory from '@/components/dashboard/EndpointHistory'
-import Incidents from '@/components/dashboard/Incidents'
+import Incidents from '@/components/resource/incident/Index'
 
 import PageNotFound from '@/components/PageNotFound'
 
