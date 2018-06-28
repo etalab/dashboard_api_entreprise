@@ -84,6 +84,7 @@ export default {
 
   .dialog {
     max-width: 32em;
+    margin-bottom: 1em;
   }
 
   h2 {
