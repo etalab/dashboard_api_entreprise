@@ -2,7 +2,7 @@
   .container
     h2 Incidents survenus sur la plateforme API Entreprise
 
-    incident-new
+    incident-new(v-if="isAdmin")
 
     template(v-for="incident in index")
       .panel
@@ -27,7 +27,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      index: 'incident/index'
+      index: 'incident/index',
+      isAdmin: 'auth/isAdmin'
     })
   },
 
