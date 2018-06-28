@@ -22,6 +22,11 @@ const actions = {
   index ({ commit, dispatch }) {
     dispatch('api/admin/get', { url: '/incidents' }, { root: true })
       .then(data => commit('fill', { incidents: data }))
+  },
+
+  create ({ dispatch }, params) {
+    return dispatch('api/admin/post', { url: '/incidents', params }, { root: true })
+      .then(() => dispatch('index'))
   }
 }
 

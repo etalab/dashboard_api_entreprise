@@ -2,6 +2,8 @@
   .container
     h2 Incidents survenus sur la plateforme API Entreprise
 
+    incident-new
+
     template(v-for="incident in index")
       .panel
         .panel__header
@@ -13,8 +15,8 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-const { mapGetters } = createNamespacedHelpers('incident')
+import { mapGetters } from 'vuex'
+import IncidentNew from '@/components/resource/incident/New.vue'
 
 export default {
   name: 'incidents-index',
@@ -24,7 +26,13 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['index'])
+    ...mapGetters({
+      index: 'incident/index'
+    })
+  },
+
+  components: {
+    'incident-new': IncidentNew
   }
 }
 </script>
