@@ -54,4 +54,8 @@ export default {
   button {
     margin-top: 1em;
   }
+
+  td, th {
+    word-break: initial;
+  }
 </style>
