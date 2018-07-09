@@ -10,14 +10,14 @@
           h3 {{ incident.title }}
           small.panel__header-extra {{ incident.subtitle }}
           incident-update(:id="incident.id" :title="incident.title" :subtitle="incident.subtitle" :description="incident.description" v-if="isAdmin")
-        div {{ incident.description }}
-      .br
+        div(v-html="toHtml(incident.description)")
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import IncidentNew from '@/components/resource/incident/New.vue'
 import IncidentUpdate from '@/components/resource/incident/Update.vue'
+import marked from 'marked'
 
 export default {
   name: 'incidents-index',
@@ -31,6 +31,12 @@ export default {
       index: 'incident/index',
       isAdmin: 'auth/isAdmin'
     })
+  },
+
+  methods: {
+    toHtml (markdownText) {
+      return marked(markdownText)
+    }
   },
 
   components: {

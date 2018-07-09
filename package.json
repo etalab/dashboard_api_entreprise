@@ -19,6 +19,7 @@
     "es6-promise": "^4.2.4",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.10",
+    "marked": "^0.4.0",
     "moment": "^2.22.1",
     "pug": "^2.0.3",
     "vee-validate": "^2.0.8",
