@@ -29,6 +29,14 @@ const actions = {
     })
   },
 
+  put (ctx, { url, params = {} }) {
+    return new Promise((resolve, reject) => {
+      http.put(url, params)
+        .then(response => resolve(response.data))
+        .catch(error => reject(handleError(error)))
+    })
+  },
+
   updateAuthorizationBearer (ctx) {
     http.defaults.headers['Authorization'] = 'Bearer ' + localStorage.token
   }

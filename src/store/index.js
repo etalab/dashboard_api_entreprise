@@ -9,6 +9,7 @@ import user from './user'
 import role from './role'
 import api from './api'
 import ui from './ui'
+import incident from './incident'
 
 Vue.use(Vuex)
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     stats,
     role,
     user,
+    incident,
     api
   }
 })
