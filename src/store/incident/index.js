@@ -1,10 +1,12 @@
+import orderBy from 'lodash/orderBy'
+
 const state = {
   incidents: []
 }
 
 const getters = {
-  index (state) {
-    return state.incidents
+  orderedIndex (state) {
+    return orderBy(state.incidents, ['created_at'], ['desc'])
   }
 }
 

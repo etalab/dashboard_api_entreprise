@@ -28,7 +28,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      index: 'incident/index',
+      index: 'incident/orderedIndex',
       isAdmin: 'auth/isAdmin'
     })
   },
