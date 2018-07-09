@@ -9,7 +9,7 @@
         .panel__header
           h3 {{ incident.title }}
           small.panel__header-extra {{ incident.subtitle }}
-
+          incident-update(:id="incident.id" :title="incident.title" :subtitle="incident.subtitle" :description="incident.description")
         div {{ incident.description }}
       .br
 </template>
@@ -17,6 +17,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import IncidentNew from '@/components/resource/incident/New.vue'
+import IncidentUpdate from '@/components/resource/incident/Update.vue'
 
 export default {
   name: 'incidents-index',
@@ -33,7 +34,8 @@ export default {
   },
 
   components: {
-    'incident-new': IncidentNew
+    'incident-new': IncidentNew,
+    'incident-update': IncidentUpdate
   }
 }
 </script>

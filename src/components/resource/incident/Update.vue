@@ -1,20 +1,20 @@
 <template lang="pug">
 .dialog
-  button.button(@click="showDialog") Nouvel incident
+  button(class="button small secondary" @click="showDialog") Editer
   .dialog-backdrop(v-if="dialog")
     .dialog.panel
-      h2 Ajouter un nouvel incident
+      h2 Mise à jour de l'incident
       .form__group
         label(for="title") Titre
-        input(type="text" v-model="title" id="title")
+        input(type="text" v-model="titleField" id="title")
 
       .form__group
         label(for="subtitle") Période
-        input(type="text" v-model="subtitle" id="subtitle")
+        input(type="text" v-model="subtitleField" id="subtitle")
 
       .form__group
         label(for="description") Description de l'incident
-        textarea(rows="8" cols="80" v-model="description" id="description")
+        textarea(rows="8" cols="80" v-model="descriptionField" id="description")
 
       .action-buttons
         button.button.small(@click="submit") Valider
@@ -24,26 +24,28 @@
 
 <script>
 export default {
-  name: 'incident-new',
+  name: 'incident-update',
+
+  props: ['id', 'title', 'subtitle', 'description'],
 
   data () {
     return {
       dialog: false,
-      title: '',
-      subtitle: '',
-      description: ''
+      titleField: this.title,
+      subtitleField: this.subtitle,
+      descriptionField: this.description
     }
   },
 
   methods: {
     submit () {
       let payload = {
-        title: this.title,
-        subtitle: this.subtitle,
-        description: this.description
+        title: this.titleField,
+        subtitle: this.subtitleField,
+        description: this.descriptionField
       }
 
-      this.$store.dispatch('incident/create', payload)
+      this.$store.dispatch('incident/update', { params: payload, incidentId: this.id })
         .then(() => this.reset())
         .catch(e => {
           // TODO display forms server validation errors
@@ -56,9 +58,9 @@ export default {
 
     reset () {
       this.dialog = false
-      this.title = ''
-      this.subtitle = ''
-      this.description = ''
+      this.titleField = this.title
+      this.subtitleField = this.subtitle
+      this.description = this.description
     }
   }
 }

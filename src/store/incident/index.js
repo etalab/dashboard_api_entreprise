@@ -27,6 +27,11 @@ const actions = {
   create ({ dispatch }, params) {
     return dispatch('api/admin/post', { url: '/incidents', params }, { root: true })
       .then(() => dispatch('index'))
+  },
+
+  update ({ dispatch }, { params, incidentId }) {
+    return dispatch('api/admin/put', { url: `/incidents/${incidentId}`, params }, { root: true })
+      .then(() => dispatch('index'))
   }
 }
 
