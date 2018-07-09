@@ -9,7 +9,7 @@
         .panel__header
           h3 {{ incident.title }}
           small.panel__header-extra {{ incident.subtitle }}
-          incident-update(:id="incident.id" :title="incident.title" :subtitle="incident.subtitle" :description="incident.description")
+          incident-update(:id="incident.id" :title="incident.title" :subtitle="incident.subtitle" :description="incident.description" v-if="isAdmin")
         div {{ incident.description }}
       .br
 </template>
