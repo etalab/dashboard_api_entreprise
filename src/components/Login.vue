@@ -57,15 +57,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .content,
   .login {
     height: calc(100% - 73px);
+  }
+
+  .login {
     display: flex;
     align-items: center;
     position: relative;
   }
 
   button.button {
-    margin-top: 2em;
+    margin: 2em auto 0;
     display: block;
   }
 

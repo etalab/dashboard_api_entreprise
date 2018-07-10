@@ -2,8 +2,7 @@ body, html {
   height: 100%;
 }
 
-#app,
-.content {
+#app {
   height: 100%;
 }
 
@@ -30,26 +29,9 @@ th, td {
   word-break: break-all;
 }
 
-a.button,
-button.button {
-  font-weight: 400;
-  font-size: 1em;
-}
-
-a.button.small,
-button.button.small {
-  font-size: 0.75em;
-}
-
-a.button.warning,
-button.button.warning {
-  background-color: $color-red;
-  border-bottom: 2px solid darken($color-red, 0.8);
-}
-
-a.button.warning:hover,
-button.button.warning:hover {
-  background: darken($color-red, 0.8);
+button.title-button {
+  margin-left: 1em;
+  top: -4px;
 }
 
 .action-buttons {
@@ -65,4 +47,8 @@ button.button.warning:hover {
 
 .action-buttons button.button:first-child {
   margin-right: 1em;
+}
+
+.panel {
+  margin-bottom: 2em;
 }

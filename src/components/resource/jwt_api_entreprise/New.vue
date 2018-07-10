@@ -1,6 +1,6 @@
 <template lang="pug">
 .dialog
-  button.button(@click="showDialog") Ajouter un token
+  button.button.small.title-button(@click="showDialog") Ajouter un token
   .dialog-backdrop(v-if="dialog")
     .dialog.panel
       h2 Ajout d’un nouveau token
@@ -106,7 +106,7 @@ export default {
   }
 
   .dialog {
-    max-width: 32em;
+    display: inline-block;
   }
 
   h2 {

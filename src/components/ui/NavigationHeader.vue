@@ -50,8 +50,4 @@ export default {
 a {
   box-sizing: initial;
 }
-
-.logout {
-  margin-right: 1em;
-}
 </style>
