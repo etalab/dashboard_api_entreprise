@@ -71,17 +71,17 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   .perfect-sla {
-    color: green;
+    color: $color-green;
     font-weight: bold;
   }
   .almost-perfect-sla {
-    color: orange;
+    color: $color-orange;
     font-weight: bold;
   }
   .bad-sla {
-    color: red;
+    color: $color-red;
     font-weight: bold;
   }
   .endpoint_label {

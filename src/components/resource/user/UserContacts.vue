@@ -1,13 +1,14 @@
 <template lang="pug">
-  .profile__group
-    h2 Contacts
-    button.button.small.title-button(v-if="isAdmin") Ajouter un contact
+  div
+    .profile__group
+      h2 Contacts
+      button.button.small.title-button(v-if="isAdmin") Ajouter un contact
 
-    .contact__container.row(v-if="accountContacts.length > 0")
-      contact-tile(class="contact" v-for="(contact, index) in accountContacts" :contact="contact" :key="index")
-    p(v-else) Aucune coordonnée de contact
+      .contact__container.row(v-if="accountContacts.length > 0")
+        contact-tile(class="contact" v-for="(contact, index) in accountContacts" :contact="contact" :key="index")
+      p(v-else) Aucune coordonnée de contact
 
-    div(v-if="allowedToCreateToken || isAdmin")
+    .profile__group(v-if="allowedToCreateToken || isAdmin")
       h2 Contacts associés aux tokens
 
       .contact__container.row(v-if="tokenContacts.length > 0")

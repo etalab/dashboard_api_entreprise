@@ -1,6 +1,6 @@
 <template lang="pug">
 .main
-  form
+  form.panel
     h2 Ajout d'un nouveau rôle
 
     .notification.error(v-if="validationFailure") {{ alertMessage }}

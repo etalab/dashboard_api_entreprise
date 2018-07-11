@@ -66,16 +66,16 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   .no_margin {
     margin: 0;
   }
   .up {
-    color: green;
+    color: $color-green;
     font-weight: bold;
   }
   .down {
-    color: red;
+    color: $color-red;
     font-weight: bold;
   }
   .bold {

@@ -7,6 +7,7 @@ import VueClipboard from 'vue-clipboard2'
 import router from './router'
 import store from './store'
 
+import 'template.data.gouv.fr/dist/style/main.css'
 require('@/polyfill')
 require('@/style/app.scss')
 
