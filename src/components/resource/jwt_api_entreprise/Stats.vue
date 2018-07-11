@@ -1,5 +1,5 @@
 <template lang="pug">
-.main.stats
+.stats
   a.back-button(@click="goToPreviousPage") ← Retour à la liste des tokens
   h2 {{jwtId}}
   stats-gauge
