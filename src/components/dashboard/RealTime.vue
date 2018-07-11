@@ -3,7 +3,7 @@
     h2 Endpoints
     .panel
       p Le service API Entreprise est :
-        span(:class="[isUP ? 'up' : 'down']")  {{ homepageStatus }}
+        span(class="status" :class="homepageStatus")  {{ homepageStatus }}
 
       p Les données proviennent de
         a(href="https://entreprise.api.gouv.fr")  entreprise.api.gouv.fr
@@ -42,10 +42,7 @@ export default {
       return this.endpoints.filter(function (e) { return e.api_version === 2 })
     },
     homepageStatus: function () {
-      return this.homepageCode === 200 ? 'UP' : 'DOWN'
-    },
-    isUP: function () {
-      return this.homepageCode === 200
+      return this.homepageCode === 0 ? 'waiting...' : (this.homepageCode === 200 ? 'up' : 'down')
     }
   },
   methods: {
@@ -70,13 +67,18 @@ export default {
   .no_margin {
     margin: 0;
   }
+  .status {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
   .up {
     color: green;
-    font-weight: bold;
   }
   .down {
     color: red;
-    font-weight: bold;
+  }
+  .waiting\.\.\. {
+    color: orange;
   }
   .bold {
     font-weight: bold;

@@ -1,6 +1,6 @@
 const state = {
   endpoints: [],
-  homepageCode: 500,
+  homepageCode: 0,
   providersHistory: []
 }
 
