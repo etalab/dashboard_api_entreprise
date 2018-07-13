@@ -2,54 +2,20 @@ body, html {
   height: 100%;
 }
 
-#app,
-.content {
+#app {
   height: 100%;
 }
 
-.form__group {
-  margin-bottom: 0;
-}
-
-.main-pane {
-  min-height: calc(100% - 73px);
-}
-
-table {
-  background: $color-white;
-  width: 100%;
-  border-collapse: collapse;
+.profile__group + .profile__group {
   margin-top: 2em;
-  box-sizing: border-box;
-  box-shadow: 0 1px 4px $color-light-grey;
 }
 
-th, td {
-  border: 1px solid $color-lighter-grey;
-  padding: 1em;
-  word-break: break-all;
+.profile__group h2 {
+  vertical-align: middle;
 }
 
-a.button,
-button.button {
-  font-weight: 400;
-  font-size: 1em;
-}
-
-a.button.small,
-button.button.small {
-  font-size: 0.75em;
-}
-
-a.button.warning,
-button.button.warning {
-  background-color: $color-red;
-  border-bottom: 2px solid darken($color-red, 0.8);
-}
-
-a.button.warning:hover,
-button.button.warning:hover {
-  background: darken($color-red, 0.8);
+button.title-button {
+  margin-left: 1em;
 }
 
 .action-buttons {

@@ -1,6 +1,6 @@
 <template lang="pug">
 .main
-  form
+  form.panel
     h2 Création d'un nouvel utilisateur
 
     .notification.error(v-if="validationFailure") {{ validationErrorMsg }}

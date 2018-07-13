@@ -63,7 +63,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   .no_margin {
     margin: 0;
   }
@@ -72,13 +72,13 @@ export default {
     font-weight: bold;
   }
   .up {
-    color: green;
+    color: $color-green;
   }
   .down {
-    color: red;
+    color: $color-red;
   }
   .waiting\.\.\. {
-    color: orange;
+    color: $color-orange;
   }
   .bold {
     font-weight: bold;
