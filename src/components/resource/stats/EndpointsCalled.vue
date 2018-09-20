@@ -5,7 +5,7 @@
       h3 {{ tableTitle }}
       ul(v-if="timeSpans")
         li.stats__time-span(v-for="time in timeSpans" v-on:click="changeSpan(time.value)" :class="{active:isSelected(time.value)}") {{ time.label }}
-  table
+  table.table
     thead
       th(v-for="header in headers") {{ header }}
     tbody

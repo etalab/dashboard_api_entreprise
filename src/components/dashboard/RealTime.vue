@@ -1,30 +1,31 @@
 <template lang="pug">
-  .container
-    h2 Endpoints
-    .panel
-      p Le service API Entreprise est :
-        span(class="status" :class="homepageStatus")  {{ homepageStatus }}
+  .section
+    .container
+      h2 Endpoints
+      .panel
+        p Le service API Entreprise est :&nbsp;
+          span(class="status" :class="homepageStatus") {{ homepageStatus }}
 
-      p Les données proviennent de
-        a(href="https://entreprise.api.gouv.fr")  entreprise.api.gouv.fr
+        p Les données proviennent de&nbsp;
+          a(href="https://entreprise.api.gouv.fr") entreprise.api.gouv.fr
 
-      table
-        thead
-          tr
-            th Endpoint
-            th Status
-            th Dernier appel
+        table.table
+          thead
+            tr
+              th Endpoint
+              th Status
+              th Dernier appel
 
-        tbody
-        endpoint-row(
-                     v-for="endpoint in endpointsV2"
-                     :key="endpoint.id"
-                     :name="endpoint.name"
-                     :sub_name="endpoint.sub_name"
-                     :code="endpoint.code"
-                     :timestamp="endpoint.timestamp")
+          tbody
+          endpoint-row(
+                       v-for="endpoint in endpointsV2"
+                       :key="endpoint.id"
+                       :name="endpoint.name"
+                       :sub_name="endpoint.sub_name"
+                       :code="endpoint.code"
+                       :timestamp="endpoint.timestamp")
 
-    br
+      br
 </template>
 
 <script>

@@ -1,14 +1,15 @@
 <template lang="pug">
-  .container
-    h2 Historique
+  .section
+    .container
+      h2 Historique
 
-    endpoint-history-element(
-      v-for="provider in providersHistory"
-      :key="provider.id"
-      :provider_name="provider.provider_name"
-      :endpoints_availability_history="provider.endpoints_availability_history")
+      endpoint-history-element(
+        v-for="provider in providersHistory"
+        :key="provider.id"
+        :provider_name="provider.provider_name"
+        :endpoints_availability_history="provider.endpoints_availability_history")
 
-    br
+      br
 </template>
 
 <script>

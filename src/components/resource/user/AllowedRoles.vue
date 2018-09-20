@@ -5,7 +5,7 @@
     user-add-roles-form(v-if="userGrantedTokenCreation")
 
     .panel
-      table
+      table.table
         thead
           th Endpoint
           th Actif
