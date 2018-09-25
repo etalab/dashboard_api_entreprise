@@ -1,8 +1,9 @@
 <template lang="pug">
   .main
     h2 Liste des utilisateurs
+    button.button.small.title-button(@click="userForm") Ajouter un utilisateur
     .panel
-      table
+      table.table
         thead
           tr
             th.text-left(v-for="header in headers") {{header.text}}
@@ -12,7 +13,6 @@
               router-link(:to="{ name: 'admin-user-profile', params: { userId: user.id }}") {{ user.email }}
             td {{ user.context }}
             td {{ user.confirmed ? 'Oui' : 'Non' }}
-    button.button(@click="userForm") Ajouter un utilisateur
 
 </template>
 
@@ -51,8 +51,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  button {
-    margin-top: 1em;
+  h2 {
+    display: inline-block;
   }
 
   td, th {

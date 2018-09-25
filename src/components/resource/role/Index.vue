@@ -1,8 +1,9 @@
 <template lang="pug">
   .main
     h2 Rôles
+    button.button.small.title-button(@click="roleForm") Ajouter un rôle
     .panel
-      table
+      table.table
         thead
           tr
             th.text-left(v-for="header in headers") {{ header.text }}
@@ -10,7 +11,6 @@
           tr(v-for="role in index")
             td {{ role.name }}
             td {{ role.code }}
-      button.button(@click="roleForm") Ajouter un rôle
 </template>
 
 <script>
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  button {
-    margin-top: 1em;
+  h2 {
+    display: inline-block;
   }
 </style>

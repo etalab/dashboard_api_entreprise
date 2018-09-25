@@ -7,8 +7,8 @@
   </div>
   <div class="form__group token__rights">
     <label class="token__rights-label">Accès</label>
-    <ul class="token__rights-list tag-list">
-      <li class="tag" v-for="(role, index) in jwt.payload.roles" :key="index">{{ role }}</li>
+    <ul class="token__rights-list label-list">
+      <li class="label" v-for="(role, index) in jwt.payload.roles" :key="index">{{ role }}</li>
     </ul>
   </div>
   <div class="form__group token__string">

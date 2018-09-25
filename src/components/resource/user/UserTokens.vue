@@ -1,10 +1,11 @@
 <template lang="pug">
   .profile__group
     h2 Tokens de l'utilisateur
+    jwt-api-entreprise-new(v-if="isAdmin || allowedToCreateToken")
+
     jwt-api-entreprise-index(:jwtList="tokens" v-if="tokens.length > 0")
     p(v-else) Aucun token attribué
 
-    jwt-api-entreprise-new(v-if="isAdmin || allowedToCreateToken")
 </template>
 
 <script>
@@ -29,3 +30,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  h2 {
+    display: inline-block;
+  }
+</style>

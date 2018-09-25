@@ -1,9 +1,11 @@
 <template lang="pug">
   .profile__group
     h2 Droits de l'utilisateur
-      span(v-if="userGrantedTokenCreation") (Cet utilisateur a les droits de création de token)
+    span(v-if="userGrantedTokenCreation") (Cet utilisateur a les droits de création de token)
+    user-add-roles-form(v-if="userGrantedTokenCreation")
+
     .panel
-      table
+      table.table
         thead
           th Endpoint
           th Actif
@@ -12,7 +14,6 @@
             td {{ role.name }}
             td {{ role.allowed ? 'Oui' : 'Non' }}
 
-    user-add-roles-form(v-if="userGrantedTokenCreation")
 </template>
 
 <script>
@@ -50,5 +51,14 @@ export default {
   tr.disabled {
     color: $color-dark-grey;
     background: $color-white;
+  }
+
+  h2 {
+    display: inline-block;
+  }
+
+  h2 + span {
+    margin-left: 0.75em;
+    color: $color-dark-grey;
   }
 </style>

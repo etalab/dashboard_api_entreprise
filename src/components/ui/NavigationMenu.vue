@@ -38,8 +38,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .dashboard .side-menu a {
+    text-decoration: none;
+  }
+
   .dashboard .side-menu a.router-link-active {
     background: linear-gradient(90deg, $color-blue, $color-blue 5px, $color-lighter-grey 0, $color-lighter-grey);
-    color: $color-darker-grey;
   }
 </style>
