@@ -3,7 +3,7 @@
     h2 Liste des utilisateurs
     button.button.small.title-button(@click="userForm") Ajouter un utilisateur
     .panel
-      table
+      table.table
         thead
           tr
             th.text-left(v-for="header in headers") {{header.text}}

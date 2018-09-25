@@ -22,7 +22,7 @@
     "marked": "^0.4.0",
     "moment": "^2.22.1",
     "pug": "^2.0.3",
-    "template.data.gouv.fr": "^1.0.2",
+    "template.data.gouv.fr": "^1.1.6",
     "vee-validate": "^2.0.8",
     "vue": "^2.5.16",
     "vue-chartjs": "^3.3.1",

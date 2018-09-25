@@ -3,7 +3,7 @@
     h2 Rôles
     button.button.small.title-button(@click="roleForm") Ajouter un rôle
     .panel
-      table
+      table.table
         thead
           tr
             th.text-left(v-for="header in headers") {{ header.text }}
