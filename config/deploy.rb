@@ -11,6 +11,7 @@ end
 
 set :user, 'deploy'
 set :application_name, 'dashboard'
+set :commit, ENV['commit']
 
 set :deploy_to, "/var/www/dashboard_#{ENV['to']}"
 
