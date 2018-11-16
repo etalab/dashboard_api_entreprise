@@ -1,7 +1,7 @@
 'use strict'
 require('./check-versions')()
 
-process.env.NODE_ENV = 'sandbox'
+process.env.NODE_ENV = 'production'
 
 const ora = require('ora')
 const rm = require('rimraf')
@@ -9,12 +9,12 @@ const path = require('path')
 const chalk = require('chalk')
 const webpack = require('webpack')
 const config = require('../config')
-const webpackConfig = require('./webpack.sandbox.conf')
+const webpackConfig = require('./webpack.prod.conf')
 
-const spinner = ora('building for sandbox...')
+const spinner = ora('building for ' + process.argv[2] + '...')
 spinner.start()
 
-rm(path.join(config.sandbox.assetsRoot, config.sandbox.assetsSubDirectory), err => {
+rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if (err) throw err
   webpack(webpackConfig, function (err, stats) {
     spinner.stop()
