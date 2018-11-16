@@ -33,7 +33,7 @@ desc 'Deploys the current version to the server.'
 task :deploy do
   run :local do
     in_path(Dir.pwd) do
-      invoke :ensure_right_branch
+      invoke :ensure_right_branch # comment this line if you want to ignore this check
       invoke :local_build
       invoke :deploy_website
     end
