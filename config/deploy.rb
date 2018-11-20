@@ -13,7 +13,7 @@ set :user, 'deploy'
 set :application_name, 'dashboard'
 set :commit, ENV['commit']
 
-set :deploy_to, "/var/www/dashboard_#{ENV['to']}"
+set :deploy_to, "/var/www/admin_board_#{ENV['to']}"
 
 # repository is useless, because we don't clone. But required for mina/rails in charge of repository setup.
 set :repository, 'git@github.com:etalab/dashboard_api_entreprise.git'
