@@ -9,7 +9,9 @@
     "start": "npm run dev",
     "sandbox": "node build/sandbox.js",
     "production": "node build/production.js",
-    "build": "node build/production.js",
+    "build:production": "node build/build.js production",
+    "build:staging": "node build/build.js staging",
+    "build:sandbox": "node build/build.js sandbox",
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
