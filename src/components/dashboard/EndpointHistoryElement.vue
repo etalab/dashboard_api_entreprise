@@ -20,7 +20,7 @@
 
       .legend-label(v-if="provider_name=='insee'")
         .square(:style="{ 'background-color': color_512 }")
-        span DOWN (via API de secours)
+        span DOWN (y compris API de secours)
 
       <!-- <p>Disponibilité sur 7 jours: <span :class="slaRatingClass">{{ meanSla }}%</span></p> -->
       p(:id="provider_name")
