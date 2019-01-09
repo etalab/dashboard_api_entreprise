@@ -1,12 +1,27 @@
 <template lang="pug">
   div
     .panel
-      <!--<span style="color:green;">UP</span>-->
-      <!--<span style="color:yellow;">UP (fallback)</span>-->
-      <!--<span style="color:orange;">INCOMPLETE</span>-->
-      <!--<span style="color:red;">DOWN</span>-->
-      <!--<span style="color:darkred;">DOWN (fallback)</span>-->
-       h3 {{ provider_name.toUpperCase() }}
+      h3 {{ provider_name.toUpperCase() }}
+      .legend-label
+        .square(:style="{ 'background-color': color_200 }")
+        span UP
+
+      .legend-label
+        .square(:style="{ 'background-color': color_206 }")
+        span UP mais réponse incomplète
+
+      .legend-label
+        .square(:style="{ 'background-color': color_500 }")
+        span DOWN
+
+      .legend-label(v-if="provider_name=='insee'")
+        .square(:style="{ 'background-color': color_212 }")
+        span UP (via API de secours)
+
+      .legend-label(v-if="provider_name=='insee'")
+        .square(:style="{ 'background-color': color_512 }")
+        span DOWN (y compris API de secours)
+
       <!-- <p>Disponibilité sur 7 jours: <span :class="slaRatingClass">{{ meanSla }}%</span></p> -->
       p(:id="provider_name")
         <!-- Visavail.js chart will be inserted here -->
@@ -22,6 +37,15 @@ require('@/assets/visavail/visavail.css')
 export default {
   name: 'endpoint-history-element',
   props: ['provider_name', 'endpoints_availability_history'],
+  data: function () {
+    return {
+      color_200: '#5CB85C',
+      color_206: '#E3C567',
+      color_212: '#FE7F2D',
+      color_500: '#D9534D',
+      color_512: '#D8386D'
+    }
+  },
   computed: {
     meanSla: function () {
       let slaSum = 0
@@ -35,16 +59,17 @@ export default {
     },
     dataset: function () {
       let dataset = []
+      let vm = this
       this.endpoints_availability_history.forEach(function (ep) {
         let computedName = ('v' + ep.api_version + ' ' + ep.name + ' ' + (ep.sub_name || '')).replace(/_/g, ' ')
         let availability = {
           'measure_html': '<div class="endpoint_label">' + computedName + '</div>',
           'categories': {
-            '200': { color: '#5CB85C' },
-            '206': { color: '#E3C567' },
-            '212': { color: '#FE7F2D' },
-            '500': { color: '#D9534D' },
-            '512': { color: '#D8386D' }
+            '200': { color: vm.color_200 },
+            '206': { color: vm.color_206 },
+            '212': { color: vm.color_212 },
+            '500': { color: vm.color_500 },
+            '512': { color: vm.color_512 }
           },
           'data': ep.availability_history
         }
@@ -72,6 +97,16 @@ export default {
 </script>
 
 <style lang="scss">
+  .legend-label {
+    display: inline-flex;
+    margin-right: 30px;
+  }
+  .square {
+    height: 15px;
+    width: 15px;
+    margin-top: 2px;
+    margin-right: 3px;
+  }
   .perfect-sla {
     color: $color-green;
     font-weight: bold;
