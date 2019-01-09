@@ -14,25 +14,18 @@ npm install
 npm run dev
 
 # build for sandbox with minification
-npm run sandbox
+npm run build:sandbox
 
 # build for production with minification
-npm run build
-# or
-npm run production
-
-# build for production and view the bundle analyzer report
-npm run build --report
+npm run build:production
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ## Deployment
 
-Deployment is handled by the `dploy` package. Please install this NPM package
-globaly : `npm install dploy -g`.
+Deployment is handled by the `mina` package. Please install this with `bundle install`.
 
-Explicit configuration can be found in the dploy.yaml file located into the
-project root folder.
-
-Use `dploy sandbox` or `dploy production` in order to deploy to the corresponding environment.
+```
+bundle exec mina deploy to=production
+```
