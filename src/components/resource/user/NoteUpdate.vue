@@ -36,8 +36,7 @@ export default {
 
       this.$store.dispatch('user/update', { params: payload, userId: this.userId })
         .then(() => {
-          this.note = this.noteField
-          this.reset()
+          this.dialog = false
         })
         .catch(e => {
           // TODO something went wrong
@@ -50,6 +49,7 @@ export default {
     },
 
     showDialog: function () {
+      this.noteField = this.note
       this.dialog = true
     }
   }
