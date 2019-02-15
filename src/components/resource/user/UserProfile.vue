@@ -10,11 +10,12 @@ div
         label Contexte
         div.headline {{ userDetails.context }}
 
-  .profile__group
-    h2 Notes
-    note-update(:userId="userDetails.id", :note="userDetails.note")
-    .panel
-      div(v-html="toHtml(userDetails.note)")
+  template(v-if="isAdmin")
+    .profile__group
+      h2 Notes
+      note-update(:userId="userDetails.id", :note="userDetails.note")
+      .panel
+        div(v-html="toHtml(userDetails.note)")
 
   user-allowed-roles
 </template>
