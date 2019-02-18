@@ -87,11 +87,17 @@ const actions = {
       .then(data => dispatch('fillUserData', data))
   },
 
+  update ({ dispatch }, { params, userId }) {
+    return dispatch('api/admin/put', { url: `/users/${userId}`, params }, { root: true })
+      .then(() => dispatch('get'))
+  },
+
   fillUserData ({ commit }, data) {
     commit('setUserDetails', {
       id: data.id,
       email: data.email,
       context: data.context,
+      note: data.note,
       allow_token_creation: data.allow_token_creation
     })
 
