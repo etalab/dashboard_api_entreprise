@@ -89,7 +89,7 @@ const actions = {
 
   update ({ dispatch }, { params, userId }) {
     return dispatch('api/admin/put', { url: `/users/${userId}`, params }, { root: true })
-      .then(() => dispatch('get'))
+      .then(() => dispatch('get', { userId }))
   },
 
   fillUserData ({ commit }, data) {
