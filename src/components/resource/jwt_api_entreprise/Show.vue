@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-bind:class="{ disabled_token: !enabled }">
   <div class="panel__header">
     <h3 class="token__name">Organisme utilisateur final : {{ jwt.payload.sub }}</h3>
     <small class="panel__header-extra">Délivré le {{ formatDate(jwt.payload.iat) }}</small>
@@ -35,6 +35,19 @@
       >
         <svg class="icon icon-copy" viewBox="0 0 32 32"><use xlink:href="#icon-copy"></use></svg>
       </button>
+
+      <button class="button warning" v-if="enabled && isAdmin"  @click="dialogDisableJwt = true">
+        Désactiver
+      </button>
+      <div class="dialog-backdrop" v-if="dialogDisableJwt">
+        <div class="dialog panel">
+          <p>Êtes-vous certains de vouloir désactiver ce token ?</p>
+          <div class="action-buttons">
+            <button class="button small" @click="dialogDisableJwt = false">Annuler</button>
+            <button class="button small warning" @click="disableJwt">Désactiver</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -49,11 +62,12 @@ export default {
   data () {
     return {
       showClipboardSuccessMsg: false,
-      showClipboardErrorMsg: false
+      showClipboardErrorMsg: false,
+      dialogDisableJwt: false
     }
   },
 
-  props: ['jwt'],
+  props: ['jwt', 'enabled'],
 
   computed: {
     ...mapGetters({
@@ -73,7 +87,12 @@ export default {
 
     clipboardSuccess (e) { this.showClipboardSuccessMsg = true },
 
-    clipboardError (e) { this.showClipboardErrorMsg = true }
+    clipboardError (e) { this.showClipboardErrorMsg = true },
+
+    disableJwt () {
+      this.$store.dispatch('user/disableToken', { id: this.jwt.payload.jti })
+        .finally(this.dialogDisableJwt = false)
+    }
   }
 }
 </script>
@@ -90,5 +109,26 @@ export default {
 
   .tag {
     margin-bottom: 0.5em;
+  }
+
+  .dialog-backdrop {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+
+  .dialog {
+    display: inline-block;
+  }
+
+  .disabled_token, .disabled_token input, .disabled_token label {
+    color: #c9d3df;
   }
 </style>
