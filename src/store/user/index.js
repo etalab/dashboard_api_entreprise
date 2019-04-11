@@ -9,7 +9,8 @@ const state = {
     details: {},
     contacts: [],
     allowed_roles: [],
-    tokens: []
+    tokens: [],
+    disabledTokens: []
   }
 }
 
@@ -29,6 +30,11 @@ const getters = {
   tokens (state) {
     let tokens = cloneDeep(state.user.tokens)
     return tokens.sort((token1, token2) => new Date(token2.payload.iat) - new Date(token1.payload.iat))
+  },
+
+  disabledTokens (state) {
+    let disabledTokens = cloneDeep(state.user.disabledTokens)
+    return disabledTokens.sort((token1, token2) => new Date(token2.payload.iat) - new Date(token1.payload.iat))
   },
 
   allowedRoles (state, getters, rootState, rootGetters) {
@@ -70,6 +76,12 @@ const mutations = {
     state.user.tokens = decodedTokens
   },
 
+  setDisabledTokens (state, disabledTokens) {
+    const decodedTokens = disabledTokens.map(e => formatJwt(e))
+
+    state.user.disabledTokens = decodedTokens
+  },
+
   setAllowedRoles (state, roles) {
     state.user.allowed_roles = roles
   },
@@ -103,6 +115,7 @@ const actions = {
 
     commit('setContacts', data.contacts)
     commit('setTokens', data.tokens)
+    commit('setDisabledTokens', data.disabled_tokens)
     commit('setAllowedRoles', data.allowed_roles)
   },
 
@@ -117,6 +130,13 @@ const actions = {
 
     dispatch('api/admin/post', { url: url, params: payload }, { root: true })
       .then(data => commit('addToken', data.new_token))
+  },
+
+  disableToken ({ dispatch, commit, getters, rootGetters }, payload) {
+    const userId = getters.userDetails.id
+    let url = `users/${userId}/jwt_api_entreprise/disable`
+    dispatch('api/admin/post', { url: url, params: payload }, { root: true })
+      .then(data => dispatch('get', { userId }))
   },
 
   addRoles ({ dispatch, getters }, roles) {
