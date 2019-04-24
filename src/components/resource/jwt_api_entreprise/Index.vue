@@ -1,7 +1,7 @@
 <template>
   <ul class="token__list">
     <li class="panel" v-for="(jwt, index) in jwtList" :key="index">
-      <jwt-api-entreprise-card :jwt="jwt" :enabled="enabled"/>
+      <jwt-api-entreprise-card :jwt="jwt" />
     </li>
   </ul>
 </template>
@@ -12,13 +12,7 @@ import JwtApiEntrepriseShow from '@/components/resource/jwt_api_entreprise/Show'
 export default {
   name: 'jwt-api-entreprise-index',
 
-  props: {
-    jwtList: Array,
-    enabled: {
-      type: Boolean,
-      default: true
-    }
-  },
+  props: ['jwtList'],
 
   components: {
     'jwt-api-entreprise-card': JwtApiEntrepriseShow

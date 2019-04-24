@@ -1,5 +1,5 @@
 <template>
-<div v-bind:class="{ disabled_token: !enabled }">
+<div v-bind:class="{ disabled_token: !jwt.enabled }">
   <div class="panel__header">
     <h3 class="token__name">Organisme utilisateur final : {{ jwt.payload.sub }}</h3>
     <small class="panel__header-extra">Délivré le {{ formatDate(jwt.payload.iat) }}</small>
@@ -36,7 +36,7 @@
         <svg class="icon icon-copy" viewBox="0 0 32 32"><use xlink:href="#icon-copy"></use></svg>
       </button>
 
-      <button class="button warning" v-if="enabled && isAdmin"  @click="dialogDisableJwt = true">
+      <button class="button warning" v-if="jwt.enabled && isAdmin"  @click="dialogDisableJwt = true">
         Désactiver
       </button>
       <div class="dialog-backdrop" v-if="dialogDisableJwt">
@@ -67,7 +67,7 @@ export default {
     }
   },
 
-  props: ['jwt', 'enabled'],
+  props: ['jwt'],
 
   computed: {
     ...mapGetters({

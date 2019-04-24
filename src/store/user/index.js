@@ -52,10 +52,11 @@ const getters = {
   }
 }
 
-const formatJwt = (jwt) => {
+const formatJwt = (jwt, enabled) => {
   const payload = JwtDecode(jwt)
 
   return {
+    enabled: enabled,
     value: jwt,
     payload
   }
@@ -71,13 +72,13 @@ const mutations = {
   },
 
   setTokens (state, tokens) {
-    const decodedTokens = tokens.map(e => formatJwt(e))
+    const decodedTokens = tokens.map(e => formatJwt(e, true))
 
     state.user.tokens = decodedTokens
   },
 
   setDisabledTokens (state, disabledTokens) {
-    const decodedTokens = disabledTokens.map(e => formatJwt(e))
+    const decodedTokens = disabledTokens.map(e => formatJwt(e, false))
 
     state.user.disabledTokens = decodedTokens
   },
@@ -87,7 +88,7 @@ const mutations = {
   },
 
   addToken (state, token) {
-    state.user.tokens.push(formatJwt(token))
+    state.user.tokens.push(formatJwt(token, true))
   }
 }
 

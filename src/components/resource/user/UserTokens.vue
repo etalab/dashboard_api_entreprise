@@ -7,7 +7,7 @@
       jwt-api-entreprise-index(:jwtList="tokens" v-if="tokens.length > 0")
       div(v-if="isAdmin && disabledTokens.length > 0")
         h2 Tokens désactivés
-        jwt-api-entreprise-index(:jwtList="disabledTokens" :enabled="false")
+        jwt-api-entreprise-index(:jwtList="disabledTokens")
     p(v-else) Aucun token attribué
 
 </template>
