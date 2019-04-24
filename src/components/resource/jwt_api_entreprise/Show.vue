@@ -37,7 +37,7 @@
       </button>
 
       <button class="button warning" v-if="jwt.enabled && isAdmin"  @click="dialogDisableJwt = true">
-        Désactiver
+        Blacklister
       </button>
       <div class="dialog-backdrop" v-if="dialogDisableJwt">
         <div class="dialog panel">
