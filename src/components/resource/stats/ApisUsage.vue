@@ -12,18 +12,22 @@
       tr(v-for="item in endpointsDisplayed")
         td {{ item.name }}
         td {{ item.total }}
+        td {{ item.percent_success }}%
+        td {{ item.percent_client_errors }}%
+        td {{ item.percent_server_errors }}%
+
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'endpoints-called',
+  name: 'apis-usage',
 
   data () {
     return {
       tableTitle: 'Nombre d\'appels',
-      headers: ['Endpoint', 'Total'],
+      headers: ['Endpoint', 'Total', '% succès', '% erreurs client', '% erreurs serveur'],
       timeSpans: [
         {
           label: '10 dernières minutes',
@@ -44,7 +48,7 @@ export default {
 
   computed: {
     ...mapGetters('stats', [
-      'endpointsCalled'
+      'orderedApisUsage'
     ]),
 
     endpointsDisplayed () {
@@ -52,15 +56,15 @@ export default {
 
       switch (this.timeSpanDisplayed) {
         case '10_minutes':
-          if (this.endpointsCalled.last_10_minutes) endpointsToDisplay = this.endpointsCalled.last_10_minutes.by_endpoint
+          if (this.orderedApisUsage.last_10_minutes) endpointsToDisplay = this.orderedApisUsage.last_10_minutes.by_endpoint
           break
 
         case '30_hours':
-          if (this.endpointsCalled.last_30_hours) endpointsToDisplay = this.endpointsCalled.last_30_hours.by_endpoint
+          if (this.orderedApisUsage.last_30_hours) endpointsToDisplay = this.orderedApisUsage.last_30_hours.by_endpoint
           break
 
         case '8_days':
-          if (this.endpointsCalled.last_8_days) endpointsToDisplay = this.endpointsCalled.last_8_days.by_endpoint
+          if (this.orderedApisUsage.last_8_days) endpointsToDisplay = this.orderedApisUsage.last_8_days.by_endpoint
           break
       }
 

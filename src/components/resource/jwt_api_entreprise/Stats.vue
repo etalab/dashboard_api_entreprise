@@ -3,14 +3,12 @@
   a.back-button(@click="goToPreviousPage") ← Retour à la liste des tokens
   h2 {{jwtId}}
   stats-gauge
-  endpoints-called(class="stats__call-count")
-  response-code-ratio
+  apis-usage(class="stats__call-count")
   last-calls(class="stats__last-calls")
 </template>
 
 <script>
-import EndpointsCalled from '@/components/resource/stats/EndpointsCalled'
-import ResponseCodeRatio from '@/components/resource/stats/ResponseCodeRatio'
+import ApisUsage from '@/components/resource/stats/ApisUsage'
 import LastCalls from '@/components/resource/stats/LastCalls'
 import StatsGauge from '@/components/resource/stats/Gauge'
 import { mapGetters } from 'vuex'
@@ -25,9 +23,8 @@ export default {
   },
 
   components: {
-    'endpoints-called': EndpointsCalled,
+    'apis-usage': ApisUsage,
     'last-calls': LastCalls,
-    'response-code-ratio': ResponseCodeRatio,
     'statsGauge': StatsGauge
   },
 
