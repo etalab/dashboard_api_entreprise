@@ -6,6 +6,7 @@ import VeeValidate from 'vee-validate'
 import VueClipboard from 'vue-clipboard2'
 import router from './router'
 import store from './store'
+import Vuetify from 'vuetify'
 
 import 'template.data.gouv.fr/dist/style/main.css'
 require('@/polyfill')
@@ -14,6 +15,8 @@ require('@/style/app.scss')
 Vue.use(VeeValidate)
 Vue.use(VueClipboard)
 Vue.config.productionTip = false
+
+Vue.use(Vuetify)
 
 /* eslint-disable no-new */
 new Vue({
