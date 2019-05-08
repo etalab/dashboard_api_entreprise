@@ -3,11 +3,11 @@
     h2 Tokens de l'utilisateur
     jwt-api-entreprise-new(v-if="isAdmin || allowedToCreateToken")
 
-    div(v-if="tokens.length > 0 || disabledTokens.length > 0")
+    div(v-if="tokens.length > 0 || blacklistedTokens.length > 0")
       jwt-api-entreprise-index(:jwtList="tokens" v-if="tokens.length > 0")
-      div(v-if="isAdmin && disabledTokens.length > 0")
-        h2 Tokens désactivés
-        jwt-api-entreprise-index(:jwtList="disabledTokens")
+      div(v-if="isAdmin && blacklistedTokens.length > 0")
+        h2 Tokens blacklistés
+        jwt-api-entreprise-index(:jwtList="blacklistedTokens")
     p(v-else) Aucun token attribué
 
 </template>
@@ -23,7 +23,7 @@ export default {
   computed: {
     ...mapGetters({
       tokens: 'user/tokens',
-      disabledTokens: 'user/disabledTokens',
+      blacklistedTokens: 'user/blacklistedTokens',
       allowedToCreateToken: 'user/allowedToCreateToken',
       isAdmin: 'auth/isAdmin'
     })

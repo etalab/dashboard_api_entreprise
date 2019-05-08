@@ -10,7 +10,7 @@ const state = {
     contacts: [],
     allowed_roles: [],
     tokens: [],
-    disabledTokens: []
+    blacklistedTokens: []
   }
 }
 
@@ -32,9 +32,9 @@ const getters = {
     return tokens.sort((token1, token2) => new Date(token2.payload.iat) - new Date(token1.payload.iat))
   },
 
-  disabledTokens (state) {
-    let disabledTokens = cloneDeep(state.user.disabledTokens)
-    return disabledTokens.sort((token1, token2) => new Date(token2.payload.iat) - new Date(token1.payload.iat))
+  blacklistedTokens (state) {
+    let blacklistedTokens = cloneDeep(state.user.blacklistedTokens)
+    return blacklistedTokens.sort((token1, token2) => new Date(token2.payload.iat) - new Date(token1.payload.iat))
   },
 
   allowedRoles (state, getters, rootState, rootGetters) {
@@ -52,11 +52,11 @@ const getters = {
   }
 }
 
-const formatJwt = (jwt, enabled) => {
+const formatJwt = (jwt, blacklisted) => {
   const payload = JwtDecode(jwt)
 
   return {
-    enabled: enabled,
+    blacklisted: blacklisted,
     value: jwt,
     payload
   }
@@ -72,15 +72,15 @@ const mutations = {
   },
 
   setTokens (state, tokens) {
-    const decodedTokens = tokens.map(e => formatJwt(e, true))
+    const decodedTokens = tokens.map(e => formatJwt(e, false))
 
     state.user.tokens = decodedTokens
   },
 
-  setDisabledTokens (state, disabledTokens) {
-    const decodedTokens = disabledTokens.map(e => formatJwt(e, false))
+  setBlacklistedTokens (state, blacklistedTokens) {
+    const decodedTokens = blacklistedTokens.map(e => formatJwt(e, true))
 
-    state.user.disabledTokens = decodedTokens
+    state.user.blacklistedTokens = decodedTokens
   },
 
   setAllowedRoles (state, roles) {
@@ -88,7 +88,7 @@ const mutations = {
   },
 
   addToken (state, token) {
-    state.user.tokens.push(formatJwt(token, true))
+    state.user.tokens.push(formatJwt(token, false))
   }
 }
 
@@ -116,7 +116,7 @@ const actions = {
 
     commit('setContacts', data.contacts)
     commit('setTokens', data.tokens)
-    commit('setDisabledTokens', data.disabled_tokens)
+    commit('setBlacklistedTokens', data.blacklisted_tokens)
     commit('setAllowedRoles', data.allowed_roles)
   },
 
@@ -133,9 +133,9 @@ const actions = {
       .then(data => commit('addToken', data.new_token))
   },
 
-  disableToken ({ dispatch, commit, getters, rootGetters }, payload) {
+  blacklistToken ({ dispatch, commit, getters, rootGetters }, payload) {
     const userId = getters.userDetails.id
-    let url = `users/${userId}/jwt_api_entreprise/disable`
+    let url = `users/${userId}/jwt_api_entreprise/blacklist`
     dispatch('api/admin/post', { url: url, params: payload }, { root: true })
       .then(data => dispatch('get', { userId }))
   },

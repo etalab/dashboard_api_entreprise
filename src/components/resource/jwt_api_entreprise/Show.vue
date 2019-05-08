@@ -1,5 +1,5 @@
 <template>
-<div v-bind:class="{ disabled_token: !jwt.enabled }">
+<div v-bind:class="{ blacklisted_token: jwt.blacklisted }">
   <div class="panel__header">
     <h3 class="token__name">Organisme utilisateur final : {{ jwt.payload.sub }}</h3>
     <small class="panel__header-extra">Délivré le {{ formatDate(jwt.payload.iat) }}</small>
@@ -36,15 +36,15 @@
         <svg class="icon icon-copy" viewBox="0 0 32 32"><use xlink:href="#icon-copy"></use></svg>
       </button>
 
-      <button class="button warning" v-if="jwt.enabled && isAdmin"  @click="dialogDisableJwt = true">
+      <button class="button warning" v-if="!jwt.blacklisted && isAdmin"  @click="dialogBlacklistJwt = true">
         Blacklister
       </button>
-      <div class="dialog-backdrop" v-if="dialogDisableJwt">
+      <div class="dialog-backdrop" v-if="dialogBlacklistJwt">
         <div class="dialog panel">
-          <p>Êtes-vous certains de vouloir désactiver ce token ?</p>
+          <p>Êtes-vous certains de vouloir blacklister ce token ?</p>
           <div class="action-buttons">
-            <button class="button small" @click="dialogDisableJwt = false">Annuler</button>
-            <button class="button small warning" @click="disableJwt">Désactiver</button>
+            <button class="button small" @click="dialogBlacklistJwt = false">Annuler</button>
+            <button class="button small warning" @click="blacklistJwt">Blacklister</button>
           </div>
         </div>
       </div>
@@ -63,7 +63,7 @@ export default {
     return {
       showClipboardSuccessMsg: false,
       showClipboardErrorMsg: false,
-      dialogDisableJwt: false
+      dialogBlacklistJwt: false
     }
   },
 
@@ -89,9 +89,9 @@ export default {
 
     clipboardError (e) { this.showClipboardErrorMsg = true },
 
-    disableJwt () {
-      this.$store.dispatch('user/disableToken', { id: this.jwt.payload.jti })
-        .finally(this.dialogDisableJwt = false)
+    blacklistJwt () {
+      this.$store.dispatch('user/blacklistToken', { id: this.jwt.payload.jti })
+        .finally(this.dialogBlacklistJwt = false)
     }
   }
 }
@@ -128,7 +128,7 @@ export default {
     display: inline-block;
   }
 
-  .disabled_token, .disabled_token input, .disabled_token label {
+  .blacklisted_token, .blacklisted_token input, .blacklisted_token label {
     color: #c9d3df;
   }
 </style>
