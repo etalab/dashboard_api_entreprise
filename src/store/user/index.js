@@ -9,7 +9,8 @@ const state = {
     details: {},
     contacts: [],
     allowed_roles: [],
-    tokens: []
+    tokens: [],
+    blacklistedTokens: []
   }
 }
 
@@ -31,6 +32,11 @@ const getters = {
     return tokens.sort((token1, token2) => new Date(token2.payload.iat) - new Date(token1.payload.iat))
   },
 
+  blacklistedTokens (state) {
+    let blacklistedTokens = cloneDeep(state.user.blacklistedTokens)
+    return blacklistedTokens.sort((token1, token2) => new Date(token2.payload.iat) - new Date(token1.payload.iat))
+  },
+
   allowedRoles (state, getters, rootState, rootGetters) {
     const allRoles = cloneDeep(rootGetters['role/index'])
     const taggedRoles = allRoles.map(role => {
@@ -46,10 +52,11 @@ const getters = {
   }
 }
 
-const formatJwt = (jwt) => {
+const formatJwt = (jwt, blacklisted) => {
   const payload = JwtDecode(jwt)
 
   return {
+    blacklisted: blacklisted,
     value: jwt,
     payload
   }
@@ -65,9 +72,15 @@ const mutations = {
   },
 
   setTokens (state, tokens) {
-    const decodedTokens = tokens.map(e => formatJwt(e))
+    const decodedTokens = tokens.map(e => formatJwt(e, false))
 
     state.user.tokens = decodedTokens
+  },
+
+  setBlacklistedTokens (state, blacklistedTokens) {
+    const decodedTokens = blacklistedTokens.map(e => formatJwt(e, true))
+
+    state.user.blacklistedTokens = decodedTokens
   },
 
   setAllowedRoles (state, roles) {
@@ -75,7 +88,7 @@ const mutations = {
   },
 
   addToken (state, token) {
-    state.user.tokens.push(formatJwt(token))
+    state.user.tokens.push(formatJwt(token, false))
   }
 }
 
@@ -103,6 +116,7 @@ const actions = {
 
     commit('setContacts', data.contacts)
     commit('setTokens', data.tokens)
+    commit('setBlacklistedTokens', data.blacklisted_tokens)
     commit('setAllowedRoles', data.allowed_roles)
   },
 
@@ -117,6 +131,13 @@ const actions = {
 
     dispatch('api/admin/post', { url: url, params: payload }, { root: true })
       .then(data => commit('addToken', data.new_token))
+  },
+
+  blacklistToken ({ dispatch, commit, getters, rootGetters }, payload) {
+    const userId = getters.userDetails.id
+    let url = `users/${userId}/jwt_api_entreprise/blacklist`
+    dispatch('api/admin/post', { url: url, params: payload }, { root: true })
+      .then(data => dispatch('get', { userId }))
   },
 
   addRoles ({ dispatch, getters }, roles) {

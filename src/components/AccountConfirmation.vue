@@ -22,7 +22,7 @@
 
           .form__group
             input(type="checkbox" id="cgu_checkbox" v-model="cguChecked")
-            label.label-inline(for="cgu_checkbox") En confirmant votre compte utilisateur vous acceptez nos
+            label.label-inline(for="cgu_checkbox") En confirmant votre compte utilisateur vous acceptez nos&nbsp;
               a(href="https://entreprise.api.gouv.fr/cgu/" target="_blank") Conditions Générales d'Utilisation
 
           button.button(@click.prevent="submit") Finaliser l'inscription
