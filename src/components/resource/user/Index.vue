@@ -61,6 +61,11 @@ export default {
   th.hidden {
     display: none;
   }
+
+  // fixes a display bug with our css
+  .v-menu__content {
+    position: fixed !important;
+  }
 </style>
 
 <style lang="scss" scoped>
