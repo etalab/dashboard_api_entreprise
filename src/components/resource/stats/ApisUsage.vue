@@ -13,7 +13,8 @@
         td {{ item.name }}
         td {{ item.total }}
         td {{ item.percent_success }}%
-        td {{ item.percent_client_errors }}%
+        td {{ item.percent_not_found }}%
+        td {{ item.percent_other_client_errors }}%
         td {{ item.percent_server_errors }}%
 
 </template>
@@ -27,7 +28,7 @@ export default {
   data () {
     return {
       tableTitle: 'Nombre d\'appels',
-      headers: ['Endpoint', 'Total', '% succès', '% erreurs client', '% erreurs serveur'],
+      headers: ['Endpoint', 'Total', '% succès', '% non trouvés', '% autres erreurs client', '% erreurs serveur'],
       timeSpans: [
         {
           label: '10 dernières minutes',
