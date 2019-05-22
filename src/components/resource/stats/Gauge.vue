@@ -37,7 +37,7 @@ export default {
     background-color: $color-lighter-grey;
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
   }
 
