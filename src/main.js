@@ -9,6 +9,8 @@ import store from './store'
 import Vuetify from 'vuetify'
 
 import 'template.data.gouv.fr/dist/style/main.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+
 require('@/polyfill')
 require('@/style/app.scss')
 
