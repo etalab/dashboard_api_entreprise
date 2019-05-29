@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 function visavailChart() {
   // define chart layout
   var margin = {
