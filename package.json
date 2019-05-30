@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "babel-polyfill": "^6.26.0",
     "core-js": "^2.6.5",
     "d3": "^3.5.17",
     "es6-promise": "^4.2.4",

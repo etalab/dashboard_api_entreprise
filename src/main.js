@@ -6,6 +6,7 @@ import VeeValidate from 'vee-validate'
 import VueClipboard from 'vue-clipboard2'
 import router from './router'
 import store from './store'
+import 'babel-polyfill'
 import Vuetify from 'vuetify'
 
 import 'template.data.gouv.fr/dist/style/main.css'
