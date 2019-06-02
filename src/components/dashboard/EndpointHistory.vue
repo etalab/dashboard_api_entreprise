@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import EndpointHistoryElement from '@/components/dashboard/EndpointHistoryElement'
 import { createNamespacedHelpers } from 'vuex'
 const { mapGetters } = createNamespacedHelpers('dashboard')

@@ -22,6 +22,7 @@
 <script>
 import { createNamespacedHelpers } from 'vuex'
 import 'vuetify/dist/vuetify.min.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 const { mapGetters } = createNamespacedHelpers('user/index')
 
 export default {

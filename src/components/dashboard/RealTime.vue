@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import EndpointRow from '@/components/dashboard/EndpointRow'
 import { createNamespacedHelpers } from 'vuex'
 
