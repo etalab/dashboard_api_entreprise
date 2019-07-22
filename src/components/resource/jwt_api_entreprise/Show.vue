@@ -85,9 +85,9 @@ export default {
       return date.toLocaleString('fr-FR')
     },
 
-    clipboardSuccess (e) { this.showClipboardSuccessMsg = true },
+    clipboardSuccess () { this.showClipboardSuccessMsg = true },
 
-    clipboardError (e) { this.showClipboardErrorMsg = true },
+    clipboardError () { this.showClipboardErrorMsg = true },
 
     blacklistJwt () {
       this.$store.dispatch('user/blacklistToken', { id: this.jwt.payload.jti })
