@@ -1,7 +1,7 @@
 <template>
   <ul class="token__list">
     <li class="panel" v-for="(jwt, index) in jwtList" :key="index">
-      <jwt-api-entreprise-card :jwt="jwt" />
+      <jwt-api-entreprise-show :jwt="jwt" />
     </li>
   </ul>
 </template>
@@ -15,7 +15,7 @@ export default {
   props: ['jwtList'],
 
   components: {
-    'jwt-api-entreprise-card': JwtApiEntrepriseShow
+    'jwt-api-entreprise-show': JwtApiEntrepriseShow
   }
 }
 </script>

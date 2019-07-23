@@ -9,7 +9,7 @@ import store from './store'
 import 'babel-polyfill'
 import Vuetify from 'vuetify'
 
-import 'template.data.gouv.fr/dist/style/main.css'
+import 'template.data.gouv.fr/dist/main.css'
 
 require('@/polyfill')
 require('@/style/app.scss')
