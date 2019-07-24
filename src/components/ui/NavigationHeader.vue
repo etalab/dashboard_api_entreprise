@@ -13,6 +13,8 @@
           li.nav__item
             router-link(:to="{ name: 'incidents' }") Incidents
           li.nav__item
+            router-link(:to="{ name: 'documentation' }") Documentation
+          li.nav__item
             router-link(:to="{ name: 'application-panel' }" v-if="isAdmin") Espace d'administration
             router-link(:to="{ name: 'application-panel' }" v-else-if="!unknownUser") Espace Perso
           li.nav__item
