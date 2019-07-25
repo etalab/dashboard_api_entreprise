@@ -53,7 +53,7 @@ export default {
         confirmation_token: this.$route.query.confirmation_token
       }
       this.$store.dispatch('auth/confirm', payload)
-        .then(data => {
+        .then(() => {
           this.$router.push({ name: 'application-panel' })
         })
         .catch(error => {
