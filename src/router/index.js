@@ -19,6 +19,7 @@ import ApplicationPanel from '@/components/ApplicationPanel'
 import RealTime from '@/components/dashboard/RealTime'
 import EndpointHistory from '@/components/dashboard/EndpointHistory'
 import Incidents from '@/components/resource/incident/Index'
+import Documentation from '@/components/Documentation'
 
 import PageNotFound from '@/components/PageNotFound'
 
@@ -165,6 +166,11 @@ const router = new Router({
       path: '/incidents',
       name: 'incidents',
       component: Incidents
+    },
+    {
+      path: '/documentation',
+      name: 'documentation',
+      component: Documentation
     },
     {
       path: '*',
