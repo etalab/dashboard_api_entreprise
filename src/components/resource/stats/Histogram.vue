@@ -9,23 +9,22 @@
 </template>
 
 <script>
-import StatsBar from '@/components/resource/stats/Bar'
+import StatsBar from "@/components/resource/stats/Bar";
 
 export default {
-  name: 'statsHistogram',
-  props: ['items'],
-  data () {
-    return {
-    }
+  name: "StatsHistogram",
+  components: {
+    statsBar: StatsBar
+  },
+  props: ["items"],
+  data() {
+    return {};
   },
   methods: {
-    changeSpan: function (time) {
-      console.log('pouet')
+    changeSpan: function(time) {
+      console.log("pouet");
       // load new results
     }
-  },
-  components: {
-    'statsBar': StatsBar
   }
-}
+};
 </script>

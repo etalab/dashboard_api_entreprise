@@ -1,22 +1,22 @@
-import JwtDecode from 'jwt-decode'
+import JwtDecode from "jwt-decode";
 
 export default class User {
-  static from (token) {
+  static from(token) {
     try {
-      let obj = JwtDecode(token)
-      return new User(obj)
+      let obj = JwtDecode(token);
+      return new User(obj);
     } catch (_) {
-      return null
+      return null;
     }
   }
 
   // The JWT payload is passed as argument to the User's constructor
-  constructor ({ uid, admin = null }) {
-    this.id = uid
-    this.admin = admin
+  constructor({ uid, admin = null }) {
+    this.id = uid;
+    this.admin = admin;
   }
 
-  isAdmin () {
-    return this.admin === true
+  isAdmin() {
+    return this.admin === true;
   }
 }

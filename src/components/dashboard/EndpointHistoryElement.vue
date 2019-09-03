@@ -30,96 +30,106 @@
 </template>
 
 <script>
-import * as d3 from 'd3'
-import { visavailChart } from '@/assets/visavail/visavail.js'
-require('@/assets/visavail/visavail.css')
+import * as d3 from "d3";
+import { visavailChart } from "@/assets/visavail/visavail.js";
+require("@/assets/visavail/visavail.css");
 
 export default {
-  name: 'endpoint-history-element',
-  props: ['provider_name', 'endpoints_availability_history'],
-  data: function () {
+  name: "EndpointHistoryElement",
+  props: ["providerName", "endpointsAvailabilityHistory"],
+  data: function() {
     return {
-      color_200: '#5CB85C',
-      color_206: '#E3C567',
-      color_212: '#FE7F2D',
-      color_500: '#D9534D',
-      color_512: '#D8386D'
-    }
+      color_200: "#5CB85C",
+      color_206: "#E3C567",
+      color_212: "#FE7F2D",
+      color_500: "#D9534D",
+      color_512: "#D8386D"
+    };
   },
   computed: {
-    meanSla: function () {
-      let slaSum = 0
-      let slaCount = 0
-      this.endpoints_availability_history.forEach(function (ep) {
-        slaSum += ep.sla
-        slaCount++
-      })
+    meanSla: function() {
+      let slaSum = 0;
+      let slaCount = 0;
+      this.endpoints_availability_history.forEach(function(ep) {
+        slaSum += ep.sla;
+        slaCount++;
+      });
 
-      return Number(slaSum / slaCount).toFixed(2)
+      return Number(slaSum / slaCount).toFixed(2);
     },
-    dataset: function () {
-      let dataset = []
-      let vm = this
-      this.endpoints_availability_history.forEach(function (ep) {
-        let computedName = ('v' + ep.api_version + ' ' + ep.name + ' ' + (ep.sub_name || '')).replace(/_/g, ' ')
+    dataset: function() {
+      let dataset = [];
+      let vm = this;
+      this.endpoints_availability_history.forEach(function(ep) {
+        let computedName = (
+          "v" +
+          ep.api_version +
+          " " +
+          ep.name +
+          " " +
+          (ep.sub_name || "")
+        ).replace(/_/g, " ");
         let availability = {
-          'measure_html': '<div class="endpoint_label">' + computedName + '</div>',
-          'categories': {
-            '200': { color: vm.color_200 },
-            '206': { color: vm.color_206 },
-            '212': { color: vm.color_212 },
-            '500': { color: vm.color_500 },
-            '512': { color: vm.color_512 }
+          measure_html:
+            '<div class="endpoint_label">' + computedName + "</div>",
+          categories: {
+            "200": { color: vm.color_200 },
+            "206": { color: vm.color_206 },
+            "212": { color: vm.color_212 },
+            "500": { color: vm.color_500 },
+            "512": { color: vm.color_512 }
           },
-          'data': ep.availability_history
-        }
-        dataset.push(availability)
-      })
+          data: ep.availability_history
+        };
+        dataset.push(availability);
+      });
 
-      return dataset
+      return dataset;
     },
-    slaRatingClass: function () {
+    slaRatingClass: function() {
       switch (true) {
-        case (this.meanSla > 99.8):
-          return 'perfect-sla'
-        case (this.meanSla > 98):
-          return 'almost-perfect-sla'
+        case this.meanSla > 99.8:
+          return "perfect-sla";
+        case this.meanSla > 98:
+          return "almost-perfect-sla";
         default:
-          return 'bad-sla'
+          return "bad-sla";
       }
     }
   },
-  mounted: function () {
-    let chart = visavailChart().width(800)
-    d3.select('#' + this.provider_name).datum(this.dataset).call(chart)
+  mounted: function() {
+    let chart = visavailChart().width(800);
+    d3.select("#" + this.provider_name)
+      .datum(this.dataset)
+      .call(chart);
   }
-}
+};
 </script>
 
 <style lang="scss">
-  .legend-label {
-    display: inline-flex;
-    margin-right: 30px;
-  }
-  .square {
-    height: 15px;
-    width: 15px;
-    margin-top: 2px;
-    margin-right: 3px;
-  }
-  .perfect-sla {
-    color: $color-green;
-    font-weight: bold;
-  }
-  .almost-perfect-sla {
-    color: $color-orange;
-    font-weight: bold;
-  }
-  .bad-sla {
-    color: $color-red;
-    font-weight: bold;
-  }
-  .endpoint_label {
-    line-height: 100%;
-  }
+.legend-label {
+  display: inline-flex;
+  margin-right: 30px;
+}
+.square {
+  height: 15px;
+  width: 15px;
+  margin-top: 2px;
+  margin-right: 3px;
+}
+.perfect-sla {
+  color: $color-green;
+  font-weight: bold;
+}
+.almost-perfect-sla {
+  color: $color-orange;
+  font-weight: bold;
+}
+.bad-sla {
+  color: $color-red;
+  font-weight: bold;
+}
+.endpoint_label {
+  line-height: 100%;
+}
 </style>

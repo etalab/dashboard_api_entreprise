@@ -13,31 +13,31 @@
 </template>
 
 <script>
-import JWTAPIEntrepriseNew from '@/components/resource/jwt_api_entreprise/New'
-import JWTAPIEntrepriseIndex from '@/components/resource/jwt_api_entreprise/Index'
-import { mapGetters } from 'vuex'
+import JWTAPIEntrepriseNew from "@/components/resource/jwt_api_entreprise/New";
+import JWTAPIEntrepriseIndex from "@/components/resource/jwt_api_entreprise/Index";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'user-tokens',
+  name: "UserTokens",
 
   computed: {
     ...mapGetters({
-      tokens: 'user/tokens',
-      blacklistedTokens: 'user/blacklistedTokens',
-      allowedToCreateToken: 'user/allowedToCreateToken',
-      isAdmin: 'auth/isAdmin'
+      tokens: "user/tokens",
+      blacklistedTokens: "user/blacklistedTokens",
+      allowedToCreateToken: "user/allowedToCreateToken",
+      isAdmin: "auth/isAdmin"
     })
   },
 
   components: {
-    'jwt-api-entreprise-new': JWTAPIEntrepriseNew,
-    'jwt-api-entreprise-index': JWTAPIEntrepriseIndex
+    "jwt-api-entreprise-new": JWTAPIEntrepriseNew,
+    "jwt-api-entreprise-index": JWTAPIEntrepriseIndex
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  h2 {
-    display: inline-block;
-  }
+h2 {
+  display: inline-block;
+}
 </style>

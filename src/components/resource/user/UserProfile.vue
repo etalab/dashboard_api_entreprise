@@ -21,58 +21,58 @@ div
 </template>
 
 <script>
-import UserAddRolesForm from '@/components/resource/user/AddRoles'
-import UserAllowedRoles from '@/components/resource/user/AllowedRoles'
-import NoteUpdate from '@/components/resource/user/NoteUpdate'
-import { mapGetters } from 'vuex'
-import marked from 'marked'
+import UserAddRolesForm from "@/components/resource/user/AddRoles";
+import UserAllowedRoles from "@/components/resource/user/AllowedRoles";
+import NoteUpdate from "@/components/resource/user/NoteUpdate";
+import { mapGetters } from "vuex";
+import marked from "marked";
 
 export default {
-  name: 'user-profile',
+  name: "UserProfile",
 
   computed: {
     ...mapGetters({
-      userDetails: 'user/userDetails',
-      allowedRoles: 'user/allowedRoles',
-      allowedToCreateToken: 'user/allowedToCreateToken',
-      isAdmin: 'auth/isAdmin'
+      userDetails: "user/userDetails",
+      allowedRoles: "user/allowedRoles",
+      allowedToCreateToken: "user/allowedToCreateToken",
+      isAdmin: "auth/isAdmin"
     }),
 
-    userGrantedTokenCreation () {
-      return (this.isAdmin && this.allowedToCreateToken)
+    userGrantedTokenCreation() {
+      return this.isAdmin && this.allowedToCreateToken;
     }
   },
 
   methods: {
-    toHtml (markdownText) {
+    toHtml(markdownText) {
       if (markdownText == null) {
-        return 'Pas de note enregistrée'
+        return "Pas de note enregistrée";
       } else {
-        return marked(markdownText)
+        return marked(markdownText);
       }
     }
   },
 
   components: {
-    'user-add-roles-form': UserAddRolesForm,
-    'user-allowed-roles': UserAllowedRoles,
-    'note-update': NoteUpdate
+    "user-add-roles-form": UserAddRolesForm,
+    "user-allowed-roles": UserAllowedRoles,
+    "note-update": NoteUpdate
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  h2 {
-    display: inline-block;
-  }
+h2 {
+  display: inline-block;
+}
 
-  .enabled :last-child {
-    color: $color-blue;
-    font-weight: 700;
-  }
+.enabled :last-child {
+  color: $color-blue;
+  font-weight: 700;
+}
 
-  tr.disabled {
-    color: $color-dark-grey;
-    background: $color-white;
-  }
+tr.disabled {
+  color: $color-dark-grey;
+  background: $color-white;
+}
 </style>

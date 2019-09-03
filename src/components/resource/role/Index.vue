@@ -14,38 +14,38 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-const { mapGetters } = createNamespacedHelpers('role')
+import { createNamespacedHelpers } from "vuex";
+const { mapGetters } = createNamespacedHelpers("role");
 
 export default {
-  name: 'role-index',
-  data () {
+  name: "RoleIndex",
+  data() {
     return {
       headers: [
-        { text: 'Nom', value: 'name', align: 'left' },
-        { text: 'Code', value: 'code', align: 'left' }
+        { text: "Nom", value: "name", align: "left" },
+        { text: "Code", value: "code", align: "left" }
       ]
-    }
+    };
   },
 
-  created: function () {
-    this.$store.dispatch('role/index')
+  created: function() {
+    this.$store.dispatch("role/index");
   },
 
   computed: {
-    ...mapGetters(['index'])
+    ...mapGetters(["index"])
   },
 
   methods: {
-    roleForm: function () {
-      this.$router.push({ name: 'roleNew' })
+    roleForm: function() {
+      this.$router.push({ name: "roleNew" });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  h2 {
-    display: inline-block;
-  }
+h2 {
+  display: inline-block;
+}
 </style>

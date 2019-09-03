@@ -25,26 +25,26 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'NavigationHeader',
+  name: "NavigationHeader",
 
   computed: {
     ...mapGetters({
-      isAdmin: 'auth/isAdmin',
-      unknownUser: 'auth/unknownUser'
+      isAdmin: "auth/isAdmin",
+      unknownUser: "auth/unknownUser"
     })
   },
 
   methods: {
-    clearHomepage () {
+    clearHomepage() {
       // TODO
     },
 
-    logout () {
-      this.$router.push({ name: 'logout' })
+    logout() {
+      this.$router.push({ name: "logout" });
     }
   }
-}
+};
 </script>

@@ -14,75 +14,76 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'note-update',
+  name: "NoteUpdate",
 
-  props: ['userId', 'note'],
+  props: ["userId", "note"],
 
-  data () {
+  data() {
     return {
       dialog: false,
       noteField: this.note
-    }
+    };
   },
 
   methods: {
-    submit: function () {
+    submit: function() {
       let payload = {
         note: this.noteField
-      }
+      };
 
-      this.$store.dispatch('user/update', { params: payload, userId: this.userId })
+      this.$store
+        .dispatch("user/update", { params: payload, userId: this.userId })
         .then(() => {
-          this.dialog = false
+          this.dialog = false;
         })
         .catch(e => {
           // TODO something went wrong
-        })
+        });
     },
 
-    reset: function () {
-      this.dialog = false
-      this.noteField = this.note
+    reset: function() {
+      this.dialog = false;
+      this.noteField = this.note;
     },
 
-    showDialog: function () {
-      this.noteField = this.note
-      this.dialog = true
+    showDialog: function() {
+      this.noteField = this.note;
+      this.dialog = true;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  label.label-inline {
-    color: $color-black;
-  }
+label.label-inline {
+  color: $color-black;
+}
 
-  .dialog-backdrop {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-  }
+.dialog-backdrop {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
 
-  .dialog {
-    display: inline-block;
-  }
+.dialog {
+  display: inline-block;
+}
 
-  h2 {
-    margin-top: 0;
-  }
+h2 {
+  margin-top: 0;
+}
 
-  .action-buttons {
-    margin-top: 2em;
-  }
+.action-buttons {
+  margin-top: 2em;
+}
 </style>

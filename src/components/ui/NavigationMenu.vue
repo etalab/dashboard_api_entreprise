@@ -7,42 +7,48 @@
 
 <script>
 export default {
-  name: 'navigation-menu',
+  name: "NavigationMenu",
 
   // TODO move this into an ui store module
-  data () {
+  data() {
     return {
-      selected: 'client-view',
+      selected: "client-view",
       tiles: [
         {
-          label: 'Utilisateurs',
-          routeName: 'users'
+          label: "Utilisateurs",
+          routeName: "users"
         },
         {
-          label: 'Rôles',
-          routeName: 'roles'
+          label: "Rôles",
+          routeName: "roles"
         }
       ]
-    }
+    };
   },
   methods: {
-    routeTo: function (routeName) {
-      this.selected = routeName
-      this.$router.push({ name: routeName })
+    routeTo: function(routeName) {
+      this.selected = routeName;
+      this.$router.push({ name: routeName });
     },
-    isSelected: function (routeName) {
-      return this.selected === routeName
+    isSelected: function(routeName) {
+      return this.selected === routeName;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .dashboard .side-menu a {
-    text-decoration: none;
-  }
+.dashboard .side-menu a {
+  text-decoration: none;
+}
 
-  .dashboard .side-menu a.router-link-active {
-    background: linear-gradient(90deg, $color-blue, $color-blue 5px, $color-lighter-grey 0, $color-lighter-grey);
-  }
+.dashboard .side-menu a.router-link-active {
+  background: linear-gradient(
+    90deg,
+    $color-blue,
+    $color-blue 5px,
+    $color-lighter-grey 0,
+    $color-lighter-grey
+  );
+}
 </style>

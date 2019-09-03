@@ -1,20 +1,20 @@
-import 'es6-promise/auto'
+import "es6-promise/auto";
 
-import Vue from 'vue'
-import Vuex from 'vuex'
-import auth from './auth'
-import dashboard from './dashboard'
-import stats from './stats'
-import user from './user'
-import role from './role'
-import api from './api'
-import ui from './ui'
-import incident from './incident'
+import Vue from "vue";
+import Vuex from "vuex";
+import auth from "./auth";
+import dashboard from "./dashboard";
+import stats from "./stats";
+import user from "./user";
+import role from "./role";
+import api from "./api";
+import ui from "./ui";
+import incident from "./incident";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-  strict: process.env.NODE_ENV !== 'production',
+  strict: process.env.NODE_ENV !== "production",
   modules: {
     auth,
     ui,
@@ -25,4 +25,4 @@ export default new Vuex.Store({
     incident,
     api
   }
-})
+});

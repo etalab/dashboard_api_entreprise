@@ -29,58 +29,66 @@
 </template>
 
 <script>
-import EndpointRow from '@/components/dashboard/EndpointRow'
-import { createNamespacedHelpers } from 'vuex'
+import EndpointRow from "@/components/dashboard/EndpointRow";
+import { createNamespacedHelpers } from "vuex";
 
-const { mapGetters } = createNamespacedHelpers('dashboard')
+const { mapGetters } = createNamespacedHelpers("dashboard");
 
 export default {
-  name: 'endpoints-view',
+  name: "EndpointsView",
   computed: {
-    ...mapGetters(['endpoints', 'homepageCode']),
-    endpointsV2: function () {
-      return this.endpoints.filter(function (e) { return e.api_version === 2 })
+    ...mapGetters(["endpoints", "homepageCode"]),
+    endpointsV2: function() {
+      return this.endpoints.filter(function(e) {
+        return e.api_version === 2;
+      });
     },
-    homepageStatus: function () {
-      return this.homepageCode === 0 ? 'waiting...' : (this.homepageCode === 200 ? 'up' : 'down')
+    homepageStatus: function() {
+      return this.homepageCode === 0
+        ? "waiting..."
+        : this.homepageCode === 200
+        ? "up"
+        : "down";
     }
+  },
+  mounted: function() {
+    this.loadData();
   },
   methods: {
-    loadData: function () {
-      this.$store.dispatch('dashboard/endpoints')
-        .catch(error => console.trace(error.message))
+    loadData: function() {
+      this.$store
+        .dispatch("dashboard/endpoints")
+        .catch(error => console.trace(error.message));
 
-      this.$store.dispatch('dashboard/homepageCode')
-        .catch(error => console.trace(error.messsage))
+      this.$store
+        .dispatch("dashboard/homepageCode")
+        .catch(error => console.trace(error.messsage));
     }
   },
-  mounted: function () {
-    this.loadData()
-  },
   components: {
-    'endpoint-row': EndpointRow
+    "endpoint-row": EndpointRow
   }
-}
+};
 </script>
 
 <style lang="scss">
-  .no_margin {
-    margin: 0;
-  }
-  .status {
-    text-transform: uppercase;
-    font-weight: bold;
-  }
-  .up {
-    color: $color-green;
-  }
-  .down {
-    color: $color-red;
-  }
-  .waiting\.\.\. {
-    color: $color-orange;
-  }
-  .bold {
-    font-weight: bold;
-  }
+.no_margin {
+  margin: 0;
+}
+.status {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.up {
+  color: $color-green;
+}
+.down {
+  color: $color-red;
+}
+.waiting\.\.\. {
+  color: $color-orange;
+}
+.bold {
+  font-weight: bold;
+}
 </style>

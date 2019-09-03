@@ -20,64 +20,65 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-import 'vuetify/dist/vuetify.min.css'
-import 'material-design-icons-iconfont/dist/material-design-icons.css'
-const { mapGetters } = createNamespacedHelpers('user/index')
+import { createNamespacedHelpers } from "vuex";
+import "vuetify/dist/vuetify.min.css";
+import "material-design-icons-iconfont/dist/material-design-icons.css";
+const { mapGetters } = createNamespacedHelpers("user/index");
 
 export default {
-  name: 'user-index',
+  name: "UserIndex",
 
-  data () {
+  data() {
     return {
-      title: 'Utilisateurs',
-      search: '',
+      title: "Utilisateurs",
+      search: "",
       headers: [
-        { text: 'E-mail', value: 'email', align: 'left' },
-        { text: 'Contexte', value: 'context', align: 'left' },
-        { text: 'Confirmé', value: 'confirmed', align: 'left' },
-        { text: 'UUID', value: 'id', class: 'hidden' }
+        { text: "E-mail", value: "email", align: "left" },
+        { text: "Contexte", value: "context", align: "left" },
+        { text: "Confirmé", value: "confirmed", align: "left" },
+        { text: "UUID", value: "id", class: "hidden" }
       ]
-    }
+    };
   },
 
-  created: function () {
-    this.$store.dispatch('user/index/index')
+  created: function() {
+    this.$store.dispatch("user/index/index");
   },
 
   computed: {
-    ...mapGetters(['userList'])
+    ...mapGetters(["userList"])
   },
 
   methods: {
-    userForm: function () {
-      this.$router.push({ name: 'userNew' })
+    userForm: function() {
+      this.$router.push({ name: "userNew" });
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-  // thead.tr.th CSS is generated and does not work with scopes
-  th.hidden {
-    display: none;
-  }
+// thead.tr.th CSS is generated and does not work with scopes
+th.hidden {
+  display: none;
+}
 
-  // fixes a display bug with our css
-  .v-menu__content {
-    position: fixed !important;
-  }
+// fixes a display bug with our css
+.v-menu__content {
+  position: fixed !important;
+}
 </style>
 
 <style lang="scss" scoped>
-  .hidden {
-    display: none;
-  }
-  h2 {
-    display: inline-block;
-  }
+.hidden {
+  display: none;
+}
+h2 {
+  display: inline-block;
+}
 
-  td, th {
-    word-break: initial;
-  }
+td,
+th {
+  word-break: initial;
+}
 </style>

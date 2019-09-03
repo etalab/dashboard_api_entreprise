@@ -29,91 +29,92 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'jwt-api-entreprise-new',
-  data () {
+  name: "JwtApiEntrepriseNew",
+  data() {
     return {
       dialog: false,
-      subject: '',
+      subject: "",
       checked_roles: [],
       contact_email: null,
       contact_phone: null
-    }
+    };
   },
 
   computed: {
     ...mapGetters({
-      allRoles: 'role/index',
-      userTaggedRoles: 'user/allowedRoles',
-      isAdmin: 'auth/isAdmin'
+      allRoles: "role/index",
+      userTaggedRoles: "user/allowedRoles",
+      isAdmin: "auth/isAdmin"
     }),
 
-    allowedRoles () {
-      const userGivenRoles = this.userTaggedRoles.filter(role => role.allowed)
-      return this.isAdmin ? this.allRoles : userGivenRoles
+    allowedRoles() {
+      const userGivenRoles = this.userTaggedRoles.filter(role => role.allowed);
+      return this.isAdmin ? this.allRoles : userGivenRoles;
     }
   },
 
   methods: {
-    submit: function () {
+    submit: function() {
       let payload = {
         roles: this.checked_roles,
         subject: this.subject,
         contact: {
           email: this.contact_email
         }
-      }
-      if (this.contact_phone) payload.contact.phone_number = this.contact_phone
+      };
+      if (this.contact_phone) payload.contact.phone_number = this.contact_phone;
 
-      this.$store.dispatch('user/createToken', payload)
+      this.$store
+        .dispatch("user/createToken", payload)
         .then(() => this.reset())
         .catch(e => {
           // TODO something went wrong
-        })
+        });
     },
 
-    reset: function () {
-      this.checked_roles = []
-      this.dialog = false
-      this.subject = ''
-      this.contact_email = this.contact_phone = null
+    reset: function() {
+      this.checked_roles = [];
+      this.dialog = false;
+      this.subject = "";
+      this.contact_email = this.contact_phone = null;
     },
-    showDialog: function () {
-      this.dialog = true
+    showDialog: function() {
+      this.dialog = true;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  label.label-inline {
-    color: $color-black;
-  }
+label.label-inline {
+  color: $color-black;
+}
 
-  .dialog-backdrop {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-  }
+.dialog-backdrop {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
 
-  .dialog {
-    display: inline-block;
-  }
+.dialog {
+  display: inline-block;
+}
 
-  h2 {
-    margin-top: 0;
-  }
+h2 {
+  margin-top: 0;
+}
 
-  .action-buttons {
-    margin-top: 2em;
-  }
+.action-buttons {
+  margin-top: 2em;
+}
 </style>

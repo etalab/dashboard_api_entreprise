@@ -6,50 +6,50 @@
 </template>
 
 <script>
-import moment from 'moment'
-import '@/assets/moment-fr.js'
+import moment from "moment";
+import "@/assets/moment-fr.js";
 
 export default {
-  name: 'endpoint',
-  props: ['name', 'code', 'timestamp'],
-  data () {
+  name: "Endpoint",
+  props: ["name", "code", "timestamp"],
+  data() {
     return {
-      status: '',
-      statusClass: ''
-    }
+      status: "",
+      statusClass: ""
+    };
   },
-  created: function () {
+  created: function() {
     switch (this.code) {
       case 200:
-        this.status = 'UP'
-        this.statusClass = 'success'
-        break
+        this.status = "UP";
+        this.statusClass = "success";
+        break;
       case 206:
-        this.status = 'INCOMPLETE'
-        this.statusClass = 'warning'
-        break
+        this.status = "INCOMPLETE";
+        this.statusClass = "warning";
+        break;
       default:
-        this.status = 'DOWN'
-        this.statusClass = 'error'
-        break
+        this.status = "DOWN";
+        this.statusClass = "error";
+        break;
     }
   },
   methods: {
-    timestampMoment: function (timestamp) {
-      return moment(timestamp).fromNow()
+    timestampMoment: function(timestamp) {
+      return moment(timestamp).fromNow();
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .success {
-    color: $color-green;
-  }
-  .error {
-    color: $color-red;
-  }
-  .warning {
-    color: $color-orange;
-  }
+.success {
+  color: $color-green;
+}
+.error {
+  color: $color-red;
+}
+.warning {
+  color: $color-orange;
+}
 </style>

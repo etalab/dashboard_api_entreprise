@@ -15,34 +15,34 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import IncidentNew from '@/components/resource/incident/New.vue'
-import IncidentUpdate from '@/components/resource/incident/Update.vue'
-import marked from 'marked'
+import { mapGetters } from "vuex";
+import IncidentNew from "@/components/resource/incident/New.vue";
+import IncidentUpdate from "@/components/resource/incident/Update.vue";
+import marked from "marked";
 
 export default {
-  name: 'incidents-index',
+  name: "IncidentsIndex",
 
-  created: function () {
-    this.$store.dispatch('incident/index')
+  created: function() {
+    this.$store.dispatch("incident/index");
   },
 
   computed: {
     ...mapGetters({
-      index: 'incident/orderedIndex',
-      isAdmin: 'auth/isAdmin'
+      index: "incident/orderedIndex",
+      isAdmin: "auth/isAdmin"
     })
   },
 
   methods: {
-    toHtml (markdownText) {
-      return marked(markdownText)
+    toHtml(markdownText) {
+      return marked(markdownText);
     }
   },
 
   components: {
-    'incident-new': IncidentNew,
-    'incident-update': IncidentUpdate
+    "incident-new": IncidentNew,
+    "incident-update": IncidentUpdate
   }
-}
+};
 </script>

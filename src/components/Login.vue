@@ -28,52 +28,53 @@
 
 <script>
 export default {
-  name: 'login',
-  data () {
+  name: "Login",
+  data() {
     return {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       loginError: false
-    }
+    };
   },
 
   methods: {
-    login () {
+    login() {
       const loginParams = {
         username: this.email,
         password: this.password,
-        grant_type: 'password'
-      }
-      this.$store.dispatch('auth/login', loginParams)
+        grant_type: "password"
+      };
+      this.$store
+        .dispatch("auth/login", loginParams)
         .then(() => {
-          this.$router.push({ name: 'application-panel' })
+          this.$router.push({ name: "application-panel" });
         })
         .catch(() => {
-          this.loginError = true
-        })
+          this.loginError = true;
+        });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .content,
-  .login {
-    height: calc(100% - 73px);
-  }
+.content,
+.login {
+  height: calc(100% - 73px);
+}
 
-  .login {
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
+.login {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
 
-  button.button {
-    margin: 2em auto 0;
-    display: block;
-  }
+button.button {
+  margin: 2em auto 0;
+  display: block;
+}
 
-  .signup {
-    margin-top: 2em;
-  }
+.signup {
+  margin-top: 2em;
+}
 </style>

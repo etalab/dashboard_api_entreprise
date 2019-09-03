@@ -20,69 +20,78 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'apis-usage',
+  name: "ApisUsage",
 
-  data () {
+  data() {
     return {
-      tableTitle: 'Nombre d\'appels',
-      headers: ['Endpoint', 'Total', '% succès', '% non trouvés', '% autres erreurs client', '% erreurs serveur'],
+      tableTitle: "Nombre d'appels",
+      headers: [
+        "Endpoint",
+        "Total",
+        "% succès",
+        "% non trouvés",
+        "% autres erreurs client",
+        "% erreurs serveur"
+      ],
       timeSpans: [
         {
-          label: '10 dernières minutes',
-          value: '10_minutes'
+          label: "10 dernières minutes",
+          value: "10_minutes"
         },
         {
-          label: '30 dernières heures',
-          value: '30_hours'
+          label: "30 dernières heures",
+          value: "30_hours"
         },
         {
-          label: '8 derniers jours',
-          value: '8_days'
+          label: "8 derniers jours",
+          value: "8_days"
         }
       ],
-      timeSpanDisplayed: '10_minutes'
-    }
+      timeSpanDisplayed: "10_minutes"
+    };
   },
 
   computed: {
-    ...mapGetters('stats', [
-      'orderedApisUsage'
-    ]),
+    ...mapGetters("stats", ["orderedApisUsage"]),
 
-    endpointsDisplayed () {
-      let endpointsToDisplay = {}
+    endpointsDisplayed() {
+      let endpointsToDisplay = {};
 
       switch (this.timeSpanDisplayed) {
-        case '10_minutes':
-          if (this.orderedApisUsage.last_10_minutes) endpointsToDisplay = this.orderedApisUsage.last_10_minutes.by_endpoint
-          break
+        case "10_minutes":
+          if (this.orderedApisUsage.last_10_minutes)
+            endpointsToDisplay = this.orderedApisUsage.last_10_minutes
+              .by_endpoint;
+          break;
 
-        case '30_hours':
-          if (this.orderedApisUsage.last_30_hours) endpointsToDisplay = this.orderedApisUsage.last_30_hours.by_endpoint
-          break
+        case "30_hours":
+          if (this.orderedApisUsage.last_30_hours)
+            endpointsToDisplay = this.orderedApisUsage.last_30_hours
+              .by_endpoint;
+          break;
 
-        case '8_days':
-          if (this.orderedApisUsage.last_8_days) endpointsToDisplay = this.orderedApisUsage.last_8_days.by_endpoint
-          break
+        case "8_days":
+          if (this.orderedApisUsage.last_8_days)
+            endpointsToDisplay = this.orderedApisUsage.last_8_days.by_endpoint;
+          break;
       }
 
-      return endpointsToDisplay
+      return endpointsToDisplay;
     }
   },
 
   methods: {
-    changeSpan: function (time) {
-      this.timeSpanDisplayed = time
+    changeSpan: function(time) {
+      this.timeSpanDisplayed = time;
     },
-    isSelected: function (time) {
-      return this.timeSpanDisplayed === time
+    isSelected: function(time) {
+      return this.timeSpanDisplayed === time;
     }
   }
-}
+};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

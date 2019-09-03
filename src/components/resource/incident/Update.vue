@@ -24,76 +24,77 @@
 
 <script>
 export default {
-  name: 'incident-update',
+  name: "IncidentUpdate",
 
-  props: ['id', 'title', 'subtitle', 'description'],
+  props: ["id", "title", "subtitle", "description"],
 
-  data () {
+  data() {
     return {
       dialog: false,
       titleField: this.title,
       subtitleField: this.subtitle,
       descriptionField: this.description
-    }
+    };
   },
 
   methods: {
-    submit () {
+    submit() {
       let payload = {
         title: this.titleField,
         subtitle: this.subtitleField,
         description: this.descriptionField
-      }
+      };
 
-      this.$store.dispatch('incident/update', { params: payload, incidentId: this.id })
+      this.$store
+        .dispatch("incident/update", { params: payload, incidentId: this.id })
         .then(() => this.reset())
         .catch(e => {
           // TODO display forms server validation errors
-        })
+        });
     },
 
-    showDialog () {
-      this.dialog = true
+    showDialog() {
+      this.dialog = true;
     },
 
-    reset () {
-      this.dialog = false
-      this.titleField = this.title
-      this.subtitleField = this.subtitle
-      this.description = this.description
+    reset() {
+      this.dialog = false;
+      this.titleField = this.title;
+      this.subtitleField = this.subtitle;
+      this.description = this.description;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  label.label-inline {
-    color: $color-black;
-  }
+label.label-inline {
+  color: $color-black;
+}
 
-  .dialog-backdrop {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-  }
+.dialog-backdrop {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
 
-  .dialog {
-    max-width: 32em;
-    margin-bottom: 1em;
-  }
+.dialog {
+  max-width: 32em;
+  margin-bottom: 1em;
+}
 
-  h2 {
-    margin-top: 0;
-  }
+h2 {
+  margin-top: 0;
+}
 
-  .action-buttons {
-    margin-top: 2em;
-  }
+.action-buttons {
+  margin-top: 2em;
+}
 </style>

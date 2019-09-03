@@ -17,34 +17,34 @@
 </template>
 
 <script>
-import ContactTile from '@/components/resource/contact/Show'
-import { mapGetters } from 'vuex'
+import ContactTile from "@/components/resource/contact/Show";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'user-contacts',
+  name: "UserContacts",
 
   components: {
-    'contact-tile': ContactTile
+    "contact-tile": ContactTile
   },
 
   computed: {
     ...mapGetters({
-      accountContacts: 'user/accountContacts',
-      tokenContacts: 'user/tokenContacts',
-      allowedToCreateToken: 'user/allowedToCreateToken',
-      isAdmin: 'auth/isAdmin'
+      accountContacts: "user/accountContacts",
+      tokenContacts: "user/tokenContacts",
+      allowedToCreateToken: "user/allowedToCreateToken",
+      isAdmin: "auth/isAdmin"
     })
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  h2 {
-    display: inline-block;
-  }
+h2 {
+  display: inline-block;
+}
 
-  .contact + .contact {
-    margin-left: 2em;
-    margin-top: 0;
-  }
+.contact + .contact {
+  margin-left: 2em;
+  margin-top: 0;
+}
 </style>

@@ -36,47 +36,47 @@
 
 <script>
 export default {
-  name: 'role-new',
-  data () {
+  name: "RoleNew",
+  data() {
     return {
       validationFailure: false,
-      alertMessage: '',
+      alertMessage: "",
       role: {}
-    }
+    };
   },
 
   methods: {
-    submit: function () {
-      this.$validator.validateAll()
-        .then(result => {
-          if (!result) {
-            this.alertMessage = 'Tous les champs ne sont pas valides !'
-            this.validationFailure = true
-            return
-          }
+    submit: function() {
+      this.$validator.validateAll().then(result => {
+        if (!result) {
+          this.alertMessage = "Tous les champs ne sont pas valides !";
+          this.validationFailure = true;
+          return;
+        }
 
-          const params = {
-            name: this.role.name,
-            code: this.role.code
-          }
-          // POST request to create role
-          this.$store.dispatch('role/create', params)
-            .then(() => {
-              this.$router.push({ name: 'roles' })
-            })
-            .catch(error => {
-              this.alertMessage = error
-              this.validationFailure = true
-            })
-        })
+        const params = {
+          name: this.role.name,
+          code: this.role.code
+        };
+        // POST request to create role
+        this.$store
+          .dispatch("role/create", params)
+          .then(() => {
+            this.$router.push({ name: "roles" });
+          })
+          .catch(error => {
+            this.alertMessage = error;
+            this.validationFailure = true;
+          });
+      });
     },
-    clearRole () {
-      this.validationFailure = false
-      this.role = {}
+    clearRole() {
+      this.validationFailure = false;
+      this.role = {};
     },
-    cancel: function () {
-      this.$router.push({ name: 'roles' })
+    cancel: function() {
+      this.$router.push({ name: "roles" });
     }
   }
-}
+};
 </script>
