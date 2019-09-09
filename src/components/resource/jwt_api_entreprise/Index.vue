@@ -18,9 +18,9 @@ export default {
 
   props: {
     jwtList: {
-      type: Object,
+      type: Array,
       default() {
-        return {};
+        return [];
       }
     }
   }

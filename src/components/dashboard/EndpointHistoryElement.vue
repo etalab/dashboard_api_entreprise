@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     .panel
-      h3 {{ provider_name.toUpperCase() }}
+      h3 {{ providerName.toUpperCase() }}
       .legend-label
         .square(:style="{ 'background-color': color_200 }")
         span UP
@@ -14,16 +14,16 @@
         .square(:style="{ 'background-color': color_500 }")
         span DOWN
 
-      .legend-label(v-if="provider_name=='insee'")
+      .legend-label(v-if="providerName=='insee'")
         .square(:style="{ 'background-color': color_212 }")
         span UP (via API de secours)
 
-      .legend-label(v-if="provider_name=='insee'")
+      .legend-label(v-if="providerName=='insee'")
         .square(:style="{ 'background-color': color_512 }")
         span DOWN (y compris API de secours)
 
       <!-- <p>Disponibilité sur 7 jours: <span :class="slaRatingClass">{{ meanSla }}%</span></p> -->
-      p(:id="provider_name")
+      p(:id="providerName")
         <!-- Visavail.js chart will be inserted here -->
 
     br
@@ -64,7 +64,7 @@ export default {
     meanSla: function() {
       let slaSum = 0;
       let slaCount = 0;
-      this.endpoints_availability_history.forEach(function(ep) {
+      this.endpointsAvailabilityHistory.forEach(function(ep) {
         slaSum += ep.sla;
         slaCount++;
       });
@@ -74,7 +74,7 @@ export default {
     dataset: function() {
       let dataset = [];
       let vm = this;
-      this.endpoints_availability_history.forEach(function(ep) {
+      this.endpointsAvailabilityHistory.forEach(function(ep) {
         let computedName = (
           "v" +
           ep.api_version +
@@ -114,7 +114,7 @@ export default {
 
   mounted: function() {
     let chart = visavailChart().width(800);
-    d3.select("#" + this.provider_name)
+    d3.select("#" + this.providerName)
       .datum(this.dataset)
       .call(chart);
   }

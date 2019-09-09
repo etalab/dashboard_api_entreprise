@@ -6,8 +6,8 @@
       endpoint-history-element(
         v-for="provider in providersHistory"
         :key="provider.id"
-        :provider_name="provider.provider_name"
-        :endpoints_availability_history="provider.endpoints_availability_history")
+        :provider-name="provider.provider_name"
+        :endpoints-availability-history="provider.endpoints_availability_history")
 
       br
 </template>

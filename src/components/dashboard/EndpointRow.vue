@@ -18,8 +18,8 @@ export default {
       default: ""
     },
     code: {
-      type: String,
-      default: ""
+      type: Number,
+      default: 0
     },
     timestamp: {
       type: String,
