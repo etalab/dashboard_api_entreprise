@@ -28,12 +28,12 @@ export default {
     };
   },
 
-  created: function() {
-    this.$store.dispatch("role/index");
-  },
-
   computed: {
     ...mapGetters(["index"])
+  },
+
+  created: function() {
+    this.$store.dispatch("role/index");
   },
 
   methods: {

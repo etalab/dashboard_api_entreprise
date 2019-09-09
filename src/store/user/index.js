@@ -47,7 +47,7 @@ const getters = {
     );
   },
 
-  allowedRoles(state, getters, rootState, rootGetters) {
+  allowedRoles(state, _getters, _rootState, rootGetters) {
     const allRoles = cloneDeep(rootGetters["role/index"]);
     const taggedRoles = allRoles.map(role => {
       role.allowed = state.user.allowed_roles.includes(role.code);
@@ -103,7 +103,7 @@ const mutations = {
 };
 
 const actions = {
-  get({ dispatch, commit, rootGetters }, { userId } = {}) {
+  get({ dispatch, _commit, rootGetters }, { userId } = {}) {
     const uid = userId || rootGetters["auth/currentUser"].id;
     dispatch("role/index", null, { root: true })
       .then(() =>
@@ -151,14 +151,14 @@ const actions = {
     ).then(data => commit("addToken", data.new_token));
   },
 
-  blacklistToken({ dispatch, commit, getters, rootGetters }, payload) {
+  blacklistToken({ dispatch, _commit, getters, _rootGetters }, payload) {
     const userId = getters.userDetails.id;
     let url = `users/${userId}/jwt_api_entreprise/blacklist`;
     dispatch(
       "api/admin/post",
       { url: url, params: payload },
       { root: true }
-    ).then(data => dispatch("get", { userId }));
+    ).then(() => dispatch("get", { userId }));
   },
 
   addRoles({ dispatch, getters }, roles) {
@@ -167,7 +167,7 @@ const actions = {
       "api/admin/post",
       { url: `/users/${userId}/add_roles`, params: roles },
       { root: true }
-    ).then(data => dispatch("user/get", { userId }));
+    ).then(() => dispatch("user/get", { userId }));
   }
 };
 

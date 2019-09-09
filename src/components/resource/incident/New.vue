@@ -46,7 +46,7 @@ export default {
       this.$store
         .dispatch("incident/create", payload)
         .then(() => this.reset())
-        .catch(e => {
+        .catch(() => {
           // TODO display forms server validation errors
         });
     },

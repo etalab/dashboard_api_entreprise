@@ -23,6 +23,10 @@ import { mapGetters } from "vuex";
 export default {
   name: "UserAllowedRoles",
 
+  components: {
+    "user-add-roles-form": UserAddRolesForm
+  },
+
   computed: {
     ...mapGetters({
       userDetails: "user/userDetails",
@@ -34,10 +38,6 @@ export default {
     userGrantedTokenCreation() {
       return this.isAdmin && this.allowedToCreateToken;
     }
-  },
-
-  components: {
-    "user-add-roles-form": UserAddRolesForm
   }
 };
 </script>

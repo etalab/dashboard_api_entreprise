@@ -41,12 +41,12 @@ export default {
     };
   },
 
-  created: function() {
-    this.$store.dispatch("user/index/index");
-  },
-
   computed: {
     ...mapGetters(["userList"])
+  },
+
+  created: function() {
+    this.$store.dispatch("user/index/index");
   },
 
   methods: {

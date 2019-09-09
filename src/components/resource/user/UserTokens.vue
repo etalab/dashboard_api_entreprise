@@ -20,6 +20,11 @@ import { mapGetters } from "vuex";
 export default {
   name: "UserTokens",
 
+  components: {
+    "jwt-api-entreprise-new": JWTAPIEntrepriseNew,
+    "jwt-api-entreprise-index": JWTAPIEntrepriseIndex
+  },
+
   computed: {
     ...mapGetters({
       tokens: "user/tokens",
@@ -27,11 +32,6 @@ export default {
       allowedToCreateToken: "user/allowedToCreateToken",
       isAdmin: "auth/isAdmin"
     })
-  },
-
-  components: {
-    "jwt-api-entreprise-new": JWTAPIEntrepriseNew,
-    "jwt-api-entreprise-index": JWTAPIEntrepriseIndex
   }
 };
 </script>

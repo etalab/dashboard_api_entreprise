@@ -12,6 +12,14 @@ import { mapGetters } from "vuex";
 export default {
   name: "ApplicationPanel",
 
+  components: {
+    "navigation-menu": NavigationMenu
+  },
+
+  computed: {
+    ...mapGetters({ showNavigationMenu: "ui/showNavigationMenu" })
+  },
+
   // redirect to '/login' when no user is logged in
   updated() {
     this.$store.dispatch("ui/load");
@@ -19,14 +27,6 @@ export default {
 
   created() {
     this.$store.dispatch("ui/load");
-  },
-
-  computed: {
-    ...mapGetters({ showNavigationMenu: "ui/showNavigationMenu" })
-  },
-
-  components: {
-    "navigation-menu": NavigationMenu
   }
 };
 </script>

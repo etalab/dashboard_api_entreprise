@@ -26,7 +26,24 @@
 export default {
   name: "IncidentUpdate",
 
-  props: ["id", "title", "subtitle", "description"],
+  props: {
+    id: {
+      type: String,
+      default: ""
+    },
+    title: {
+      type: String,
+      default: ""
+    },
+    subtitle: {
+      type: String,
+      default: ""
+    },
+    description: {
+      type: String,
+      default: ""
+    }
+  },
 
   data() {
     return {
@@ -48,7 +65,7 @@ export default {
       this.$store
         .dispatch("incident/update", { params: payload, incidentId: this.id })
         .then(() => this.reset())
-        .catch(e => {
+        .catch(() => {
           // TODO display forms server validation errors
         });
     },

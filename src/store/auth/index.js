@@ -14,7 +14,7 @@ const getters = {
     return state.user;
   },
 
-  isAdmin(state, getters) {
+  isAdmin(_state, getters) {
     const user = getters.currentUser;
     return user && user.isAdmin();
   }
@@ -31,7 +31,7 @@ const mutations = {
 };
 
 const actions = {
-  login({ dispatch, commit }, params) {
+  login({ dispatch, _commit }, params) {
     return dispatch(
       "api/admin/post",
       { url: "/users/login", params: params },

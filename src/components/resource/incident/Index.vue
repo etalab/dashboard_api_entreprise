@@ -23,8 +23,9 @@ import marked from "marked";
 export default {
   name: "IncidentsIndex",
 
-  created: function() {
-    this.$store.dispatch("incident/index");
+  components: {
+    "incident-new": IncidentNew,
+    "incident-update": IncidentUpdate
   },
 
   computed: {
@@ -34,15 +35,14 @@ export default {
     })
   },
 
+  created: function() {
+    this.$store.dispatch("incident/index");
+  },
+
   methods: {
     toHtml(markdownText) {
       return marked(markdownText);
     }
-  },
-
-  components: {
-    "incident-new": IncidentNew,
-    "incident-update": IncidentUpdate
   }
 };
 </script>

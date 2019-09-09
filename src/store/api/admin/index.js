@@ -15,7 +15,7 @@ const http = axios.create({
 });
 
 const actions = {
-  get(ctx, { url, params = {} }) {
+  get(_ctx, { url, params = {} }) {
     return new Promise((resolve, reject) => {
       http
         .get(url, { params })
@@ -24,7 +24,7 @@ const actions = {
     });
   },
 
-  post(ctx, { url, params = {} }) {
+  post(_ctx, { url, params = {} }) {
     return new Promise((resolve, reject) => {
       http
         .post(url, params)
@@ -33,7 +33,7 @@ const actions = {
     });
   },
 
-  put(ctx, { url, params = {} }) {
+  put(_ctx, { url, params = {} }) {
     return new Promise((resolve, reject) => {
       http
         .put(url, params)
@@ -42,7 +42,7 @@ const actions = {
     });
   },
 
-  updateAuthorizationBearer(ctx) {
+  updateAuthorizationBearer(_ctx) {
     http.defaults.headers["Authorization"] = "Bearer " + localStorage.token;
   }
 };

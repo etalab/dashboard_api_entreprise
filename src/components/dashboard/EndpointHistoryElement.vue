@@ -36,7 +36,20 @@ require("@/assets/visavail/visavail.css");
 
 export default {
   name: "EndpointHistoryElement",
-  props: ["providerName", "endpointsAvailabilityHistory"],
+
+  props: {
+    providerName: {
+      type: String,
+      default: ""
+    },
+    endpointsAvailabilityHistory: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
+  },
+
   data: function() {
     return {
       color_200: "#5CB85C",
@@ -46,6 +59,7 @@ export default {
       color_512: "#D8386D"
     };
   },
+
   computed: {
     meanSla: function() {
       let slaSum = 0;
@@ -97,6 +111,7 @@ export default {
       }
     }
   },
+
   mounted: function() {
     let chart = visavailChart().width(800);
     d3.select("#" + this.provider_name)

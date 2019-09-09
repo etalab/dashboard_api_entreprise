@@ -19,21 +19,25 @@ const { mapGetters } = createNamespacedHelpers("dashboard");
 
 export default {
   name: "EndpointHistory",
+
+  components: {
+    EndpointHistoryElement
+  },
+
   computed: {
     ...mapGetters(["providersHistory"])
   },
+
   mounted: function() {
     this.loadHistoricalData();
   },
+
   methods: {
     loadHistoricalData: function() {
       this.$store
         .dispatch("dashboard/providersHistory")
         .catch(error => console.trace(error.message));
     }
-  },
-  components: {
-    EndpointHistoryElement
   }
 };
 </script>

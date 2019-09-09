@@ -18,16 +18,21 @@ import { mapGetters } from "vuex";
 export default {
   name: "UserTabs",
 
-  props: ["userId"],
-
-  created: function() {
-    this.$store.dispatch("user/get", { userId: this.userId });
+  props: {
+    userId: {
+      type: String,
+      default: ""
+    }
   },
 
   computed: {
     ...mapGetters({
       isAdmin: "auth/isAdmin"
     })
+  },
+
+  created: function() {
+    this.$store.dispatch("user/get", { userId: this.userId });
   },
 
   methods: {

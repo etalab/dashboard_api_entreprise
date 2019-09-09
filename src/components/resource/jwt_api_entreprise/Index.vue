@@ -16,7 +16,14 @@ export default {
     "jwt-api-entreprise-show": JwtApiEntrepriseShow
   },
 
-  props: ["jwtList"]
+  props: {
+    jwtList: {
+      type: Object,
+      default() {
+        return {};
+      }
+    }
+  }
 };
 </script>
 

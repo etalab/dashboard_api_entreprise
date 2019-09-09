@@ -62,6 +62,7 @@ const { mapState } = createNamespacedHelpers("user/create");
 
 export default {
   name: "UserNew",
+
   data() {
     return {
       validationErrorMsg: "",
@@ -173,7 +174,7 @@ export default {
         // TODO handle routing and error with vuex
         this.$store
           .dispatch("user/create/submit")
-          .then(data => this.$router.push({ name: "users" }))
+          .then(() => this.$router.push({ name: "users" }))
           .catch(e => {
             this.validationErrorMsg = e.response.data.errors;
             this.validationFailure = true;

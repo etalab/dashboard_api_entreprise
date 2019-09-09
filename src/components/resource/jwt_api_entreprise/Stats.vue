@@ -11,7 +11,6 @@
 import ApisUsage from "@/components/resource/stats/ApisUsage";
 import LastCalls from "@/components/resource/stats/LastCalls";
 import StatsGauge from "@/components/resource/stats/Gauge";
-import { mapGetters } from "vuex";
 
 export default {
   name: "JwtStats",
@@ -22,8 +21,12 @@ export default {
     statsGauge: StatsGauge
   },
 
-  props: ["jwtId"],
-
+  props: {
+    jwtId: {
+      type: String,
+      default: ""
+    }
+  },
   created: function() {
     this.$store.dispatch("stats/fetch", { jti: this.jwtId });
   },

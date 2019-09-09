@@ -39,7 +39,7 @@ export default {
       this.$store
         .dispatch("user/addRoles", { roles: this.checked_roles })
         .then(() => this.reset())
-        .catch(e => {
+        .catch(() => {
           // TODO something went wrong
         });
     },

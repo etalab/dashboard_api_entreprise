@@ -6,7 +6,7 @@
       h2 Notes
 
       .form__group
-        textarea(rows="8" cols="100" v-model="noteField" id="notes")
+        textarea(rows="8" cols="100" v-model="noteField")
 
       .action-buttons
         button.button.small(@click="submit") Valider
@@ -14,12 +14,19 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
   name: "NoteUpdate",
 
-  props: ["userId", "note"],
+  props: {
+    userId: {
+      type: String,
+      default: ""
+    },
+    note: {
+      type: String,
+      default: ""
+    }
+  },
 
   data() {
     return {
@@ -39,7 +46,7 @@ export default {
         .then(() => {
           this.dialog = false;
         })
-        .catch(e => {
+        .catch(() => {
           // TODO something went wrong
         });
     },

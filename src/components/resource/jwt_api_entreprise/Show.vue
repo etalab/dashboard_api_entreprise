@@ -98,8 +98,14 @@ import { mapGetters } from "vuex";
 export default {
   name: "JwtApiEntrepriseShow",
 
-  props: ["jwt"],
-
+  props: {
+    jwt: {
+      type: Object,
+      default() {
+        return {};
+      }
+    }
+  },
   data() {
     return {
       showClipboardSuccessMsg: false,

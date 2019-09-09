@@ -13,16 +13,26 @@ import StatsBar from "@/components/resource/stats/Bar";
 
 export default {
   name: "StatsHistogram",
+
   components: {
     statsBar: StatsBar
   },
-  props: ["items"],
+
+  props: {
+    items: {
+      type: Object,
+      default() {
+        return {};
+      }
+    }
+  },
+
   data() {
     return {};
   },
+
   methods: {
-    changeSpan: function(time) {
-      console.log("pouet");
+    changeSpan: function() {
       // load new results
     }
   }

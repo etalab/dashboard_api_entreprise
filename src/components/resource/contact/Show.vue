@@ -18,7 +18,15 @@
 <script>
 export default {
   name: "ContactTile",
-  props: ["contact"],
+
+  props: {
+    contact: {
+      type: Object,
+      default() {
+        return {};
+      }
+    }
+  },
 
   computed: {
     contactLabel() {
@@ -32,6 +40,7 @@ export default {
         case "other":
           return "Autre contact";
       }
+      return null;
     }
   }
 };

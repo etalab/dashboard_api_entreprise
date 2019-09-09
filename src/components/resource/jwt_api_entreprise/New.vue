@@ -70,7 +70,7 @@ export default {
       this.$store
         .dispatch("user/createToken", payload)
         .then(() => this.reset())
-        .catch(e => {
+        .catch(() => {
           // TODO something went wrong
         });
     },

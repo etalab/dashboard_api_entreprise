@@ -11,13 +11,29 @@ import "@/assets/moment-fr.js";
 
 export default {
   name: "Endpoint",
-  props: ["name", "code", "timestamp"],
+
+  props: {
+    name: {
+      type: String,
+      default: ""
+    },
+    code: {
+      type: String,
+      default: ""
+    },
+    timestamp: {
+      type: String,
+      default: ""
+    }
+  },
+
   data() {
     return {
       status: "",
       statusClass: ""
     };
   },
+
   created: function() {
     switch (this.code) {
       case 200:
@@ -34,6 +50,7 @@ export default {
         break;
     }
   },
+
   methods: {
     timestampMoment: function(timestamp) {
       return moment(timestamp).fromNow();
