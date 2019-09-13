@@ -103,7 +103,7 @@ const mutations = {
 };
 
 const actions = {
-  get({ dispatch, _commit, rootGetters }, { userId } = {}) {
+  get({ dispatch, rootGetters }, { userId } = {}) {
     const uid = userId || rootGetters["auth/currentUser"].id;
     dispatch("role/index", null, { root: true })
       .then(() =>
@@ -151,7 +151,7 @@ const actions = {
     ).then(data => commit("addToken", data.new_token));
   },
 
-  blacklistToken({ dispatch, _commit, getters, _rootGetters }, payload) {
+  blacklistToken({ dispatch, getters }, payload) {
     const userId = getters.userDetails.id;
     let url = `users/${userId}/jwt_api_entreprise/blacklist`;
     dispatch(

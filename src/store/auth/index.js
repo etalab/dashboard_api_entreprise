@@ -31,7 +31,7 @@ const mutations = {
 };
 
 const actions = {
-  login({ dispatch, _commit }, params) {
+  login({ dispatch }, params) {
     return dispatch(
       "api/admin/post",
       { url: "/users/login", params: params },
