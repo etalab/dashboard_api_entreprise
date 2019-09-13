@@ -23,11 +23,6 @@ import marked from "marked";
 export default {
   name: "IncidentsIndex",
 
-  components: {
-    "incident-new": IncidentNew,
-    "incident-update": IncidentUpdate
-  },
-
   computed: {
     ...mapGetters({
       index: "incident/orderedIndex",
@@ -43,6 +38,11 @@ export default {
     toHtml(markdownText) {
       return marked(markdownText);
     }
+  },
+
+  components: {
+    "incident-new": IncidentNew,
+    "incident-update": IncidentUpdate
   }
 };
 </script>

@@ -37,10 +37,6 @@ const { mapGetters } = createNamespacedHelpers("dashboard");
 export default {
   name: "EndpointsView",
 
-  components: {
-    "endpoint-row": EndpointRow
-  },
-
   computed: {
     ...mapGetters(["endpoints", "homepageCode"]),
     endpointsV2: function() {
@@ -71,6 +67,10 @@ export default {
         .dispatch("dashboard/homepageCode")
         .catch(error => console.trace(error.messsage));
     }
+  },
+
+  components: {
+    "endpoint-row": EndpointRow
   }
 };
 </script>

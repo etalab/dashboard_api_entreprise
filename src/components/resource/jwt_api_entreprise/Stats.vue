@@ -15,12 +15,6 @@ import StatsGauge from "@/components/resource/stats/Gauge";
 export default {
   name: "JwtStats",
 
-  components: {
-    "apis-usage": ApisUsage,
-    "last-calls": LastCalls,
-    statsGauge: StatsGauge
-  },
-
   props: {
     jwtId: {
       type: String,
@@ -35,6 +29,12 @@ export default {
     goToPreviousPage: function() {
       this.$router.go(-1);
     }
+  },
+
+  components: {
+    "apis-usage": ApisUsage,
+    "last-calls": LastCalls,
+    statsGauge: StatsGauge
   }
 };
 </script>

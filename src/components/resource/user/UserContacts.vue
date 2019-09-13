@@ -23,10 +23,6 @@ import { mapGetters } from "vuex";
 export default {
   name: "UserContacts",
 
-  components: {
-    "contact-tile": ContactTile
-  },
-
   computed: {
     ...mapGetters({
       accountContacts: "user/accountContacts",
@@ -34,6 +30,10 @@ export default {
       allowedToCreateToken: "user/allowedToCreateToken",
       isAdmin: "auth/isAdmin"
     })
+  },
+
+  components: {
+    "contact-tile": ContactTile
   }
 };
 </script>

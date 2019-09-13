@@ -12,10 +12,6 @@ import { mapGetters } from "vuex";
 export default {
   name: "ApplicationPanel",
 
-  components: {
-    "navigation-menu": NavigationMenu
-  },
-
   computed: {
     ...mapGetters({ showNavigationMenu: "ui/showNavigationMenu" })
   },
@@ -27,6 +23,10 @@ export default {
 
   created() {
     this.$store.dispatch("ui/load");
+  },
+
+  components: {
+    "navigation-menu": NavigationMenu
   }
 };
 </script>

@@ -12,10 +12,6 @@ import JwtApiEntrepriseShow from "@/components/resource/jwt_api_entreprise/Show"
 export default {
   name: "JwtApiEntrepriseIndex",
 
-  components: {
-    "jwt-api-entreprise-show": JwtApiEntrepriseShow
-  },
-
   props: {
     jwtList: {
       type: Array,
@@ -23,6 +19,10 @@ export default {
         return [];
       }
     }
+  },
+
+  components: {
+    "jwt-api-entreprise-show": JwtApiEntrepriseShow
   }
 };
 </script>

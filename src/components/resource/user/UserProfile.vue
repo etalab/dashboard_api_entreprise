@@ -30,12 +30,6 @@ import marked from "marked";
 export default {
   name: "UserProfile",
 
-  components: {
-    "user-add-roles-form": UserAddRolesForm,
-    "user-allowed-roles": UserAllowedRoles,
-    "note-update": NoteUpdate
-  },
-
   computed: {
     ...mapGetters({
       userDetails: "user/userDetails",
@@ -57,6 +51,12 @@ export default {
         return marked(markdownText);
       }
     }
+  },
+
+  components: {
+    "user-add-roles-form": UserAddRolesForm,
+    "user-allowed-roles": UserAllowedRoles,
+    "note-update": NoteUpdate
   }
 };
 </script>
