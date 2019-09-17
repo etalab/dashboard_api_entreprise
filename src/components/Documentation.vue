@@ -165,12 +165,12 @@
 
 <script>
 export default {
-  name: 'documentation'
-}
+  name: "Documentation"
+};
 </script>
 
 <style>
-  code {
-    color: initial;
-  }
+code {
+  color: initial;
+}
 </style>

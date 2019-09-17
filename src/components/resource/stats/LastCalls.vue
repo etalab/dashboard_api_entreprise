@@ -16,28 +16,26 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'statsTable',
+  name: "StatsTable",
 
-  data () {
+  data() {
     return {
-      tableTitle: 'Derniers appels',
-      headers: ['Endpoint', 'Paramètres', 'Code retour']
-    }
+      tableTitle: "Derniers appels",
+      headers: ["Endpoint", "Paramètres", "Code retour"]
+    };
   },
 
   computed: {
-    ...mapGetters('stats', [
-      'orderedLastCalls'
-    ])
+    ...mapGetters("stats", ["orderedLastCalls"])
   }
-}
+};
 </script>
 
 <style lang="scss">
-  .return-code {
-    width: 90px;
-  }
+.return-code {
+  width: 90px;
+}
 </style>

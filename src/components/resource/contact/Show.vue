@@ -17,40 +17,49 @@
 
 <script>
 export default {
-  name: 'contact-tile',
-  props: ['contact'],
+  name: "ContactTile",
 
-  computed: {
-    contactLabel () {
-      switch (this.contact.contact_type) {
-        case 'admin':
-          return 'Contact administratif'
-        case 'tech':
-          return 'Contact technique'
-        case 'token':
-          return 'Contact ré-utilisateur'
-        case 'other':
-          return 'Autre contact'
+  props: {
+    contact: {
+      type: Object,
+      default() {
+        return {};
       }
     }
+  },
+
+  computed: {
+    contactLabel() {
+      switch (this.contact.contact_type) {
+        case "admin":
+          return "Contact administratif";
+        case "tech":
+          return "Contact technique";
+        case "token":
+          return "Contact ré-utilisateur";
+        case "other":
+          return "Autre contact";
+      }
+      return null;
+    }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .panel {
-    flex: 1;
-  }
+.panel {
+  flex: 1;
+}
 
-  h4 {
-    margin-top: 0;
-  }
+h4 {
+  margin-top: 0;
+}
 
-  .contact-item {
-    margin-bottom: 1em;
-  }
+.contact-item {
+  margin-bottom: 1em;
+}
 
-  .label {
-    color: $color-dark-grey;
-  }
+.label {
+  color: $color-dark-grey;
+}
 </style>

@@ -17,70 +17,71 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-const { mapGetters } = createNamespacedHelpers('role')
+import { createNamespacedHelpers } from "vuex";
+const { mapGetters } = createNamespacedHelpers("role");
 
 export default {
-  name: 'user-add-roles-form',
+  name: "UserAddRolesForm",
 
-  data () {
+  data() {
     return {
       dialog: false,
       checked_roles: []
-    }
+    };
   },
 
   computed: {
-    ...mapGetters(['index'])
+    ...mapGetters(["index"])
   },
 
   methods: {
-    submit: function () {
-      this.$store.dispatch('user/addRoles', { roles: this.checked_roles })
+    submit: function() {
+      this.$store
+        .dispatch("user/addRoles", { roles: this.checked_roles })
         .then(() => this.reset())
-        .catch(e => {
+        .catch(() => {
           // TODO something went wrong
-        })
+        });
     },
 
-    reset: function () {
-      this.checked_roles = []
-      this.dialog = false
+    reset: function() {
+      this.checked_roles = [];
+      this.dialog = false;
     },
-    showDialog: function () {
-      this.dialog = true
+    showDialog: function() {
+      this.dialog = true;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  label.label-inline {
-    color: $color-black;
-  }
+label.label-inline {
+  color: $color-black;
+}
 
-  .dialog-backdrop {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-  }
+.dialog-backdrop {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
 
-  .dialog {
-    display: inline-block;
-  }
+.dialog {
+  display: inline-block;
+}
 
-  h2 {
-    margin-top: 0;
-  }
+h2 {
+  margin-top: 0;
+}
 
-  .action-buttons {
-    margin-top: 2em;
-  }
+.action-buttons {
+  margin-top: 2em;
+}
 </style>

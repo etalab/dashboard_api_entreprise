@@ -17,48 +17,48 @@
 </template>
 
 <script>
-import UserAddRolesForm from '@/components/resource/user/AddRoles'
-import { mapGetters } from 'vuex'
+import UserAddRolesForm from "@/components/resource/user/AddRoles";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'user-allowed-roles',
+  name: "UserAllowedRoles",
 
   computed: {
     ...mapGetters({
-      userDetails: 'user/userDetails',
-      allowedRoles: 'user/allowedRoles',
-      allowedToCreateToken: 'user/allowedToCreateToken',
-      isAdmin: 'auth/isAdmin'
+      userDetails: "user/userDetails",
+      allowedRoles: "user/allowedRoles",
+      allowedToCreateToken: "user/allowedToCreateToken",
+      isAdmin: "auth/isAdmin"
     }),
 
-    userGrantedTokenCreation () {
-      return (this.isAdmin && this.allowedToCreateToken)
+    userGrantedTokenCreation() {
+      return this.isAdmin && this.allowedToCreateToken;
     }
   },
 
   components: {
-    'user-add-roles-form': UserAddRolesForm
+    "user-add-roles-form": UserAddRolesForm
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .enabled :last-child {
-    color: $color-blue;
-    font-weight: 700;
-  }
+.enabled :last-child {
+  color: $color-blue;
+  font-weight: 700;
+}
 
-  tr.disabled {
-    color: $color-dark-grey;
-    background: $color-white;
-  }
+tr.disabled {
+  color: $color-dark-grey;
+  background: $color-white;
+}
 
-  h2 {
-    display: inline-block;
-  }
+h2 {
+  display: inline-block;
+}
 
-  h2 + span {
-    margin-left: 0.75em;
-    color: $color-dark-grey;
-  }
+h2 + span {
+  margin-left: 0.75em;
+  color: $color-dark-grey;
+}
 </style>

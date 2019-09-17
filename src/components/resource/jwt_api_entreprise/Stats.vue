@@ -8,33 +8,35 @@
 </template>
 
 <script>
-import ApisUsage from '@/components/resource/stats/ApisUsage'
-import LastCalls from '@/components/resource/stats/LastCalls'
-import StatsGauge from '@/components/resource/stats/Gauge'
-import { mapGetters } from 'vuex'
+import ApisUsage from "@/components/resource/stats/ApisUsage";
+import LastCalls from "@/components/resource/stats/LastCalls";
+import StatsGauge from "@/components/resource/stats/Gauge";
 
 export default {
-  name: 'jwt-stats',
+  name: "JwtStats",
 
-  props: ['jwtId'],
-
-  created: function () {
-    this.$store.dispatch('stats/fetch', { jti: this.jwtId })
+  props: {
+    jwtId: {
+      type: String,
+      default: ""
+    }
   },
-
-  components: {
-    'apis-usage': ApisUsage,
-    'last-calls': LastCalls,
-    'statsGauge': StatsGauge
+  created: function() {
+    this.$store.dispatch("stats/fetch", { jti: this.jwtId });
   },
 
   methods: {
-    goToPreviousPage: function () {
-      this.$router.go(-1)
+    goToPreviousPage: function() {
+      this.$router.go(-1);
     }
+  },
+
+  components: {
+    "apis-usage": ApisUsage,
+    "last-calls": LastCalls,
+    statsGauge: StatsGauge
   }
-}
+};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
