@@ -1,3 +1,5 @@
+import { orderBy } from "lodash";
+
 const state = {
   user_index: []
 };
@@ -11,6 +13,9 @@ const getters = {
 const mutations = {
   fill(state, users) {
     state.user_index = users;
+  },
+  orderIndexBy(state, { element, direction }) {
+    state.user_index = orderBy(state.user_index, element, direction);
   }
 };
 

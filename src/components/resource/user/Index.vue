@@ -1,20 +1,17 @@
 <template lang="pug">
   .main
     .panel
-      //- .panel__header
-      //-   h2 Liste des utilisateurs
-      //-   button.button.small.title-button(@click="userForm") Ajouter un utilisateur
-
       .form__group
         .panel
-          h3 Liste des utilisateurs
-          button.button.small.title-button(@click="userForm") Ajouter un utilisateur
-          input.table__filter(v-model="search", placeholder="recherche par UUID, email, contexte")
+          .header
+            h3 Liste des utilisateurs
+            button.button.small.title-button(@click="userForm") Ajouter un utilisateur
+            input.table__filter(v-model="search", placeholder="recherche par UUID, email, contexte")
           table.table
             thead
-              th.ascending E-mail
-              th.descending Contexte
-              th.ascending Confirmé
+              th.ascending(@click='sortBy("email")' v-bind:class="{ descending: isDesc(order.email) }") E-mail
+              th.ascending(@click='sortBy("context")' v-bind:class="{ descending: isDesc(order.context) }") Contexte
+              th.ascending(@click='sortBy("confirmed")' v-bind:class="{ descending: isDesc(order.confirmed) }") Confirmé
             tr(v-for="user in userList")
               td
                 router-link(:to="{ name: 'admin-user-profile', params: { userId: user.email }}") {{ user.email }}
@@ -33,7 +30,12 @@ export default {
   data() {
     return {
       title: "Utilisateurs",
-      search: ""
+      search: "",
+      order: {
+        email: "asc",
+        context: "asc",
+        confirmed: "asc"
+      }
     };
   },
 
@@ -48,23 +50,30 @@ export default {
   methods: {
     userForm: function() {
       this.$router.push({ name: "userNew" });
+    },
+    toggleOrderSort: function(element) {
+      if (this.order[element] == "asc") {
+        this.order[element] = "desc";
+        return "desc";
+      } else {
+        this.order[element] = "asc";
+        return "asc";
+      }
+    },
+    sortBy: function(element) {
+      this.$store.commit("user/index/orderIndexBy", {
+        element: element,
+        direction: this.toggleOrderSort(element)
+      });
+    },
+    isDesc: function(order) {
+      return order == "desc";
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.panel > h3,
-.panel > button {
-  display: inline-block;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.panel > button {
-  float: right;
-}
-
 td,
 th {
   word-break: initial;
