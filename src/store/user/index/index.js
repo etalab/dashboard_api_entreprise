@@ -1,21 +1,47 @@
 import { orderBy } from "lodash";
 
 const state = {
-  user_index: []
+  userIndex: [],
+  search: ""
 };
 
 const getters = {
+  search(state) {
+    return state.search;
+  },
   userList(state) {
-    return state.user_index;
+    return state.userIndex;
+  },
+  userListFiltered(state) {
+    if (state.search == "") {
+      return state.userIndex;
+    }
+
+    // Removing special chars from regexp to match litteral string
+    const regex = new RegExp(
+      state.search.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&"),
+      "gi"
+    );
+
+    return state.userIndex.filter(item => {
+      return (
+        item.id.match(regex) ||
+        item.context.match(regex) ||
+        item.email.match(regex)
+      );
+    });
   }
 };
 
 const mutations = {
   fill(state, users) {
-    state.user_index = users;
+    state.userIndex = users;
   },
   orderIndexBy(state, { element, direction }) {
-    state.user_index = orderBy(state.user_index, element, direction);
+    state.userIndex = orderBy(state.userIndex, element, direction);
+  },
+  updateSearch(state, search) {
+    state.search = search;
   }
 };
 

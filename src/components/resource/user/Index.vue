@@ -12,7 +12,7 @@
               th.ascending(@click='sortBy("email")' v-bind:class="{ descending: isDesc(order.email) }") E-mail
               th.ascending(@click='sortBy("context")' v-bind:class="{ descending: isDesc(order.context) }") Contexte
               th.ascending(@click='sortBy("confirmed")' v-bind:class="{ descending: isDesc(order.confirmed) }") Confirmé
-            tr(v-for="user in userList")
+            tr(v-for="user in userListFiltered")
               td
                 router-link(:to="{ name: 'admin-user-profile', params: { userId: user.email }}") {{ user.email }}
               td {{ user.context }}
@@ -30,7 +30,6 @@ export default {
   data() {
     return {
       title: "Utilisateurs",
-      search: "",
       order: {
         email: "asc",
         context: "asc",
@@ -40,7 +39,15 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["userList"])
+    ...mapGetters(["userListFiltered"]),
+    search: {
+      get() {
+        return this.$store.state.user.index.search;
+      },
+      set(value) {
+        this.$store.commit("user/index/updateSearch", value);
+      }
+    }
   },
 
   created: function() {
