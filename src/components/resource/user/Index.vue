@@ -9,10 +9,12 @@
             input.table__filter(v-model="search", placeholder="recherche par UUID, email, contexte")
           table.table
             thead
+              th.ascending(@click='sortBy("created_at")' v-bind:class="{ descending: isDesc(order.dateCreation) }") Date de création
               th.ascending(@click='sortBy("email")' v-bind:class="{ descending: isDesc(order.email) }") E-mail
               th.ascending(@click='sortBy("context")' v-bind:class="{ descending: isDesc(order.context) }") Contexte
               th.ascending(@click='sortBy("confirmed")' v-bind:class="{ descending: isDesc(order.confirmed) }") Confirmé
             tr(v-for="user in userListFiltered")
+              td {{ user.created_at | formatDate }}
               td
                 router-link(:to="{ name: 'admin-user-profile', params: { userId: user.email }}") {{ user.email }}
               td {{ user.context }}
@@ -32,6 +34,7 @@ export default {
       title: "Utilisateurs",
       order: {
         email: "asc",
+        dateCreation: "asc",
         context: "asc",
         confirmed: "asc"
       }
@@ -52,6 +55,13 @@ export default {
 
   created: function() {
     this.$store.dispatch("user/index/index");
+  },
+
+  filters: {
+    formatDate: function(date) {
+      const parsed = Date.parse(date);
+      return new Date(parsed).toLocaleDateString("fr-FR");
+    }
   },
 
   methods: {

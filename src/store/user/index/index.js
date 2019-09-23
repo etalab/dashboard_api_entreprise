@@ -12,9 +12,9 @@ const getters = {
   userList(state) {
     return state.userIndex;
   },
-  userListFiltered(state) {
+  userListFiltered(state, getters) {
     if (state.search == "") {
-      return state.userIndex;
+      return getters.userList;
     }
 
     // Removing special chars from regexp to match litteral string
