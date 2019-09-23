@@ -9,7 +9,7 @@
             input.table__filter(v-model="search", placeholder="recherche par UUID, email, contexte")
           table.table
             thead
-              th.ascending(@click='sortBy("created_at")' v-bind:class="{ descending: isDesc(order.dateCreation) }") Date de création
+              th.ascending(@click='sortBy("created_at")' v-bind:class="{ descending: isDesc(order.dateCreation) }") Date création
               th.ascending(@click='sortBy("email")' v-bind:class="{ descending: isDesc(order.email) }") E-mail
               th.ascending(@click='sortBy("context")' v-bind:class="{ descending: isDesc(order.context) }") Contexte
               th.ascending(@click='sortBy("confirmed")' v-bind:class="{ descending: isDesc(order.confirmed) }") Confirmé
@@ -45,7 +45,7 @@ export default {
     ...mapGetters(["userListFiltered"]),
     search: {
       get() {
-        return this.$store.state.user.index.search;
+        return this.$store.getters["user/index/search"];
       },
       set(value) {
         this.$store.commit("user/index/updateSearch", value);

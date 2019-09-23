@@ -34,7 +34,7 @@ module.exports = {
           "computed",
           "watch",
           "LIFECYCLE_HOOKS",
-           "filters",
+          "filters",
           "methods",
           "components",
           [("template", "render")],
