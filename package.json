@@ -18,7 +18,7 @@
     "d3": "^3.5.17",
     "es6-promise": "^4.2.4",
     "jwt-decode": "^2.2.0",
-    "marked": "^0.6.2",
+    "marked": "^0.7.0",
     "moment": "^2.22.1",
     "template.data.gouv.fr": "^1.2.2",
     "vee-validate": "^2.0.8",
