@@ -17,10 +17,6 @@
       input(v-model="userContext"
       data-vv-name="context")
 
-    .form__group
-      input(type="checkbox" id="token_grant" v-model="tokenGrant")
-      label.label-inline(for="token_grant") Déléguer la création de jetons
-
     .contact__group
       h3 Contact administratif
       .form__group
@@ -148,18 +144,6 @@ export default {
         });
       }
     },
-
-    tokenGrant: {
-      get() {
-        return this.userForm.allowTokenCreation;
-      },
-      set(value) {
-        this.$store.commit("user/create/updateField", {
-          field: "allowTokenCreation",
-          val: value
-        });
-      }
-    }
   },
 
   methods: {

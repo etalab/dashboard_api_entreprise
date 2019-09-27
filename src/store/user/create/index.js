@@ -2,7 +2,6 @@ const initState = () => {
   return {
     email: "",
     context: "",
-    allowTokenCreation: false,
     adminContactEmail: "",
     adminContactPhone: "",
     techContactEmail: "",
@@ -26,7 +25,6 @@ const getters = {
     let payload = {
       email: state.user_form.email,
       context: state.user_form.context,
-      allow_token_creation: state.user_form.allowTokenCreation
     };
     if (contacts.length > 0) payload.contacts = contacts;
 
@@ -61,10 +59,6 @@ const getters = {
       phone_number: state.user_form.techContactPhone,
       contact_type: "tech"
     };
-  },
-
-  allowTokenCreation(state) {
-    return state.user_form.allowTokenCreation;
   }
 };
 
