@@ -24,7 +24,7 @@ const getters = {
 
     let payload = {
       email: state.user_form.email,
-      context: state.user_form.context,
+      context: state.user_form.context
     };
     if (contacts.length > 0) payload.contacts = contacts;
 

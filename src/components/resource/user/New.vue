@@ -143,7 +143,7 @@ export default {
           val: value
         });
       }
-    },
+    }
   },
 
   methods: {
