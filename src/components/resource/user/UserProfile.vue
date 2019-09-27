@@ -21,7 +21,6 @@ div
 </template>
 
 <script>
-import UserAddRolesForm from "@/components/resource/user/AddRoles";
 import UserAllowedRoles from "@/components/resource/user/AllowedRoles";
 import NoteUpdate from "@/components/resource/user/NoteUpdate";
 import { mapGetters } from "vuex";
@@ -36,11 +35,7 @@ export default {
       allowedRoles: "user/allowedRoles",
       allowedToCreateToken: "user/allowedToCreateToken",
       isAdmin: "auth/isAdmin"
-    }),
-
-    userGrantedTokenCreation() {
-      return this.isAdmin && this.allowedToCreateToken;
-    }
+    })
   },
 
   methods: {
@@ -54,7 +49,6 @@ export default {
   },
 
   components: {
-    "user-add-roles-form": UserAddRolesForm,
     "user-allowed-roles": UserAllowedRoles,
     "note-update": NoteUpdate
   }
