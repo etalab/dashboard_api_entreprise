@@ -25,12 +25,6 @@ const getters = {
     );
   },
 
-  tokenContacts(state) {
-    return state.user.contacts.filter(
-      contact => contact.contact_type === "token"
-    );
-  },
-
   tokens(state) {
     let tokens = cloneDeep(state.user.tokens);
     return tokens.sort(

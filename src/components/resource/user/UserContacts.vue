@@ -8,12 +8,6 @@
         contact-tile(class="contact" v-for="(contact, index) in accountContacts" :contact="contact" :key="index")
       p(v-else) Aucune coordonnée de contact
 
-    .profile__group(v-if="allowedToCreateToken || isAdmin")
-      h2 Contacts associés aux tokens
-
-      .contact__container.row(v-if="tokenContacts.length > 0")
-        contact-tile(class="contact" v-for="(contact, index) in tokenContacts" :contact="contact" :key="index")
-      p(v-else) Aucune coordonnée de contact (aucun jeton créé jusqu'ici)
 </template>
 
 <script>
@@ -26,8 +20,6 @@ export default {
   computed: {
     ...mapGetters({
       accountContacts: "user/accountContacts",
-      tokenContacts: "user/tokenContacts",
-      allowedToCreateToken: "user/allowedToCreateToken",
       isAdmin: "auth/isAdmin"
     })
   },
