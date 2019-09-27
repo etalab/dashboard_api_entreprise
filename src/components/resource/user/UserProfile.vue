@@ -33,7 +33,6 @@ export default {
     ...mapGetters({
       userDetails: "user/userDetails",
       allowedRoles: "user/allowedRoles",
-      allowedToCreateToken: "user/allowedToCreateToken",
       isAdmin: "auth/isAdmin"
     })
   },
