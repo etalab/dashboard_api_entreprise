@@ -9,16 +9,28 @@
             input.table__filter(v-model="search", placeholder="recherche par UUID, email, contexte")
           table.table
             thead
-              th.ascending(@click='sortBy("created_at")' v-bind:class="{ descending: isDesc(order.dateCreation) }") Date création
-              th.ascending(@click='sortBy("email")' v-bind:class="{ descending: isDesc(order.email) }") E-mail
-              th.ascending(@click='sortBy("context")' v-bind:class="{ descending: isDesc(order.context) }") Contexte
-              th.ascending(@click='sortBy("confirmed")' v-bind:class="{ descending: isDesc(order.confirmed) }") Confirmé
+              th.ascending(
+                @click='toggleSortBy("created_at")'
+                v-bind:class='{ descending: order["created_at"] == "desc" }'
+              ) Date création
+              th.ascending(
+                @click='toggleSortBy("email")'
+                v-bind:class='{ descending: order["email"] == "desc" }'
+              ) E-mail
+              th.ascending(
+                @click='toggleSortBy("context")'
+                v-bind:class='{ descending: order["context"] == "desc" }'
+              ) Contexte
+              th.ascending(
+                @click='toggleSortBy("confirmed")'
+                v-bind:class='{ descending: order["confirmed"] == "desc" }'
+              ) Confirmé
             tr(v-for="user in userListFiltered")
               td {{ user.created_at | formatDate }}
               td
                 router-link(:to="{ name: 'admin-user-profile', params: { userId: user.email }}") {{ user.email }}
               td {{ user.context }}
-              td {{ user.confirmed }}
+              td {{ user.confirmed | friendlyBoolean }}
 </template>
 
 <script>
@@ -31,18 +43,12 @@ export default {
 
   data() {
     return {
-      title: "Utilisateurs",
-      order: {
-        email: "asc",
-        dateCreation: "asc",
-        context: "asc",
-        confirmed: "asc"
-      }
+      title: "Utilisateurs"
     };
   },
 
   computed: {
-    ...mapGetters(["userListFiltered"]),
+    ...mapGetters(["userListFiltered", "order"]),
     search: {
       get() {
         return this.$store.getters["user/index/search"];
@@ -61,6 +67,9 @@ export default {
     formatDate: function(date) {
       const parsed = Date.parse(date);
       return new Date(parsed).toLocaleDateString("fr-FR");
+    },
+    friendlyBoolean: function(boolean) {
+      return boolean == true ? "Oui" : "Non";
     }
   },
 
@@ -68,23 +77,8 @@ export default {
     userForm: function() {
       this.$router.push({ name: "userNew" });
     },
-    toggleOrderSort: function(element) {
-      if (this.order[element] == "asc") {
-        this.order[element] = "desc";
-        return "desc";
-      } else {
-        this.order[element] = "asc";
-        return "asc";
-      }
-    },
-    sortBy: function(element) {
-      this.$store.commit("user/index/orderIndexBy", {
-        element: element,
-        direction: this.toggleOrderSort(element)
-      });
-    },
-    isDesc: function(order) {
-      return order == "desc";
+    toggleSortBy: function(element) {
+      this.$store.dispatch("user/index/toggleSort", element);
     }
   }
 };
@@ -94,5 +88,25 @@ export default {
 td,
 th {
   word-break: initial;
+}
+
+th {
+  cursor: pointer;
+}
+
+th {
+  // created_at, confirmed
+  &:first-of-type,
+  &:last-of-type {
+    width: 12% !important;
+  }
+  // email
+  &:nth-of-type(2) {
+    width: 30% !important;
+  }
+  // context
+  &:nth-of-type(3) {
+    width: 40% !important;
+  }
 }
 </style>

@@ -1,17 +1,25 @@
-import { orderBy } from "lodash";
+import orderBy from "lodash/orderBy";
 
 const state = {
   userIndex: [],
-  search: ""
+  search: "",
+  order: {
+    created_at: "desc",
+    email: "asc",
+    context: "asc",
+    confirmed: "asc"
+  }
 };
 
 const getters = {
   search(state) {
     return state.search;
   },
+
   userList(state) {
     return state.userIndex;
   },
+
   userListFiltered(state, getters) {
     if (state.search == "") {
       return getters.userList;
@@ -30,6 +38,10 @@ const getters = {
         item.email.match(regex)
       );
     });
+  },
+
+  order(state) {
+    return state.order;
   }
 };
 
@@ -37,9 +49,19 @@ const mutations = {
   fill(state, users) {
     state.userIndex = users;
   },
-  orderIndexBy(state, { element, direction }) {
-    state.userIndex = orderBy(state.userIndex, element, direction);
+
+  toggleOrder(state, element) {
+    if (state.order[element] == "desc") {
+      state.order[element] = "asc";
+    } else if (state.order[element] == "asc") {
+      state.order[element] = "desc";
+    }
   },
+
+  orderIndexBy(state, { element, order }) {
+    state.userIndex = orderBy(state.userIndex, element, order);
+  },
+
   updateSearch(state, search) {
     state.search = search;
   }
@@ -47,9 +69,19 @@ const mutations = {
 
 const actions = {
   index({ commit, dispatch }) {
-    dispatch("api/admin/get", { url: "/users" }, { root: true }).then(data =>
-      commit("fill", data)
-    );
+    dispatch("api/admin/get", { url: "/users" }, { root: true }).then(data => {
+      // Default order: by most recent
+      data = orderBy(data, "created_at", "desc");
+      commit("fill", data);
+    });
+  },
+
+  toggleSort({ commit }, element) {
+    commit("toggleOrder", element);
+    commit("orderIndexBy", {
+      element: element,
+      order: state.order[element]
+    });
   }
 };
 
