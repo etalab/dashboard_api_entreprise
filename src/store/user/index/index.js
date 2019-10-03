@@ -1,4 +1,5 @@
 import orderBy from "lodash/orderBy";
+import { sanitizeNulls } from "@/components/mixins/data";
 
 const state = {
   userIndex: [],
@@ -70,6 +71,7 @@ const mutations = {
 const actions = {
   index({ commit, dispatch }) {
     dispatch("api/admin/get", { url: "/users" }, { root: true }).then(data => {
+      sanitizeNulls(data);
       // Default order: by most recent
       data = orderBy(data, "created_at", "desc");
       commit("fill", data);
