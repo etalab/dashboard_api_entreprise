@@ -32,11 +32,12 @@ const getters = {
     );
 
     return state.userIndex.filter(item => {
-      return (
-        item.id.match(regex) ||
-        item.context.match(regex) ||
-        item.email.match(regex)
-      );
+      let keepItem = false;
+      ["id", "email", "context"].forEach(k => {
+        if (item[k] !== null && item[k].match(regex)) keepItem = true;
+      });
+
+      return keepItem;
     });
   },
 
