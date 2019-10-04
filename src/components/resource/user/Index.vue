@@ -28,7 +28,7 @@
             tr(v-for="user in userListFiltered")
               td {{ user.created_at | formatDate }}
               td
-                router-link(:to="{ name: 'admin-user-profile', params: { userId: user.email }}") {{ user.email }}
+                router-link(:to="{ name: 'admin-user-profile', params: { userId: user.id }}") {{ user.email }}
               td {{ user.context }}
               td {{ user.confirmed | friendlyBoolean }}
 </template>
