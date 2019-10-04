@@ -25,12 +25,6 @@ const getters = {
     );
   },
 
-  tokenContacts(state) {
-    return state.user.contacts.filter(
-      contact => contact.contact_type === "token"
-    );
-  },
-
   tokens(state) {
     let tokens = cloneDeep(state.user.tokens);
     return tokens.sort(
@@ -55,10 +49,6 @@ const getters = {
     });
 
     return orderBy(taggedRoles, ["allowed", "name"], ["desc", "asc"]);
-  },
-
-  allowedToCreateToken(state) {
-    return state.user.details.allow_token_creation;
   }
 };
 
@@ -125,8 +115,7 @@ const actions = {
       id: data.id,
       email: data.email,
       context: data.context,
-      note: data.note,
-      allow_token_creation: data.allow_token_creation
+      note: data.note
     });
 
     commit("setContacts", data.contacts);
@@ -135,14 +124,13 @@ const actions = {
     commit("setAllowedRoles", data.allowed_roles);
   },
 
-  createToken({ dispatch, commit, getters, rootGetters }, payload) {
+  createToken({ dispatch, commit, getters }, payload) {
     const userId = getters.userDetails.id;
-    let url = "";
-    if (rootGetters["auth/isAdmin"]) {
-      url = `/users/${userId}/jwt_api_entreprise/admin_create`;
-    } else {
-      url = `/users/${userId}/jwt_api_entreprise`;
-    }
+    //TODO not RESTFull here since a post on the resource URL is already
+    //a "create" action. Authorizations (here checking this is an admin
+    //making the request) needs to be done server side.
+    //The URL should be /users/${userId}/jwt_api_entreprise
+    let url = `/users/${userId}/jwt_api_entreprise/admin_create`;
 
     dispatch(
       "api/admin/post",
@@ -159,15 +147,6 @@ const actions = {
       { url: url, params: payload },
       { root: true }
     ).then(() => dispatch("get", { userId }));
-  },
-
-  addRoles({ dispatch, getters }, roles) {
-    const userId = getters.userDetails.id;
-    dispatch(
-      "api/admin/post",
-      { url: `/users/${userId}/add_roles`, params: roles },
-      { root: true }
-    ).then(() => dispatch("user/get", { userId }));
   }
 };
 
