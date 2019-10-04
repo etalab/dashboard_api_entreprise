@@ -24,74 +24,75 @@
 
 <script>
 export default {
-  name: 'incident-new',
+  name: "IncidentNew",
 
-  data () {
+  data() {
     return {
       dialog: false,
-      title: '',
-      subtitle: '',
-      description: ''
-    }
+      title: "",
+      subtitle: "",
+      description: ""
+    };
   },
 
   methods: {
-    submit () {
+    submit() {
       let payload = {
         title: this.title,
         subtitle: this.subtitle,
         description: this.description
-      }
+      };
 
-      this.$store.dispatch('incident/create', payload)
+      this.$store
+        .dispatch("incident/create", payload)
         .then(() => this.reset())
-        .catch(e => {
+        .catch(() => {
           // TODO display forms server validation errors
-        })
+        });
     },
 
-    showDialog () {
-      this.dialog = true
+    showDialog() {
+      this.dialog = true;
     },
 
-    reset () {
-      this.dialog = false
-      this.title = ''
-      this.subtitle = ''
-      this.description = ''
+    reset() {
+      this.dialog = false;
+      this.title = "";
+      this.subtitle = "";
+      this.description = "";
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  label.label-inline {
-    color: $color-black;
-  }
+label.label-inline {
+  color: $color-black;
+}
 
-  .dialog-backdrop {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-  }
+.dialog-backdrop {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
 
-  .dialog {
-    max-width: 32em;
-    margin-bottom: 1em;
-  }
+.dialog {
+  max-width: 32em;
+  margin-bottom: 1em;
+}
 
-  h2 {
-    margin-top: 0;
-  }
+h2 {
+  margin-top: 0;
+}
 
-  .action-buttons {
-    margin-top: 2em;
-  }
+.action-buttons {
+  margin-top: 2em;
+}
 </style>

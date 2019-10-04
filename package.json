@@ -8,7 +8,8 @@
     "build:sandbox": "vue-cli-service build --mode sandbox",
     "build:staging": "vue-cli-service build --mode staging",
     "build:production": "vue-cli-service build --mode production",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint --no-fix",
+    "lint-fix": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -17,22 +18,25 @@
     "d3": "^3.5.17",
     "es6-promise": "^4.2.4",
     "jwt-decode": "^2.2.0",
-    "marked": "^0.6.2",
+    "marked": "^0.7.0",
+    "lodash.orderby": "^4.6.0",
     "moment": "^2.22.1",
     "template.data.gouv.fr": "^1.2.2",
     "vee-validate": "^2.0.8",
     "vue": "^2.6.10",
     "vue-clipboard2": "^0.1.0",
     "vue-router": "^2.7.0",
-    "vuetify": "^1.5.14",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.7.0",
     "@vue/cli-plugin-eslint": "^3.7.0",
     "@vue/cli-service": "^3.7.0",
+    "@vue/eslint-config-prettier": "^5.0.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-vue": "^5.0.0",
     "material-design-icons-iconfont": "^5.0.1",
     "node-sass": "^4.12.0",
@@ -40,20 +44,6 @@
     "pug-plain-loader": "^1.0.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.21"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
   },
   "postcss": {
     "plugins": {
@@ -63,5 +53,8 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
+  ],
+  "eslintIgnore": [
+    "src/assets"
   ]
 }

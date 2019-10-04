@@ -14,23 +14,36 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
-  name: 'statsTable',
-  props: ['items', 'headers', 'tableTitle'],
-  data () {
-    return {
+  name: "StatsTable",
+
+  props: {
+    items: {
+      type: Object,
+      default() {
+        return {};
+      }
+    },
+    headers: {
+      type: Object,
+      default() {
+        return {};
+      }
+    },
+    tableTitle: {
+      type: String,
+      default: ""
     }
   },
+  data() {
+    return {};
+  },
   methods: {
-    changeSpan: function (time) {
-      console.log('pouet')
+    changeSpan: function() {
       // load new results
     }
   }
-}
+};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

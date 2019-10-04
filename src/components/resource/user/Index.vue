@@ -1,83 +1,112 @@
 <template lang="pug">
   .main
     .panel
-      .panel__header
-        h2 Liste des utilisateurs
-        button.button.small.title-button(@click="userForm") Ajouter un utilisateur
-
       .form__group
-        input(v-model="search", placeholder="recherche par UUID, email, contexte")
-
-      .form__group
-        v-data-table.elevation-1(:headers="headers", :items="userList", :search="search")
-          template(v-slot:items="props")
-            td
-              router-link(:to="{ name: 'admin-user-profile', params: { userId: props.item.id }}") {{ props.item.email }}
-            td {{ props.item.context }}
-            td {{ props.item.confirmed ? 'Oui' : 'Non' }}
-            td.hidden {{ props.item.id }}
-
+        .panel
+          .header
+            h3 Liste des utilisateurs
+            button.button.small.title-button(@click="userForm") Ajouter un utilisateur
+            input.table__filter(v-model="search", placeholder="recherche par UUID, email, contexte")
+          table.table
+            thead
+              th.ascending(
+                @click='toggleSortBy("created_at")'
+                v-bind:class='{ descending: order["created_at"] == "desc" }'
+              ) Date création
+              th.ascending(
+                @click='toggleSortBy("email")'
+                v-bind:class='{ descending: order["email"] == "desc" }'
+              ) E-mail
+              th.ascending(
+                @click='toggleSortBy("context")'
+                v-bind:class='{ descending: order["context"] == "desc" }'
+              ) Contexte
+              th.ascending(
+                @click='toggleSortBy("confirmed")'
+                v-bind:class='{ descending: order["confirmed"] == "desc" }'
+              ) Confirmé
+            tr(v-for="user in userListFiltered")
+              td {{ user.created_at | formatDate }}
+              td
+                router-link(:to="{ name: 'admin-user-profile', params: { userId: user.email }}") {{ user.email }}
+              td {{ user.context }}
+              td {{ user.confirmed | friendlyBoolean }}
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-import 'vuetify/dist/vuetify.min.css'
-import 'material-design-icons-iconfont/dist/material-design-icons.css'
-const { mapGetters } = createNamespacedHelpers('user/index')
+import { createNamespacedHelpers } from "vuex";
+import "material-design-icons-iconfont/dist/material-design-icons.css";
+const { mapGetters } = createNamespacedHelpers("user/index");
 
 export default {
-  name: 'user-index',
+  name: "UserIndex",
 
-  data () {
+  data() {
     return {
-      title: 'Utilisateurs',
-      search: '',
-      headers: [
-        { text: 'E-mail', value: 'email', align: 'left' },
-        { text: 'Contexte', value: 'context', align: 'left' },
-        { text: 'Confirmé', value: 'confirmed', align: 'left' },
-        { text: 'UUID', value: 'id', class: 'hidden' }
-      ]
-    }
-  },
-
-  created: function () {
-    this.$store.dispatch('user/index/index')
+      title: "Utilisateurs"
+    };
   },
 
   computed: {
-    ...mapGetters(['userList'])
+    ...mapGetters(["userListFiltered", "order"]),
+    search: {
+      get() {
+        return this.$store.getters["user/index/search"];
+      },
+      set(value) {
+        this.$store.commit("user/index/updateSearch", value);
+      }
+    }
+  },
+
+  created: function() {
+    this.$store.dispatch("user/index/index");
+  },
+
+  filters: {
+    formatDate: function(date) {
+      const parsed = Date.parse(date);
+      return new Date(parsed).toLocaleDateString("fr-FR");
+    },
+    friendlyBoolean: function(boolean) {
+      return boolean == true ? "Oui" : "Non";
+    }
   },
 
   methods: {
-    userForm: function () {
-      this.$router.push({ name: 'userNew' })
+    userForm: function() {
+      this.$router.push({ name: "userNew" });
+    },
+    toggleSortBy: function(element) {
+      this.$store.dispatch("user/index/toggleSort", element);
     }
   }
-}
+};
 </script>
 
-<style lang="scss">
-  // thead.tr.th CSS is generated and does not work with scopes
-  th.hidden {
-    display: none;
-  }
-
-  // fixes a display bug with our css
-  .v-menu__content {
-    position: fixed !important;
-  }
-</style>
-
 <style lang="scss" scoped>
-  .hidden {
-    display: none;
-  }
-  h2 {
-    display: inline-block;
-  }
+td,
+th {
+  word-break: initial;
+}
 
-  td, th {
-    word-break: initial;
+th {
+  cursor: pointer;
+}
+
+th {
+  // created_at, confirmed
+  &:first-of-type,
+  &:last-of-type {
+    width: 12% !important;
   }
+  // email
+  &:nth-of-type(2) {
+    width: 30% !important;
+  }
+  // context
+  &:nth-of-type(3) {
+    width: 40% !important;
+  }
+}
 </style>

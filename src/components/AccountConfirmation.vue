@@ -31,58 +31,59 @@
 
 <script>
 export default {
-  name: 'account-confirmation',
+  name: "AccountConfirmation",
 
-  data () {
+  data() {
     return {
-      password: '',
-      password_confirmation: '',
+      password: "",
+      password_confirmation: "",
       cguChecked: false,
       fieldErrors: false,
       validationErrors: []
-    }
+    };
   },
 
   methods: {
     // TODO set validation for password
-    submit () {
+    submit() {
       const payload = {
         password: this.password,
         password_confirmation: this.password_confirmation,
         cgu_checked: this.cguChecked,
         confirmation_token: this.$route.query.confirmation_token
-      }
-      this.$store.dispatch('auth/confirm', payload)
+      };
+      this.$store
+        .dispatch("auth/confirm", payload)
         .then(() => {
-          this.$router.push({ name: 'application-panel' })
+          this.$router.push({ name: "application-panel" });
         })
         .catch(error => {
-          this.validationErrors = error
-          this.fieldErrors = true
-        })
+          this.validationErrors = error;
+          this.fieldErrors = true;
+        });
     },
 
-    clearFieldErrors () {
-      this.fieldErrors = false
+    clearFieldErrors() {
+      this.fieldErrors = false;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .login {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
+.login {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
 
-  button.button {
-    margin-top: 2em;
-    display: block;
-  }
+button.button {
+  margin-top: 2em;
+  display: block;
+}
 
-  .signup {
-    margin-top: 2em;
-  }
+.signup {
+  margin-top: 2em;
+}
 </style>

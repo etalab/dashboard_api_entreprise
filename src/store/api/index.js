@@ -1,5 +1,5 @@
-import admin from '@/store/api/admin'
-import watchdoge from '@/store/api/watchdoge'
+import admin from "@/store/api/admin";
+import watchdoge from "@/store/api/watchdoge";
 
 export default {
   namespaced: true,
@@ -7,4 +7,4 @@ export default {
     admin,
     watchdoge
   }
-}
+};

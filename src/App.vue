@@ -6,14 +6,14 @@
 </template>
 
 <script>
-import IconDefinition from '@/components/ui/IconDefinition'
-import NavigationHeader from '@/components/ui/NavigationHeader'
+import IconDefinition from "@/components/ui/IconDefinition";
+import NavigationHeader from "@/components/ui/NavigationHeader";
 
 export default {
-  name: 'app',
+  name: "App",
   components: {
-    'IconDefinition': IconDefinition,
-    'navigation-header': NavigationHeader
+    IconDefinition: IconDefinition,
+    "navigation-header": NavigationHeader
   }
-}
+};
 </script>
