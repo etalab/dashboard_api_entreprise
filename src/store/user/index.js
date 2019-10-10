@@ -2,6 +2,7 @@ import JwtDecode from "jwt-decode";
 import userCreate from "./create";
 import userIndex from "./index/index.js";
 import orderBy from "lodash/orderBy";
+import reduce from "lodash/reduce";
 import cloneDeep from "lodash/cloneDeep";
 
 const state = {
@@ -20,9 +21,13 @@ const getters = {
   },
 
   accountContacts(state) {
-    return state.user.contacts.filter(contact =>
-      ["tech", "admin"].includes(contact.contact_type)
-    );
+    return state.user.contacts;
+  },
+
+  anyContacts(state) {
+    // Contacts, if exist, are grouped by "usage policy" (their related JWT id)
+    const nbUsagePolicies = Object.keys(state.user.contacts).length;
+    return nbUsagePolicies > 0;
   },
 
   tokens(state) {
@@ -68,7 +73,36 @@ const mutations = {
   },
 
   setContacts(state, contacts) {
-    state.user.contacts = contacts;
+    // As the name points is we are regrouping the received contact's data by
+    // their related JWT. This is because we want to regroup contacts by their
+    // token's usage policy (see issue #68).
+    // Data received from API : [{id, email, phone_number, jwt_id, jwt_usage_policy, contact_type}, {...}]
+    // Data grouped by JWT : { jwt_id: { usage_policy: jwt_usage_policy, contacts_data: [{ id, email, ...}, ...] }, jwt_id: { ...} }
+    const jwtGroupedContacts = reduce(
+      contacts,
+      function(result, contact) {
+        const relatedJwtId = contact.jwt_id;
+        const relatedUsagePolicy = contact.jwt_usage_policy;
+        const contact_data = {
+          id: contact.id,
+          email: contact.email,
+          phone_number: contact.phone_number,
+          contact_type: contact.contact_type
+        };
+
+        if (result[relatedJwtId] === undefined) {
+          result[relatedJwtId] = {
+            usage_policy: relatedUsagePolicy,
+            contacts_data: []
+          };
+        }
+        result[relatedJwtId].contacts_data.push(contact_data);
+        return result;
+      },
+      {}
+    );
+
+    state.user.contacts = jwtGroupedContacts;
   },
 
   setTokens(state, tokens) {
