@@ -1,5 +1,4 @@
 import JwtDecode from "jwt-decode";
-import userCreate from "./create";
 import userIndex from "./index/index.js";
 import orderBy from "lodash/orderBy";
 import reduce from "lodash/reduce";
@@ -181,6 +180,14 @@ const actions = {
       { url: url, params: payload },
       { root: true }
     ).then(() => dispatch("get", { userId }));
+  },
+
+  create({ dispatch }, payload) {
+    return dispatch(
+      "api/admin/post",
+      { url: "/users", params: payload },
+      { root: true }
+    );
   }
 };
 
@@ -191,7 +198,6 @@ export default {
   getters,
   actions,
   modules: {
-    create: userCreate,
     index: userIndex
   }
 };
