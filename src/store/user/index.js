@@ -157,7 +157,7 @@ const actions = {
     commit("setAllowedRoles", data.allowed_roles);
   },
 
-  createToken({ dispatch, commit, getters }, payload) {
+  createToken({ dispatch, getters }, payload) {
     const userId = getters.userDetails.id;
     //TODO not RESTFull here since a post on the resource URL is already
     //a "create" action. Authorizations (here checking this is an admin
