@@ -157,19 +157,19 @@ const actions = {
     commit("setAllowedRoles", data.allowed_roles);
   },
 
-  createToken({ dispatch, commit, getters }, payload) {
+  createToken({ dispatch, getters }, payload) {
     const userId = getters.userDetails.id;
     //TODO not RESTFull here since a post on the resource URL is already
     //a "create" action. Authorizations (here checking this is an admin
     //making the request) needs to be done server side.
     //The URL should be /users/${userId}/jwt_api_entreprise
-    let url = `/users/${userId}/jwt_api_entreprise/admin_create`;
+    let url = `/users/${userId}/jwt_api_entreprise`;
 
     dispatch(
       "api/admin/post",
       { url: url, params: payload },
       { root: true }
-    ).then(data => commit("addToken", data.new_token));
+    ).then(() => dispatch("get", { userId }));
   },
 
   blacklistToken({ dispatch, getters }, payload) {
