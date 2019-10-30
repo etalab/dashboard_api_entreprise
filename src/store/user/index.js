@@ -1,7 +1,7 @@
 import JwtDecode from "jwt-decode";
-import userCreate from "./create";
 import userIndex from "./index/index.js";
 import orderBy from "lodash/orderBy";
+import reduce from "lodash/reduce";
 import cloneDeep from "lodash/cloneDeep";
 
 const state = {
@@ -20,15 +20,13 @@ const getters = {
   },
 
   accountContacts(state) {
-    return state.user.contacts.filter(contact =>
-      ["tech", "admin"].includes(contact.contact_type)
-    );
+    return state.user.contacts;
   },
 
-  tokenContacts(state) {
-    return state.user.contacts.filter(
-      contact => contact.contact_type === "token"
-    );
+  anyContacts(state) {
+    // Contacts, if exist, are grouped by "usage policy" (their related JWT id)
+    const nbUsagePolicies = Object.keys(state.user.contacts).length;
+    return nbUsagePolicies > 0;
   },
 
   tokens(state) {
@@ -55,10 +53,6 @@ const getters = {
     });
 
     return orderBy(taggedRoles, ["allowed", "name"], ["desc", "asc"]);
-  },
-
-  allowedToCreateToken(state) {
-    return state.user.details.allow_token_creation;
   }
 };
 
@@ -78,7 +72,36 @@ const mutations = {
   },
 
   setContacts(state, contacts) {
-    state.user.contacts = contacts;
+    // As the name points is we are regrouping the received contact's data by
+    // their related JWT. This is because we want to regroup contacts by their
+    // token's usage policy (see issue #68).
+    // Data received from API : [{id, email, phone_number, jwt_id, jwt_usage_policy, contact_type}, {...}]
+    // Data grouped by JWT : { jwt_id: { usage_policy: jwt_usage_policy, contacts_data: [{ id, email, ...}, ...] }, jwt_id: { ...} }
+    const jwtGroupedContacts = reduce(
+      contacts,
+      function(result, contact) {
+        const relatedJwtId = contact.jwt_id;
+        const relatedUsagePolicy = contact.jwt_usage_policy;
+        const contact_data = {
+          id: contact.id,
+          email: contact.email,
+          phone_number: contact.phone_number,
+          contact_type: contact.contact_type
+        };
+
+        if (result[relatedJwtId] === undefined) {
+          result[relatedJwtId] = {
+            usage_policy: relatedUsagePolicy,
+            contacts_data: []
+          };
+        }
+        result[relatedJwtId].contacts_data.push(contact_data);
+        return result;
+      },
+      {}
+    );
+
+    state.user.contacts = jwtGroupedContacts;
   },
 
   setTokens(state, tokens) {
@@ -125,8 +148,7 @@ const actions = {
       id: data.id,
       email: data.email,
       context: data.context,
-      note: data.note,
-      allow_token_creation: data.allow_token_creation
+      note: data.note
     });
 
     commit("setContacts", data.contacts);
@@ -135,20 +157,19 @@ const actions = {
     commit("setAllowedRoles", data.allowed_roles);
   },
 
-  createToken({ dispatch, commit, getters, rootGetters }, payload) {
+  createToken({ dispatch, getters }, payload) {
     const userId = getters.userDetails.id;
-    let url = "";
-    if (rootGetters["auth/isAdmin"]) {
-      url = `/users/${userId}/jwt_api_entreprise/admin_create`;
-    } else {
-      url = `/users/${userId}/jwt_api_entreprise`;
-    }
+    //TODO not RESTFull here since a post on the resource URL is already
+    //a "create" action. Authorizations (here checking this is an admin
+    //making the request) needs to be done server side.
+    //The URL should be /users/${userId}/jwt_api_entreprise
+    let url = `/users/${userId}/jwt_api_entreprise`;
 
     dispatch(
       "api/admin/post",
       { url: url, params: payload },
       { root: true }
-    ).then(data => commit("addToken", data.new_token));
+    ).then(() => dispatch("get", { userId }));
   },
 
   blacklistToken({ dispatch, getters }, payload) {
@@ -161,13 +182,12 @@ const actions = {
     ).then(() => dispatch("get", { userId }));
   },
 
-  addRoles({ dispatch, getters }, roles) {
-    const userId = getters.userDetails.id;
-    dispatch(
+  create({ dispatch }, payload) {
+    return dispatch(
       "api/admin/post",
-      { url: `/users/${userId}/add_roles`, params: roles },
+      { url: "/users", params: payload },
       { root: true }
-    ).then(() => dispatch("user/get", { userId }));
+    );
   }
 };
 
@@ -178,7 +198,6 @@ export default {
   getters,
   actions,
   modules: {
-    create: userCreate,
     index: userIndex
   }
 };

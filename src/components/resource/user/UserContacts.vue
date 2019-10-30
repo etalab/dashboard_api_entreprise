@@ -2,18 +2,14 @@
   div
     .profile__group
       h2 Contacts
-      button.button.small.title-button(v-if="isAdmin") Ajouter un contact
+      div(v-if="anyContacts")
+        template(v-for="jwtContacts in accountContacts")
+          h3 Cadre d'utilisation associé : {{ jwtContacts.usage_policy }}
+          .contact__container.row
+            contact-tile(class="contact" v-for="(contact, index) in jwtContacts.contacts_data" :contact="contact" :key="index")
 
-      .contact__container.row(v-if="accountContacts.length > 0")
-        contact-tile(class="contact" v-for="(contact, index) in accountContacts" :contact="contact" :key="index")
-      p(v-else) Aucune coordonnée de contact
+      div(v-else) Aucune coordonnée de contact
 
-    .profile__group(v-if="allowedToCreateToken || isAdmin")
-      h2 Contacts associés aux tokens
-
-      .contact__container.row(v-if="tokenContacts.length > 0")
-        contact-tile(class="contact" v-for="(contact, index) in tokenContacts" :contact="contact" :key="index")
-      p(v-else) Aucune coordonnée de contact (aucun jeton créé jusqu'ici)
 </template>
 
 <script>
@@ -26,8 +22,7 @@ export default {
   computed: {
     ...mapGetters({
       accountContacts: "user/accountContacts",
-      tokenContacts: "user/tokenContacts",
-      allowedToCreateToken: "user/allowedToCreateToken",
+      anyContacts: "user/anyContacts",
       isAdmin: "auth/isAdmin"
     })
   },

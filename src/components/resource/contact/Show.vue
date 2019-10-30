@@ -35,8 +35,6 @@ export default {
           return "Contact administratif";
         case "tech":
           return "Contact technique";
-        case "token":
-          return "Contact ré-utilisateur";
         case "other":
           return "Autre contact";
       }

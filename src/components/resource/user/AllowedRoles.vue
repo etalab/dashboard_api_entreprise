@@ -1,8 +1,6 @@
 <template lang="pug">
   .profile__group
     h2 Droits de l'utilisateur
-    span(v-if="userGrantedTokenCreation") (Cet utilisateur a les droits de création de token)
-    user-add-roles-form(v-if="userGrantedTokenCreation")
 
     .panel
       table.table
@@ -17,7 +15,6 @@
 </template>
 
 <script>
-import UserAddRolesForm from "@/components/resource/user/AddRoles";
 import { mapGetters } from "vuex";
 
 export default {
@@ -26,18 +23,8 @@ export default {
   computed: {
     ...mapGetters({
       userDetails: "user/userDetails",
-      allowedRoles: "user/allowedRoles",
-      allowedToCreateToken: "user/allowedToCreateToken",
-      isAdmin: "auth/isAdmin"
-    }),
-
-    userGrantedTokenCreation() {
-      return this.isAdmin && this.allowedToCreateToken;
-    }
-  },
-
-  components: {
-    "user-add-roles-form": UserAddRolesForm
+      allowedRoles: "user/allowedRoles"
+    })
   }
 };
 </script>
