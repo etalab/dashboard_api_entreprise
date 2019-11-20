@@ -22,8 +22,8 @@
 
             .signup.text-center Pas de compte ?
               div
-                a Contactez-nous &nbsp
-                span pour en créer un.
+                a Contactez-nous
+                span &nbsppour en créer un.
 </template>
 
 <script>
@@ -67,9 +67,11 @@ export default {
   display: flex;
   align-items: center;
   position: relative;
+  height: 100%;
 }
 
-button.button {
+button.button,
+button.button:active {
   margin: 2em auto 0;
   display: block;
 }
