@@ -108,7 +108,7 @@ label.label-inline {
 }
 
 .dialog-backdrop {
-  position: fixed;
+  position: absolute;
   height: 100%;
   width: 100%;
   background: rgba(0, 0, 0, 0.5);
@@ -116,8 +116,9 @@ label.label-inline {
   left: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   z-index: 100;
+  padding: 5em 0;
 }
 
 .dialog__full {
