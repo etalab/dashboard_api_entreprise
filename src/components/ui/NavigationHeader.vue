@@ -20,7 +20,7 @@
           li.nav__item
             a.logout(icon @click="logout" v-if="!unknownUser") Déconnexion
           li.nav__item
-            router-link(:to="{ name: 'login' }" v-if="unknownUser") Login
+            router-link(:to="{ name: 'login' }" v-if="unknownUser") Connexion
 
 </template>
 
