@@ -163,7 +163,7 @@ export default {
 
 .dialog-backdrop {
   position: fixed;
-  height: 100%;
+  height: auto;
   width: 100%;
   background: rgba(0, 0, 0, 0.5);
   top: 0;
