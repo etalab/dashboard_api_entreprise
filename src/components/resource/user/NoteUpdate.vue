@@ -82,14 +82,6 @@ label.label-inline {
   z-index: 100;
 }
 
-.dialog {
-  display: inline-block;
-}
-
-h2 {
-  margin-top: 0;
-}
-
 .action-buttons {
   margin-top: 2em;
 }

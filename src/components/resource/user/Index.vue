@@ -85,6 +85,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h2 {
+  display: inline-block;
+  vertical-align: top;
+}
+
 td,
 th {
   word-break: initial;

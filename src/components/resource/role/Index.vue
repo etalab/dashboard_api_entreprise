@@ -47,5 +47,6 @@ export default {
 <style lang="scss" scoped>
 h2 {
   display: inline-block;
+  vertical-align: top;
 }
 </style>

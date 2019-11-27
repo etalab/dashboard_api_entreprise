@@ -18,8 +18,18 @@ body {
   vertical-align: middle;
 }
 
-button.title-button {
+.dialog {
+  display: inline-block;
+  vertical-align: top;
+}
+
+button.button {
+  margin: 0;
+}
+
+button.title-button.small {
   margin-left: 1em;
+  padding: 0.5em 1em;
 }
 
 .action-buttons {
