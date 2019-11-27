@@ -11,7 +11,7 @@ body {
 }
 
 .profile__group + .profile__group {
-  margin-top: 2em;
+  margin-top: 4em;
 }
 
 .profile__group h2 {
@@ -45,4 +45,9 @@ button.title-button.small {
 
 .action-buttons button.button:first-child {
   margin-right: 1em;
+}
+
+.panel p:first-child,
+.panel p:last-child {
+  margin-top: 0;
 }

@@ -169,8 +169,13 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 code {
   color: initial;
+}
+
+.input__group .button {
+  margin: 0;
+  margin-left: 1em;
 }
 </style>
