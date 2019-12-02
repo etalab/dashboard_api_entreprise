@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   .profile__group
-    h2 Profil utilisateur
+    h2(class="main-title") Profil utilisateur
     .panel
       .form__group
         label Adresse e-mail

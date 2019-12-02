@@ -1,14 +1,16 @@
 <template lang="pug">
   .panel
     .panel__header
-      h3 {{ contactLabel }}
+      h4 {{ contactLabel }}
     .contact-item
-      .label Email
-      span {{ contact.email }}
+      dl
+        dt Email
+        dd {{ contact.email }}
 
     .contact-item
-      .label Téléphone
-      span {{ contact.phone_number }}
+      dl
+        dt Téléphone
+        dd {{ contact.phone_number }}
 
     .action-buttons
       button.button.small Editer

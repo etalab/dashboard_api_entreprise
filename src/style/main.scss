@@ -10,6 +10,22 @@ body {
   height: 100%;
 }
 
+.main-title {
+  position: relative;
+  margin-bottom: 2em;
+}
+
+.main-title::after {
+  content: "";
+  display: block;
+  width: 2em;
+  left: 0;
+  bottom: 0;
+  border-bottom: 5px solid $color-light-blue;
+  position: relative;
+  padding-bottom: 0.5em;
+}
+
 .profile__group + .profile__group {
   margin-top: 4em;
 }
