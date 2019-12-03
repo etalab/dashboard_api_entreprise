@@ -17,11 +17,9 @@ div
       .panel
         div(v-html="toHtml(userDetails.note)")
 
-  user-allowed-roles
 </template>
 
 <script>
-import UserAllowedRoles from "@/components/resource/user/AllowedRoles";
 import NoteUpdate from "@/components/resource/user/NoteUpdate";
 import { mapGetters } from "vuex";
 import marked from "marked";
@@ -32,7 +30,6 @@ export default {
   computed: {
     ...mapGetters({
       userDetails: "user/userDetails",
-      allowedRoles: "user/allowedRoles",
       isAdmin: "auth/isAdmin"
     })
   },
@@ -48,7 +45,6 @@ export default {
   },
 
   components: {
-    "user-allowed-roles": UserAllowedRoles,
     "note-update": NoteUpdate
   }
 };
