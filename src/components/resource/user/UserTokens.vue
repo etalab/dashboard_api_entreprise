@@ -1,6 +1,6 @@
 <template lang="pug">
   .profile__group
-    h2(class="main-title") Tokens de l'utilisateur
+    h2(class="main-title") Tokens de l’organisation
     jwt-api-entreprise-new(v-if="isAdmin")
 
     div(v-if="tokens.length > 0 || blacklistedTokens.length > 0")

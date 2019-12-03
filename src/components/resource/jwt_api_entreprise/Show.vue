@@ -1,9 +1,7 @@
 <template>
   <div :class="{ blacklisted_token: jwt.blacklisted }">
     <div class="panel__header">
-      <h3 class="token__name">
-        Organisme utilisateur final : {{ jwt.payload.sub }}
-      </h3>
+      <h3 class="token__name">Cadre d’utilisation : {{ jwt.payload.sub }}</h3>
       <small class="panel__header-extra"
         >Délivré le {{ formatDate(jwt.payload.iat) }}</small
       >

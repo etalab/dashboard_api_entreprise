@@ -15,7 +15,7 @@ export default {
       selected: "client-view",
       tiles: [
         {
-          label: "Utilisateurs",
+          label: "Organisations",
           routeName: "users"
         },
         {
