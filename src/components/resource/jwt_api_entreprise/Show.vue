@@ -153,6 +153,10 @@ export default {
   margin-bottom: 0;
 }
 
+.input__group .button {
+  margin-left: 1em;
+}
+
 .button-stats {
   float: right;
 }

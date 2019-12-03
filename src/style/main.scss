@@ -10,16 +10,42 @@ body {
   height: 100%;
 }
 
+.main-title {
+  position: relative;
+  margin-bottom: 2em;
+}
+
+.main-title::after {
+  content: "";
+  display: block;
+  width: 2em;
+  left: 0;
+  bottom: 0;
+  border-bottom: 5px solid $color-light-blue;
+  position: relative;
+  padding-bottom: 0.5em;
+}
+
 .profile__group + .profile__group {
-  margin-top: 2em;
+  margin-top: 4em;
 }
 
 .profile__group h2 {
   vertical-align: middle;
 }
 
-button.title-button {
+.dialog {
+  display: inline-block;
+  vertical-align: top;
+}
+
+button.button {
+  margin: 0;
+}
+
+button.title-button.small {
   margin-left: 1em;
+  padding: 0.5em 1em;
 }
 
 .action-buttons {
@@ -35,4 +61,9 @@ button.title-button {
 
 .action-buttons button.button:first-child {
   margin-right: 1em;
+}
+
+.panel p:first-child,
+.panel p:last-child {
+  margin-top: 0;
 }

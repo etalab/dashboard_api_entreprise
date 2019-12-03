@@ -46,3 +46,15 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+h2 {
+  display: inline-block;
+}
+
+.dialog {
+  margin-bottom: 0.6em;
+  margin-left: 1em;
+  vertical-align: middle;
+}
+</style>

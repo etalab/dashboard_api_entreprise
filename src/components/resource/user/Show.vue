@@ -57,29 +57,33 @@ export default {
 
 <style lang="scss" scoped>
 .profile__tabs {
-  margin: 0;
-  margin-bottom: 3em;
+  margin-bottom: 4em;
   padding: 0;
 }
 
 .profile__tabs li {
-  display: inline;
+  display: inline-block;
 }
 
 .profile__tabs li + li {
-  margin-left: 1em;
+  margin-left: 2em;
 }
 
 .profile__tabs a {
   display: inline-block;
-  background: $color-white;
-  border-radius: 3px;
-  box-shadow: 0 0 4px $color-light-grey;
-  padding: 0.75em 1.5em;
+  border-radius: 0;
+  padding-bottom: 0.5em;
+  text-decoration: none;
+  border-bottom: 5px solid transparent;
+  color: $color-black;
+}
+
+.profile__tabs a:hover {
+  border-color: $color-light-blue;
+  color: $color-light-blue;
 }
 
 .profile__tabs .router-link-active {
-  background: $color-blue;
-  color: $color-white;
+  border-color: $color-light-blue;
 }
 </style>
