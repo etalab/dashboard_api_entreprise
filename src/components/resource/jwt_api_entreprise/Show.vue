@@ -5,7 +5,7 @@
         Organisme utilisateur final : {{ jwt.payload.sub }}
       </h3>
       <small class="panel__header-extra"
-        >Délivré le {{ formatDate(jwt.payload.iat) }}</small
+        >Expire le {{ formatDate(jwt.payload.exp) }}</small
       >
       <router-link
         :to="{ name: statsRoute, params: { jwtId: jwt.payload.jti } }"
