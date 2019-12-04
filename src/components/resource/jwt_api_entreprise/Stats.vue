@@ -1,7 +1,8 @@
 <template lang="pug">
 .stats
   a.back-button(@click="goToPreviousPage") ← Retour à la liste des tokens
-  h2 {{jwtId}}
+  h2.main-title {{jwtSub}}
+    .label JTI : {{jwtId}})
   stats-gauge
   apis-usage(class="stats__call-count")
   last-calls(class="stats__last-calls")
@@ -17,6 +18,10 @@ export default {
 
   props: {
     jwtId: {
+      type: String,
+      default: ""
+    },
+    jwtSub: {
       type: String,
       default: ""
     }
@@ -39,4 +44,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.label {
+  background-color: $color-white;
+  border: 1px solid $color-light-grey;
+  margin-left: 0.5em;
+  font-family: "Source Sans Pro";
+  font-weight: 400;
+  font-size: 0.75em;
+}
+</style>

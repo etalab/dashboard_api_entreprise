@@ -6,7 +6,10 @@
         >Délivré le {{ formatDate(jwt.payload.iat) }}</small
       >
       <router-link
-        :to="{ name: statsRoute, params: { jwtId: jwt.payload.jti } }"
+        :to="{
+          name: statsRoute,
+          params: { jwtId: jwt.payload.jti, jwtSub: jwt.payload.sub }
+        }"
         class="button-stats"
         >Voir les statistiques →</router-link
       >
