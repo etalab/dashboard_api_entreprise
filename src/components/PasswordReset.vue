@@ -52,7 +52,7 @@ export default {
       this.$store
         .dispatch("auth/passwordReset", payload)
         .then(() => {
-          this.$router.push({ name: "application-panel"})
+          this.$router.push({ name: "application-panel" });
         })
         .catch(error => {
           this.apiErrors = error;
