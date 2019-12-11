@@ -15,6 +15,7 @@ import JwtStats from "@/components/resource/jwt_api_entreprise/Stats";
 import Login from "@/components/Login";
 import AccountConfirmation from "@/components/AccountConfirmation";
 import PasswordResetRequest from "@/components/PasswordResetRequest";
+import PasswordReset from "@/components/PasswordReset";
 import ApplicationPanel from "@/components/ApplicationPanel";
 
 import RealTime from "@/components/dashboard/RealTime";
@@ -44,6 +45,11 @@ const router = new Router({
       path: "/account/password_reset_request",
       name: "account-password-reset-request",
       component: PasswordResetRequest
+    },
+    {
+      path: "/account/password_reset",
+      name: "account-password-reset",
+      component: PasswordReset
     },
     {
       path: "/login",
