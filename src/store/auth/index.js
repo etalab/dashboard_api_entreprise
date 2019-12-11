@@ -64,6 +64,14 @@ const actions = {
       { url: "/users/confirm", params: params },
       { root: true }
     ).then(data => dispatch("processLogin", data));
+  },
+
+  passwordResetRequest({ dispatch }, params) {
+    return dispatch(
+      "api/admin/post",
+      { url: "/users/password_renewal", params: params },
+      { root: true }
+    );
   }
 };
 

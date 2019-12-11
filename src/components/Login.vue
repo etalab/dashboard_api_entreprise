@@ -14,7 +14,7 @@
           label Mot de passe
           input(type="password" v-model="password")
           small
-            a Mot de passe oublié ?
+            router-link(:to="{ name: 'account-password-reset-request' }") Mot de passe oublié ?
 
         button.button(@click.prevent="login") S'identifier
 
