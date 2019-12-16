@@ -5,7 +5,7 @@
       template(v-if="anyContacts")
         div(v-for="jwtContacts in accountContacts" class="usage")
           h3 Cadre d'utilisation associé : {{ jwtContacts.usage_policy }}
-          .contact__container.row
+          .contact__container.grid
             contact-tile(class="contact" v-for="(contact, index) in jwtContacts.contacts_data" :contact="contact" :key="index")
 
       div(v-else) Aucune coordonnée de contact

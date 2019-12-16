@@ -48,7 +48,7 @@ export default {
 
 <style lang="scss" scoped>
 .panel {
-  flex: 1;
+  width: 100%;
 }
 
 h4 {
