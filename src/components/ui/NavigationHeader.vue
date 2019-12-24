@@ -18,9 +18,13 @@
             router-link(:to="{ name: 'application-panel' }" v-if="isAdmin") Espace d'administration
             router-link(:to="{ name: 'application-panel' }" v-else-if="!unknownUser") Espace Perso
           li.nav__item
-            a.logout(icon @click="logout" v-if="!unknownUser") Déconnexion
+            a.logout(@click="logout" v-if="!unknownUser")
+              img(class="lock" alt="" src="../../assets/images/lock.svg")
+              | Déconnexion
           li.nav__item
-            router-link(:to="{ name: 'login' }" v-if="unknownUser") Login
+            router-link(:to="{ name: 'login' }" v-if="unknownUser")
+              img(class="lock" alt="" src="../../assets/images/lock.svg")
+              | Connexion
 
 </template>
 
@@ -48,3 +52,13 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.lock {
+  display: inline-block;
+  height: 1em;
+  vertical-align: middle;
+  margin-bottom: 0.2em;
+  margin-right: 0.25em;
+}
+</style>

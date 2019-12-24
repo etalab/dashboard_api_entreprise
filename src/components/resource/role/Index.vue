@@ -1,6 +1,6 @@
 <template lang="pug">
   .main
-    h2 Rôles
+    h2(class="main-title") Rôles
     button.button.small.title-button(@click="roleForm") Ajouter un rôle
     .panel
       table.table
@@ -47,5 +47,6 @@ export default {
 <style lang="scss" scoped>
 h2 {
   display: inline-block;
+  vertical-align: top;
 }
 </style>

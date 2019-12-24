@@ -1,11 +1,11 @@
 <template lang="pug">
   div
     .profile__group
-      h2 Contacts
-      div(v-if="anyContacts")
-        template(v-for="jwtContacts in accountContacts")
+      h2(class="main-title") Contacts
+      template(v-if="anyContacts")
+        div(v-for="jwtContacts in accountContacts" class="usage")
           h3 Cadre d'utilisation associé : {{ jwtContacts.usage_policy }}
-          .contact__container.row
+          .contact__container.grid
             contact-tile(class="contact" v-for="(contact, index) in jwtContacts.contacts_data" :contact="contact" :key="index")
 
       div(v-else) Aucune coordonnée de contact
@@ -36,6 +36,14 @@ export default {
 <style lang="scss" scoped>
 h2 {
   display: inline-block;
+}
+
+.usage h3 {
+  margin-bottom: 0.5em;
+}
+
+.usage + .usage {
+  margin-top: 5em;
 }
 
 .contact + .contact {

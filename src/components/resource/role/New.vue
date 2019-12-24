@@ -1,7 +1,7 @@
 <template lang="pug">
 .main
   form.panel
-    h2 Ajout d'un nouveau rôle
+    h2(class="main-title") Ajout d'un nouveau rôle
 
     .notification.error(v-if="validationFailure") {{ alertMessage }}
       button(class="close" aria-label="Fermer" @click.prevent="clearRole")
@@ -24,7 +24,7 @@
       v-validate="'required'"
       data-vv-name="code")
 
-    .form__group
+    .button__group
       button.button.secondary(
         @click.prevent="cancel"
        ) Annuler
@@ -80,3 +80,16 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.main {
+  display: flex;
+  align-items: center;
+}
+
+.button__group {
+  margin-top: 4em;
+  display: flex;
+  justify-content: space-between;
+}
+</style>

@@ -1,6 +1,6 @@
 <template lang="pug">
 .dialog
-  button.button(@click="showDialog") Nouvel incident
+  button.button.small.title-button(@click="showDialog") Nouvel incident
   .dialog-backdrop(v-if="dialog")
     .dialog.panel
       h2 Ajouter un nouvel incident

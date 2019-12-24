@@ -1,9 +1,7 @@
 <template>
   <div :class="{ blacklisted_token: jwt.blacklisted }">
     <div class="panel__header">
-      <h3 class="token__name">
-        Organisme utilisateur final : {{ jwt.payload.sub }}
-      </h3>
+      <h3 class="token__name">Cadre d’utilisation : {{ jwt.payload.sub }}</h3>
       <small class="panel__header-extra"
         >Délivré le {{ formatDate(jwt.payload.iat) }}</small
       >
@@ -153,6 +151,10 @@ export default {
   margin-bottom: 0;
 }
 
+.input__group .button {
+  margin-left: 1em;
+}
+
 .button-stats {
   float: right;
 }
@@ -163,7 +165,7 @@ export default {
 
 .dialog-backdrop {
   position: fixed;
-  height: 100%;
+  height: auto;
   width: 100%;
   background: rgba(0, 0, 0, 0.5);
   top: 0;

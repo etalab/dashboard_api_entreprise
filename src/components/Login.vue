@@ -1,29 +1,27 @@
 <template lang="pug">
   .content
-    .login
-      .container
-        .form__container
-          form.panel
-            h1 Connectez vous !
+    .container
+      form.panel
+        h1 Connectez vous !
 
-            .notification.error(v-if="loginError") L’authentification a échoué
+        .notification.error(v-if="loginError") L’authentification a échoué
 
-            .form__group
-              label Adresse e-mail
-              input(type="email" v-model="email")
+        .form__group
+          label Adresse e-mail
+          input(type="email" v-model="email")
 
-            .form__group
-              label Mot de passe
-              input(type="password" v-model="password")
-              small
-                a Mot de passe oublié ?
+        .form__group
+          label Mot de passe
+          input(type="password" v-model="password")
+          small
+            router-link(:to="{ name: 'account-password-reset-request' }") Mot de passe oublié ?
 
-            button.button(@click.prevent="login") S'identifier
+        button.button(@click.prevent="login") S'identifier
 
-            .signup.text-center Pas de compte ?
-              div
-                a Contactez-nous &nbsp
-                span pour en créer un.
+        .signup.text-center Pas de compte ?
+          div
+            a Contactez-nous
+            span &nbsppour en créer un.
 </template>
 
 <script>
@@ -58,18 +56,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.content,
-.login {
-  height: calc(100% - 73px);
-}
-
-.login {
+.content {
+  height: calc(100vh - 73px);
   display: flex;
   align-items: center;
   position: relative;
 }
 
-button.button {
+button.button,
+button.button:active {
   margin: 2em auto 0;
   display: block;
 }

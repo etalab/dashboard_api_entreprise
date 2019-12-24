@@ -1,6 +1,5 @@
 import JwtDecode from "jwt-decode";
 import userIndex from "./index/index.js";
-import orderBy from "lodash/orderBy";
 import reduce from "lodash/reduce";
 import cloneDeep from "lodash/cloneDeep";
 
@@ -43,16 +42,6 @@ const getters = {
       (token1, token2) =>
         new Date(token2.payload.iat) - new Date(token1.payload.iat)
     );
-  },
-
-  allowedRoles(state, _getters, _rootState, rootGetters) {
-    const allRoles = cloneDeep(rootGetters["role/index"]);
-    const taggedRoles = allRoles.map(role => {
-      role.allowed = state.user.allowed_roles.includes(role.code);
-      return role;
-    });
-
-    return orderBy(taggedRoles, ["allowed", "name"], ["desc", "asc"]);
   }
 };
 

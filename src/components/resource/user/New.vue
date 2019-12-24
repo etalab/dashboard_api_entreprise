@@ -1,7 +1,7 @@
 <template lang="pug">
 .main
   form.panel
-    h2 Création d'un nouvel utilisateur
+    h2 Création d'une nouvelle organisation
 
     .notification.error(v-if="validationFailure") {{ validationErrorMsg }}
 
@@ -13,7 +13,7 @@
       div.notification.error.error_field(v-if="errorsExist('email')") {{ errorsFor('email') }}
 
     .form__group
-      label Contexte
+      label Siret de l’organisation
       input(v-model="userContext")
 
     button.button(@click.prevent="submit") Créer
@@ -79,11 +79,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.contact__group {
-  margin: 3em 0;
-}
-
-.button {
+button.button {
   margin-top: 2em;
 }
 
