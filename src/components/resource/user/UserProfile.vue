@@ -1,14 +1,14 @@
 <template lang="pug">
 div
   .profile__group
-    h2(class="main-title") Profil utilisateur
+    h2(class="main-title") Profil de organisation
     .panel
-      .form__group
-        label Adresse e-mail
-        div.headline {{ userDetails.email }}
-      .form__group
-        label Contexte
-        div.headline {{ userDetails.context }}
+      dl.form__group
+        dt Adresse e-mail
+        dd.headline {{ userDetails.email }}
+      dl.form__group
+        dt Siret de organisation
+        dd.headline {{ userDetails.context }}
 
   template(v-if="isAdmin")
     .profile__group
@@ -55,13 +55,12 @@ h2 {
   display: inline-block;
 }
 
+dl:first-child {
+  margin-top: 0;
+}
+
 .enabled :last-child {
   color: $color-blue;
   font-weight: 700;
-}
-
-tr.disabled {
-  color: $color-dark-grey;
-  background: $color-white;
 }
 </style>

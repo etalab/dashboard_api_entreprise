@@ -7,7 +7,7 @@
         .dialog.panel
           h2 Ajout d’un nouveau token
           .form__group
-            label(for="agent-name") Organisme utilisateur final (ex: numéro SIRET)
+            label(for="agent-name") Cadre d’utilisation
             input(type="text" v-model="subject" id="agent-name")
 
           .form__group

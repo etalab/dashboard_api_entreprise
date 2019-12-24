@@ -2,8 +2,8 @@
   .main
     .panel
       .header
-        h2 Liste des utilisateurs
-        button.button.small.title-button(@click="userForm") Ajouter un utilisateur
+        h2 Liste des organisations
+        button.button.small.title-button(@click="userForm") Ajouter une organisation
         input.table__filter(v-model="search", placeholder="recherche par UUID, email, contexte")
       table.table
         thead
@@ -41,7 +41,7 @@ export default {
 
   data() {
     return {
-      title: "Utilisateurs"
+      title: "Organisations"
     };
   },
 
