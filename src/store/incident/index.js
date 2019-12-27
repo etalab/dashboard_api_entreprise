@@ -22,9 +22,11 @@ const mutations = {
 
 const actions = {
   index({ commit, dispatch }) {
-    dispatch("api/admin/get", { url: "/incidents" }, { root: true }).then(
-      data => commit("fill", { incidents: data })
-    );
+    dispatch(
+      "api/admin/get",
+      { url: "/incidents" },
+      { root: true }
+    ).then(data => commit("fill", { incidents: data }));
   },
 
   create({ dispatch }, params) {
