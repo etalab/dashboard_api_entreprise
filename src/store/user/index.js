@@ -171,6 +171,16 @@ const actions = {
     ).then(() => dispatch("get", { userId }));
   },
 
+  archiveToken({ dispatch, getters }, payload) {
+    const userId = getters.userDetails.id;
+    let url = `users/${userId}/jwt_api_entreprise/archive`;
+    dispatch(
+      "api/admin/post",
+      { url: url, params: payload },
+      { root: true }
+    ).then(() => dispatch("get", { userId }));
+  },
+
   create({ dispatch }, payload) {
     return dispatch(
       "api/admin/post",

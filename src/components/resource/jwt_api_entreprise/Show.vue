@@ -72,18 +72,38 @@
         >
           Blacklister
         </button>
-        <div v-if="dialogBlacklistJwt" class="dialog-backdrop">
-          <div class="dialog panel">
-            <p>Êtes-vous certains de vouloir blacklister ce token ?</p>
-            <div class="action-buttons">
-              <button class="button small" @click="dialogBlacklistJwt = false">
-                Annuler
-              </button>
-              <button class="button small warning" @click="blacklistJwt">
-                Blacklister
-              </button>
-            </div>
-          </div>
+        <button
+          v-if="!jwt.blacklisted && isAdmin"
+          class="button secondary"
+          @click="dialogArchiveJwt = true"
+        >
+          Archiver
+        </button>
+      </div>
+    </div>
+    <div v-if="dialogBlacklistJwt" class="dialog-backdrop">
+      <div class="dialog panel">
+        <p>Êtes-vous certains de vouloir blacklister ce token ?</p>
+        <div class="action-buttons">
+          <button class="button small" @click="dialogBlacklistJwt = false">
+            Annuler
+          </button>
+          <button class="button small warning" @click="blacklistJwt">
+            Blacklister
+          </button>
+        </div>
+      </div>
+    </div>
+    <div v-if="dialogArchiveJwt" class="dialog-backdrop">
+      <div class="dialog panel">
+        <p>Êtes-vous certains de vouloir archiver ce token ?</p>
+        <div class="action-buttons">
+          <button class="button small" @click="dialogArchiveJwt = false">
+            Annuler
+          </button>
+          <button class="button small warning" @click="archiveJwt">
+            Archiver
+          </button>
         </div>
       </div>
     </div>
@@ -108,7 +128,8 @@ export default {
     return {
       showClipboardSuccessMsg: false,
       showClipboardErrorMsg: false,
-      dialogBlacklistJwt: false
+      dialogBlacklistJwt: false,
+      dialogArchiveJwt: false
     };
   },
 
@@ -140,6 +161,12 @@ export default {
       this.$store
         .dispatch("user/blacklistToken", { id: this.jwt.payload.jti })
         .finally((this.dialogBlacklistJwt = false));
+    },
+
+    archiveJwt() {
+      this.$store
+        .dispatch("user/archiveToken", { id: this.jwt.payload.jti })
+        .finally((this.dialogArchiveJwt = false));
     }
   }
 };
@@ -164,16 +191,17 @@ export default {
 }
 
 .dialog-backdrop {
-  position: fixed;
-  height: auto;
+  position: absolute;
+  height: 100%;
   width: 100%;
   background: rgba(0, 0, 0, 0.5);
   top: 0;
   left: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   z-index: 100;
+  padding: 5em 0;
 }
 
 .dialog {
