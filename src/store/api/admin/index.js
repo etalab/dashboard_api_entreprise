@@ -40,6 +40,15 @@ const actions = {
     });
   },
 
+  patch(_ctx, { url, params = {} }) {
+    return new Promise((resolve, reject) => {
+      http
+        .patch(url, params)
+        .then(response => resolve(response.data))
+        .catch(error => reject(handleError(error)));
+    });
+  },
+
   updateAuthorizationBearer(_ctx) {
     http.defaults.headers["Authorization"] = "Bearer " + localStorage.token;
   }

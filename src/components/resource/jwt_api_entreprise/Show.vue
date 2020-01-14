@@ -76,7 +76,7 @@
           Blacklister
         </button>
         <button
-          v-if="!jwt.blacklisted && isAdmin"
+          v-if="!jwt.archived && isAdmin"
           class="button secondary"
           @click="dialogArchiveJwt = true"
         >
@@ -162,13 +162,13 @@ export default {
 
     blacklistJwt() {
       this.$store
-        .dispatch("user/blacklistToken", { id: this.jwt.payload.jti })
+        .dispatch("user/blacklistToken", this.jwt.payload.jti)
         .finally((this.dialogBlacklistJwt = false));
     },
 
     archiveJwt() {
       this.$store
-        .dispatch("user/archiveToken", { id: this.jwt.payload.jti })
+        .dispatch("user/archiveToken", this.jwt.payload.jti)
         .finally((this.dialogArchiveJwt = false));
     }
   }
