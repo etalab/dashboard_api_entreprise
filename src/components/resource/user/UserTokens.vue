@@ -3,11 +3,16 @@
     h2(class="main-title") Tokens de l’organisation
     jwt-api-entreprise-new(v-if="isAdmin")
 
-    div(v-if="tokens.length > 0 || blacklistedTokens.length > 0")
+    div(v-if="tokens.length > 0 || blacklistedTokens.length > 0 || archivedTokens.length > 0")
       jwt-api-entreprise-index(:jwtList="tokens" v-if="tokens.length > 0")
+
       div(v-if="isAdmin && blacklistedTokens.length > 0")
         h2 Tokens blacklistés
         jwt-api-entreprise-index(:jwtList="blacklistedTokens")
+
+      div(v-if="isAdmin && archivedTokens.length > 0")
+        h2 Tokens archivés
+        jwt-api-entreprise-index(:jwtList="archivedTokens")
     p(v-else) Aucun token attribué
 
 </template>
@@ -24,6 +29,7 @@ export default {
     ...mapGetters({
       tokens: "user/tokens",
       blacklistedTokens: "user/blacklistedTokens",
+      archivedTokens: "user/archivedTokens",
       isAdmin: "auth/isAdmin"
     })
   },
