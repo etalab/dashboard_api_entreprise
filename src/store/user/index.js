@@ -9,7 +9,8 @@ const state = {
     contacts: [],
     allowed_roles: [],
     tokens: [],
-    blacklistedTokens: []
+    blacklistedTokens: [],
+    archivedTokens: []
   }
 };
 
@@ -39,6 +40,14 @@ const getters = {
   blacklistedTokens(state) {
     let blacklistedTokens = cloneDeep(state.user.blacklistedTokens);
     return blacklistedTokens.sort(
+      (token1, token2) =>
+        new Date(token2.payload.iat) - new Date(token1.payload.iat)
+    );
+  },
+
+  archivedTokens(state) {
+    let archivedTokens = cloneDeep(state.user.archivedTokens);
+    return archivedTokens.sort(
       (token1, token2) =>
         new Date(token2.payload.iat) - new Date(token1.payload.iat)
     );
@@ -105,6 +114,12 @@ const mutations = {
     state.user.blacklistedTokens = decodedTokens;
   },
 
+  setArchivedTokens(state, archivedTokens) {
+    const decodedTokens = archivedTokens.map(e => formatJwt(e, true));
+
+    state.user.archivedTokens = decodedTokens;
+  },
+
   setAllowedRoles(state, roles) {
     state.user.allowed_roles = roles;
   },
@@ -143,6 +158,7 @@ const actions = {
     commit("setContacts", data.contacts);
     commit("setTokens", data.tokens);
     commit("setBlacklistedTokens", data.blacklisted_tokens);
+    commit("setArchivedTokens", data.archived_tokens);
     commit("setAllowedRoles", data.allowed_roles);
   },
 
@@ -161,12 +177,22 @@ const actions = {
     ).then(() => dispatch("get", { userId }));
   },
 
-  blacklistToken({ dispatch, getters }, payload) {
+  blacklistToken({ dispatch, getters }, jwtId) {
     const userId = getters.userDetails.id;
-    let url = `users/${userId}/jwt_api_entreprise/blacklist`;
+    let url = `jwt_api_entreprise/${jwtId}`;
     dispatch(
-      "api/admin/post",
-      { url: url, params: payload },
+      "api/admin/patch",
+      { url: url, params: { blacklisted: true } },
+      { root: true }
+    ).then(() => dispatch("get", { userId }));
+  },
+
+  archiveToken({ dispatch, getters }, jwtId) {
+    const userId = getters.userDetails.id;
+    let url = `jwt_api_entreprise/${jwtId}`;
+    dispatch(
+      "api/admin/patch",
+      { url: url, params: { archived: true } },
       { root: true }
     ).then(() => dispatch("get", { userId }));
   },

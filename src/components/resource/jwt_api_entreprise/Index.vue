@@ -36,5 +36,6 @@ export default {
 
 .panel {
   margin-bottom: 1em;
+  position: initial;
 }
 </style>

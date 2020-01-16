@@ -1,7 +1,6 @@
 <template lang="pug">
-  .login
+  .content
     .container
-      .form__container
         form.panel
           h1 Activer votre compte utilisateur
 
@@ -19,11 +18,6 @@
           .form__group
             label Confirmation
             input(type="password" v-model="password_confirmation")
-
-          .form__group
-            input(type="checkbox" id="cgu_checkbox" v-model="cguChecked")
-            label.label-inline(for="cgu_checkbox") En confirmant votre compte utilisateur vous acceptez nos&nbsp;
-              a(href="https://entreprise.api.gouv.fr/cgu/" target="_blank") Conditions Générales d'Utilisation
 
           button.button(@click.prevent="submit") Finaliser l'inscription
 
@@ -71,15 +65,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login {
-  height: 100%;
+.content {
+  height: calc(100vh - 73px);
   display: flex;
   align-items: center;
   position: relative;
 }
 
-button.button {
-  margin-top: 2em;
+button.button,
+button.button:active {
+  margin: 2em auto 0;
   display: block;
 }
 
