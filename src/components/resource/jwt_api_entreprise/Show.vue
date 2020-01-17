@@ -71,50 +71,49 @@
         <button
           v-if="!jwt.blacklisted && isAdmin"
           class="button warning"
-          @click="dialogBlacklistJwt = true"
+          @click="modalBlacklistJwt = true"
         >
           Blacklister
         </button>
         <button
           v-if="!jwt.archived && isAdmin"
           class="button secondary"
-          @click="dialogArchiveJwt = true"
+          @click="modalArchiveJwt = true"
         >
           Archiver
         </button>
       </div>
     </div>
-    <div v-if="dialogBlacklistJwt" class="dialog-backdrop">
-      <div class="dialog panel">
-        <p>Êtes-vous certains de vouloir blacklister ce token ?</p>
-        <div class="action-buttons">
-          <button class="button small" @click="dialogBlacklistJwt = false">
-            Annuler
-          </button>
-          <button class="button small warning" @click="blacklistJwt">
-            Blacklister
-          </button>
-        </div>
-      </div>
-    </div>
-    <div v-if="dialogArchiveJwt" class="dialog-backdrop">
-      <div class="dialog panel">
-        <p>Êtes-vous certains de vouloir archiver ce token ?</p>
-        <div class="action-buttons">
-          <button class="button small" @click="dialogArchiveJwt = false">
-            Annuler
-          </button>
-          <button class="button small warning" @click="archiveJwt">
-            Archiver
-          </button>
-        </div>
-      </div>
-    </div>
+    <modal
+      v-if="modalBlacklistJwt"
+      @submit="blacklistJwt"
+      @close="modalBlacklistJwt = false"
+    >
+      <p slot="modalText">
+        Êtes-vous sûr de vouloir blacklister ce token ?
+      </p>
+      <template slot="confirmText">
+        Blacklister
+      </template>
+    </modal>
+    <modal
+      v-if="modalArchiveJwt"
+      @submit="archiveJwt"
+      @close="modalArchiveJwt = false"
+    >
+      <p slot="modalText">
+        Êtes-vous sûr de vouloir archiver ce token ?
+      </p>
+      <template slot="confirmText">
+        Archiver
+      </template>
+    </modal>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import Modal from "@/components/ui/Modal";
 
 export default {
   name: "JwtApiEntrepriseShow",
@@ -131,8 +130,8 @@ export default {
     return {
       showClipboardSuccessMsg: false,
       showClipboardErrorMsg: false,
-      dialogBlacklistJwt: false,
-      dialogArchiveJwt: false
+      modalBlacklistJwt: false,
+      modalArchiveJwt: false
     };
   },
 
@@ -163,14 +162,18 @@ export default {
     blacklistJwt() {
       this.$store
         .dispatch("user/blacklistToken", this.jwt.payload.jti)
-        .finally((this.dialogBlacklistJwt = false));
+        .finally((this.modalBlacklistJwt = false));
     },
 
     archiveJwt() {
       this.$store
         .dispatch("user/archiveToken", this.jwt.payload.jti)
-        .finally((this.dialogArchiveJwt = false));
+        .finally((this.modalArchiveJwt = false));
     }
+  },
+
+  components: {
+    modal: Modal
   }
 };
 </script>
@@ -191,24 +194,6 @@ export default {
 
 .tag {
   margin-bottom: 0.5em;
-}
-
-.dialog-backdrop {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: start;
-  z-index: 100;
-  padding: 5em 0;
-}
-
-.dialog {
-  display: inline-block;
 }
 
 .blacklisted_token,
