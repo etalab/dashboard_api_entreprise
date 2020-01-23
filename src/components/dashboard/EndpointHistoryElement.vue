@@ -22,7 +22,7 @@
         .square(:style="{ 'background-color': color_512 }")
         span DOWN (y compris API de secours)
 
-      <!-- <p>Disponibilité sur 7 jours: <span :class="slaRatingClass">{{ meanSla }}%</span></p> -->
+      <p>Disponibilité sur 7 jours: <span :class="slaRatingClass">{{ meanSla }}%</span></p>
       p(:id="providerName")
         <!-- Visavail.js chart will be inserted here -->
 
@@ -102,9 +102,9 @@ export default {
     },
     slaRatingClass: function() {
       switch (true) {
-        case this.meanSla > 99.8:
+        case this.meanSla > 99:
           return "perfect-sla";
-        case this.meanSla > 98:
+        case this.meanSla > 95:
           return "almost-perfect-sla";
         default:
           return "bad-sla";
