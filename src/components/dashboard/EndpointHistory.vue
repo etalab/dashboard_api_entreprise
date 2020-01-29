@@ -32,7 +32,7 @@ export default {
     loadHistoricalData: function() {
       this.$store
         .dispatch("dashboard/providersHistory")
-        .catch(error => console.trace(error.message));
+        .catch(error => console.log(error.message));
     }
   },
 

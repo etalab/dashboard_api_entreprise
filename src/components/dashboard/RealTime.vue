@@ -61,11 +61,11 @@ export default {
     loadData: function() {
       this.$store
         .dispatch("dashboard/endpoints")
-        .catch(error => console.trace(error.message));
+        .catch(error => console.log(error.message));
 
       this.$store
         .dispatch("dashboard/homepageCode")
-        .catch(error => console.trace(error.messsage));
+        .catch(error => console.log(error.messsage));
     }
   },
 
