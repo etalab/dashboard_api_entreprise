@@ -6,6 +6,7 @@ import auth from "./auth";
 import dashboard from "./dashboard";
 import stats from "./stats";
 import user from "./user";
+import jwt_api_entreprise from "./jwt_api_entreprise";
 import role from "./role";
 import api from "./api";
 import ui from "./ui";
@@ -22,6 +23,7 @@ export default new Vuex.Store({
     stats,
     role,
     user,
+    jwt_api_entreprise,
     incident,
     api
   }

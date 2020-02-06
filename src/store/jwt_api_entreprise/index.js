@@ -1,13 +1,14 @@
 import orderBy from "lodash/orderBy";
 
 const state = {
-  userIndex: [],
+  tokens: [],
   search: "",
   order: {
-    created_at: "desc",
-    email: "asc",
-    context: "asc",
-    confirmed: "asc"
+    iat: "desc",
+    subject: "asc",
+    exp: "desc",
+    archived: "asc",
+    blacklisted: "asc"
   }
 };
 
@@ -16,13 +17,13 @@ const getters = {
     return state.search;
   },
 
-  userList(state) {
-    return state.userIndex;
+  tokenList(state) {
+    return state.tokens;
   },
 
-  userListFiltered(state, getters) {
+  tokenListFiltered(state) {
     if (state.search == "") {
-      return getters.userList;
+      return state.tokens;
     }
 
     // Removing special chars from regexp to match litteral string
@@ -31,9 +32,9 @@ const getters = {
       "gi"
     );
 
-    return state.userIndex.filter(item => {
+    return state.tokens.filter(item => {
       let keepItem = false;
-      ["id", "email", "context"].forEach(k => {
+      ["subject"].forEach(k => {
         if (item[k] !== null && item[k].match(regex)) keepItem = true;
       });
 
@@ -47,8 +48,8 @@ const getters = {
 };
 
 const mutations = {
-  fill(state, users) {
-    state.userIndex = users;
+  fill(state, token_list) {
+    state.tokens = token_list;
   },
 
   toggleOrder(state, element) {
@@ -60,7 +61,7 @@ const mutations = {
   },
 
   orderIndexBy(state, { element, order }) {
-    state.userIndex = orderBy(state.userIndex, element, order);
+    state.tokens = orderBy(state.tokens, element, order);
   },
 
   updateSearch(state, search) {
@@ -70,10 +71,13 @@ const mutations = {
 
 const actions = {
   index({ commit, dispatch }) {
-    dispatch("api/admin/get", { url: "/users" }, { root: true }).then(data => {
+    dispatch(
+      "api/admin/get",
+      { url: "/jwt_api_entreprise" },
+      { root: true }
+    ).then(data => {
       // Default order: by most recent
-      data = orderBy(data, "created_at", "desc");
-      commit("fill", data);
+      commit("fill", orderBy(data, "iat", "desc"));
     });
   },
 
