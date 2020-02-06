@@ -28,11 +28,12 @@
             v-bind:class='{ descending: order["blacklisted"] == "desc" }'
           ) Blacklisté
         tr(v-for="token in tokenListFiltered")
-          td {{ token.iat }}
-          td {{ token.subject }}
-          td {{ token.exp }}
-          td {{ token.archived }}
-          td {{ token.blacklisted }}
+          td {{ token.iat | fromTimestampToLocaleDate }}
+          td
+            router-link(:to="{ name: 'admin-user-tokens', params: { userId: token.user_id }}") {{ token.subject }}
+          td {{ token.exp | fromTimestampToLocale }}
+          td {{ token.archived | friendlyBoolean }}
+          td {{ token.blacklisted | friendlyBoolean }}
 </template>
 
 <script>
@@ -56,6 +57,24 @@ export default {
 
   created: function() {
     this.$store.dispatch("jwt_api_entreprise/index");
+  },
+
+  filters: {
+    // returns the date as well as hour
+    fromTimestampToLocale: function(timestamp) {
+      const date = new Date(timestamp * 1000); // wtf JS ...
+      return date.toLocaleString("fr-FR");
+    },
+
+    // returns only the date
+    fromTimestampToLocaleDate: function(timestamp) {
+      const date = new Date(timestamp * 1000); // wtf JS ...
+      return date.toLocaleDateString("fr-FR");
+    },
+
+    friendlyBoolean: function(boolean) {
+      return boolean == true ? "Oui" : "Non";
+    }
   },
 
   methods: {
