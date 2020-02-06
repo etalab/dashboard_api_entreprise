@@ -4,7 +4,7 @@
       .header
         h2 Liste des organisations
         button.button.small.title-button(@click="userForm") Ajouter une organisation
-        input.table__filter(v-model="search", placeholder="recherche par UUID, email, contexte")
+        input.table__filter(v-model="search", placeholder="recherche par UUID, email, SIRET, ...")
       table.table
         thead
           th.ascending(
@@ -18,7 +18,7 @@
           th.ascending(
             @click='toggleSortBy("context")'
             v-bind:class='{ descending: order["context"] == "desc" }'
-          ) Contexte
+          ) Siret
           th.ascending(
             @click='toggleSortBy("confirmed")'
             v-bind:class='{ descending: order["confirmed"] == "desc" }'
@@ -38,12 +38,6 @@ const { mapGetters } = createNamespacedHelpers("user/index");
 
 export default {
   name: "UserIndex",
-
-  data() {
-    return {
-      title: "Organisations"
-    };
-  },
 
   computed: {
     ...mapGetters(["userListFiltered", "order"]),
