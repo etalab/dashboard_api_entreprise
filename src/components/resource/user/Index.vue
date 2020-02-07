@@ -55,16 +55,6 @@ export default {
     this.$store.dispatch("user/index/index");
   },
 
-  filters: {
-    formatDate: function(date) {
-      const parsed = Date.parse(date);
-      return new Date(parsed).toLocaleDateString("fr-FR");
-    },
-    friendlyBoolean: function(boolean) {
-      return boolean == true ? "Oui" : "Non";
-    }
-  },
-
   methods: {
     userForm: function() {
       this.$router.push({ name: "userNew" });
