@@ -29,8 +29,9 @@
           ) Blacklisté
         tr(v-for="token in tokenListFiltered")
           td {{ token.iat | fromTimestampToLocaleDate }}
-          td
+          td(v-if="token.user_id")
             router-link(:to="{ name: 'admin-user-tokens', params: { userId: token.user_id }}") {{ token.subject }}
+          td(v-else) {{ token.subject }}
           td {{ token.exp | fromTimestampToLocale }}
           td {{ token.archived | friendlyBoolean }}
           td {{ token.blacklisted | friendlyBoolean }}
