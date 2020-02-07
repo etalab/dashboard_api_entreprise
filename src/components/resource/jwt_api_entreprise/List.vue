@@ -3,7 +3,7 @@
     .panel
       .header
         h2 Liste des jetons
-        input.table__filter(v-model="search", placeholder="Recherche par cas d'usage")
+        input.table__filter(v-model="search", placeholder="Recherche par cas d'usage, JTI")
 
       table.table
         thead

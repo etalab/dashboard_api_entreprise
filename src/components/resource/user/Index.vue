@@ -4,7 +4,7 @@
       .header
         h2 Liste des organisations
         button.button.small.title-button(@click="userForm") Ajouter une organisation
-        input.table__filter(v-model="search", placeholder="recherche par UUID, email, SIRET, ...")
+        input.table__filter(v-model="search", placeholder="recherche par UID, email, SIRET, ...")
       table.table
         thead
           th.ascending(
