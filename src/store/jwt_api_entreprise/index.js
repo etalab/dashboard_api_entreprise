@@ -34,7 +34,7 @@ const getters = {
 
     return state.tokens.filter(item => {
       let keepItem = false;
-      ["subject"].forEach(k => {
+      ["id", "subject"].forEach(k => {
         if (item[k] !== null && item[k].match(regex)) keepItem = true;
       });
 

@@ -1,16 +1,11 @@
-import JwtDecode from "jwt-decode";
 import userIndex from "./index/index.js";
 import reduce from "lodash/reduce";
-import cloneDeep from "lodash/cloneDeep";
 
 const state = {
   user: {
     details: {},
     contacts: [],
-    allowed_roles: [],
-    tokens: [],
-    blacklistedTokens: [],
-    archivedTokens: []
+    tokens: []
   }
 };
 
@@ -29,39 +24,28 @@ const getters = {
     return nbUsagePolicies > 0;
   },
 
-  tokens(state) {
-    let tokens = cloneDeep(state.user.tokens);
+  activeTokens(state) {
+    let tokens = state.user.tokens.filter(item => {
+      return item.archived === false && item.blacklisted === false;
+    });
     return tokens.sort(
-      (token1, token2) =>
-        new Date(token2.payload.iat) - new Date(token1.payload.iat)
+      (token1, token2) => new Date(token2.iat) - new Date(token1.iat)
     );
   },
 
   blacklistedTokens(state) {
-    let blacklistedTokens = cloneDeep(state.user.blacklistedTokens);
+    let blacklistedTokens = state.user.tokens.filter(item => item.blacklisted);
     return blacklistedTokens.sort(
-      (token1, token2) =>
-        new Date(token2.payload.iat) - new Date(token1.payload.iat)
+      (token1, token2) => new Date(token2.iat) - new Date(token1.iat)
     );
   },
 
   archivedTokens(state) {
-    let archivedTokens = cloneDeep(state.user.archivedTokens);
+    let archivedTokens = state.user.tokens.filter(item => item.archived);
     return archivedTokens.sort(
-      (token1, token2) =>
-        new Date(token2.payload.iat) - new Date(token1.payload.iat)
+      (token1, token2) => new Date(token2.iat) - new Date(token1.iat)
     );
   }
-};
-
-const formatJwt = (jwt, blacklisted) => {
-  const payload = JwtDecode(jwt);
-
-  return {
-    blacklisted: blacklisted,
-    value: jwt,
-    payload
-  };
 };
 
 const mutations = {
@@ -103,29 +87,7 @@ const mutations = {
   },
 
   setTokens(state, tokens) {
-    const decodedTokens = tokens.map(e => formatJwt(e, false));
-
-    state.user.tokens = decodedTokens;
-  },
-
-  setBlacklistedTokens(state, blacklistedTokens) {
-    const decodedTokens = blacklistedTokens.map(e => formatJwt(e, true));
-
-    state.user.blacklistedTokens = decodedTokens;
-  },
-
-  setArchivedTokens(state, archivedTokens) {
-    const decodedTokens = archivedTokens.map(e => formatJwt(e, true));
-
-    state.user.archivedTokens = decodedTokens;
-  },
-
-  setAllowedRoles(state, roles) {
-    state.user.allowed_roles = roles;
-  },
-
-  addToken(state, token) {
-    state.user.tokens.push(formatJwt(token, false));
+    state.user.tokens = tokens;
   }
 };
 
@@ -157,9 +119,6 @@ const actions = {
 
     commit("setContacts", data.contacts);
     commit("setTokens", data.tokens);
-    commit("setBlacklistedTokens", data.blacklisted_tokens);
-    commit("setArchivedTokens", data.archived_tokens);
-    commit("setAllowedRoles", data.allowed_roles);
   },
 
   createToken({ dispatch, getters }, payload) {
