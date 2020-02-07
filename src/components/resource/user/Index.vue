@@ -60,7 +60,7 @@ export default {
       this.$router.push({ name: "userNew" });
     },
     toggleSortBy: function(element) {
-      this.$store.dispatch("user/index/toggleSort", element);
+      this.$store.commit("user/index/orderIndexBy", element);
     }
   }
 };

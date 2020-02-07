@@ -1,3 +1,4 @@
+import { filterListOfObjects } from "@/store/helpers";
 import orderBy from "lodash/orderBy";
 
 const state = {
@@ -16,29 +17,14 @@ const getters = {
     return state.search;
   },
 
-  userList(state) {
-    return state.userIndex;
-  },
+  userListFiltered(state) {
+    if (state.search == "") return state.userIndex;
 
-  userListFiltered(state, getters) {
-    if (state.search == "") {
-      return getters.userList;
-    }
-
-    // Removing special chars from regexp to match litteral string
-    const regex = new RegExp(
-      state.search.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&"),
-      "gi"
+    return filterListOfObjects(
+      state.userIndex,
+      ["id", "email", "context"],
+      state.search
     );
-
-    return state.userIndex.filter(item => {
-      let keepItem = false;
-      ["id", "email", "context"].forEach(k => {
-        if (item[k] !== null && item[k].match(regex)) keepItem = true;
-      });
-
-      return keepItem;
-    });
   },
 
   order(state) {
@@ -51,16 +37,17 @@ const mutations = {
     state.userIndex = users;
   },
 
-  toggleOrder(state, element) {
-    if (state.order[element] == "desc") {
-      state.order[element] = "asc";
-    } else if (state.order[element] == "asc") {
-      state.order[element] = "desc";
-    }
-  },
-
-  orderIndexBy(state, { element, order }) {
-    state.userIndex = orderBy(state.userIndex, element, order);
+  // Following mutations will need to be moved into an action when ordering
+  // and filtering will be done serverside
+  orderIndexBy(state, element) {
+    // TODO Try to get rid off the order switch and memoization from the store
+    // This may be moved in the component, object key and order passed to the
+    // mutation when ordering changes. The behaviour could even be (maybe?)
+    // shared into a component "table"'s mixin.
+    const currentOrder = state.order[element];
+    const newOrder = (state.order[element] =
+      currentOrder == "desc" ? "asc" : "desc");
+    state.userIndex = orderBy(state.userIndex, element, newOrder);
   },
 
   updateSearch(state, search) {
@@ -74,17 +61,6 @@ const actions = {
       // Default order: by most recent
       data = orderBy(data, "created_at", "desc");
       commit("fill", data);
-    });
-  },
-
-  // TODO XXX Move into a mutation, action not needed here
-  // Only one mutation needed too
-  // Create a "mixin" or a generic component to share table ordering and filtering
-  toggleSort({ commit }, element) {
-    commit("toggleOrder", element);
-    commit("orderIndexBy", {
-      element: element,
-      order: state.order[element]
     });
   }
 };

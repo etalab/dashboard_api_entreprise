@@ -62,7 +62,7 @@ export default {
 
   methods: {
     toggleSortBy: function(element) {
-      this.$store.dispatch("jwt_api_entreprise/toggleSort", element);
+      this.$store.commit("jwt_api_entreprise/orderIndexBy", element);
     }
   }
 };

@@ -1,3 +1,4 @@
+import { filterListOfObjects } from "@/store/helpers";
 import orderBy from "lodash/orderBy";
 
 const state = {
@@ -22,24 +23,9 @@ const getters = {
   },
 
   tokenListFiltered(state) {
-    if (state.search == "") {
-      return state.tokens;
-    }
+    if (state.search == "") return state.tokens;
 
-    // Removing special chars from regexp to match litteral string
-    const regex = new RegExp(
-      state.search.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&"),
-      "gi"
-    );
-
-    return state.tokens.filter(item => {
-      let keepItem = false;
-      ["id", "subject"].forEach(k => {
-        if (item[k] !== null && item[k].match(regex)) keepItem = true;
-      });
-
-      return keepItem;
-    });
+    return filterListOfObjects(state.tokens, ["id", "subject"], state.search);
   },
 
   order(state) {
@@ -52,16 +38,11 @@ const mutations = {
     state.tokens = token_list;
   },
 
-  toggleOrder(state, element) {
-    if (state.order[element] == "desc") {
-      state.order[element] = "asc";
-    } else if (state.order[element] == "asc") {
-      state.order[element] = "desc";
-    }
-  },
-
-  orderIndexBy(state, { element, order }) {
-    state.tokens = orderBy(state.tokens, element, order);
+  orderIndexBy(state, element) {
+    const currentOrder = state.order[element];
+    const newOrder = (state.order[element] =
+      currentOrder == "desc" ? "asc" : "desc");
+    state.tokens = orderBy(state.tokens, element, newOrder);
   },
 
   updateSearch(state, search) {
@@ -78,17 +59,6 @@ const actions = {
     ).then(data => {
       // Default order: by most recent
       commit("fill", orderBy(data, "iat", "desc"));
-    });
-  },
-
-  // TODO XXX Move into a mutation, action not needed here
-  // Only one mutation needed too
-  // Create a "mixin" or a generic component to share table ordering and filtering
-  toggleSort({ commit }, element) {
-    commit("toggleOrder", element);
-    commit("orderIndexBy", {
-      element: element,
-      order: state.order[element]
     });
   }
 };
