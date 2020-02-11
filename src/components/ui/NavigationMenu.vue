@@ -19,6 +19,10 @@ export default {
           routeName: "users"
         },
         {
+          label: "Jetons",
+          routeName: "tokens"
+        },
+        {
           label: "Rôles",
           routeName: "roles"
         }

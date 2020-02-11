@@ -6,6 +6,7 @@ import VeeValidate from "vee-validate";
 import VueClipboard from "vue-clipboard2";
 import router from "./router";
 import store from "./store";
+import "./filters";
 import "babel-polyfill";
 
 import "template.data.gouv.fr/dist/main.css";

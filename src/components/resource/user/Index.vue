@@ -4,7 +4,7 @@
       .header
         h2 Liste des organisations
         button.button.small.title-button(@click="userForm") Ajouter une organisation
-        input.table__filter(v-model="search", placeholder="recherche par UUID, email, contexte")
+        input.table__filter(v-model="search", placeholder="recherche par UID, email, SIRET, ...")
       table.table
         thead
           th.ascending(
@@ -18,7 +18,7 @@
           th.ascending(
             @click='toggleSortBy("context")'
             v-bind:class='{ descending: order["context"] == "desc" }'
-          ) Contexte
+          ) Siret
           th.ascending(
             @click='toggleSortBy("confirmed")'
             v-bind:class='{ descending: order["confirmed"] == "desc" }'
@@ -39,12 +39,6 @@ const { mapGetters } = createNamespacedHelpers("user/index");
 export default {
   name: "UserIndex",
 
-  data() {
-    return {
-      title: "Organisations"
-    };
-  },
-
   computed: {
     ...mapGetters(["userListFiltered", "order"]),
     search: {
@@ -61,22 +55,12 @@ export default {
     this.$store.dispatch("user/index/index");
   },
 
-  filters: {
-    formatDate: function(date) {
-      const parsed = Date.parse(date);
-      return new Date(parsed).toLocaleDateString("fr-FR");
-    },
-    friendlyBoolean: function(boolean) {
-      return boolean == true ? "Oui" : "Non";
-    }
-  },
-
   methods: {
     userForm: function() {
       this.$router.push({ name: "userNew" });
     },
     toggleSortBy: function(element) {
-      this.$store.dispatch("user/index/toggleSort", element);
+      this.$store.commit("user/index/orderIndexBy", element);
     }
   }
 };

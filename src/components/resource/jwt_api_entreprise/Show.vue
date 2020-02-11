@@ -1,14 +1,14 @@
 <template>
-  <div :class="{ blacklisted_token: jwt.blacklisted }">
+  <div :class="{ blacklisted_token: jwt.blacklisted || jwt.archived }">
     <div class="panel__header">
-      <h3 class="token__name">Cadre d’utilisation : {{ jwt.payload.sub }}</h3>
+      <h3 class="token__name">Cadre d’utilisation : {{ jwt.subject }}</h3>
       <small class="panel__header-extra"
-        >Délivré le {{ formatDate(jwt.payload.iat) }}</small
+        >Délivré le {{ formatDate(jwt.iat) }}</small
       >
       <router-link
         :to="{
           name: statsRoute,
-          params: { jwtId: jwt.payload.jti, jwtSub: jwt.payload.sub }
+          params: { jwtId: jwt.id, jwtSub: jwt.subject }
         }"
         class="button-stats"
         >Voir les statistiques →</router-link
@@ -17,11 +17,7 @@
     <div class="form__group token__rights">
       <label class="token__rights-label">Accès</label>
       <ul class="token__rights-list label-list">
-        <li
-          v-for="(role, index) in jwt.payload.roles"
-          :key="index"
-          class="label"
-        >
+        <li v-for="(role, index) in jwt.roles" :key="index" class="label">
           {{ role }}
         </li>
       </ul>
@@ -56,9 +52,9 @@
       </div>
 
       <div class="input__group">
-        <input type="text" name="token" :value="jwt.value" />
+        <input type="text" name="token" :value="jwt.secret_key" />
         <button
-          v-clipboard:copy.prevent="jwt.value"
+          v-clipboard:copy.prevent="jwt.secret_key"
           v-clipboard:success="clipboardSuccess"
           v-clipboard:error="clipboardError"
           class="button icon-button"
@@ -126,6 +122,7 @@ export default {
       }
     }
   },
+
   data() {
     return {
       showClipboardSuccessMsg: false,
@@ -145,6 +142,7 @@ export default {
     }
   },
 
+  // TODO XXX Make it a filter
   methods: {
     formatDate(timestamp) {
       const date = new Date(timestamp * 1000); // wtf JS ...
@@ -161,14 +159,14 @@ export default {
 
     blacklistJwt() {
       this.$store
-        .dispatch("user/blacklistToken", this.jwt.payload.jti)
-        .finally((this.modalBlacklistJwt = false));
+        .dispatch("user/blacklistToken", this.jwt.id)
+        .finally((this.dialogBlacklistJwt = false));
     },
 
     archiveJwt() {
       this.$store
-        .dispatch("user/archiveToken", this.jwt.payload.jti)
-        .finally((this.modalArchiveJwt = false));
+        .dispatch("user/archiveToken", this.jwt.id)
+        .finally((this.dialogArchiveJwt = false));
     }
   },
 
