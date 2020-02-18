@@ -12,6 +12,8 @@ import RoleIndex from "@/components/resource/role/Index";
 import RoleNew from "@/components/resource/role/New";
 import JwtStats from "@/components/resource/jwt_api_entreprise/Stats";
 
+import JwtApiEntrepriseList from "@/components/resource/jwt_api_entreprise/List";
+
 import Login from "@/components/Login";
 import AccountConfirmation from "@/components/AccountConfirmation";
 import PasswordResetRequest from "@/components/PasswordResetRequest";
@@ -110,6 +112,12 @@ const router = new Router({
           name: "users",
           meta: { requiresAdmin: true },
           component: UserIndex
+        },
+        {
+          path: "tokens",
+          name: "tokens",
+          meta: { requiresAdmin: true },
+          component: JwtApiEntrepriseList
         },
         {
           path: "roles",

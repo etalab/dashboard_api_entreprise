@@ -1,8 +1,8 @@
 <template lang="pug">
 .stats
   a.back-button(@click="goToPreviousPage") ← Retour à la liste des tokens
-  h2.main-title {{jwtSub}}
-    .label JTI : {{jwtId}})
+  h2.main-title {{ jwtSub }}
+    .label JTI : {{ jwtId }}
   stats-gauge
   apis-usage(class="stats__call-count")
   last-calls(class="stats__last-calls")

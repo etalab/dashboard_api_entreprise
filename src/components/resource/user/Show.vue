@@ -8,7 +8,7 @@
       li
         router-link(:to="{ name: routeTo('contacts') }") Contacts
 
-    // Tabs above are yield here as nested routes
+    // Tabs above are yielded here as nested routes
     router-view
 </template>
 
