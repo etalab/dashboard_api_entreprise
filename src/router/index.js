@@ -15,6 +15,7 @@ import JwtStats from "@/components/resource/jwt_api_entreprise/Stats";
 import JwtApiEntrepriseList from "@/components/resource/jwt_api_entreprise/List";
 
 import Login from "@/components/Login";
+import AuthApiGouv from "@/components/AuthApiGouv";
 import AccountConfirmation from "@/components/AccountConfirmation";
 import PasswordResetRequest from "@/components/PasswordResetRequest";
 import PasswordReset from "@/components/PasswordReset";
@@ -52,6 +53,11 @@ const router = new Router({
       path: "/account/password_reset",
       name: "account-password-reset",
       component: PasswordReset
+    },
+    {
+      path: "/auth_api_gouv_callback",
+      name: "auth-api-gouv",
+      component: AuthApiGouv
     },
     {
       path: "/login",
