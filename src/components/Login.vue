@@ -17,6 +17,7 @@
             router-link(:to="{ name: 'account-password-reset-request' }") Mot de passe oublié ?
 
         button.button(@click.prevent="login") S'identifier
+        button.button(@click.prevent="loginSignup") Me connecter avec Signup
 
         .signup.text-center Pas de compte ?
           div
@@ -27,6 +28,7 @@
 <script>
 export default {
   name: "Login",
+
   data() {
     return {
       email: "",
@@ -50,6 +52,22 @@ export default {
         .catch(() => {
           this.loginError = true;
         });
+    },
+
+    loginSignup() {
+      const oauthUrl =
+        process.env.VUE_APP_OAUTH_API_GOUV_AUTHORIZATION_ENDPOINT +
+        "?" +
+        "redirect_uri=" +
+        process.env.VUE_APP_OAUTH_API_GOUV_REDIRECT_URI +
+        "&" +
+        "client_id=" +
+        process.env.VUE_APP_OAUTH_API_GOUV_CLIENT_ID +
+        "&" +
+        "scope=openid email&" +
+        "response_type=code";
+
+      window.location = oauthUrl;
     }
   }
 };
