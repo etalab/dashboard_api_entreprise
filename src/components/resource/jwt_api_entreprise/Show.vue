@@ -10,9 +10,16 @@
           name: statsRoute,
           params: { jwtId: jwt.id, jwtSub: jwt.subject }
         }"
-        class="button-stats"
+        class="token-link"
         >Voir les statistiques →</router-link
       >
+      <a
+        v-if="hasAuthorizationRequestId"
+        class="token-link"
+        :href="signupRoute"
+        target="_blank"
+        >Aller à la demande Signup (n°{{ jwt.authorization_request_id }})↗
+      </a>
     </div>
     <div class="form__group token__rights">
       <label class="token__rights-label">Accès</label>
@@ -139,6 +146,19 @@ export default {
 
     statsRoute() {
       return this.isAdmin ? "admin-jwt-stats" : "client-jwt-stats";
+    },
+
+    signupRoute() {
+      return (
+        process.env.VUE_APP_SIGNUP_BASE_URL +
+        process.env.VUE_APP_SIGNUP_PREFIX +
+        "/" +
+        this.jwt.authorization_request_id
+      );
+    },
+
+    hasAuthorizationRequestId() {
+      return this.jwt.authorization_request_id != undefined;
     }
   },
 
@@ -186,8 +206,9 @@ export default {
   margin-left: 1em;
 }
 
-.button-stats {
+.token-link {
   float: right;
+  margin-left: 1em;
 }
 
 .tag {
