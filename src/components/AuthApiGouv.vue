@@ -1,12 +1,26 @@
 <template lang="pug">
   .content
     .container
-      div Veuillez patienter...
+      div(class="notification error" v-if="isOauthError") {{ oauthErrors }}
+      div(v-if="loginInProgress") Veuillez patienter...
 </template>
 
 <script>
 export default {
   name: "AuthApiGouv",
+
+  data() {
+    return {
+      loginInProgress: true,
+      oauthErrors: []
+    };
+  },
+
+  computed: {
+    isOauthError: function() {
+      return this.oauthErrors.length > 0;
+    }
+  },
 
   created() {
     const authorizationCode = this.$route.query.code;
@@ -16,7 +30,10 @@ export default {
         this.$router.push({ name: "application-panel" });
       })
       .catch(e => {
-        console.error(e);
+        this.oauthErrors.push(e);
+      })
+      .finally(() => {
+        this.loginInProgress = false;
       });
   }
 };
