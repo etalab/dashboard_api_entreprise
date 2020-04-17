@@ -43,7 +43,7 @@ const actions = {
     const params = { authorization_code: authorizationCode };
     return dispatch(
       "api/admin/get",
-      { url: "/users/auth_api_gouv_token", params: params },
+      { url: "/oauth_api_gouv/login", params: params },
       { root: true }
     ).then(data => dispatch("processLogin", data));
   },
