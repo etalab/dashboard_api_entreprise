@@ -20,7 +20,7 @@
 
         .signup.text-center Pas de compte ?
           div
-            a Contactez-nous
+            a(href="mailto:support@entreprise.api.gouv.fr") Contactez-nous
             span &nbsppour en créer un.
 </template>
 
