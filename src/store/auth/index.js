@@ -39,6 +39,15 @@ const actions = {
     ).then(data => dispatch("processLogin", data));
   },
 
+  loginSignup({ dispatch }, authorizationCode) {
+    const params = { authorization_code: authorizationCode };
+    return dispatch(
+      "api/admin/get",
+      { url: "/oauth_api_gouv/login", params: params },
+      { root: true }
+    ).then(data => dispatch("processLogin", data));
+  },
+
   logout({ commit }) {
     delete localStorage.token;
     commit("clearUser");
