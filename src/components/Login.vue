@@ -1,29 +1,37 @@
 <template lang="pug">
   .content
     .container
-      form.panel
-        h1 Connectez vous !
+      .row.panel
+        .column
+          form
+            h2 Connectez-vous !
 
-        .notification.error(v-if="loginError") L’authentification a échoué
+            .notification.error(v-if="loginError") L’authentification a échoué
 
-        .form__group
-          label Adresse e-mail
-          input(type="email" v-model="email")
+            .form__group
+              label Adresse e-mail
+              input(type="email" v-model="email")
 
-        .form__group
-          label Mot de passe
-          input(type="password" v-model="password")
-          small
-            router-link(:to="{ name: 'account-password-reset-request' }") Mot de passe oublié ?
+            .form__group
+              label Mot de passe
+              input(type="password" v-model="password")
+              small
+                router-link(:to="{ name: 'account-password-reset-request' }") Mot de passe oublié ?
 
-        button.button(@click.prevent="login") S'identifier
-        button.button(@click.prevent="loginSignup") Me connecter avec Signup
+            button.button(@click.prevent="login") S'identifier
 
-        .signup.text-center Pas de compte ?
-          div
-            a(href="mailto:support@entreprise.api.gouv.fr") Contactez-nous
-            span &nbsppour en créer un.
-</template>
+        .column.no-account
+          h2 Pas de compte ?
+
+          .no-account__content
+            button.button(@click.prevent="loginSignup") Se connecter avec Signup
+
+            .or ou
+
+            .signup.text-center
+                a(href="mailto:support@entreprise.api.gouv.fr") Contactez-nous
+                span &nbsppour en créer un.
+  </template>
 
 <script>
 export default {
@@ -81,13 +89,66 @@ export default {
   position: relative;
 }
 
+.row.panel {
+  margin: auto;
+  max-width: 45em;
+}
+
+.column {
+  flex: 1 1 50%;
+}
+
+.column + .column {
+  border-left: 1px solid $color-light-grey;
+  margin-left: 2em;
+  padding-left: 2em;
+}
+
+.column h2 {
+  text-align: center;
+}
+
 button.button,
 button.button:active {
   margin: 2em auto 0;
   display: block;
 }
 
-.signup {
-  margin-top: 2em;
+.no-account {
+  display: flex;
+  flex-direction: column;
+}
+
+.no-account__content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.no-account__content .or {
+  color: $color-dark-grey;
+  margin: 2em auto;
+  text-transform: uppercase;
+}
+
+.no-account__content .button,
+.no-account__content .button:active {
+  margin-top: 0;
+}
+
+hr {
+  border-bottom: 1px solid $color-light-grey;
+}
+
+@media (max-width: 749px) {
+  .column + .column {
+    border-left: 0;
+    border-top: 1px solid $color-light-grey;
+    margin-left: 0;
+    margin-top: 2em;
+    padding-left: 0;
+    padding-top: 2em;
+  }
 }
 </style>
