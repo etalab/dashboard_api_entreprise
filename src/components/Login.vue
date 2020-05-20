@@ -13,7 +13,7 @@
       .container
         .row
           .column
-            .panel.panel--grey
+            form.panel.panel--grey
               h3.text-center Connexion habituelle
 
               p Vous aviez l’habitude de vous connecter avec vos identifiants API Entreprise, vous pouvez toujours le faire ici :
