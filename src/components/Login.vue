@@ -6,7 +6,6 @@
       .panel.api-gouv
         h3 Vous êtes client de API Entreprise depuis septembre 2019 ?
         button.button(@click.prevent="loginSignup") Identifiez-vous avec<br> votre compte API GOUV
-        a(href="") Qu‘est-ce que mon compte API Gouv ?
 
       hr
 
@@ -36,9 +35,9 @@
           .column.no-account
             h3.text-center Vous n’êtes pas habilités mais vous<br> souhaitez demander un accès à API Entreprise ?
 
-            a.button Découvrez les services d’API Entreprise
+            a.button(href="https://entreprise.api.gouv.fr") Découvrez les services d’API Entreprise
 
-            a.button(href="mailto:support@entreprise.api.gouv.fr") Découvrez les étapes pour demander un accès
+            a.button(href="https://doc.entreprise.api.gouv.fr") Découvrez les étapes pour demander un accès
   </template>
 
 <script>
@@ -174,6 +173,10 @@ hr {
   .form__group {
     width: 100%;
   }
+
+  .button {
+    margin-top: 2em;
+  }
 }
 
 .no-account {
@@ -194,6 +197,11 @@ hr {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
     color: $color-blue;
     text-align: center;
+
+    &:hover {
+      color: $color-dark-blue;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    }
   }
 
   a.button + a.button {
