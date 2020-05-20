@@ -2,7 +2,7 @@
   .content
     .container
       h2 Connectez-vous à votre tableau de bord pour suivre vos endpoints API Entreprise
-    
+
       .panel.api-gouv
         h3 Vous êtes client de API Entreprise depuis septembre 2019 ?
         button.button(@click.prevent="loginSignup") Identifiez-vous avec<br> votre compte API GOUV
@@ -37,7 +37,7 @@
 
             a.button(href="https://entreprise.api.gouv.fr") Découvrez les services d’API Entreprise
 
-            a.button(href="https://doc.entreprise.api.gouv.fr") Découvrez les étapes pour demander un accès
+            a.button(href="https://entreprise.api.gouv.fr/demander_un_acces/") Découvrez les étapes pour demander un accès
   </template>
 
 <script>
