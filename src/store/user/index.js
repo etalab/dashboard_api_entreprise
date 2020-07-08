@@ -103,7 +103,7 @@ const actions = {
 
   update({ dispatch }, { params, userId }) {
     return dispatch(
-      "api/admin/put",
+      "api/admin/patch",
       { url: `/users/${userId}`, params },
       { root: true }
     ).then(() => dispatch("get", { userId }));
