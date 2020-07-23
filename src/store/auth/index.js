@@ -67,14 +67,6 @@ const actions = {
     else dispatch("loginSuccess", sessionJWT);
   },
 
-  confirm({ dispatch }, params) {
-    return dispatch(
-      "api/admin/post",
-      { url: "/users/confirm", params: params },
-      { root: true }
-    ).then(data => dispatch("processLogin", data));
-  },
-
   passwordResetRequest({ dispatch }, params) {
     return dispatch(
       "api/admin/post",

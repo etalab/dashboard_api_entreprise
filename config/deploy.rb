@@ -2,8 +2,6 @@ require 'mina/bundler'
 require 'mina/rails'
 require 'colorize'
 
-ENV['domain'] = 'watchdoge.entreprise.api.gouv.fr'
-
 ENV['to'] ||= 'sandbox'
 unless %w[sandbox staging production].include?(ENV['to'])
   raise("target environment (#{ENV['to']}) not in the list")
@@ -12,6 +10,7 @@ end
 set :user, 'deploy'
 set :application_name, 'dashboard'
 set :commit, ENV['commit']
+set :domain, ENV['domain']
 
 set :deploy_to, "/var/www/admin_board_#{ENV['to']}"
 

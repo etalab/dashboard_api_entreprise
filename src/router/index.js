@@ -16,7 +16,6 @@ import JwtApiEntrepriseList from "@/components/resource/jwt_api_entreprise/List"
 
 import Login from "@/components/Login";
 import AuthApiGouv from "@/components/AuthApiGouv";
-import AccountConfirmation from "@/components/AccountConfirmation";
 import PasswordResetRequest from "@/components/PasswordResetRequest";
 import PasswordReset from "@/components/PasswordReset";
 import ApplicationPanel from "@/components/ApplicationPanel";
@@ -38,11 +37,6 @@ const router = new Router({
     {
       path: "/",
       redirect: "/real_time"
-    },
-    {
-      path: "/account/confirm",
-      name: "account-confirmation",
-      component: AccountConfirmation
     },
     {
       path: "/account/password_reset_request",
