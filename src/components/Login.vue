@@ -37,7 +37,7 @@
 
             a.button(href="https://entreprise.api.gouv.fr") Découvrez les services d’API Entreprise
 
-            a.button(href="https://entreprise.api.gouv.fr/demander_un_acces/") Découvrez les étapes pour demander un accès
+            a.button(href="https://entreprise.api.gouv.fr/doc/#demande-habilitation") Découvrez les étapes pour demander un accès
   </template>
 
 <script>
