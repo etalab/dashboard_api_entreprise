@@ -5,6 +5,9 @@
       <small class="panel__header-extra"
         >Délivré le {{ formatDate(jwt.iat) }}</small
       >
+      <small class="panel__header-extra"
+        >(expire le {{ formatDate(jwt.exp) }})</small
+      >
       <router-link
         :to="{
           name: statsRoute,
