@@ -75,6 +75,14 @@
         </button>
 
         <button
+          v-if="jwtEligibleForRenew"
+          class="button secondary"
+          @click="redirectToDataPassForm"
+        >
+          Renouveler ou étendre mes droits
+        </button>
+
+        <button
           v-if="!jwt.blacklisted && isAdmin"
           class="button warning"
           @click="modalBlacklistJwt = true"
@@ -162,6 +170,14 @@ export default {
 
     hasAuthorizationRequestId() {
       return this.jwt.authorization_request_id != undefined;
+    },
+
+    jwtEligibleForRenew() {
+      return (
+        !this.jwt.archived &&
+        !this.jwt.blacklisted &&
+        this.hasAuthorizationRequestId
+      );
     }
   },
 
@@ -190,6 +206,13 @@ export default {
       this.$store
         .dispatch("user/archiveToken", this.jwt.id)
         .finally((this.dialogArchiveJwt = false));
+    },
+
+    redirectToDataPassForm() {
+      const redirectUrl =
+        "https://datapass.api.gouv.fr/copy-authorization-request/" +
+        this.jwt.authorization_request_id;
+      window.location = redirectUrl;
     }
   },
 
