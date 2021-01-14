@@ -136,6 +136,17 @@ const actions = {
     ).then(() => dispatch("get", { userId }));
   },
 
+  transferAccount({ dispatch, getters }, payload) {
+    const userId = getters.userDetails.id;
+    let url = `/users/${userId}/transfer_ownership`;
+
+    return dispatch(
+      "api/admin/post",
+      { url: url, params: payload },
+      { root: true }
+    ).then(data => dispatch("fillUserData", data));
+  },
+
   blacklistToken({ dispatch, getters }, jwtId) {
     const userId = getters.userDetails.id;
     let url = `jwt_api_entreprise/${jwtId}`;
