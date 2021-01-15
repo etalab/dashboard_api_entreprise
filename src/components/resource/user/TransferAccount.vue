@@ -47,7 +47,7 @@ export default {
     submit: function() {
       const payload = {
         id: this.userDetails.id,
-        new_owner_email: this.newOwnerEmail
+        email: this.newOwnerEmail
       };
 
       this.$store
