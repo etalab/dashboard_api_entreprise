@@ -2,6 +2,8 @@
 div
   .profile__group
     h2(class="main-title") Profil de organisation
+    transfer-account
+
     .panel
       dl.form__group
         dt Adresse e-mail
@@ -21,6 +23,7 @@ div
 
 <script>
 import NoteUpdate from "@/components/resource/user/NoteUpdate";
+import TransferAccount from "@/components/resource/user/TransferAccount";
 import { mapGetters } from "vuex";
 import marked from "marked";
 
@@ -45,7 +48,8 @@ export default {
   },
 
   components: {
-    "note-update": NoteUpdate
+    "note-update": NoteUpdate,
+    "transfer-account": TransferAccount
   }
 };
 </script>
