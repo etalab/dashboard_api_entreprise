@@ -34,31 +34,25 @@ export const actions = {
       "api/watchdoge/get",
       { url: "/dashboard/current_status" },
       { root: true }
-    )
-      .then(data => commit("fillEndpoints", { endpoints: data.results }))
-      .catch(error => console.log(error));
+    ).then(data => commit("fillEndpoints", { endpoints: data.results }));
   },
   homepageCode({ dispatch, commit }) {
     dispatch(
       "api/watchdoge/get",
       { url: "/dashboard/homepage_status" },
       { root: true }
-    )
-      .then(data =>
-        commit("fillHomepageCode", { homepageCode: data.results[0].code })
-      )
-      .catch(error => console.log(error));
+    ).then(data =>
+      commit("fillHomepageCode", { homepageCode: data.results[0].code })
+    );
   },
   providersHistory({ dispatch, commit }) {
     dispatch(
       "api/watchdoge/get",
       { url: "/dashboard/availability_history" },
       { root: true }
-    )
-      .then(data =>
-        commit("fillProvidersHistory", { providersHistory: data.results })
-      )
-      .catch(error => console.log(error));
+    ).then(data =>
+      commit("fillProvidersHistory", { providersHistory: data.results })
+    );
   }
 };
 

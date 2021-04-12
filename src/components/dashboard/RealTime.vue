@@ -59,13 +59,9 @@ export default {
 
   methods: {
     loadData: function() {
-      this.$store
-        .dispatch("dashboard/endpoints")
-        .catch(error => console.log(error.message));
+      this.$store.dispatch("dashboard/endpoints");
 
-      this.$store
-        .dispatch("dashboard/homepageCode")
-        .catch(error => console.log(error.messsage));
+      this.$store.dispatch("dashboard/homepageCode");
     }
   },
 
