@@ -30,9 +30,7 @@ export default {
 
   methods: {
     loadHistoricalData: function() {
-      this.$store
-        .dispatch("dashboard/providersHistory")
-        .catch(error => console.log(error.message));
+      this.$store.dispatch("dashboard/providersHistory");
     }
   },
 
