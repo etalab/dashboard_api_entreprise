@@ -74,6 +74,8 @@
           </svg>
         </button>
 
+        <magic-link-new :jwt-id="jwt.id" />
+
         <button
           v-if="jwtEligibleForRenew"
           class="button secondary"
@@ -128,6 +130,7 @@
 <script>
 import { mapGetters } from "vuex";
 import Modal from "@/components/ui/Modal";
+import MagicLinkNew from "@/components/resource/jwt_api_entreprise/magic_link/New";
 
 export default {
   name: "JwtApiEntrepriseShow",
@@ -217,7 +220,8 @@ export default {
   },
 
   components: {
-    modal: Modal
+    modal: Modal,
+    "magic-link-new": MagicLinkNew
   }
 };
 </script>

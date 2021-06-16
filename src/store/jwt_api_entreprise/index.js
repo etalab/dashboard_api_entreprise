@@ -60,6 +60,15 @@ const actions = {
       // Default order: by most recent
       commit("fill", orderBy(data, "iat", "desc"));
     });
+  },
+
+  createMagicLink({ dispatch }, payload) {
+    const url = `jwt_api_entreprise/${payload.id}/create_magic_link`;
+    return dispatch(
+      "api/admin/post",
+      { url: url, params: { email: payload.email } },
+      { root: true }
+    );
   }
 };
 
