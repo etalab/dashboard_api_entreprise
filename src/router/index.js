@@ -13,6 +13,7 @@ import RoleNew from "@/components/resource/role/New";
 import JwtStats from "@/components/resource/jwt_api_entreprise/Stats";
 
 import JwtApiEntrepriseList from "@/components/resource/jwt_api_entreprise/List";
+import JwtApiEntrepriseMagicLink from "@/components/resource/jwt_api_entreprise/magic_link/Show";
 
 import Login from "@/components/Login";
 import AuthApiGouv from "@/components/AuthApiGouv";
@@ -47,6 +48,11 @@ const router = new Router({
       path: "/account/password_reset",
       name: "account-password-reset",
       component: PasswordReset
+    },
+    {
+      path: "/magic_link",
+      name: "jwt-magic-link",
+      component: JwtApiEntrepriseMagicLink
     },
     {
       path: "/auth_api_gouv_callback",
