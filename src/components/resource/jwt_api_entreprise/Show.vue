@@ -9,6 +9,7 @@
         >(expire le {{ formatDate(jwt.exp) }})</small
       >
       <router-link
+        v-if="!unknownUser"
         :to="{
           name: statsRoute,
           params: { jwtId: jwt.id, jwtSub: jwt.subject }
@@ -17,7 +18,7 @@
         >Voir les statistiques →</router-link
       >
       <a
-        v-if="hasAuthorizationRequestId"
+        v-if="!unknownUser && hasAuthorizationRequestId"
         class="token-link"
         :href="signupRoute"
         target="_blank"
@@ -74,7 +75,7 @@
           </svg>
         </button>
 
-        <magic-link-new :jwt-id="jwt.id" />
+        <magic-link-new v-if="!unknownUser" :jwt-id="jwt.id" />
 
         <button
           v-if="jwtEligibleForRenew"
@@ -155,7 +156,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      isAdmin: "auth/isAdmin"
+      isAdmin: "auth/isAdmin",
+      unknownUser: "auth/unknownUser"
     }),
 
     statsRoute() {
@@ -177,6 +179,7 @@ export default {
 
     jwtEligibleForRenew() {
       return (
+        !this.unknownUser &&
         !this.jwt.archived &&
         !this.jwt.blacklisted &&
         this.hasAuthorizationRequestId
