@@ -11,12 +11,24 @@
       @close="modalMagicLink = false"
     >
       <p slot="modalText">
-        Adresse e-mail à laquelle un lien d'accès au token, d'une durée de 4 heures, sera envoyé. </br>
-        ⚠️  Votre clé d'accès est unique et privée. L'utilisation de cette fonctionnalité doit avoir pour unique objectif la transmission sécurisée de votre clé à vos services techniques qui intégreront l'API Entreprise. </br>
-        Le renouvellement d’un token est très facile et rapide. C’est pourquoi, si vous avez divulgué votre token par erreur, n’hésitez pas à écrire rapidement à support@entreprise.api.gouv.fr.
+        Adresse e-mail à laquelle un lien d'accès au token, d'une durée de 4
+        heures, sera envoyé.
       </p>
 
-      <input slot="modalForm" v-model="email" type="text" />
+      <div slot="modalForm">
+        <input slot="modalForm" v-model="email" type="text" />
+        <p>
+          ⚠️ Votre clé d'accès est unique et privée. L'utilisation de cette
+          fonctionnalité doit avoir pour unique objectif la transmission
+          sécurisée de votre clé à vos services techniques qui intégreront l'API
+          Entreprise.
+        </p>
+        <p>
+          Le renouvellement d’un token est très facile et rapide. C’est
+          pourquoi, si vous avez divulgué votre token par erreur, n’hésitez pas
+          à écrire rapidement à support@entreprise.api.gouv.fr.
+        </p>
+      </div>
 
       <template slot="confirmText">
         Envoyer
