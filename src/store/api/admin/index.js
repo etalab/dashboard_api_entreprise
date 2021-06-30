@@ -59,6 +59,7 @@ const handleError = error => {
   if (!error.response) router.push({ name: "logout" });
   else if (error.response.status === 401) router.push({ name: "logout" });
   else if (error.response.status === 422) return error.response.data.errors;
+  else if (error.response.status === 404) return error.response.data.errors;
 };
 
 export default { namespaced: true, actions };

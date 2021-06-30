@@ -60,6 +60,24 @@ const actions = {
       // Default order: by most recent
       commit("fill", orderBy(data, "iat", "desc"));
     });
+  },
+
+  createMagicLink({ dispatch }, payload) {
+    const url = `jwt_api_entreprise/${payload.id}/create_magic_link`;
+    return dispatch(
+      "api/admin/post",
+      { url: url, params: { email: payload.email } },
+      { root: true }
+    );
+  },
+
+  retrieveFromMagicLink({ dispatch }, payload) {
+    const url = "jwt_api_entreprise/show_magic_link";
+    return dispatch(
+      "api/admin/get",
+      { url: url, params: { token: payload.token } },
+      { root: true }
+    );
   }
 };
 
