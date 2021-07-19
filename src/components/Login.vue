@@ -1,43 +1,22 @@
 <template lang="pug">
   .content
     .container
-      h2 Connectez-vous à votre tableau de bord pour suivre vos endpoints API Entreprise
+      h2.text-center Connectez-vous à votre tableau de bord <br />pour suivre vos endpoints API Entreprise
 
       .panel.api-gouv
-        h3 Vous êtes client de API Entreprise depuis septembre 2019 ?
         button.button(@click.prevent="loginSignup") Identifiez-vous avec<br> votre compte API GOUV
+        p Seule la personne ayant effectué la demande d'habilitation peut accéder au tableau de bord.
+        p Si vous avez besoin d'accéder au jeton d'accès mais que vous n'êtes pas cette personne, veuillez vous référer à <a href="https://entreprise.api.gouv.fr/support/#050-connection-dashboard" target="_blank">cette rubrique</a>.
 
       hr
 
     .other-login
-      .container
-        .row
-          .column
-            form.panel.panel--grey
-              h3.text-center Connexion habituelle
+      .column.no-account
+        h3.text-center Vous n’êtes pas habilité mais vous<br> souhaitez demander un accès à API Entreprise ?
 
-              p Vous aviez l’habitude de vous connecter avec vos identifiants API Entreprise, vous pouvez toujours le faire ici :
+        a.button(href="https://entreprise.api.gouv.fr") Découvrez les services d’API Entreprise
 
-              .notification.error(v-if="loginError") L’authentification a échoué
-
-              .form__group
-                label Adresse e-mail
-                input(type="email" v-model="email")
-
-              .form__group
-                label Mot de passe
-                input(type="password" v-model="password")
-                small
-                  router-link(:to="{ name: 'account-password-reset-request' }") Mot de passe oublié ?
-
-              button.button(@click.prevent="login") S'identifier
-
-          .column.no-account
-            h3.text-center Vous n’êtes pas habilités mais vous<br> souhaitez demander un accès à API Entreprise ?
-
-            a.button(href="https://entreprise.api.gouv.fr") Découvrez les services d’API Entreprise
-
-            a.button(href="https://entreprise.api.gouv.fr/doc/#demande-habilitation") Découvrez les étapes pour demander un accès
+        a.button(href="https://entreprise.api.gouv.fr/doc/#demande-habilitation") Découvrez les étapes pour demander un accès
   </template>
 
 <script>
@@ -100,27 +79,10 @@ export default {
 
 hr {
   border-bottom: 1px solid $color-light-grey;
-  border: 0;
-  background-image: linear-gradient(
-    to right,
-    $color-light-grey,
-    $color-light-grey 48%,
-    transparent 48%,
-    transparent 52%,
-    $color-light-grey 52%
-  );
   height: 1px;
   margin-top: 5em;
   margin-bottom: 0;
   position: relative;
-
-  &::after {
-    content: "OU";
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translate(-50%);
-  }
 }
 
 .other-login {
@@ -180,6 +142,8 @@ hr {
 }
 
 .no-account {
+  margin: auto;
+
   display: flex;
   flex-direction: column;
   align-items: center;
