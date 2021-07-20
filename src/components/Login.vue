@@ -6,8 +6,7 @@
       .panel.api-gouv
         button.button(@click.prevent="loginSignup") Identifiez-vous avec<br> votre compte API GOUV
         p Seule la personne ayant effectué la demande d'habilitation peut accéder au tableau de bord.
-        p Si vous avez besoin d'accéder au jeton d'accès mais que vous n'êtes pas cette personne,
-          &#32;veuillez vous référer à <a href="https://entreprise.api.gouv.fr/support/#050-connection-dashboard" target="_blank">cette rubrique</a>.
+        p Si vous avez besoin d'accéder au jeton d'accès mais que vous n'êtes pas cette personne, veuillez vous référer à <a href="https://entreprise.api.gouv.fr/support/#050-connection-dashboard" target="_blank">cette rubrique</a>.
 
       hr
 
