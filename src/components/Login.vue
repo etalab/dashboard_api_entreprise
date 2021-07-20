@@ -13,7 +13,7 @@
 
     .other-login
       .column.no-account
-        h3.text-center Vous n’êtes pas habilités mais vous<br> souhaitez demander un accès à API Entreprise ?
+        h3.text-center Vous n’êtes pas habilité mais vous<br> souhaitez demander un accès à API Entreprise ?
 
         a.button(href="https://entreprise.api.gouv.fr") Découvrez les services d’API Entreprise
 
