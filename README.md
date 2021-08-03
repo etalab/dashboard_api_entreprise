@@ -9,7 +9,7 @@ développement : `npm install -g @vue/cli`.
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 
@@ -30,5 +30,5 @@ For a detailed explanation on how things work, check out the [guide](https://cli
 Deployment is handled by the `mina` package. Please install this with `bundle install`.
 
 ```
-bundle exec mina deploy to=production
+bundle exec mina deploy to=production domain=dashboard.entreprise.api.gouv.fr
 ```
