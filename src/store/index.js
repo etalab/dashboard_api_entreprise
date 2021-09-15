@@ -10,7 +10,6 @@ import jwt_api_entreprise from "./jwt_api_entreprise";
 import role from "./role";
 import api from "./api";
 import ui from "./ui";
-import incident from "./incident";
 
 Vue.use(Vuex);
 
@@ -24,7 +23,6 @@ export default new Vuex.Store({
     role,
     user,
     jwt_api_entreprise,
-    incident,
     api
   }
 });
