@@ -1,5 +1,7 @@
 # Dashboard API Entreprise
 
+Ce projet est déprécié. Le dashboard fait maintenant partie intégrante du projet [Admin API Entreprise](https://github.com/etalab/admin_api_entreprise).
+
 ## Environnements de développement
 
 Le projet est développé dans un environnement Node.js version 11.10.0. Voir NVM comme gestionnaire de versions Node.
